@@ -24,60 +24,82 @@ class ItemController {
     // MARK: - Load items
     
     // Loads items for the selected group
-    func loadItems(completion: @escaping (Bool) -> Void = {_ in}) {
+    func loadItems(completion: @escaping (Error?, [Item]?) -> Void) {
         
-        guard let group = selectedGroup else { completion(false); return }
-        guard let accessToken = SessionManager.tokens?.idToken else {return}
+//        guard let group = selectedGroup else { completion(false); return }
+//        guard let accessToken = SessionManager.tokens?.idToken else {return}
         
 //        let url = baseURL.appendingPathComponent("item").appendingPathComponent("group").appendingPathComponent(String(group.groupID))
         let url = baseURL.appendingPathComponent("item")
-        var request = URLRequest(url: url)
-        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        let request = URLRequest(url: url)
         
-        Alamofire.request(request).validate().response { (response) in
-            
-            if let error = response.error {
-                print(error.localizedDescription)
-                completion(false)
+        let loadTask = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                print(error)
+                completion(error, nil)
                 return
             }
             
-            guard let data = response.data else {
-                print("Error: No data when trying to load items")
-                completion(false)
+            guard let data = data else {
+                completion(NSError(), nil)
                 return
             }
             
             do {
-                let itemList = try JSONDecoder().decode(ItemList.self, from: data)
-                let items = itemList.data
-                
-                group.items = nil
-                var myHistory: [History] = []
-                
-                for item in items {
-                    if item.groupID == group.groupID && !item.purchased {
-                        if group.items != nil {
-                            group.items?.append(item)
-                        } else {
-                            group.items = [item]
-                        }
-                    }
-                    
-                    if item.purchased && item.groupID == group.groupID {
-                        myHistory.append(History(item: item))
-                    }
-                }
-                
-                history = myHistory
-                completion(true)
-                
+                let items = try JSONDecoder().decode([Item].self, from: data)
+                completion(nil, items)
             } catch {
-                print("Error: Could not decode data into [Item]")
-                completion(false)
-                return
+                completion(NSError(), nil)
             }
+            
+//        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+//
+//        Alamofire.request(request).validate().response { (response) in
+//
+//            if let error = response.error {
+//                print(error.localizedDescription)
+//                completion(false)
+//                return
+//            }
+//
+//            guard let data = response.data else {
+//                print("Error: No data when trying to load items")
+//                completion(false)
+//                return
+//            }
+//
+//            do {
+//                let itemList = try JSONDecoder().decode(ItemList.self, from: data)
+//                let items = itemList.data
+//
+//                group.items = nil
+//                var myHistory: [History] = []
+//
+//                for item in items {
+//                    if item.groupID == group.groupID && !item.purchased {
+//                        if group.items != nil {
+//                            group.items?.append(item)
+//                        } else {
+//                            group.items = [item]
+//                        }
+//                    }
+//
+//                    if item.purchased && item.groupID == group.groupID {
+//                        myHistory.append(History(item: item))
+//                    }
+//                }
+//
+//                history = myHistory
+//                completion(true)
+//
+//            } catch {
+//                print("Error: Could not decode data into [Item]")
+//                completion(false)
+//                return
+//            }
         }
+        
+        loadTask.resume()
     }
     
     
