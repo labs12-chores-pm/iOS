@@ -27,7 +27,7 @@ class LoginViewController: UIViewController, StoryboardInstantiatable {
     func showLogin() {
         Auth0
             .webAuth()
-            .audience("https://shoptrak.auth0.com/api/v2/")
+            .audience("https://shoptrak1.auth0.com/api/v2/")
             .scope("openid profile email")
             .start {
                 switch $0 {

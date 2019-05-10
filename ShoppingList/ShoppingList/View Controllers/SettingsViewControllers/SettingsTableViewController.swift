@@ -77,7 +77,7 @@ class SettingsTableViewController: UITableViewController, StoryboardInstantiatab
     }
     
     @IBAction func openOnlineHelp(_ sender: Any) {
-        let helpUrl = URL(string: "https://labs10-shopping-list.netlify.com")!
+        let helpUrl = URL(string: "https://labs12-shopping-list.netlify.com")!
         UIApplication.shared.open(helpUrl)
     }
     

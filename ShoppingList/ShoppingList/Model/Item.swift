@@ -23,7 +23,14 @@ class Item: Codable {
     var groupID: Int?
     var id: Int?
     
-    init(name: String, measurement: String? = nil, purchased: Bool, price: Double, quantity: Int? = nil, group: Group) {
+    init(name: String,
+         measurement: String? = nil,
+         purchased: Bool,
+         price: Double,
+         quantity: Int? = nil,
+         
+         group: Group) {
+        
         self.groupID = group.groupID
         self.name = name
         self.measurement = measurement
@@ -31,6 +38,7 @@ class Item: Codable {
         self.price = price
         self.quantity = quantity
         self.id = nil
+        
     }
 }
 
