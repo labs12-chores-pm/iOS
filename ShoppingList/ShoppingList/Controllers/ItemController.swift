@@ -17,7 +17,7 @@ enum ItemError: Error {
 
 class ItemController {
     
-    private var baseURL = URL(string: "https://shoptrak-backend.herokuapp.com/api/")!
+    private var baseURL = URL(string: "https://shoppinglistredeploy.herokuapp.com")!
     static let shared = ItemController()
     
     // MARK: - Load items
@@ -28,8 +28,9 @@ class ItemController {
         guard let group = selectedGroup else { completion(false); return }
         guard let accessToken = SessionManager.tokens?.idToken else {return}
         
-//        let url = baseURL.appendingPathComponent("item").appendingPathComponent("group").appendingPathComponent(String(group.groupID))
-        let url = baseURL.appendingPathComponent("item")
+        let url = baseURL.appendingPathComponent("item").appendingPathComponent("group").appendingPathComponent(String(group.groupID))
+        
+        _ = baseURL.appendingPathComponent("item")
         var request = URLRequest(url: url)
         request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         
@@ -84,31 +85,52 @@ class ItemController {
     
     func saveItem(item: Item, completion: @escaping (Item?, Error?) -> Void) {
         
+//        let dataTask = URLSession.shared.dataTask(with: baseURL) { (data, _, error) in
+//
+//            let error = error {
+//                print(error)
+//                completion(error, nil)
+//            }
+//
+//
+//
+//        }
+
         guard let accessToken = SessionManager.tokens?.idToken else { return }
-        
+
         let headers: HTTPHeaders = ["Authorization": "Bearer \(accessToken)"]
         let item = item
-        
+
         var url = baseURL.appendingPathComponent("item")
-        
+
         var method = HTTPMethod.post
-        
+
         if let id = item.id {
             url = url.appendingPathComponent(String(describing: id))
             method = .put
         }
-        
+
         var json: Parameters
-        
+
         do {
             json = try itemToJSON(item: item)
+            print(json)
         }
         catch {
             completion(nil, error)
             return
         }
-        
+
         Alamofire.request(url, method: method, parameters: json, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (response) in
+
+        
+                    print("response.request \(response.request)")  // original URL request
+                    print("response.response \(response.response)") // HTTP URL response
+                    print("response.data \(response.data)")     // server data
+                    print("response.result \(response.result)")
+                    
+                    print("response \(response)")
+            
             
             switch response.result {
             case .success(let value):
@@ -117,10 +139,10 @@ class ItemController {
                         completion(nil, ItemError.noIdReturned)
                         return
                 }
-                
+
                 item.id = itemID
                 completion(item, nil)
-                
+
             case .failure(let error):
                 completion(nil, ItemError.backendError(String(data: response.data!, encoding: .utf8 )!, error))
                 return

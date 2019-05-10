@@ -16,7 +16,7 @@ import FirebaseStorage
 class UserController {
     
     static let shared = UserController()
-    private var baseURL = URL(string: "https://shoptrak-backend.herokuapp.com/api/")!
+    private var baseURL = URL(string: "https://shoppinglistredeploy.herokuapp.com")!
     
     private func userToJSON(user: User) -> [String: Any]? {
         
