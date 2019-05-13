@@ -33,7 +33,7 @@ class Item: Codable {
         
         self.groupID = group.groupID
         self.name = name
-        self.measurement = measurement
+        self.measurement = measurement 
         self.purchased = purchased
         self.price = price
         self.quantity = quantity

@@ -17,7 +17,7 @@ enum ItemError: Error {
 
 class ItemController {
     
-    private var baseURL = URL(string: "https://shoppinglistredeploy.herokuapp.com")!
+    private var baseURL = URL(string: "https://shoppinglistredeploy.herokuapp.com/api/")!
     static let shared = ItemController()
     
     // MARK: - Load items

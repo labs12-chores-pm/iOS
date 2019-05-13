@@ -267,12 +267,12 @@
 		443C1B4A2215F0DA00220C28 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				118646D7221CA9D900D0F04B /* User.swift */,
+				118646D3221CA8CD00D0F04B /* Group.swift */,
+				118646D5221CA93900D0F04B /* Item.swift */,
 				443C1B4B22160D9E00220C28 /* Shopping.swift */,
 				118646DD221CAAA100D0F04B /* Category.swift */,
-				118646D3221CA8CD00D0F04B /* Group.swift */,
 				118646D9221CAA1600D0F04B /* Trip.swift */,
-				118646D5221CA93900D0F04B /* Item.swift */,
-				118646D7221CA9D900D0F04B /* User.swift */,
 				118646DB221CAA5600D0F04B /* GroupMember.swift */,
 				44A16802222766C600227DFB /* History.swift */,
 				44A16806222F418C00227DFB /* Invitation.swift */,
