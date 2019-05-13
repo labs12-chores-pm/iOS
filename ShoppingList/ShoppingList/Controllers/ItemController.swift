@@ -24,7 +24,7 @@ class ItemController {
     // MARK: - Load items
     
     // Loads items for the selected group
-    func loadItems(completion: @escaping (Error?, [Item]?) -> Void) {
+    func loadItems(completion: @escaping (Error?, [Task]?) -> Void) {
         
 //        guard let group = selectedGroup else { completion(false); return }
 //        guard let accessToken = SessionManager.tokens?.idToken else {return}
@@ -46,7 +46,7 @@ class ItemController {
             }
             
             do {
-                let items = try JSONDecoder().decode([Item].self, from: data)
+                let items = try JSONDecoder().decode([Task].self, from: data)
                 completion(nil, items)
             } catch {
                 completion(NSError(), nil)
@@ -105,7 +105,7 @@ class ItemController {
     
     // MARK:- Save items methods
     
-    func saveItem(item: Item, completion: @escaping (Item?, Error?) -> Void) {
+    func saveItem(item: Task, completion: @escaping (Task?, Error?) -> Void) {
         
         guard let accessToken = SessionManager.tokens?.idToken else { return }
         
@@ -170,9 +170,9 @@ class ItemController {
     }
     
     
-    func checkout(items: [Item], withTotal total: Double, completion: @escaping (Bool) -> Void) {
+    func checkout(items: [Task], withTotal total: Double, completion: @escaping (Bool) -> Void) {
         
-        let purchasedItems = items.map { (item) -> Item in
+        let purchasedItems = items.map { (item) -> Task in
             item.purchased = true
             item.price = total
             return item
@@ -199,7 +199,7 @@ class ItemController {
     }
     
     
-    func itemToJSON(item: Item) throws -> Parameters {
+    func itemToJSON(item: Task) throws -> Parameters {
         let jsonData = try! JSONEncoder().encode(item)
         return try! JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any]
     }

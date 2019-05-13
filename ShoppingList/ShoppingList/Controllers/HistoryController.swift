@@ -71,7 +71,7 @@ class HistoryController {
         }
     }
     
-    func newHistory(forItem item: Item, withTotal total: Double, completion: @escaping (Bool) -> Void) {
+    func newHistory(forItem item: Task, withTotal total: Double, completion: @escaping (Bool) -> Void) {
         guard let accessToken = SessionManager.tokens?.idToken else {completion(false); return}
         guard let groupID = selectedGroup?.groupID else { completion(false); return }
         
