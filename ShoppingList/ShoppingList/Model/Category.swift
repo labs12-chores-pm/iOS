@@ -8,14 +8,9 @@
 
 import Foundation
 
-
 struct Category: Codable {
-    var createdAt: Date
-    var groupID: Int
+    var tasks: [Task]
+    let createdAt: Date
+    let householdId: UUID
     var name: String
-    var token: String
-    var updatedAt: Date
-    var userID: Int
-    
-    var items: [Item]
 }

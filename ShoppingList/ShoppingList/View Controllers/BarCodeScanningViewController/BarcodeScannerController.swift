@@ -195,7 +195,7 @@ extension BarcodeScannerController: AVCaptureMetadataOutputObjectsDelegate {
                     guard let name = productName else { return }
                     
                     guard let selectedGroup = selectedGroup else { return }
-                    let newItem = Item(name: name, measurement: nil, purchased: false, price: 0, quantity: 0, group: selectedGroup)
+                    let newItem = Task(name: name, measurement: nil, purchased: false, price: 0, quantity: 0, group: selectedGroup)
                     ItemController.shared.saveItem(item: newItem) { (_, _) in
                         self.delegate?.updatesNeeded()
                         self.dismiss(animated: true, completion: nil)

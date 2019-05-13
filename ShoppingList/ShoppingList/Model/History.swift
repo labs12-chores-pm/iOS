@@ -18,7 +18,7 @@ struct History: Codable {
     let name, user, date: String?
     let grandTotal: Double?
     
-    init(item: Item) {
+    init(item: Task) {
         self.total = item.price
         self.item = HistoryItem(item: item)
         self.name = item.name
@@ -33,7 +33,7 @@ struct HistoryItem: Codable {
     let name, user: String
     let price: Double
     
-    init(item: Item) {
+    init(item: Task) {
         self.id = item.id ?? 0
         self.name = item.name
         self.user = userName
