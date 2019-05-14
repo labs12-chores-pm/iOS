@@ -17,12 +17,9 @@ enum ItemError: Error {
 
 class ItemController {
     
-<<<<<<< HEAD
 //    private var baseURL = URL(string: "https://shoptrak-backend.herokuapp.com/api/")!
     private var baseURL = URL(string: "https://labs12chores.firebaseio.com/")!
-=======
     private var baseURL = URL(string: "https://shoppinglistredeploy.herokuapp.com")!
->>>>>>> master
     static let shared = ItemController()
     
     // MARK: - Load items
@@ -33,17 +30,14 @@ class ItemController {
 //        guard let group = selectedGroup else { completion(false); return }
 //        guard let accessToken = SessionManager.tokens?.idToken else {return}
         
-<<<<<<< HEAD
 //        let url = baseURL.appendingPathComponent("item").appendingPathComponent("group").appendingPathComponent(String(group.groupID))
         let url = baseURL.appendingPathComponent("item")
         let request = URLRequest(url: url)
-=======
         let url = baseURL.appendingPathComponent("item").appendingPathComponent("group").appendingPathComponent(String(group.groupID))
         
         _ = baseURL.appendingPathComponent("item")
         var request = URLRequest(url: url)
         request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
->>>>>>> master
         
         let loadTask = URLSession.shared.dataTask(with: request) { (data, _, error) in
             if let error = error {

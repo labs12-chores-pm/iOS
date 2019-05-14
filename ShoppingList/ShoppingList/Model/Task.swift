@@ -8,12 +8,19 @@
 
 import Foundation
 
-class Task: Codable {
-    var desciption: String
+class Task: Codable, Equatable {
+    var description: String
     let categoryId: UUID
     let assigneeIds: [UUID]
     var dueDate: Date
     var notes: [Note]
     let identifier: UUID
     var isComplete: Bool
+    
+    static func == (lhs: Task, rhs: Task) -> Bool {
+        return lhs.description == rhs.description &&
+        lhs.assigneeIds == rhs.assigneeIds &&
+        lhs.dueDate == rhs.dueDate &&
+        lhs.isComplete == rhs.isComplete
+    }
 }
