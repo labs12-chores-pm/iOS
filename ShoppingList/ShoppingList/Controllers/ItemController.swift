@@ -18,7 +18,6 @@ enum ItemError: Error {
 class ItemController {
     
 //    private var baseURL = URL(string: "https://shoptrak-backend.herokuapp.com/api/")!
-    private var baseURL = URL(string: "https://labs12chores.firebaseio.com/")!
     private var baseURL = URL(string: "https://shoppinglistredeploy.herokuapp.com")!
     static let shared = ItemController()
     
@@ -31,8 +30,8 @@ class ItemController {
 //        guard let accessToken = SessionManager.tokens?.idToken else {return}
         
 //        let url = baseURL.appendingPathComponent("item").appendingPathComponent("group").appendingPathComponent(String(group.groupID))
-        let url = baseURL.appendingPathComponent("item")
-        let request = URLRequest(url: url)
+//        let url = baseURL.appendingPathComponent("item")
+//        let request = URLRequest(url: url)
         let url = baseURL.appendingPathComponent("item").appendingPathComponent("group").appendingPathComponent(String(group.groupID))
         
         _ = baseURL.appendingPathComponent("item")

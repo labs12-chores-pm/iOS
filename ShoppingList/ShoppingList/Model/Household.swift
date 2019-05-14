@@ -6,17 +6,34 @@
 //  Copyright © 2019 Lambda School Labs. All rights reserved.
 //
 
-import Foundation
+import CoreData
 
-struct Household: Codable, Equatable {
+extension Household {
+    
+    convenience init(name: String, identifier: UUID = UUID(), creatorId: UUID, memberIds: [UUID], adminIds: [UUID], categories: [UUID], context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+        self.init(context: context)
+        self.name = name
+        self.identifier = identifier
+        self.creatorId = creatorId
+        self.memberIds = memberIds
+        self.adminIds = adminIds
+        self.categories = categories
+    }
+    
+    @discardableResult convenience init?(householdRepresentation: HouseholdRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+        self.init(name: householdRepresentation.name, identifier: householdRepresentation.identifier, creatorId: householdRepresentation.creatorId, memberIds: householdRepresentation.memberIds, adminIds: householdRepresentation.adminIds, categories: householdRepresentation.categories, context: context)
+    }
+}
+
+struct HouseholdRepresentation: Codable, Equatable {
     var name: String
     let identifier: UUID
     let creatorId: UUID
     var memberIds: [UUID]
     var adminIds: [UUID]
-    var categories: [Category]
+    var categories: [UUID]
     
-    static func == (lhs: Household, rhs: Household) -> Bool {
+    static func == (lhs: HouseholdRepresentation, rhs: HouseholdRepresentation) -> Bool {
         return lhs.name == rhs.name &&
         lhs.memberIds == rhs.memberIds &&
         lhs.adminIds == rhs.adminIds &&
