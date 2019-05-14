@@ -6,14 +6,39 @@
 //  Copyright © 2019 Lambda School Labs. All rights reserved.
 //
 
-import Foundation
+import CoreData
 
-class Task: Codable, Equatable {
+extension Task {
+    
+    convenience init(description: String, categoryId: UUID, assigneeIds: [UUID], dueDate: Date, notes: [UUID], isComplete: Bool = false, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+        self.init(context: context)
+        self.descriptionText = description
+        self.categoryId = categoryId
+        self.assigneeIds = assigneeIds
+        self.dueDate = dueDate
+        self.notes = notes
+        self.identifier = UUID()
+        self.isComplete = isComplete
+    }
+    
+    convenience init(taskRepresentation: TaskRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+        self.init(context: context)
+        self.descriptionText = taskRepresentation.description
+        self.categoryId = taskRepresentation.categoryId
+        self.assigneeIds = taskRepresentation.assigneeIds
+        self.dueDate = taskRepresentation.dueDate
+        self.notes = taskRepresentation.notes
+        self.identifier = taskRepresentation.identifier
+        self.isComplete = taskRepresentation.isComplete
+    }
+}
+
+struct TaskRepresentation: Codable, Equatable {
     var description: String
     let categoryId: UUID
     let assigneeIds: [UUID]
     var dueDate: Date
-    var notes: [Note]
+    var notes: [UUID]
     let identifier: UUID
     var isComplete: Bool
     
