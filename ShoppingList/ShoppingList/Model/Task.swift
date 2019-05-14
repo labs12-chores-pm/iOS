@@ -10,26 +10,19 @@ import CoreData
 
 extension Task {
     
-    convenience init(description: String, categoryId: UUID, assigneeIds: [UUID], dueDate: Date, notes: [UUID], isComplete: Bool = false, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+    convenience init(description: String, identifier: UUID = UUID(), categoryId: UUID, assigneeIds: [UUID], dueDate: Date, notes: [UUID], isComplete: Bool = false, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         self.descriptionText = description
         self.categoryId = categoryId
         self.assigneeIds = assigneeIds
         self.dueDate = dueDate
         self.notes = notes
-        self.identifier = UUID()
+        self.identifier = identifier
         self.isComplete = isComplete
     }
     
     convenience init(taskRepresentation: TaskRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-        self.init(context: context)
-        self.descriptionText = taskRepresentation.description
-        self.categoryId = taskRepresentation.categoryId
-        self.assigneeIds = taskRepresentation.assigneeIds
-        self.dueDate = taskRepresentation.dueDate
-        self.notes = taskRepresentation.notes
-        self.identifier = taskRepresentation.identifier
-        self.isComplete = taskRepresentation.isComplete
+        self.init(description: taskRepresentation.description, identifier: taskRepresentation.identifier, categoryId: taskRepresentation.categoryId, assigneeIds: taskRepresentation.assigneeIds, dueDate: taskRepresentation.dueDate, notes: taskRepresentation.notes, isComplete: taskRepresentation.isComplete, context: context)
     }
 }
 

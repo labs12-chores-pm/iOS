@@ -20,14 +20,8 @@ extension Household {
         self.categories = categories
     }
     
-    convenience init(householdRepresentation: HouseholdRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-        self.init(context: context)
-        self.name = householdRepresentation.name
-        self.identifier = householdRepresentation.identifier
-        self.creatorId = householdRepresentation.creatorId
-        self.memberIds = householdRepresentation.memberIds
-        self.adminIds = householdRepresentation.adminIds
-        self.categories = householdRepresentation.categories
+    @discardableResult convenience init?(householdRepresentation: CategoryRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+        self.init(name: householdRepresenation.name, creatorId: householdRepresenation.creatorId, memberIds: householdRepresenation.memberIds, adminIds: householdRepresenation.adminIds, categories: householdRepresenation.categories, context: context)
     }
 }
 

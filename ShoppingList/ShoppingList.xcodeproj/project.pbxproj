@@ -263,7 +263,6 @@
 				443C1B4A2215F0DA00220C28 /* Model */,
 				969A83C92215C99A0003BB37 /* Frameworks */,
 				969A83C02215C94F0003BB37 /* Resources */,
-				77F678C5228B37C2005C7C94 /* CoreDataStack.swift */,
 			);
 			path = ShoppingList;
 			sourceTree = "<group>";
@@ -361,6 +360,7 @@
 		969A83C02215C94F0003BB37 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				77F678C5228B37C2005C7C94 /* CoreDataStack.swift */,
 				96476B482215D40700E57EB9 /* Info.plist */,
 				1101B93722383BEC005F170D /* GoogleService-Info.plist */,
 				96476B4F2215D41300E57EB9 /* Assets.xcassets */,
