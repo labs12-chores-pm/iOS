@@ -111,6 +111,7 @@
 		44A1680822318BE700227DFB /* InviteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteController.swift; sourceTree = "<group>"; };
 		44A1680B22381C0B00227DFB /* BarcodeScannerController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BarcodeScannerController.storyboard; sourceTree = "<group>"; };
 		44A1680E223820DC00227DFB /* BarcodeScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerController.swift; sourceTree = "<group>"; };
+		476FE93E228B3590009D70AA /* ShoppingList 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ShoppingList 2.xcdatamodel"; sourceTree = "<group>"; };
 		77F678AB228A1268005C7C94 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		77F678AE228A2B99005C7C94 /* HouseholdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdController.swift; sourceTree = "<group>"; };
 		77F678B0228A2D57005C7C94 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
@@ -951,9 +952,10 @@
 		96476B4A2215D41300E57EB9 /* ShoppingList.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				476FE93E228B3590009D70AA /* ShoppingList 2.xcdatamodel */,
 				96476B4B2215D41300E57EB9 /* ShoppingList.xcdatamodel */,
 			);
-			currentVersion = 96476B4B2215D41300E57EB9 /* ShoppingList.xcdatamodel */;
+			currentVersion = 476FE93E228B3590009D70AA /* ShoppingList 2.xcdatamodel */;
 			path = ShoppingList.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
