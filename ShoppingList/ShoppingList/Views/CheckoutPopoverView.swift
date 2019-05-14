@@ -12,7 +12,7 @@ class CheckoutPopoverView: UIView, NibInstantiatable {
     
     static let nibName: NibName = "CheckoutPopoverView"
     weak var delegate: PopoverViewDelegate?
-    var items: [Item] = [] { didSet { updateViews() }}
+    var items: [Task] = [] { didSet { updateViews() }}
     
     override func awakeFromNib() {
         super.awakeFromNib()

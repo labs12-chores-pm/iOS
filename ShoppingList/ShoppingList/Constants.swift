@@ -11,9 +11,9 @@ import Popover
 
 var userID: Int = 0
 var userName: String = ""
-var allGroups: [Group] = []
-var selectedGroup: Group? = nil
-var selectedItems: [Item] = []
+var allGroups: [Household] = []
+var selectedGroup: Household? = nil
+var selectedItems: [Task] = []
 var history: [History] = []
 var groupMembers: [GroupMember] = []
 
@@ -78,7 +78,7 @@ struct Popovers {
         popover.show(popoverView, point: startPoint)
     }
     
-    static func triggerCheckoutPopover(delegate: PopoverViewDelegate, items: [Item]) {
+    static func triggerCheckoutPopover(delegate: PopoverViewDelegate, items: [Task]) {
         let popoverView = CheckoutPopoverView.instantiate()
         popoverView.items = items
         popoverView.delegate = delegate

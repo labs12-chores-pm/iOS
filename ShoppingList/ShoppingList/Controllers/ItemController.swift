@@ -17,73 +17,104 @@ enum ItemError: Error {
 
 class ItemController {
     
+<<<<<<< HEAD
     private var baseURL = URL(string: "https://shoppinglistredeploy.herokuapp.com/api/")!
+=======
+//    private var baseURL = URL(string: "https://shoptrak-backend.herokuapp.com/api/")!
+    private var baseURL = URL(string: "https://shoppinglistredeploy.herokuapp.com")!
+>>>>>>> aff7302af62af4334006cda9050912336cc6c355
     static let shared = ItemController()
     
     // MARK: - Load items
     
     // Loads items for the selected group
-    func loadItems(completion: @escaping (Bool) -> Void = {_ in}) {
+    func loadItems(completion: @escaping (Error?, [Task]?) -> Void) {
         
-        guard let group = selectedGroup else { completion(false); return }
-        guard let accessToken = SessionManager.tokens?.idToken else {return}
+//        guard let group = selectedGroup else { completion(false); return }
+//        guard let accessToken = SessionManager.tokens?.idToken else {return}
         
+//        let url = baseURL.appendingPathComponent("item").appendingPathComponent("group").appendingPathComponent(String(group.groupID))
+//        let url = baseURL.appendingPathComponent("item")
+//        let request = URLRequest(url: url)
         let url = baseURL.appendingPathComponent("item").appendingPathComponent("group").appendingPathComponent(String(group.groupID))
         
         _ = baseURL.appendingPathComponent("item")
         var request = URLRequest(url: url)
         request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         
-        Alamofire.request(request).validate().response { (response) in
-            
-            if let error = response.error {
-                print(error.localizedDescription)
-                completion(false)
+        let loadTask = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                print(error)
+                completion(error, nil)
                 return
             }
             
-            guard let data = response.data else {
-                print("Error: No data when trying to load items")
-                completion(false)
+            guard let data = data else {
+                completion(NSError(), nil)
                 return
             }
             
             do {
-                let itemList = try JSONDecoder().decode(ItemList.self, from: data)
-                let items = itemList.data
-                
-                group.items = nil
-                var myHistory: [History] = []
-                
-                for item in items {
-                    if item.groupID == group.groupID && !item.purchased {
-                        if group.items != nil {
-                            group.items?.append(item)
-                        } else {
-                            group.items = [item]
-                        }
-                    }
-                    
-                    if item.purchased && item.groupID == group.groupID {
-                        myHistory.append(History(item: item))
-                    }
-                }
-                
-                history = myHistory
-                completion(true)
-                
+                let items = try JSONDecoder().decode([Task].self, from: data)
+                completion(nil, items)
             } catch {
-                print("Error: Could not decode data into [Item]")
-                completion(false)
-                return
+                completion(NSError(), nil)
             }
+            
+//        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+//
+//        Alamofire.request(request).validate().response { (response) in
+//
+//            if let error = response.error {
+//                print(error.localizedDescription)
+//                completion(false)
+//                return
+//            }
+//
+//            guard let data = response.data else {
+//                print("Error: No data when trying to load items")
+//                completion(false)
+//                return
+//            }
+//
+//            do {
+//                let itemList = try JSONDecoder().decode(ItemList.self, from: data)
+//                let items = itemList.data
+//
+//                group.items = nil
+//                var myHistory: [History] = []
+//
+//                for item in items {
+//                    if item.groupID == group.groupID && !item.purchased {
+//                        if group.items != nil {
+//                            group.items?.append(item)
+//                        } else {
+//                            group.items = [item]
+//                        }
+//                    }
+//
+//                    if item.purchased && item.groupID == group.groupID {
+//                        myHistory.append(History(item: item))
+//                    }
+//                }
+//
+//                history = myHistory
+//                completion(true)
+//
+//            } catch {
+//                print("Error: Could not decode data into [Item]")
+//                completion(false)
+//                return
+//            }
         }
+        
+        loadTask.resume()
     }
     
     
     // MARK:- Save items methods
     
-    func saveItem(item: Item, completion: @escaping (Item?, Error?) -> Void) {
+    func saveItem(item: Task, completion: @escaping (Task?, Error?) -> Void) {
         
 //        let dataTask = URLSession.shared.dataTask(with: baseURL) { (data, _, error) in
 //
@@ -169,9 +200,9 @@ class ItemController {
     }
     
     
-    func checkout(items: [Item], withTotal total: Double, completion: @escaping (Bool) -> Void) {
+    func checkout(items: [Task], withTotal total: Double, completion: @escaping (Bool) -> Void) {
         
-        let purchasedItems = items.map { (item) -> Item in
+        let purchasedItems = items.map { (item) -> Task in
             item.purchased = true
             item.price = total
             return item
@@ -198,7 +229,7 @@ class ItemController {
     }
     
     
-    func itemToJSON(item: Item) throws -> Parameters {
+    func itemToJSON(item: Task) throws -> Parameters {
         let jsonData = try! JSONEncoder().encode(item)
         return try! JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any]
     }

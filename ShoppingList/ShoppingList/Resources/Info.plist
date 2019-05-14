@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>ShopTrak</string>
+	<string>ShoppingList</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -40,7 +40,11 @@
 	<key>NSCameraUsageDescription</key>
 	<string>We need to access your camera for scanning QR code</string>
 	<key>NSPhotoLibraryUsageDescription</key>
+<<<<<<< HEAD
 	<string>"We need access to your photos to update your profile picture" </string>
+=======
+	<string>&quot;We need access to your photos to update your profile picture&quot; </string>
+>>>>>>> aff7302af62af4334006cda9050912336cc6c355
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

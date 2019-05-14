@@ -62,7 +62,7 @@ class GroupController {
     
     
     
-    private func groupToJSON(group: Group) -> [String: Any]? {
+    private func groupToJSON(group: Household) -> [String: Any]? {
         
         guard let jsonData = try? JSONEncoder().encode(group) else {
             return nil
@@ -77,7 +77,7 @@ class GroupController {
     }
     
     
-    func newGroup(withName name: String, completion: @escaping (Group?) -> Void) {
+    func newGroup(withName name: String, completion: @escaping (Household?) -> Void) {
         
         guard let accessToken = SessionManager.tokens?.idToken else {return}
         
@@ -108,7 +108,7 @@ class GroupController {
                             return
                     }
                     
-                    let newGroup = Group(name: name, userID: userID, token: token, groupID: groupID)
+                    let newGroup = Household(name: name, userID: userID, token: token, groupID: groupID)
                     
                     completion(newGroup)
                     
@@ -124,7 +124,7 @@ class GroupController {
     
     // Updates the group and downloads all groups from server. Optional success completion.
     func updateGroup(
-        group: Group,
+        group: Household,
         name: String?,
         userID: Int?,
         pusher: PushNotifications,
@@ -221,7 +221,7 @@ class GroupController {
         }
     }
     
-    func delete(group: Group, completion: @escaping (Bool) -> Void) {
+    func delete(group: Household, completion: @escaping (Bool) -> Void) {
         guard let accessToken = SessionManager.tokens?.idToken else {return}
         let headers: HTTPHeaders = [ "Authorization": "Bearer \(accessToken)"]
         
