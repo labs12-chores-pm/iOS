@@ -9,22 +9,17 @@ import CoreData
 
 extension User {
     
-    convenience init(email: String, name: String, subscriptionType: Int = 0, profilePicture: String?, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+    convenience init(email: String, identifier: UUID = UUID(), name: String, subscriptionType: Int = 0, profilePicture: String?, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         self.email = email
-        self.identifier = UUID()
+        self.identifier = identifier
         self.name = name
         self.subscriptionType = subscriptionType
         self.profilePicture = profilePicture
     }
     
     convenience init(userRepresentation: UserRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-        self.init(context: context)
-        self.email = userRepresentation.email
-        self.identifier = userRepresentation.identifier
-        self.name = userRepresentation.name
-        self.subscriptionType = userRepresentation.subscriptionType
-        self.profilePicture = userRepresentation.profilePicture
+        self.init(email: userRepresentation.email, identifier: userRepresentation.identifier, name: userRepresentation.name, subscriptionType: userRepresentation.subscriptionType, profilePicture: userRepresentation.profilePicture, context: context)
     }
 }
 

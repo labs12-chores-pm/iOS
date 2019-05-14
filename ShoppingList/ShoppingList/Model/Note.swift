@@ -10,20 +10,16 @@ import CoreData
 
 extension Note {
     
-    convenience init(text: String, memberId: UUID, taskId: UUID, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+    convenience init(text: String, memberId: UUID, date: Date = Date(), taskId: UUID, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         self.text = text
         self.memberId = memberId
-        self.date = Date()
+        self.date = date
         self.taskId = taskId
     }
     
     convenience init(noteRepresentation: NoteRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-        self.init(context: context)
-        self.text = noteRepresentation.text
-        self.memberId = noteRepresentation.memberId
-        self.date = noteRepresentation.date
-        self.taskId = noteRepresentation.taskId
+        self.init(text: noteRepresentation.text, memberId: noteRepresentation.memberId, date: noteRepresentation.date, taskId: noteRepresentation.taskId, context: context)
     }
 }
 
