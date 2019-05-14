@@ -26,6 +26,8 @@
 		44A1680C22381C0C00227DFB /* BarcodeScannerController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44A1680B22381C0B00227DFB /* BarcodeScannerController.storyboard */; };
 		44A16810223820DC00227DFB /* BarcodeScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1680E223820DC00227DFB /* BarcodeScannerController.swift */; };
 		77F678AC228A1268005C7C94 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678AB228A1268005C7C94 /* Note.swift */; };
+		77F678AF228A2B99005C7C94 /* HouseholdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678AE228A2B99005C7C94 /* HouseholdController.swift */; };
+		77F678B1228A2D57005C7C94 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678B0228A2D57005C7C94 /* Error.swift */; };
 		96029A422231604800F7F7AE /* MainViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96029A412231604700F7F7AE /* MainViewController.storyboard */; };
 		96029A44223189D500F7F7AE /* NoItemsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96029A43223189D500F7F7AE /* NoItemsView.xib */; };
 		96029A46223198FA00F7F7AE /* Double+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96029A45223198FA00F7F7AE /* Double+Currency.swift */; };
@@ -110,6 +112,8 @@
 		44A1680B22381C0B00227DFB /* BarcodeScannerController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BarcodeScannerController.storyboard; sourceTree = "<group>"; };
 		44A1680E223820DC00227DFB /* BarcodeScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerController.swift; sourceTree = "<group>"; };
 		77F678AB228A1268005C7C94 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		77F678AE228A2B99005C7C94 /* HouseholdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdController.swift; sourceTree = "<group>"; };
+		77F678B0228A2D57005C7C94 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		8BC76772DCDB2F67B7FAE732 /* Pods_ShoppingList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShoppingList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96029A412231604700F7F7AE /* MainViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainViewController.storyboard; sourceTree = "<group>"; };
 		96029A43223189D500F7F7AE /* NoItemsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoItemsView.xib; sourceTree = "<group>"; };
@@ -218,6 +222,7 @@
 				118646DF221DCE9B00D0F04B /* UserController.swift */,
 				44A1680422276F1000227DFB /* HistoryController.swift */,
 				44A1680822318BE700227DFB /* InviteController.swift */,
+				77F678AE228A2B99005C7C94 /* HouseholdController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -268,6 +273,7 @@
 				118646D7221CA9D900D0F04B /* User.swift */,
 				44A16806222F418C00227DFB /* Invitation.swift */,
 				77F678AB228A1268005C7C94 /* Note.swift */,
+				77F678B0228A2D57005C7C94 /* Error.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -529,7 +535,7 @@
 		443C1B2A2214A45100220C28 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
+				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Lambda School Labs";
 				TargetAttributes = {
@@ -722,6 +728,8 @@
 				969A840D2215C99A0003BB37 /* UIImage+ChameleonPrivate.m in Sources */,
 				9663C68C2231D9250019FCED /* HistoryTableViewCell.swift in Sources */,
 				447BEE43221F473300FA1D82 /* SessionManager.swift in Sources */,
+				77F678B1228A2D57005C7C94 /* Error.swift in Sources */,
+				77F678AF228A2B99005C7C94 /* HouseholdController.swift in Sources */,
 				969A841D2215C99A0003BB37 /* Instantiatable.swift in Sources */,
 				77F678AC228A1268005C7C94 /* Note.swift in Sources */,
 				969A841C2215C99A0003BB37 /* Injectable.swift in Sources */,
@@ -874,7 +882,7 @@
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7JG93VFG2G;
+				DEVELOPMENT_TEAM = VXUQXR6S56;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/ShoppingList/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -900,7 +908,7 @@
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7JG93VFG2G;
+				DEVELOPMENT_TEAM = VXUQXR6S56;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/ShoppingList/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

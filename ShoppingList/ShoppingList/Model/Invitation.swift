@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 struct Invite: Codable {
     let id: Int?
     let inviteCode: String
