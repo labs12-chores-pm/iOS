@@ -15,7 +15,7 @@
         <attribute name="memberIds" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" syncable="YES"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="newRelationship" inverseEntity="User" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="user" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Invite" representedClassName="Invite" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" optional="YES" attributeType="String" syncable="YES"/>
@@ -52,14 +52,14 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="profileProfile" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="subscriptionType" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="newRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Household" inverseName="user" inverseEntity="Household" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Household" inverseName="user" inverseEntity="Household" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Household" positionX="-364.171875" positionY="-133.6640625" width="128" height="163"/>
-        <element name="User" positionX="-40.6484375" positionY="-122.38671875" width="128" height="118"/>
-        <element name="Task" positionX="-210.63671875" positionY="98.9765625" width="128" height="163"/>
-        <element name="Note" positionX="-32.79296875" positionY="268.703125" width="128" height="105"/>
         <element name="Category" positionX="-390.52734375" positionY="370.6328125" width="128" height="120"/>
+        <element name="Household" positionX="-364.171875" positionY="-133.6640625" width="128" height="163"/>
         <element name="Invite" positionX="-38.25" positionY="399.5703125" width="128" height="210"/>
+        <element name="Note" positionX="-32.79296875" positionY="268.703125" width="128" height="105"/>
+        <element name="Task" positionX="-210.63671875" positionY="98.9765625" width="128" height="163"/>
+        <element name="User" positionX="-40.6484375" positionY="-122.38671875" width="128" height="133"/>
     </elements>
 </model>
