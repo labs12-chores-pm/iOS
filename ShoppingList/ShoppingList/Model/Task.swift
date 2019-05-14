@@ -35,7 +35,7 @@ struct TaskRepresentation: Codable, Equatable {
     let identifier: UUID
     var isComplete: Bool
     
-    static func == (lhs: Task, rhs: Task) -> Bool {
+    static func == (lhs: TaskRepresentation, rhs: TaskRepresentation) -> Bool {
         return lhs.description == rhs.description &&
         lhs.assigneeIds == rhs.assigneeIds &&
         lhs.dueDate == rhs.dueDate &&

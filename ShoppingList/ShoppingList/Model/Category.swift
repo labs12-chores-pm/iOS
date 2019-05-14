@@ -10,12 +10,12 @@ import CoreData
 
 extension Category {
     
-    convenience init(createdAt: UUID = UUID(), householdId: UUID, name: String, tasks: [UUID], context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+    convenience init(createdAt: Date = Date(), householdId: UUID, name: String, tasks: [UUID], context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         
         self.tasks = tasks
         self.createdAt = createdAt
-        self.householdId = householdID
+        self.householdId = householdId
         self.name = name
     }
     

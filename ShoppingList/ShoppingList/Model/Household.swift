@@ -10,18 +10,18 @@ import CoreData
 
 extension Household {
     
-    convenience init(name: String, creatorId: UUID, memberIds: [UUID], adminIds: [UUID], categories: [UUID], context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+    convenience init(name: String, identifier: UUID = UUID(), creatorId: UUID, memberIds: [UUID], adminIds: [UUID], categories: [UUID], context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         self.name = name
-        self.identifier = UUID()
+        self.identifier = identifier
         self.creatorId = creatorId
         self.memberIds = memberIds
         self.adminIds = adminIds
         self.categories = categories
     }
     
-    @discardableResult convenience init?(householdRepresentation: CategoryRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-        self.init(name: householdRepresenation.name, creatorId: householdRepresenation.creatorId, memberIds: householdRepresenation.memberIds, adminIds: householdRepresenation.adminIds, categories: householdRepresenation.categories, context: context)
+    @discardableResult convenience init?(householdRepresentation: HouseholdRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+        self.init(name: householdRepresentation.name, identifier: householdRepresentation.identifier, creatorId: householdRepresentation.creatorId, memberIds: householdRepresentation.memberIds, adminIds: householdRepresentation.adminIds, categories: householdRepresentation.categories, context: context)
     }
 }
 

@@ -25,11 +25,11 @@
 		44A1680922318BE700227DFB /* InviteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1680822318BE700227DFB /* InviteController.swift */; };
 		44A1680C22381C0C00227DFB /* BarcodeScannerController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44A1680B22381C0B00227DFB /* BarcodeScannerController.storyboard */; };
 		44A16810223820DC00227DFB /* BarcodeScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1680E223820DC00227DFB /* BarcodeScannerController.swift */; };
+		77CABBD4228B6CA3000E00A3 /* ShoppingList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77CABBD2228B6CA3000E00A3 /* ShoppingList.xcdatamodeld */; };
 		77F678AC228A1268005C7C94 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678AB228A1268005C7C94 /* Note.swift */; };
 		77F678AF228A2B99005C7C94 /* HouseholdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678AE228A2B99005C7C94 /* HouseholdController.swift */; };
 		77F678B1228A2D57005C7C94 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678B0228A2D57005C7C94 /* Error.swift */; };
 		77F678C6228B37C2005C7C94 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678C5228B37C2005C7C94 /* CoreDataStack.swift */; };
-		77F678CA228B6656005C7C94 /* ShoppingList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77F678C7228B6656005C7C94 /* ShoppingList.xcdatamodeld */; };
 		96029A422231604800F7F7AE /* MainViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96029A412231604700F7F7AE /* MainViewController.storyboard */; };
 		96029A44223189D500F7F7AE /* NoItemsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96029A43223189D500F7F7AE /* NoItemsView.xib */; };
 		96029A46223198FA00F7F7AE /* Double+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96029A45223198FA00F7F7AE /* Double+Currency.swift */; };
@@ -112,12 +112,11 @@
 		44A1680822318BE700227DFB /* InviteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteController.swift; sourceTree = "<group>"; };
 		44A1680B22381C0B00227DFB /* BarcodeScannerController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BarcodeScannerController.storyboard; sourceTree = "<group>"; };
 		44A1680E223820DC00227DFB /* BarcodeScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerController.swift; sourceTree = "<group>"; };
+		77CABBD3228B6CA3000E00A3 /* ShoppingList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShoppingList.xcdatamodel; sourceTree = "<group>"; };
 		77F678AB228A1268005C7C94 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		77F678AE228A2B99005C7C94 /* HouseholdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdController.swift; sourceTree = "<group>"; };
 		77F678B0228A2D57005C7C94 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		77F678C5228B37C2005C7C94 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		77F678C8228B6656005C7C94 /* ShoppingList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShoppingList.xcdatamodel; sourceTree = "<group>"; };
-		77F678C9228B6656005C7C94 /* ShoppingList 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ShoppingList 2.xcdatamodel"; sourceTree = "<group>"; };
 		8BC76772DCDB2F67B7FAE732 /* Pods_ShoppingList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShoppingList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96029A412231604700F7F7AE /* MainViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainViewController.storyboard; sourceTree = "<group>"; };
 		96029A43223189D500F7F7AE /* NoItemsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoItemsView.xib; sourceTree = "<group>"; };
@@ -261,8 +260,8 @@
 				112430AC221611B30081784C /* Controllers */,
 				443C1B4A2215F0DA00220C28 /* Model */,
 				969A83C92215C99A0003BB37 /* Frameworks */,
+				77CABBD2228B6CA3000E00A3 /* ShoppingList.xcdatamodeld */,
 				969A83C02215C94F0003BB37 /* Resources */,
-				77F678C7228B6656005C7C94 /* ShoppingList.xcdatamodeld */,
 			);
 			path = ShoppingList;
 			sourceTree = "<group>";
@@ -627,7 +626,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ShoppingList/Pods-ShoppingList-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ShoppingList/Pods-ShoppingList-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Auth0/Auth0.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
@@ -664,7 +663,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShoppingList/Pods-ShoppingList-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ShoppingList/Pods-ShoppingList-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -734,7 +733,7 @@
 				447BEE43221F473300FA1D82 /* SessionManager.swift in Sources */,
 				77F678B1228A2D57005C7C94 /* Error.swift in Sources */,
 				77F678AF228A2B99005C7C94 /* HouseholdController.swift in Sources */,
-				77F678CA228B6656005C7C94 /* ShoppingList.xcdatamodeld in Sources */,
+				77CABBD4228B6CA3000E00A3 /* ShoppingList.xcdatamodeld in Sources */,
 				969A841D2215C99A0003BB37 /* Instantiatable.swift in Sources */,
 				77F678AC228A1268005C7C94 /* Note.swift in Sources */,
 				969A841C2215C99A0003BB37 /* Injectable.swift in Sources */,
@@ -953,13 +952,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		77F678C7228B6656005C7C94 /* ShoppingList.xcdatamodeld */ = {
+		77CABBD2228B6CA3000E00A3 /* ShoppingList.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				77F678C8228B6656005C7C94 /* ShoppingList.xcdatamodel */,
-				77F678C9228B6656005C7C94 /* ShoppingList 2.xcdatamodel */,
+				77CABBD3228B6CA3000E00A3 /* ShoppingList.xcdatamodel */,
 			);
-			currentVersion = 77F678C8228B6656005C7C94 /* ShoppingList.xcdatamodel */;
+			currentVersion = 77CABBD3228B6CA3000E00A3 /* ShoppingList.xcdatamodel */;
 			path = ShoppingList.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
