@@ -30,6 +30,7 @@
 		771D3445228C7EFE00C8BA13 /* TabView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 771D3444228C7EFE00C8BA13 /* TabView.storyboard */; };
 		771D344B228CAEC700C8BA13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 771D344A228CAEC700C8BA13 /* GoogleService-Info.plist */; };
 		771D344D228CB33300C8BA13 /* NotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D344C228CB33300C8BA13 /* NotesController.swift */; };
+		771D3451228CCCC300C8BA13 /* CustomTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D3450228CCCC300C8BA13 /* CustomTableView.swift */; };
 		77CABBD7228BAC98000E00A3 /* HouseholdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CABBD6228BAC98000E00A3 /* HouseholdViewController.swift */; };
 		77F678AC228A1268005C7C94 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678AB228A1268005C7C94 /* Note.swift */; };
 		77F678AF228A2B99005C7C94 /* HouseholdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678AE228A2B99005C7C94 /* HouseholdController.swift */; };
@@ -122,6 +123,7 @@
 		771D3444228C7EFE00C8BA13 /* TabView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabView.storyboard; sourceTree = "<group>"; };
 		771D344A228CAEC700C8BA13 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		771D344C228CB33300C8BA13 /* NotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesController.swift; sourceTree = "<group>"; };
+		771D3450228CCCC300C8BA13 /* CustomTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableView.swift; sourceTree = "<group>"; };
 		77CABBD6228BAC98000E00A3 /* HouseholdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdViewController.swift; sourceTree = "<group>"; };
 		77F678AB228A1268005C7C94 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		77F678AE228A2B99005C7C94 /* HouseholdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdController.swift; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 				96A6E0152231C5240006994E /* CheckoutPopoverView.swift */,
 				96029A43223189D500F7F7AE /* NoItemsView.xib */,
 				9663C6832231CF400019FCED /* NoItemsView.swift */,
+				771D3450228CCCC300C8BA13 /* CustomTableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -759,6 +762,7 @@
 				969A840D2215C99A0003BB37 /* UIImage+ChameleonPrivate.m in Sources */,
 				771D3440228C775F00C8BA13 /* HouseholdUserTableViewCell.swift in Sources */,
 				9663C68C2231D9250019FCED /* HistoryTableViewCell.swift in Sources */,
+				771D3451228CCCC300C8BA13 /* CustomTableView.swift in Sources */,
 				447BEE43221F473300FA1D82 /* SessionManager.swift in Sources */,
 				77F678B1228A2D57005C7C94 /* Error.swift in Sources */,
 				77F678AF228A2B99005C7C94 /* HouseholdController.swift in Sources */,

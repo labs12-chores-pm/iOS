@@ -11,4 +11,6 @@ import Foundation
 enum NetworkError: Error {
     case urlSession
     case encodingData
+    case decodingData
+    case dataMissing
 }
