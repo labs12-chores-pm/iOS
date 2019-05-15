@@ -17,18 +17,14 @@ class HouseholdController {
         put(household: newHousehold)
     }
     
-    func updateHousehold(household: Household, name: String?, memberIds: [UUID], adminIds: [UUID], categories: [UUID]) {
+    func updateHousehold(household: Household, name: String?, memberIds: [UUID], adminIds: [UUID], categories: [Category]) {
         
-        var newHousehold = HouseholdRepresentation(household: household)
-        newHousehold.name = name ?? newHousehold.name
-        newHousehold.memberIds.append(contentsOf: memberIds)
-        newHousehold.adminIds.append(contentsOf: adminIds)
-        newHousehold.categories.append(contentsOf: categories)
+        household.name = name ?? household.name
+        household.memberIds.append(contentsOf: memberIds)
+        household.adminIds.append(contentsOf: adminIds)
+        household.categories.append(contentsOf: categories)
         
-        if let updatedHousehold = Household(householdRepresentation: newHousehold) {
-            saveToCoreData()
-            put(household: updatedHousehold)
-        }
+        put(household: household)
     }
     
     func deleteHousehold(household: Household, completion: @escaping (Error?) -> Void = {_ in }) {
@@ -56,10 +52,9 @@ class HouseholdController {
         let requestURL = householdsURL.appendingPathComponent(id).appendingPathExtension("json")
         var request = URLRequest(url: requestURL)
         request.httpMethod = "PUT"
-        let householdRep = HouseholdRepresentation(household: household)
         
         do {
-            request.httpBody = try JSONEncoder().encode(householdRep)
+            request.httpBody = try JSONEncoder().encode(household)
         } catch {
             print("Error encoding data: \(household)")
             completion(NetworkError.encodingData)
@@ -76,21 +71,6 @@ class HouseholdController {
             completion(nil)
         }
         task.resume()
-    }
-    
-    func deleteFromCoreData(household: Household, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-        context.delete(household)
-        saveToCoreData()
-    }
-    
-    func saveToCoreData(context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-        context.perform {
-            do {
-                try context.save()
-            } catch {
-                context.reset()
-            }
-        }
     }
     
     let baseURL = URL(string: "https://my-json-server.typicode.com/ryanboris/mockiosserver")!

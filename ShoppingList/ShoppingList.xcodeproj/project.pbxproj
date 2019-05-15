@@ -29,7 +29,6 @@
 		771D3441228C775F00C8BA13 /* HouseholdUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771D343F228C775F00C8BA13 /* HouseholdUserTableViewCell.xib */; };
 		771D3443228C7B7F00C8BA13 /* Roles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D3442228C7B7F00C8BA13 /* Roles.swift */; };
 		771D3445228C7EFE00C8BA13 /* TabView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 771D3444228C7EFE00C8BA13 /* TabView.storyboard */; };
-		77CABBD4228B6CA3000E00A3 /* ShoppingList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77CABBD2228B6CA3000E00A3 /* ShoppingList.xcdatamodeld */; };
 		77CABBD7228BAC98000E00A3 /* HouseholdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CABBD6228BAC98000E00A3 /* HouseholdViewController.swift */; };
 		77F678AC228A1268005C7C94 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678AB228A1268005C7C94 /* Note.swift */; };
 		77F678AF228A2B99005C7C94 /* HouseholdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678AE228A2B99005C7C94 /* HouseholdController.swift */; };
@@ -121,7 +120,6 @@
 		771D343F228C775F00C8BA13 /* HouseholdUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HouseholdUserTableViewCell.xib; sourceTree = "<group>"; };
 		771D3442228C7B7F00C8BA13 /* Roles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roles.swift; sourceTree = "<group>"; };
 		771D3444228C7EFE00C8BA13 /* TabView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabView.storyboard; sourceTree = "<group>"; };
-		77CABBD3228B6CA3000E00A3 /* ShoppingList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShoppingList.xcdatamodel; sourceTree = "<group>"; };
 		77CABBD6228BAC98000E00A3 /* HouseholdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdViewController.swift; sourceTree = "<group>"; };
 		77F678AB228A1268005C7C94 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		77F678AE228A2B99005C7C94 /* HouseholdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdController.swift; sourceTree = "<group>"; };
@@ -270,7 +268,6 @@
 				112430AC221611B30081784C /* Controllers */,
 				443C1B4A2215F0DA00220C28 /* Model */,
 				969A83C92215C99A0003BB37 /* Frameworks */,
-				77CABBD2228B6CA3000E00A3 /* ShoppingList.xcdatamodeld */,
 				969A83C02215C94F0003BB37 /* Resources */,
 			);
 			path = ShoppingList;
@@ -761,7 +758,6 @@
 				447BEE43221F473300FA1D82 /* SessionManager.swift in Sources */,
 				77F678B1228A2D57005C7C94 /* Error.swift in Sources */,
 				77F678AF228A2B99005C7C94 /* HouseholdController.swift in Sources */,
-				77CABBD4228B6CA3000E00A3 /* ShoppingList.xcdatamodeld in Sources */,
 				969A841D2215C99A0003BB37 /* Instantiatable.swift in Sources */,
 				77F678AC228A1268005C7C94 /* Note.swift in Sources */,
 				969A841C2215C99A0003BB37 /* Injectable.swift in Sources */,
@@ -978,19 +974,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		77CABBD2228B6CA3000E00A3 /* ShoppingList.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				77CABBD3228B6CA3000E00A3 /* ShoppingList.xcdatamodel */,
-			);
-			currentVersion = 77CABBD3228B6CA3000E00A3 /* ShoppingList.xcdatamodel */;
-			path = ShoppingList.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 443C1B2A2214A45100220C28 /* Project object */;
 }
