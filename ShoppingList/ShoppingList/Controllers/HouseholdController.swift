@@ -13,23 +13,24 @@ class HouseholdController {
     func createHousehold(name: String, creatorId: UUID, memberIds: [UUID] = []) {
         
         let newHousehold = Household(name: name, identifier: UUID(), creatorId: creatorId, memberIds: [], adminIds: [creatorId], categories: [])
-        saveToCoreData()
         put(household: newHousehold)
     }
     
     func updateHousehold(household: Household, name: String?, memberIds: [UUID], adminIds: [UUID], categories: [Category]) {
         
-        household.name = name ?? household.name
-        household.memberIds.append(contentsOf: memberIds)
-        household.adminIds.append(contentsOf: adminIds)
-        household.categories.append(contentsOf: categories)
+        var newHousehold = household
         
-        put(household: household)
+        newHousehold.name = name ?? household.name
+        newHousehold.memberIds.append(contentsOf: memberIds)
+        newHousehold.adminIds.append(contentsOf: adminIds)
+        newHousehold.categories.append(contentsOf: categories)
+        
+        put(household: newHousehold)
     }
     
-    func deleteHousehold(household: Household, completion: @escaping (Error?) -> Void = {_ in }) {
+    func deleteHousehold(household: Household, completion: @escaping (Error?) -> Void) {
         
-        guard let id = household.identifier?.uuidString else { return }
+        let id = household.identifier.uuidString
         let householdsURL = baseURL.appendingPathComponent("households")
         let requestURL = householdsURL.appendingPathComponent(id).appendingPathExtension("json")
         var request = URLRequest(url: requestURL)
@@ -41,13 +42,11 @@ class HouseholdController {
         }
         
         task.resume()
-        
-        deleteHousehold(household: household)
     }
     
     private func put(household: Household, completion: @escaping (Error?) -> Void = {_ in }) {
         
-        guard let id = household.identifier?.uuidString else { return }
+        let id = household.identifier.uuidString
         let householdsURL = baseURL.appendingPathComponent("households")
         let requestURL = householdsURL.appendingPathComponent(id).appendingPathExtension("json")
         var request = URLRequest(url: requestURL)

@@ -13,4 +13,5 @@ struct Note: Codable {
     let memberId: UUID
     let date: Date
     let taskId: UUID
+    let identifier: UUID
 }
