@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1101B93822383BED005F170D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1101B93722383BEC005F170D /* GoogleService-Info.plist */; };
-		112430AE2216267E0081784C /* GroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112430AD2216267E0081784C /* GroupController.swift */; };
 		118646D4221CA8CD00D0F04B /* Household.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118646D3221CA8CD00D0F04B /* Household.swift */; };
 		118646D6221CA93900D0F04B /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118646D5221CA93900D0F04B /* Task.swift */; };
 		118646D8221CA9D900D0F04B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118646D7221CA9D900D0F04B /* User.swift */; };
@@ -95,7 +94,6 @@
 
 /* Begin PBXFileReference section */
 		1101B93722383BEC005F170D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		112430AD2216267E0081784C /* GroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupController.swift; sourceTree = "<group>"; };
 		118646D3221CA8CD00D0F04B /* Household.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Household.swift; sourceTree = "<group>"; };
 		118646D5221CA93900D0F04B /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		118646D7221CA9D900D0F04B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -218,7 +216,6 @@
 			isa = PBXGroup;
 			children = (
 				11F5380C221F51EA0046BDFC /* HelperFile.swift */,
-				112430AD2216267E0081784C /* GroupController.swift */,
 				119B303C2225ABC300DF93E6 /* GroupMemberController.swift */,
 				44A16800222746E600227DFB /* ItemController.swift */,
 				118646DF221DCE9B00D0F04B /* UserController.swift */,
@@ -724,7 +721,6 @@
 				118646DE221CAAA100D0F04B /* Category.swift in Sources */,
 				969A84162215C99A0003BB37 /* Reusable+UICollectionView.swift in Sources */,
 				969A841A2215C99A0003BB37 /* Storyboard.swift in Sources */,
-				112430AE2216267E0081784C /* GroupController.swift in Sources */,
 				969A84172215C99A0003BB37 /* Storyboard+UIViewController.swift in Sources */,
 				969A841B2215C99A0003BB37 /* Deprecated.swift in Sources */,
 				960FBF65221C27050076C662 /* AccountInformationViewController.swift in Sources */,

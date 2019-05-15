@@ -10,9 +10,10 @@ import CoreData
 
 extension Category {
     
-    convenience init(createdAt: Date = Date(), householdId: UUID, name: String, tasks: [UUID], context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+    convenience init(createdAt: Date = Date(), identifier: UUID = UUID(), householdId: UUID, name: String, tasks: [UUID], context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         
+        self.identifier = identifier
         self.tasks = tasks
         self.createdAt = createdAt
         self.householdId = householdId
@@ -20,7 +21,7 @@ extension Category {
     }
     
     @discardableResult convenience init?(categoryRepresentation: CategoryRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-        self.init(createdAt: categoryRepresentation.createdAt, householdId: categoryRepresentation.householdId, name: categoryRepresentation.name, tasks: categoryRepresentation.tasks, context: context)
+        self.init(createdAt: categoryRepresentation.createdAt, identifier: categoryRepresentation.identifier, householdId: categoryRepresentation.householdId, name: categoryRepresentation.name, tasks: categoryRepresentation.tasks, context: context)
     }
 }
 
@@ -29,9 +30,11 @@ struct CategoryRepresentation: Codable, Equatable {
     let createdAt: Date
     let householdId: UUID
     var name: String
+    let identifier: UUID
     
     static func == (lhs: CategoryRepresentation, rhs: CategoryRepresentation) -> Bool {
         return lhs.tasks == rhs.tasks &&
-            lhs.name == rhs.name
+            lhs.name == rhs.name &&
+        lhs.identifier == rhs.identifier
     }
 }

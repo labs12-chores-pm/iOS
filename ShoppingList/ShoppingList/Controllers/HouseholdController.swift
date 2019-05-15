@@ -16,16 +16,17 @@ class HouseholdController {
         put(household: newHousehold)
     }
     
-    func updateHousehold(household: Household, name: String?, memberIds: [UUID], adminIds: [UUID], categories: [Category]) {
+    func updateHousehold(household: Household, name: String?, memberIds: [UUID], adminIds: [UUID], categories: [UUID]) {
         
-        var updateHousehold = household
+        var newHousehold = HouseholdRepresentation(household: household)
+        newHousehold.name = name ?? newHousehold.name
+        newHousehold.memberIds.append(contentsOf: memberIds)
+        newHousehold.adminIds.append(contentsOf: adminIds)
+        newHousehold.categories.append(contentsOf: categories)
         
-        updateHousehold.name = name ?? household.name
-        updateHousehold.memberIds += memberIds
-        updateHousehold.adminIds += adminIds
-        updateHousehold.categories += categories
-        
-        put(household: updateHousehold)
+        if let updatedHousehold = Household(householdRepresentation: newHousehold) {
+            put(household: updatedHousehold)
+        }
     }
     
     func deleteHousehold(household: Household, completion: @escaping (Error?) -> Void = {_ in }) {

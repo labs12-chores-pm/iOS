@@ -35,8 +35,31 @@ struct HouseholdRepresentation: Codable, Equatable {
     
     static func == (lhs: HouseholdRepresentation, rhs: HouseholdRepresentation) -> Bool {
         return lhs.name == rhs.name &&
+        lhs.identifier == rhs.identifier &&
+        lhs.creatorId == rhs.creatorId &&
         lhs.memberIds == rhs.memberIds &&
         lhs.adminIds == rhs.adminIds &&
         lhs.categories == rhs.categories
+    }
+    
+    init(name: String, identifier: UUID = UUID(), creatorId: UUID, memberIds: [UUID], adminIds: [UUID], categories: [UUID]) {
+        self.name = name
+        self.identifier = identifier
+        self.creatorId = creatorId
+        self.memberIds = memberIds
+        self.adminIds = adminIds
+        self.categories = categories
+    }
+    
+    init(household: Household) {
+        guard let name = household.name, let identifier = household.identifier, let creatorId = household.creatorId,
+            let memberIds = household.memberIds, let adminIds = household.adminIds, let categories = household.categories else { return }
+        
+        self.name = name
+        self.identifier = identifier
+        self.creatorId = creatorId
+        self.memberIds = memberIds
+        self.adminIds = adminIds
+        self.categories = categories
     }
 }
