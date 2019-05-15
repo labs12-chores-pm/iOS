@@ -3,6 +3,7 @@
     <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="householdId" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tasks" optional="YES" attributeType="Transformable" customClassName="[UUID]" syncable="YES"/>
     </entity>
@@ -37,10 +38,10 @@
         <attribute name="subscriptionType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Category" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="Household" positionX="-54" positionY="18" width="128" height="135"/>
-        <element name="Task" positionX="-36" positionY="63" width="128" height="150"/>
-        <element name="User" positionX="-18" positionY="99" width="128" height="120"/>
+        <element name="Category" positionX="-271.359375" positionY="-241.8046875" width="128" height="120"/>
+        <element name="Household" positionX="-302.046875" positionY="69.8046875" width="128" height="133"/>
         <element name="Note" positionX="0" positionY="117" width="128" height="105"/>
+        <element name="Task" positionX="-64.3515625" positionY="-186.546875" width="128" height="150"/>
+        <element name="User" positionX="214.8125" positionY="-69.39453125" width="128" height="120"/>
     </elements>
 </model>
