@@ -24,7 +24,13 @@
 		44A1680922318BE700227DFB /* InviteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1680822318BE700227DFB /* InviteController.swift */; };
 		44A1680C22381C0C00227DFB /* BarcodeScannerController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44A1680B22381C0B00227DFB /* BarcodeScannerController.storyboard */; };
 		44A16810223820DC00227DFB /* BarcodeScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1680E223820DC00227DFB /* BarcodeScannerController.swift */; };
+		771D343B228C654000C8BA13 /* Household.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 771D343A228C654000C8BA13 /* Household.storyboard */; };
+		771D3440228C775F00C8BA13 /* HouseholdUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D343E228C775F00C8BA13 /* HouseholdUserTableViewCell.swift */; };
+		771D3441228C775F00C8BA13 /* HouseholdUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771D343F228C775F00C8BA13 /* HouseholdUserTableViewCell.xib */; };
+		771D3443228C7B7F00C8BA13 /* Roles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D3442228C7B7F00C8BA13 /* Roles.swift */; };
+		771D3445228C7EFE00C8BA13 /* TabView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 771D3444228C7EFE00C8BA13 /* TabView.storyboard */; };
 		77CABBD4228B6CA3000E00A3 /* ShoppingList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77CABBD2228B6CA3000E00A3 /* ShoppingList.xcdatamodeld */; };
+		77CABBD7228BAC98000E00A3 /* HouseholdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CABBD6228BAC98000E00A3 /* HouseholdViewController.swift */; };
 		77F678AC228A1268005C7C94 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678AB228A1268005C7C94 /* Note.swift */; };
 		77F678AF228A2B99005C7C94 /* HouseholdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678AE228A2B99005C7C94 /* HouseholdController.swift */; };
 		77F678B1228A2D57005C7C94 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678B0228A2D57005C7C94 /* Error.swift */; };
@@ -110,7 +116,13 @@
 		44A1680822318BE700227DFB /* InviteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteController.swift; sourceTree = "<group>"; };
 		44A1680B22381C0B00227DFB /* BarcodeScannerController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BarcodeScannerController.storyboard; sourceTree = "<group>"; };
 		44A1680E223820DC00227DFB /* BarcodeScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerController.swift; sourceTree = "<group>"; };
+		771D343A228C654000C8BA13 /* Household.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Household.storyboard; sourceTree = "<group>"; };
+		771D343E228C775F00C8BA13 /* HouseholdUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdUserTableViewCell.swift; sourceTree = "<group>"; };
+		771D343F228C775F00C8BA13 /* HouseholdUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HouseholdUserTableViewCell.xib; sourceTree = "<group>"; };
+		771D3442228C7B7F00C8BA13 /* Roles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roles.swift; sourceTree = "<group>"; };
+		771D3444228C7EFE00C8BA13 /* TabView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabView.storyboard; sourceTree = "<group>"; };
 		77CABBD3228B6CA3000E00A3 /* ShoppingList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShoppingList.xcdatamodel; sourceTree = "<group>"; };
+		77CABBD6228BAC98000E00A3 /* HouseholdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdViewController.swift; sourceTree = "<group>"; };
 		77F678AB228A1268005C7C94 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		77F678AE228A2B99005C7C94 /* HouseholdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdController.swift; sourceTree = "<group>"; };
 		77F678B0228A2D57005C7C94 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
@@ -247,6 +259,7 @@
 		443C1B342214A45200220C28 /* ShoppingList */ = {
 			isa = PBXGroup;
 			children = (
+				77CABBD5228BAC77000E00A3 /* Storyboards */,
 				77F678AD228A1273005C7C94 /* Extensions */,
 				960FBF66221C29D00076C662 /* ShoppingList.entitlements */,
 				969A83C52215C9840003BB37 /* AppDelegate.swift */,
@@ -273,6 +286,7 @@
 				44A16806222F418C00227DFB /* Invitation.swift */,
 				77F678AB228A1268005C7C94 /* Note.swift */,
 				77F678B0228A2D57005C7C94 /* Error.swift */,
+				771D3442228C7B7F00C8BA13 /* Roles.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -301,6 +315,15 @@
 				B5F3823A7F0AFA3E748D368C /* Pods-ShoppingList.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		77CABBD5228BAC77000E00A3 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				771D343A228C654000C8BA13 /* Household.storyboard */,
+				771D3444228C7EFE00C8BA13 /* TabView.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		77F678AD228A1273005C7C94 /* Extensions */ = {
@@ -338,6 +361,8 @@
 				9663C6872231D4880019FCED /* ItemTableViewCell.xib */,
 				9663C68A2231D9250019FCED /* HistoryTableViewCell.swift */,
 				9663C68B2231D9250019FCED /* HistoryTableViewCell.xib */,
+				771D343E228C775F00C8BA13 /* HouseholdUserTableViewCell.swift */,
+				771D343F228C775F00C8BA13 /* HouseholdUserTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -484,6 +509,7 @@
 				96DE302C221637FE00213C3E /* MainViewController */,
 				96DE302F221637FE00213C3E /* LoginViewController */,
 				96700E2F221C034000F084B3 /* SettingsViewControllers */,
+				77CABBD6228BAC98000E00A3 /* HouseholdViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -579,9 +605,11 @@
 			files = (
 				96A6E0142231C4040006994E /* CheckoutPopoverView.xib in Resources */,
 				96029A422231604800F7F7AE /* MainViewController.storyboard in Resources */,
+				771D3445228C7EFE00C8BA13 /* TabView.storyboard in Resources */,
 				443C1B4E221B628D00220C28 /* Auth0.plist in Resources */,
 				9663C6892231D4880019FCED /* ItemTableViewCell.xib in Resources */,
 				1101B93822383BED005F170D /* GoogleService-Info.plist in Resources */,
+				771D343B228C654000C8BA13 /* Household.storyboard in Resources */,
 				96029A44223189D500F7F7AE /* NoItemsView.xib in Resources */,
 				96476B512215D41300E57EB9 /* LaunchScreen.storyboard in Resources */,
 				96CBFBEB22285A7700A6B41E /* NewGroupPopoverView.xib in Resources */,
@@ -590,6 +618,7 @@
 				44A1680C22381C0C00227DFB /* BarcodeScannerController.storyboard in Resources */,
 				9691AB552225AEB600C1EE1E /* GroupsPopoverView.xib in Resources */,
 				96476B522215D41300E57EB9 /* Assets.xcassets in Resources */,
+				771D3441228C775F00C8BA13 /* HouseholdUserTableViewCell.xib in Resources */,
 				968D512C222EBA5900179241 /* NewItemPopoverView.xib in Resources */,
 				9663C68D2231D9250019FCED /* HistoryTableViewCell.xib in Resources */,
 				960FBF6B221C41570076C662 /* MessagePopoverView.xib in Resources */,
@@ -681,12 +710,14 @@
 				968D512D222EBA5900179241 /* NewItemPopoverView.swift in Sources */,
 				9663C6842231CF400019FCED /* NoItemsView.swift in Sources */,
 				969A84122215C99A0003BB37 /* Nib+NSView.swift in Sources */,
+				771D3443228C7B7F00C8BA13 /* Roles.swift in Sources */,
 				118646D6221CA93900D0F04B /* Task.swift in Sources */,
 				969A84042215C99A0003BB37 /* UIColor+Chameleon.m in Sources */,
 				969A840C2215C99A0003BB37 /* UIAppearance+Swift.m in Sources */,
 				11F5380D221F51EA0046BDFC /* HelperFile.swift in Sources */,
 				96CBFBED22285E7200A6B41E /* NewGroupPopoverView.swift in Sources */,
 				44A16810223820DC00227DFB /* BarcodeScannerController.swift in Sources */,
+				77CABBD7228BAC98000E00A3 /* HouseholdViewController.swift in Sources */,
 				96E7BE60221DC149004EE9FF /* Helpers.swift in Sources */,
 				96700E31221C035600F084B3 /* SettingsTableViewController.swift in Sources */,
 				969A84022215C99A0003BB37 /* UIColor+ChameleonPrivate.m in Sources */,
@@ -725,6 +756,7 @@
 				969A841B2215C99A0003BB37 /* Deprecated.swift in Sources */,
 				960FBF65221C27050076C662 /* AccountInformationViewController.swift in Sources */,
 				969A840D2215C99A0003BB37 /* UIImage+ChameleonPrivate.m in Sources */,
+				771D3440228C775F00C8BA13 /* HouseholdUserTableViewCell.swift in Sources */,
 				9663C68C2231D9250019FCED /* HistoryTableViewCell.swift in Sources */,
 				447BEE43221F473300FA1D82 /* SessionManager.swift in Sources */,
 				77F678B1228A2D57005C7C94 /* Error.swift in Sources */,

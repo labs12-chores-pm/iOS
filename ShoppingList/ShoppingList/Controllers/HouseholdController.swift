@@ -6,13 +6,14 @@
 //  Copyright © 2019 Lambda School Labs. All rights reserved.
 //
 
-import Foundation
+import CoreData
 
 class HouseholdController {
     
     func createHousehold(name: String, creatorId: UUID, memberIds: [UUID] = []) {
         
         let newHousehold = Household(name: name, identifier: UUID(), creatorId: creatorId, memberIds: [], adminIds: [creatorId], categories: [])
+        saveToCoreData()
         put(household: newHousehold)
     }
     
@@ -25,13 +26,14 @@ class HouseholdController {
         newHousehold.categories.append(contentsOf: categories)
         
         if let updatedHousehold = Household(householdRepresentation: newHousehold) {
+            saveToCoreData()
             put(household: updatedHousehold)
         }
     }
     
     func deleteHousehold(household: Household, completion: @escaping (Error?) -> Void = {_ in }) {
         
-        let id = household.identifier.uuidString
+        guard let id = household.identifier?.uuidString else { return }
         let householdsURL = baseURL.appendingPathComponent("households")
         let requestURL = householdsURL.appendingPathComponent(id).appendingPathExtension("json")
         var request = URLRequest(url: requestURL)
@@ -43,18 +45,21 @@ class HouseholdController {
         }
         
         task.resume()
+        
+        deleteHousehold(household: household)
     }
     
     private func put(household: Household, completion: @escaping (Error?) -> Void = {_ in }) {
         
-        let id = household.identifier.uuidString
+        guard let id = household.identifier?.uuidString else { return }
         let householdsURL = baseURL.appendingPathComponent("households")
         let requestURL = householdsURL.appendingPathComponent(id).appendingPathExtension("json")
         var request = URLRequest(url: requestURL)
         request.httpMethod = "PUT"
+        let householdRep = HouseholdRepresentation(household: household)
         
         do {
-            request.httpBody = try JSONEncoder().encode(household)
+            request.httpBody = try JSONEncoder().encode(householdRep)
         } catch {
             print("Error encoding data: \(household)")
             completion(NetworkError.encodingData)
@@ -68,11 +73,24 @@ class HouseholdController {
                 completion(NetworkError.urlSession)
                 return
             }
-            
             completion(nil)
         }
-        
         task.resume()
+    }
+    
+    func deleteFromCoreData(household: Household, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+        context.delete(household)
+        saveToCoreData()
+    }
+    
+    func saveToCoreData(context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+        context.perform {
+            do {
+                try context.save()
+            } catch {
+                context.reset()
+            }
+        }
     }
     
     let baseURL = URL(string: "https://my-json-server.typicode.com/ryanboris/mockiosserver")!
