@@ -10,10 +10,13 @@ import CoreData
 
 class HouseholdController {
     
-    func createHousehold(name: String, creatorId: UUID, memberIds: [UUID] = []) {
+    func createHousehold(name: String, creatorId: UUID, memberIds: [UUID] = []) -> Household {
         
-        let newHousehold = Household(name: name, identifier: UUID(), creatorId: creatorId, memberIds: [], adminIds: [creatorId], categories: [])
+        let members = memberIds + [creatorId]
+        
+        let newHousehold = Household(name: name, identifier: UUID(), creatorId: creatorId, memberIds: members, adminIds: [creatorId], categories: [])
         put(household: newHousehold)
+        return newHousehold
     }
     
     func updateHousehold(household: Household, name: String? = nil, memberIds: [UUID], adminIds: [UUID], categories: [Category]) {

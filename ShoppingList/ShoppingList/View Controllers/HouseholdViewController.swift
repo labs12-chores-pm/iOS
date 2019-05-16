@@ -15,9 +15,16 @@ class HouseholdViewController: UIViewController {
         householdMemberTableView.delegate = self
         householdPicker.delegate = self
         householdPicker.dataSource = self
-        
+        fetchAndAssign()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchAndAssign), name: NSNotification.Name("newHousehold"), object: self)
+    }
+    
+    @objc private func fetchAndAssign() {
         if let currentUser = userController.currentUser {
-           
+            
             self.currentUser = currentUser
             
             householdController.fetchHousehold(householdId: currentUser.currentHouseholdId) { (household, error) in
@@ -38,8 +45,13 @@ class HouseholdViewController: UIViewController {
         }
     }
     
-    private func updateViews() {
-//        guard let household = household else { return }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PopCreateHousehold" {
+            guard let createVC = segue.destination as? CreateHouseholdViewController else { return }
+            createVC.householdController = self.householdController
+            createVC.userController = self.userController
+            createVC.currentUser = self.currentUser
+        }
     }
     
     @IBOutlet weak var householdPicker: UIPickerView!
@@ -50,7 +62,6 @@ class HouseholdViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.householdMemberTableView.reloadData()
-                self.updateViews()
             }
         }
     }
