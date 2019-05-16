@@ -1,8 +1,4 @@
 PODS:
-  - Alamofire (4.8.2)
-  - Auth0 (1.15.0):
-    - SimpleKeychain
-  - CryptoSwift (0.15.0)
   - Firebase/Core (6.0.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 6.0.0)
@@ -57,42 +53,20 @@ PODS:
   - GoogleUtilities/UserDefaults (6.1.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.1)
-  - Kingfisher (5.4.0)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Popover (1.2.2)
-  - PusherSwift (7.0.0):
-    - CryptoSwift (~> 0.9)
-    - ReachabilitySwift (= 4.3.0)
-    - Starscream (~> 3.0.5)
-  - PushNotifications (2.0.0)
-  - ReachabilitySwift (4.3.0)
-  - SimpleKeychain (0.9.0)
-  - Starscream (3.0.6)
-  - SwiftKeychainWrapper (3.3.0)
-  - TUSafariActivity (1.0.4)
 
 DEPENDENCIES:
-  - Alamofire
-  - Auth0
   - Firebase/Core
   - Firebase/Storage
-  - Kingfisher
   - Popover
-  - PusherSwift
-  - PushNotifications
-  - SimpleKeychain
-  - SwiftKeychainWrapper
-  - TUSafariActivity (~> 1.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Alamofire
-    - Auth0
-    - CryptoSwift
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuthInterop
@@ -102,21 +76,10 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - GTMSessionFetcher
-    - Kingfisher
     - nanopb
     - Popover
-    - PusherSwift
-    - PushNotifications
-    - ReachabilitySwift
-    - SimpleKeychain
-    - Starscream
-    - SwiftKeychainWrapper
-    - TUSafariActivity
 
 SPEC CHECKSUMS:
-  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  Auth0: b741c805711a80eb698fce55d354cc32e0784dce
-  CryptoSwift: 769f58a9e89f64e8796c2e59ce5f002dc81a2438
   Firebase: fa80b9d987ca014a1ba9357496ef2a0178b28b12
   FirebaseAnalytics: 1743c5f4de3687d0745709dfdc4b1dea1484f44c
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
@@ -126,17 +89,9 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 7f028ea162b72c8f326daec74afc95d94f7a47d6
   GoogleUtilities: 84df567c76ca84f67b7bb40e769fdd4acc746a10
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
-  Kingfisher: 9c8f2cc6710334e06f32ba2b45e77707d5e2f0c9
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Popover: 21e357f86d45c8d9e29a41a4adbca3664d6e511f
-  PusherSwift: d15d6290be0b0b57fd9ac80b03661a6ba24623ec
-  PushNotifications: db23723ad406eeeae365b9ba8f473bf0a54be093
-  ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
-  SimpleKeychain: 3be49072fd2d82de8fa83d847ef1e548622f8fc5
-  Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
-  SwiftKeychainWrapper: ef5ad793bc0e08e24a5913f28345b8f7bc8e4123
-  TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
 
-PODFILE CHECKSUM: ec8bcaeeeb449e715484ed554c5d299ea8aba954
+PODFILE CHECKSUM: ec05be6c3296b4cf6030a4e419d986b3ea1fdf18
 
 COCOAPODS: 1.5.3

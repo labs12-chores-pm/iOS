@@ -8,6 +8,13 @@ target 'ShoppingList' do
   # Pods for ShoppingList
 pod 'Popover'
 
+pod 'FirebaseUI'
+pod 'FirebaseUI/Auth'
+pod 'FirebaseUI/Google'
+pod 'FirebaseUI/Facebook'
+pod 'FirebaseUI/Twitter'
+pod 'FirebaseUI/Phone'
+
 pod 'Firebase/Core'
 pod 'Firebase/Storage'
 
