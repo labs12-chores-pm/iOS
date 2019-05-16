@@ -1,5 +1,5 @@
 //
-//  TaskController.swift
+//  CategoryController.swift
 //  ShoppingList
 //
 //  Created by Jerrick Warren on 5/16/19.
@@ -8,39 +8,38 @@
 
 import Foundation
 
-class TaskController {
- 
-    var task: Task?
+class CategoryController {
+    
+    var currentCategory: Category?
     
     // CRUD
     
-    func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, notes: [Note] = [] , isComplete: Bool) {
+    // Tasks vs Task ?? (Naming)
+    func createCategory(tasks: [Task] = [], createdAt: Date, household: UUID, name: String) {
+        let category = Category(tasks: tasks, createdAt: createdAt, householdId: householdId, name: name, identifier: UUID())
         
-        let task = Task(description: description, categoryId: categoryId, assigneeIds: assineeIds, dueDate: dueDate, notes: notes, identifier: UUID(), isComplete: isComplete)
+        put(category: category)
         
-        put(task: task)
+    }
+    
+    func updateCategory(category: Category, task: Task, createdAt: Date? = nil, householdId: UUID? = nil, name: String? = nil ) {
+        
+        // do we need a househouldId? that shouldn't be updated should it?
+        var categoryCopy = category
+        
+        categoryCopy.tasks = task ?? categoryCopy.tasks
+        categoryCopy.createdAt = createdAt ?? categoryCopy.createdAt
+        categoryCopy.name = name ?? categoryCopy.name
+        
+        put(category: categoryCopy)
         
     }
     
     
-    func updateTask(task: Task , description: String?, categoryId: UUID? = nil, assignIds: [UUID]? = nil, dueDate: Date? = nil, notes: [Note]? = nil, isComplete: False) {
+    func fetchCategory(categoryId: UUID, completion: @escaping (Category?, Error?) -> Void) {
         
-        var taskCopy = task
-        
-        taskCopy.description = description ?? taskCopy.description
-        taskCopy.categoryId = categoryId ?? taskCopy.categoryId // ??
-        taskCopy.assigneeIds = assignIds ?? taskCopy.assigneeIds
-        taskCopy.dueDate = dueDate ?? taskCopy.dueDate
-        taskCopy.notes = notes ?? taskCopy.notes
-       
-        put(task: taskCopy)
-        
-    }
-    
-    func fetchTask(taskId: UUID, completion: @escaping (Task?, Error?) -> Void) {
-        
-        let tasksURL = baseURL.appendingPathComponent("tasks")
-        let requestURL = tasksURL.appendingPathComponent(taskId.uuidString).appendingPathExtension("json")
+        let categoryURL = baseURL.appendingPathComponent("Category")
+        let requestURL = categoryURL.appendingPathComponent(categoryId.uuidString).appendingPathExtension("json")
         let request = URLRequest(url: requestURL)
         
         let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
@@ -58,7 +57,7 @@ class TaskController {
             }
             
             do {
-                let user = try JSONDecoder().decode(User.self, from: data)
+                let user = try JSONDecoder().decode(Category.self, from: data)
                 completion(user, nil)
             } catch {
                 completion(nil, NetworkError.decodingData)
@@ -70,10 +69,10 @@ class TaskController {
     }
     
     
-    private func put(task: Task, completion: @escaping (Error?) -> Void = {_ in }) {
+    private func put(category: Category, completion: @escaping (Error?) -> Void = {_ in }) {
         
-        let id = task.identifier.uuidString
-        let usersURL = baseURL.appendingPathComponent("tasks")
+        let id = category.identifier.uuidString
+        let usersURL = baseURL.appendingPathComponent("category")
         let requestURL = usersURL.appendingPathComponent(id).appendingPathExtension("json")
         var request = URLRequest(url: requestURL)
         request.httpMethod = "PUT"
@@ -81,7 +80,7 @@ class TaskController {
         do {
             request.httpBody = try JSONEncoder().encode(task)
         } catch {
-            print("Error encoding data: \(task)")
+            print("Error encoding data: \(category)")
             completion(NetworkError.encodingData)
             return
         }
@@ -98,13 +97,7 @@ class TaskController {
         task.resume()
     }
     
-     let baseURL = URL(string: "https://my-json-server.typicode.com/ryanboris/mockiosserver")!
+    let baseURL = URL(string: "https://my-json-server.typicode.com/ryanboris/mockiosserver")!
+    
     
 }
-
-
-
-
-
-
-
