@@ -45,6 +45,32 @@ class HouseholdViewController: UIViewController {
         }
     }
     
+    @IBAction func leaveHouseholdButtonTapped(_ sender: UIButton) {
+        
+        guard let household = household else { return }
+        
+        if let currentUser = currentUser {
+            
+            var members = household.memberIds
+            
+            var admins = household.adminIds
+            
+            for (index, id) in members.enumerated() {
+                if id == currentUser.identifier {
+                    members.remove(at: index)
+                }
+            }
+            
+            for (index, id) in admins.enumerated() {
+                if id == currentUser.identifier {
+                    admins.remove(at: index)
+                }
+            }
+            
+            householdController.updateHousehold(household: household, memberIds: members, adminIds: admins, categories: [])
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PopCreateHousehold" {
             guard let createVC = segue.destination as? CreateHouseholdViewController else { return }

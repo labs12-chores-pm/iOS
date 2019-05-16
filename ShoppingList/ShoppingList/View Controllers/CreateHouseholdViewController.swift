@@ -24,8 +24,15 @@ class CreateHouseholdViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func joinButtonWasTapped(_ sender: UIButton) {
+        
+    }
+    
     @IBOutlet weak var householdNameField: UITextField!
     @IBOutlet weak var createButton: UIButton!
+    
+    @IBOutlet weak var inviteCodeField: UITextField!
+    @IBOutlet weak var joinButton: UIButton!
     
     var householdController: HouseholdController?
     var userController: UserController?
