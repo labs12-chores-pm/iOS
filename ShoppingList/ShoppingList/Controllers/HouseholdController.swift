@@ -10,22 +10,25 @@ import CoreData
 
 class HouseholdController {
     
-    func createHousehold(name: String, creatorId: UUID, memberIds: [UUID] = []) {
+    func createHousehold(name: String, creatorId: UUID, memberIds: [UUID] = []) -> Household {
         
-        let newHousehold = Household(name: name, identifier: UUID(), creatorId: creatorId, memberIds: [], adminIds: [creatorId], categories: [])
+        let members = memberIds + [creatorId]
+        
+        let newHousehold = Household(name: name, identifier: UUID(), creatorId: creatorId, memberIds: members, adminIds: [creatorId], categories: [])
         put(household: newHousehold)
+        return newHousehold
     }
     
-    func updateHousehold(household: Household, name: String?, memberIds: [UUID], adminIds: [UUID], categories: [Category]) {
+    func updateHousehold(household: Household, name: String? = nil, memberIds: [UUID], adminIds: [UUID], categories: [Category]) {
         
-        var newHousehold = household
+        var updatedHousehold = household
         
-        newHousehold.name = name ?? household.name
-        newHousehold.memberIds.append(contentsOf: memberIds)
-        newHousehold.adminIds.append(contentsOf: adminIds)
-        newHousehold.categories.append(contentsOf: categories)
+        updatedHousehold.name = name ?? household.name
+        updatedHousehold.memberIds.append(contentsOf: memberIds)
+        updatedHousehold.adminIds.append(contentsOf: adminIds)
+        updatedHousehold.categories.append(contentsOf: categories)
         
-        put(household: newHousehold)
+        put(household: updatedHousehold)
     }
     
     func deleteHousehold(household: Household, completion: @escaping (Error?) -> Void) {
@@ -39,6 +42,68 @@ class HouseholdController {
         let task = URLSession.shared.dataTask(with: request) { (_, response, error) in
             print(response!)
             completion(error)
+        }
+        
+        task.resume()
+    }
+    
+    func fetchHousehold(householdId: UUID, completion: @escaping (Household?, Error?) -> Void) {
+        
+        let householdsURL = baseURL.appendingPathComponent("households")
+        let requestURL = householdsURL.appendingPathComponent(householdId.uuidString).appendingPathExtension("json")
+        let request = URLRequest(url: requestURL)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            
+            if let error = error {
+                print(error)
+                completion(nil, NetworkError.urlSession)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data")
+                completion(nil, NetworkError.dataMissing)
+                return
+            }
+            
+            do {
+                let household = try JSONDecoder().decode(Household.self, from: data)
+                completion(household, nil)
+            } catch {
+                completion(nil, NetworkError.decodingData)
+            }
+            return
+        }
+        
+        task.resume()
+    }
+    
+    func fetchHouseholds(user: User, completion: @escaping ([Household]?, Error?) -> Void) {
+        let householdsURL = baseURL.appendingPathComponent("households").appendingPathExtension("json")
+        let request = URLRequest(url: householdsURL)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                print(error)
+                completion(nil, NetworkError.urlSession)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data")
+                completion(nil, NetworkError.dataMissing)
+                return
+            }
+            
+            do {
+                let households = try JSONDecoder().decode([Household].self, from: data)
+                let userHouseholds = households.filter({ return $0.memberIds.contains(user.identifier) })
+                completion(userHouseholds, nil)
+            } catch {
+                completion(nil, NetworkError.decodingData)
+            }
+            return
         }
         
         task.resume()

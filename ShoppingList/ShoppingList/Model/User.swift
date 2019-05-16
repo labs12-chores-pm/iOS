@@ -13,4 +13,5 @@ struct User: Codable {
     var name: String
     var subscriptionType: Int
     var profilePicture: String?
+    var currentHouseholdId: UUID
 }
