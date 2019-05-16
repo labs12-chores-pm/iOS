@@ -9,27 +9,24 @@
 import Foundation
 
 class TaskController {
- 
-    var task: Task?
-    
-    // CRUD
     
     func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, notes: [Note] = [] , isComplete: Bool) {
         
         let task = Task(description: description, categoryId: categoryId, assigneeIds: assineeIds, dueDate: dueDate, notes: notes, identifier: UUID(), isComplete: isComplete)
-        
         put(task: task)
-        
     }
     
     
-    func updateTask(task: Task , description: String?, categoryId: UUID? = nil, assignIds: [UUID]? = nil, dueDate: Date? = nil, notes: [Note]? = nil, isComplete: False) {
+    func updateTask(task: Task , description: String?, categoryId: UUID? = nil, assignIds: [UUID]? = nil, dueDate: Date? = nil, notes: [Note]? = nil, isComplete: Bool = false) {
         
         var taskCopy = task
         
         taskCopy.description = description ?? taskCopy.description
-        taskCopy.categoryId = categoryId ?? taskCopy.categoryId // ??
-        taskCopy.assigneeIds = assignIds ?? taskCopy.assigneeIds
+        
+        if let assigneeIds = assignIds {
+            taskCopy.assigneeIds = task.assigneeIds + assigneeIds
+        }
+        
         taskCopy.dueDate = dueDate ?? taskCopy.dueDate
         taskCopy.notes = notes ?? taskCopy.notes
        
@@ -37,11 +34,10 @@ class TaskController {
         
     }
     
-    func fetchTask(taskId: UUID, completion: @escaping (Task?, Error?) -> Void) {
+    func fetchTasks(categoryId: UUID, completion: @escaping ([Task]?, Error?) -> Void) {
         
-        let tasksURL = baseURL.appendingPathComponent("tasks")
-        let requestURL = tasksURL.appendingPathComponent(taskId.uuidString).appendingPathExtension("json")
-        let request = URLRequest(url: requestURL)
+        let tasksURL = baseURL.appendingPathComponent("tasks").appendingPathExtension("json")
+        let request = URLRequest(url: tasksURL)
         
         let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
             
@@ -58,8 +54,9 @@ class TaskController {
             }
             
             do {
-                let user = try JSONDecoder().decode(User.self, from: data)
-                completion(user, nil)
+                let tasks = try JSONDecoder().decode([Task].self, from: data)
+                let tasksInCategory = tasks.filter({ $0.categoryId == categoryId })
+                completion(tasksInCategory, nil)
             } catch {
                 completion(nil, NetworkError.decodingData)
             }
@@ -101,10 +98,3 @@ class TaskController {
      let baseURL = URL(string: "https://my-json-server.typicode.com/ryanboris/mockiosserver")!
     
 }
-
-
-
-
-
-
-

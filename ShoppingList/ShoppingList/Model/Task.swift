@@ -11,7 +11,7 @@ import Foundation
 struct Task: Codable, Equatable {
     var description: String
     let categoryId: UUID
-    let assigneeIds: [UUID]
+    var assigneeIds: [UUID]
     var dueDate: Date
     var notes: [Note]
     let identifier: UUID
