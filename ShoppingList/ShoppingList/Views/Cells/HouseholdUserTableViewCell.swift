@@ -22,10 +22,14 @@ class HouseholdUserTableViewCell: UITableViewCell {
     }
     
     private func updateViews() {
-        guard let user = user, let household = household else { return }
+        guard let user = user, let household = household, let currentUser = currentUser else { return }
         userNameLabel.text = user.name
         
         let adminIds = household.adminIds
+        
+        if adminIds.contains(currentUser.identifier) {
+            roleSegmentedControl.isEnabled = false
+        }
         
         if adminIds.contains(user.identifier) {
             roleSegmentedControl.selectedSegmentIndex = 0
@@ -76,6 +80,8 @@ class HouseholdUserTableViewCell: UITableViewCell {
             getUserDetails()
         }
     }
+    
+    var currentUser: User?
     
     var user: User? {
         didSet {

@@ -117,6 +117,8 @@ extension HouseholdViewController: UITableViewDelegate, UITableViewDataSource {
         let userId = household.memberIds[indexPath.row]
         userCell.userId = userId
         
+        userCell.currentUser = currentUser
+        
         return userCell
     }
 }
