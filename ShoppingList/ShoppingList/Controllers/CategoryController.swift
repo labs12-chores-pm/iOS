@@ -10,37 +10,26 @@ import Foundation
 
 class CategoryController {
     
-    var currentCategory: Category?
-    
     // CRUD
-    
     // Tasks vs Task ?? (Naming)
-    func createCategory(tasks: [Task] = [], createdAt: Date, household: UUID, name: String) {
+    func createCategory(tasks: [Task] = [], createdAt: Date, householdId: UUID, name: String) {
         let category = Category(tasks: tasks, createdAt: createdAt, householdId: householdId, name: name, identifier: UUID())
-        
         put(category: category)
-        
     }
     
-    func updateCategory(category: Category, task: Task, createdAt: Date? = nil, householdId: UUID? = nil, name: String? = nil ) {
+    func updateCategory(category: Category, tasks: [Task] = [], householdId: UUID? = nil, name: String? = nil ) {
         
-        // do we need a househouldId? that shouldn't be updated should it?
         var categoryCopy = category
-        
-        categoryCopy.tasks = task ?? categoryCopy.tasks
-        categoryCopy.createdAt = createdAt ?? categoryCopy.createdAt
+        categoryCopy.tasks += tasks
         categoryCopy.name = name ?? categoryCopy.name
-        
         put(category: categoryCopy)
-        
     }
     
-    
-    func fetchCategory(categoryId: UUID, completion: @escaping (Category?, Error?) -> Void) {
+    // Test function
+    func fetchCategoriesTest(completion: @escaping ([Category]?, Error?) -> Void) {
         
-        let categoryURL = baseURL.appendingPathComponent("Category")
-        let requestURL = categoryURL.appendingPathComponent(categoryId.uuidString).appendingPathExtension("json")
-        let request = URLRequest(url: requestURL)
+        let categoriesURL = baseURL.appendingPathComponent("category").appendingPathExtension("json")
+        let request = URLRequest(url: categoriesURL)
         
         let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
             
@@ -57,8 +46,41 @@ class CategoryController {
             }
             
             do {
-                let user = try JSONDecoder().decode(Category.self, from: data)
-                completion(user, nil)
+                let categories = try JSONDecoder().decode([Category].self, from: data)
+                completion(categories, nil)
+            } catch {
+                completion(nil, NetworkError.decodingData)
+            }
+            return
+        }
+        
+        task.resume()
+    }
+    
+    
+    func fetchCategories(householdId: UUID, completion: @escaping ([Category]?, Error?) -> Void) {
+        
+        let categoriesURL = baseURL.appendingPathComponent("categories").appendingPathExtension("json")
+        let request = URLRequest(url: categoriesURL)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            
+            if let error = error {
+                print(error)
+                completion(nil, NetworkError.urlSession)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data")
+                completion(nil, NetworkError.dataMissing)
+                return
+            }
+            
+            do {
+                let categories = try JSONDecoder().decode([Category].self, from: data)
+                let householdCategories = categories.filter({ $0.householdId == householdId })
+                completion(householdCategories, nil)
             } catch {
                 completion(nil, NetworkError.decodingData)
             }
@@ -78,7 +100,7 @@ class CategoryController {
         request.httpMethod = "PUT"
         
         do {
-            request.httpBody = try JSONEncoder().encode(task)
+            request.httpBody = try JSONEncoder().encode(category)
         } catch {
             print("Error encoding data: \(category)")
             completion(NetworkError.encodingData)
@@ -98,6 +120,4 @@ class CategoryController {
     }
     
     let baseURL = URL(string: "https://my-json-server.typicode.com/ryanboris/mockiosserver")!
-    
-    
 }
