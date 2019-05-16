@@ -34,6 +34,7 @@
 		771D3451228CCCC300C8BA13 /* CustomTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D3450228CCCC300C8BA13 /* CustomTableView.swift */; };
 		7721FE4B228E098200334208 /* MainCategories.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7721FE4A228E098200334208 /* MainCategories.storyboard */; };
 		7721FE4D228E0A7700334208 /* MainCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7721FE4C228E0A7700334208 /* MainCategoriesViewController.swift */; };
+		7721FE4F228E238200334208 /* TabViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7721FE4E228E238200334208 /* TabViewViewController.swift */; };
 		776BBD0E228DB93A0097A4D4 /* CreateHouseholdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */; };
 		776BBD10228DC3900097A4D4 /* JoinCreateHousehold.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */; };
 		776BBD12228DCFCA0097A4D4 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */; };
@@ -116,6 +117,7 @@
 		771D3450228CCCC300C8BA13 /* CustomTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableView.swift; sourceTree = "<group>"; };
 		7721FE4A228E098200334208 /* MainCategories.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainCategories.storyboard; sourceTree = "<group>"; };
 		7721FE4C228E0A7700334208 /* MainCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoriesViewController.swift; sourceTree = "<group>"; };
+		7721FE4E228E238200334208 /* TabViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewViewController.swift; sourceTree = "<group>"; };
 		776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHouseholdViewController.swift; sourceTree = "<group>"; };
 		776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoinCreateHousehold.storyboard; sourceTree = "<group>"; };
 		776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
@@ -432,6 +434,7 @@
 				776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */,
 				776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */,
 				7721FE4C228E0A7700334208 /* MainCategoriesViewController.swift */,
+				7721FE4E228E238200334208 /* TabViewViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -599,6 +602,7 @@
 				44A16807222F418C00227DFB /* Invitation.swift in Sources */,
 				96A6E0162231C5240006994E /* CheckoutPopoverView.swift in Sources */,
 				969A840A2215C99A0003BB37 /* UILabel+Chameleon.m in Sources */,
+				7721FE4F228E238200334208 /* TabViewViewController.swift in Sources */,
 				118646DE221CAAA100D0F04B /* Category.swift in Sources */,
 				960FBF65221C27050076C662 /* AccountInformationViewController.swift in Sources */,
 				969A840D2215C99A0003BB37 /* UIImage+ChameleonPrivate.m in Sources */,

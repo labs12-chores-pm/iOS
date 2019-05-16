@@ -47,8 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let loginVC = LoginViewController.instantiate()
 //        let mainVC = MainViewController.instantiate()
         
-        let mainStoryboard = UIStoryboard(name: "MainCategories", bundle: .main)
-        let categoriesVC = mainStoryboard.instantiateViewController(withIdentifier: "Categories")
+        let mainStoryboard = UIStoryboard(name: "TabView", bundle: .main)
+        let categoriesVC = mainStoryboard.instantiateViewController(withIdentifier: "TabViewViewController")
         self.window?.rootViewController = categoriesVC
         
 //        self.window?.rootViewController = SessionManager.tokens == nil ? loginVC : mainVC
