@@ -10,30 +10,30 @@ import CoreData
 
 class HouseholdController {
     
-    func createHousehold(name: String, creatorId: UUID, memberIds: [UUID] = []) {
+    func createHousehold(name: String, creatorId: UUID, memberIds: [UUID] = []) -> Household {
         
-        let newHousehold = Household(name: name, identifier: UUID(), creatorId: creatorId, memberIds: [], adminIds: [creatorId], categories: [])
-        saveToCoreData()
+        let members = memberIds + [creatorId]
+        
+        let newHousehold = Household(name: name, identifier: UUID(), creatorId: creatorId, memberIds: members, adminIds: [creatorId], categories: [])
         put(household: newHousehold)
+        return newHousehold
     }
     
-    func updateHousehold(household: Household, name: String?, memberIds: [UUID], adminIds: [UUID], categories: [UUID]) {
+    func updateHousehold(household: Household, name: String? = nil, memberIds: [UUID], adminIds: [UUID], categories: [Category]) {
         
-        var newHousehold = HouseholdRepresentation(household: household)
-        newHousehold.name = name ?? newHousehold.name
-        newHousehold.memberIds.append(contentsOf: memberIds)
-        newHousehold.adminIds.append(contentsOf: adminIds)
-        newHousehold.categories.append(contentsOf: categories)
+        var updatedHousehold = household
         
-        if let updatedHousehold = Household(householdRepresentation: newHousehold) {
-            saveToCoreData()
-            put(household: updatedHousehold)
-        }
+        updatedHousehold.name = name ?? household.name
+        updatedHousehold.memberIds.append(contentsOf: memberIds)
+        updatedHousehold.adminIds.append(contentsOf: adminIds)
+        updatedHousehold.categories.append(contentsOf: categories)
+        
+        put(household: updatedHousehold)
     }
     
-    func deleteHousehold(household: Household, completion: @escaping (Error?) -> Void = {_ in }) {
+    func deleteHousehold(household: Household, completion: @escaping (Error?) -> Void) {
         
-        guard let id = household.identifier?.uuidString else { return }
+        let id = household.identifier.uuidString
         let householdsURL = baseURL.appendingPathComponent("households")
         let requestURL = householdsURL.appendingPathComponent(id).appendingPathExtension("json")
         var request = URLRequest(url: requestURL)
@@ -45,21 +45,80 @@ class HouseholdController {
         }
         
         task.resume()
+    }
+    
+    func fetchHousehold(householdId: UUID, completion: @escaping (Household?, Error?) -> Void) {
         
-        deleteHousehold(household: household)
+        let householdsURL = baseURL.appendingPathComponent("households")
+        let requestURL = householdsURL.appendingPathComponent(householdId.uuidString).appendingPathExtension("json")
+        let request = URLRequest(url: requestURL)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            
+            if let error = error {
+                print(error)
+                completion(nil, NetworkError.urlSession)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data")
+                completion(nil, NetworkError.dataMissing)
+                return
+            }
+            
+            do {
+                let household = try JSONDecoder().decode(Household.self, from: data)
+                completion(household, nil)
+            } catch {
+                completion(nil, NetworkError.decodingData)
+            }
+            return
+        }
+        
+        task.resume()
+    }
+    
+    func fetchHouseholds(user: User, completion: @escaping ([Household]?, Error?) -> Void) {
+        let householdsURL = baseURL.appendingPathComponent("households").appendingPathExtension("json")
+        let request = URLRequest(url: householdsURL)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                print(error)
+                completion(nil, NetworkError.urlSession)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data")
+                completion(nil, NetworkError.dataMissing)
+                return
+            }
+            
+            do {
+                let households = try JSONDecoder().decode([Household].self, from: data)
+                let userHouseholds = households.filter({ return $0.memberIds.contains(user.identifier) })
+                completion(userHouseholds, nil)
+            } catch {
+                completion(nil, NetworkError.decodingData)
+            }
+            return
+        }
+        
+        task.resume()
     }
     
     private func put(household: Household, completion: @escaping (Error?) -> Void = {_ in }) {
         
-        guard let id = household.identifier?.uuidString else { return }
+        let id = household.identifier.uuidString
         let householdsURL = baseURL.appendingPathComponent("households")
         let requestURL = householdsURL.appendingPathComponent(id).appendingPathExtension("json")
         var request = URLRequest(url: requestURL)
         request.httpMethod = "PUT"
-        let householdRep = HouseholdRepresentation(household: household)
         
         do {
-            request.httpBody = try JSONEncoder().encode(householdRep)
+            request.httpBody = try JSONEncoder().encode(household)
         } catch {
             print("Error encoding data: \(household)")
             completion(NetworkError.encodingData)
@@ -76,21 +135,6 @@ class HouseholdController {
             completion(nil)
         }
         task.resume()
-    }
-    
-    func deleteFromCoreData(household: Household, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-        context.delete(household)
-        saveToCoreData()
-    }
-    
-    func saveToCoreData(context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-        context.perform {
-            do {
-                try context.save()
-            } catch {
-                context.reset()
-            }
-        }
     }
     
     let baseURL = URL(string: "https://my-json-server.typicode.com/ryanboris/mockiosserver")!
