@@ -76,6 +76,36 @@ class HouseholdController {
         task.resume()
     }
     
+    func fetchHouseholds(user: User, completion: @escaping ([Household]?, Error?) -> Void) {
+        let householdsURL = baseURL.appendingPathComponent("households").appendingPathExtension("json")
+        let request = URLRequest(url: householdsURL)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                print(error)
+                completion(nil, NetworkError.urlSession)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data")
+                completion(nil, NetworkError.dataMissing)
+                return
+            }
+            
+            do {
+                let households = try JSONDecoder().decode([Household].self, from: data)
+                let userHouseholds = households.filter({ return $0.memberIds.contains(user.identifier) })
+                completion(userHouseholds, nil)
+            } catch {
+                completion(nil, NetworkError.decodingData)
+            }
+            return
+        }
+        
+        task.resume()
+    }
+    
     private func put(household: Household, completion: @escaping (Error?) -> Void = {_ in }) {
         
         let id = household.identifier.uuidString

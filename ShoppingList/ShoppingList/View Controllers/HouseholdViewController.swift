@@ -13,8 +13,13 @@ class HouseholdViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         householdMemberTableView.delegate = self
+        householdPicker.delegate = self
+        householdPicker.dataSource = self
         
         if let currentUser = userController.currentUser {
+           
+            self.currentUser = currentUser
+            
             householdController.fetchHousehold(householdId: currentUser.currentHouseholdId) { (household, error) in
                 if let error = error {
                     print(error)
@@ -22,16 +27,22 @@ class HouseholdViewController: UIViewController {
                 }
                 self.household = household
             }
+            
+            householdController.fetchHouseholds(user: currentUser) { (households, error) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                self.pickerDataSource = households
+            }
         }
     }
     
     private func updateViews() {
-        guard let household = household else { return }
-        householdNameLabel.text = household.name
+//        guard let household = household else { return }
     }
     
-    
-    @IBOutlet weak var householdNameLabel: UILabel!
+    @IBOutlet weak var householdPicker: UIPickerView!
     @IBOutlet weak var householdMemberTableView: UITableView!
     let householdController = HouseholdController()
     var userController = UserController()
@@ -40,6 +51,16 @@ class HouseholdViewController: UIViewController {
             DispatchQueue.main.async {
                 self.householdMemberTableView.reloadData()
                 self.updateViews()
+            }
+        }
+    }
+    
+    var currentUser: User?
+    
+    var pickerDataSource: [Household]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.householdPicker.reloadAllComponents()
             }
         }
     }
@@ -63,3 +84,25 @@ extension HouseholdViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension HouseholdViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerDataSource?.count ?? 0
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        guard let currentUser = currentUser else { return }
+        
+        let household = pickerDataSource?[row].identifier
+        
+        userController.updateUser(user: currentUser, currentHouseholdId: household)
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerDataSource?[row].name
+    }
+}

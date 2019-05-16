@@ -250,6 +250,17 @@ class UserController {
         put(user: user)
     }
     
+    func updateUser(user: User, email: String? = nil, name: String? = nil, subscriptionType: Int? = nil, profilePicture: String? = nil, currentHouseholdId: UUID? = nil) {
+        
+        var userCopy = user
+        userCopy.email = email ?? user.email
+        userCopy.name = name ?? user.name
+        userCopy.subscriptionType = subscriptionType ?? user.subscriptionType
+        userCopy.profilePicture = profilePicture ?? user.profilePicture
+        userCopy.currentHouseholdId = currentHouseholdId ?? user.currentHouseholdId
+        put(user: userCopy)
+    }
+    
     func fetchUser(userId: UUID, completion: @escaping (User?, Error?) -> Void) {
         
         let usersURL = baseURL.appendingPathComponent("users")
