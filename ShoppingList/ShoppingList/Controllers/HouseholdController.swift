@@ -6,7 +6,7 @@
 //  Copyright © 2019 Lambda School Labs. All rights reserved.
 //
 
-import Foundation
+import CoreData
 
 class HouseholdController {
     
@@ -18,17 +18,17 @@ class HouseholdController {
     
     func updateHousehold(household: Household, name: String?, memberIds: [UUID], adminIds: [UUID], categories: [Category]) {
         
-        var updateHousehold = household
+        var newHousehold = household
         
-        updateHousehold.name = name ?? household.name
-        updateHousehold.memberIds += memberIds
-        updateHousehold.adminIds += adminIds
-        updateHousehold.categories += categories
+        newHousehold.name = name ?? household.name
+        newHousehold.memberIds.append(contentsOf: memberIds)
+        newHousehold.adminIds.append(contentsOf: adminIds)
+        newHousehold.categories.append(contentsOf: categories)
         
-        put(household: updateHousehold)
+        put(household: newHousehold)
     }
     
-    func deleteHousehold(household: Household, completion: @escaping (Error?) -> Void = {_ in }) {
+    func deleteHousehold(household: Household, completion: @escaping (Error?) -> Void) {
         
         let id = household.identifier.uuidString
         let householdsURL = baseURL.appendingPathComponent("households")
@@ -67,10 +67,8 @@ class HouseholdController {
                 completion(NetworkError.urlSession)
                 return
             }
-            
             completion(nil)
         }
-        
         task.resume()
     }
     
