@@ -30,12 +30,17 @@
 		771D3441228C775F00C8BA13 /* HouseholdUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771D343F228C775F00C8BA13 /* HouseholdUserTableViewCell.xib */; };
 		771D3443228C7B7F00C8BA13 /* Roles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D3442228C7B7F00C8BA13 /* Roles.swift */; };
 		771D3445228C7EFE00C8BA13 /* TabView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 771D3444228C7EFE00C8BA13 /* TabView.storyboard */; };
+<<<<<<< HEAD
+		771D3449228CA3E500C8BA13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 771D3448228CA3E500C8BA13 /* GoogleService-Info.plist */; };
+		77CABBD4228B6CA3000E00A3 /* ShoppingList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77CABBD2228B6CA3000E00A3 /* ShoppingList.xcdatamodeld */; };
+=======
 		771D344B228CAEC700C8BA13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 771D344A228CAEC700C8BA13 /* GoogleService-Info.plist */; };
 		771D344D228CB33300C8BA13 /* NotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D344C228CB33300C8BA13 /* NotesController.swift */; };
 		771D3451228CCCC300C8BA13 /* CustomTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D3450228CCCC300C8BA13 /* CustomTableView.swift */; };
 		776BBD0E228DB93A0097A4D4 /* CreateHouseholdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */; };
 		776BBD10228DC3900097A4D4 /* JoinCreateHousehold.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */; };
 		776BBD12228DCFCA0097A4D4 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */; };
+>>>>>>> ab2691f171fb42a4f653d8c2480c54400da56b49
 		77CABBD7228BAC98000E00A3 /* HouseholdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CABBD6228BAC98000E00A3 /* HouseholdViewController.swift */; };
 		77F678AC228A1268005C7C94 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678AB228A1268005C7C94 /* Note.swift */; };
 		77F678AF228A2B99005C7C94 /* HouseholdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678AE228A2B99005C7C94 /* HouseholdController.swift */; };
@@ -128,12 +133,17 @@
 		771D343F228C775F00C8BA13 /* HouseholdUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HouseholdUserTableViewCell.xib; sourceTree = "<group>"; };
 		771D3442228C7B7F00C8BA13 /* Roles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roles.swift; sourceTree = "<group>"; };
 		771D3444228C7EFE00C8BA13 /* TabView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabView.storyboard; sourceTree = "<group>"; };
+<<<<<<< HEAD
+		771D3448228CA3E500C8BA13 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		77CABBD3228B6CA3000E00A3 /* ShoppingList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShoppingList.xcdatamodel; sourceTree = "<group>"; };
+=======
 		771D344A228CAEC700C8BA13 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		771D344C228CB33300C8BA13 /* NotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesController.swift; sourceTree = "<group>"; };
 		771D3450228CCCC300C8BA13 /* CustomTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableView.swift; sourceTree = "<group>"; };
 		776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHouseholdViewController.swift; sourceTree = "<group>"; };
 		776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoinCreateHousehold.storyboard; sourceTree = "<group>"; };
 		776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
+>>>>>>> ab2691f171fb42a4f653d8c2480c54400da56b49
 		77CABBD6228BAC98000E00A3 /* HouseholdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdViewController.swift; sourceTree = "<group>"; };
 		77F678AB228A1268005C7C94 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		77F678AE228A2B99005C7C94 /* HouseholdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdController.swift; sourceTree = "<group>"; };
@@ -397,7 +407,11 @@
 		969A83C02215C94F0003BB37 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
+				771D3448228CA3E500C8BA13 /* GoogleService-Info.plist */,
+=======
 				771D344A228CAEC700C8BA13 /* GoogleService-Info.plist */,
+>>>>>>> ab2691f171fb42a4f653d8c2480c54400da56b49
 				77F678C5228B37C2005C7C94 /* CoreDataStack.swift */,
 				96476B482215D40700E57EB9 /* Info.plist */,
 				96476B4F2215D41300E57EB9 /* Assets.xcassets */,
@@ -633,7 +647,11 @@
 				96CBFBEB22285A7700A6B41E /* NewGroupPopoverView.xib in Resources */,
 				96DE3035221637FE00213C3E /* LoginViewController.storyboard in Resources */,
 				96700E2E221C025E00F084B3 /* SettingsTableViewController.storyboard in Resources */,
+<<<<<<< HEAD
+				771D3449228CA3E500C8BA13 /* GoogleService-Info.plist in Resources */,
+=======
 				771D344B228CAEC700C8BA13 /* GoogleService-Info.plist in Resources */,
+>>>>>>> ab2691f171fb42a4f653d8c2480c54400da56b49
 				44A1680C22381C0C00227DFB /* BarcodeScannerController.storyboard in Resources */,
 				9691AB552225AEB600C1EE1E /* GroupsPopoverView.xib in Resources */,
 				96476B522215D41300E57EB9 /* Assets.xcassets in Resources */,
@@ -945,7 +963,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.netlify.labs10-shopping-list-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ChoreMonkey.ChoreMonkey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShoppingList/Frameworks/Chameleon/ShoppingList-Bridging-Header.h";
@@ -971,7 +989,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.netlify.labs10-shopping-list-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ChoreMonkey.ChoreMonkey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShoppingList/Frameworks/Chameleon/ShoppingList-Bridging-Header.h";

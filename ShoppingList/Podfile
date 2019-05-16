@@ -8,15 +8,6 @@ target 'ShoppingList' do
   # Pods for ShoppingList
 pod 'Popover'
 
-pod 'Auth0'
-pod 'SwiftKeychainWrapper'
-pod 'Alamofire'
-pod 'SimpleKeychain'
-pod 'Kingfisher'
-pod 'PusherSwift'
-pod 'PushNotifications'
-pod 'TUSafariActivity', '~> 1.0'
-
 pod 'Firebase/Core'
 pod 'Firebase/Storage'
 
