@@ -27,7 +27,6 @@
 		771D3440228C775F00C8BA13 /* HouseholdUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D343E228C775F00C8BA13 /* HouseholdUserTableViewCell.swift */; };
 		771D3441228C775F00C8BA13 /* HouseholdUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771D343F228C775F00C8BA13 /* HouseholdUserTableViewCell.xib */; };
 		771D3443228C7B7F00C8BA13 /* Roles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D3442228C7B7F00C8BA13 /* Roles.swift */; };
-		771D3445228C7EFE00C8BA13 /* TabView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 771D3444228C7EFE00C8BA13 /* TabView.storyboard */; };
 		771D344B228CAEC700C8BA13 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 771D344A228CAEC700C8BA13 /* GoogleService-Info.plist */; };
 		771D344D228CB33300C8BA13 /* NotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D344C228CB33300C8BA13 /* NotesController.swift */; };
 		771D3451228CCCC300C8BA13 /* CustomTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D3450228CCCC300C8BA13 /* CustomTableView.swift */; };
@@ -123,7 +122,6 @@
 		771D343E228C775F00C8BA13 /* HouseholdUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdUserTableViewCell.swift; sourceTree = "<group>"; };
 		771D343F228C775F00C8BA13 /* HouseholdUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HouseholdUserTableViewCell.xib; sourceTree = "<group>"; };
 		771D3442228C7B7F00C8BA13 /* Roles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roles.swift; sourceTree = "<group>"; };
-		771D3444228C7EFE00C8BA13 /* TabView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabView.storyboard; sourceTree = "<group>"; };
 		771D344A228CAEC700C8BA13 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		771D344C228CB33300C8BA13 /* NotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesController.swift; sourceTree = "<group>"; };
 		771D3450228CCCC300C8BA13 /* CustomTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableView.swift; sourceTree = "<group>"; };
@@ -329,7 +327,6 @@
 			isa = PBXGroup;
 			children = (
 				771D343A228C654000C8BA13 /* Household.storyboard */,
-				771D3444228C7EFE00C8BA13 /* TabView.storyboard */,
 				776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */,
 			);
 			path = Storyboards;
@@ -618,7 +615,6 @@
 				776BBD10228DC3900097A4D4 /* JoinCreateHousehold.storyboard in Resources */,
 				96A6E0142231C4040006994E /* CheckoutPopoverView.xib in Resources */,
 				96029A422231604800F7F7AE /* MainViewController.storyboard in Resources */,
-				771D3445228C7EFE00C8BA13 /* TabView.storyboard in Resources */,
 				443C1B4E221B628D00220C28 /* Auth0.plist in Resources */,
 				9663C6892231D4880019FCED /* ItemTableViewCell.xib in Resources */,
 				771D343B228C654000C8BA13 /* Household.storyboard in Resources */,

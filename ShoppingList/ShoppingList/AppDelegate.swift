@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window?.makeKeyAndVisible()
         
         let loginVC = LoginViewController.instantiate()
-        let mainVC = MainViewController.instantiate()
+        let mainVC = HouseholdViewController.instantiate()
         
         self.window?.rootViewController = SessionManager.tokens == nil ? loginVC : mainVC
         
