@@ -97,7 +97,11 @@ class HouseholdController {
             }
             
             do {
-                let households = try JSONDecoder().decode([Household].self, from: data)
+                let householdsResponse = try JSONDecoder().decode([String: Household].self, from: data)
+                var households: [Household] = []
+                for household in householdsResponse {
+                    households.append(household.value)
+                }
                 let userHouseholds = households.filter({ return $0.memberIds.contains(user.identifier) })
                 completion(userHouseholds, nil)
             } catch {

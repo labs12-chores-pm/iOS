@@ -17,9 +17,10 @@ class HouseholdViewController: UIViewController {
         householdPicker.dataSource = self
         
         if let tabBar = self.tabBarController as? TabViewViewController {
-            self.currentUser = tabBar.currentUser
+            
             self.householdController = tabBar.householdController
             self.userController = tabBar.userController
+            self.currentUser = tabBar.currentUser
         }
     }
     
@@ -29,8 +30,6 @@ class HouseholdViewController: UIViewController {
     
     @objc private func fetchAndAssign() {
         guard let currentUser = currentUser, let householdController = householdController else { return }
-            
-        self.currentUser = currentUser
         
         householdController.fetchHousehold(householdId: currentUser.currentHouseholdId) { (household, error) in
             if let error = error {
