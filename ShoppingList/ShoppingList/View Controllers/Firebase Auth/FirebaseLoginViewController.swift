@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseUI
+
 
 class FirebaseLoginViewController: UIViewController {
 
@@ -15,6 +17,32 @@ class FirebaseLoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    
+    @IBAction func loginTapped(_ sender: Any) {
+    
+        // get the default AuthUI object
+        
+        let authUI = FUIAuth.defaultAuthUI()
+        
+        guard authUI != nil else {
+            print("The AuthUI object is not available")
+            return
+        }
+        
+        // Set ourselves as the delegate
+        authUI?.delegate = self
+        
+        
+        // Get a reference to the auth UI view controller
+        let authViewController = authUI!.authViewController()
+        
+        // Show it.
+        present(authViewController, animated: true, completion: nil)
+
+        
+    }
+    
     
 
     /*
@@ -27,4 +55,24 @@ class FirebaseLoginViewController: UIViewController {
     }
     */
 
+}
+
+
+extension UIViewController: FUIAuthDelegate {
+    
+    public func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+        
+        if error != nil {
+            print("There is an error with auth")
+            return
+        }
+        
+        // you can access the UI
+        
+       // authDataResult?.user.uid
+        
+        performSegue(withIdentifier: "loginSegue", sender: self)
+        
+    }
+    
 }
