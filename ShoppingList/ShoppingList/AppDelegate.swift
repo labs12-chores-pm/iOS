@@ -47,8 +47,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let loginVC = LoginViewController.instantiate()
 //        let mainVC = MainViewController.instantiate()
         
-        let mainStoryboard = UIStoryboard(name: "TabView", bundle: .main)
-        let categoriesVC = mainStoryboard.instantiateViewController(withIdentifier: "TabViewViewController")
+        
+        
+        let mainStoryboard = UIStoryboard(name: "FirebaseLogin", bundle: .main)
+        let categoriesVC = mainStoryboard.instantiateViewController(withIdentifier: "FirebaseLogin")
         self.window?.rootViewController = categoriesVC
         
 //        self.window?.rootViewController = SessionManager.tokens == nil ? loginVC : mainVC

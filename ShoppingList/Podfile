@@ -12,5 +12,9 @@ target 'ShoppingList' do
    pod 'Firebase/Core'
    pod 'FirebaseUI/Auth'
   
+   pod 'FirebaseUI/Email'
+   pod 'FirebaseUI/Google'
+   
+   pod 'FirebaseUI/Phone'
 
 end

@@ -13,7 +13,7 @@
         <!--Firebase Login View Controller-->
         <scene sceneID="gBH-jX-BJV">
             <objects>
-                <viewController id="c8a-7f-Kdy" customClass="FirebaseLoginViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FirebaseLogin" id="c8a-7f-Kdy" customClass="FirebaseLoginViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EZk-C9-pDF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -67,7 +67,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m5M-qe-jjk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="934.78260869565224" y="103.79464285714285"/>
+            <point key="canvasLocation" x="1703" y="104"/>
         </scene>
     </scenes>
 </document>
