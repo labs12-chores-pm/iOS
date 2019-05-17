@@ -15,16 +15,7 @@ class MainCategoriesViewController: UIViewController {
         categoriesTableView.dataSource = self
         categoriesTableView.delegate = self
         
-        // Test Code
-        let user = userController.currentUser
-        let householdId = user.currentHouseholdId
-        categoryController.fetchCategories(householdId: householdId) { (categories, error) in
-            if let error = error {
-                print(error)
-                return
-            }
-            self.categories = categories
-        }
+        fetchCategories()
         
 //        if let user = userController.currentUser {
 //            let householdId = user.currentHouseholdId
@@ -40,10 +31,23 @@ class MainCategoriesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(refresh(_:)), name: NSNotification.Name("addedCategory"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchCategories), name: NSNotification.Name("addedCategory"), object: nil)
     }
     
-    @objc func refresh(_ sender: Any) {
+    @objc func fetchCategories() {
+        // Test Code
+        let user = userController.currentUser
+        let householdId = user.currentHouseholdId
+        categoryController.fetchCategories(householdId: householdId) { (categories, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            self.categories = categories
+        }
+    }
+    
+    func refresh() {
         categoriesTableView.reloadData()
     }
     
