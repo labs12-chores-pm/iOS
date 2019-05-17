@@ -54,10 +54,9 @@ class CategoryController {
                 for category in categoriesResponse {
                     categories.append(category.value)
                 }
-                //let householdCategories = categories.filter({ $0.householdId == householdId })
-                //completion(householdCategories, nil)
-                // Testing
-                completion(categories, nil)
+                let householdCategories = categories.filter({ $0.householdId == householdId })
+                completion(householdCategories, nil)
+//                completion(categories, nil)
             } catch {
                 completion(nil, NetworkError.decodingData)
             }

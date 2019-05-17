@@ -15,7 +15,12 @@ class HouseholdViewController: UIViewController {
         householdMemberTableView.delegate = self
         householdPicker.delegate = self
         householdPicker.dataSource = self
-        fetchAndAssign()
+        
+        if let tabBar = self.tabBarController as? TabViewViewController {
+            self.currentUser = tabBar.currentUser
+            self.householdController = tabBar.householdController
+            self.userController = tabBar.userController
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -23,7 +28,7 @@ class HouseholdViewController: UIViewController {
     }
     
     @objc private func fetchAndAssign() {
-        let currentUser = userController.currentUser
+        guard let currentUser = currentUser, let householdController = householdController else { return }
             
         self.currentUser = currentUser
         
@@ -46,7 +51,7 @@ class HouseholdViewController: UIViewController {
     
     @IBAction func leaveHouseholdButtonTapped(_ sender: UIButton) {
         
-        guard let household = household else { return }
+        guard let household = household, let householdController = householdController else { return }
         
         if let currentUser = currentUser {
             
@@ -75,14 +80,13 @@ class HouseholdViewController: UIViewController {
             guard let createVC = segue.destination as? CreateHouseholdViewController else { return }
             createVC.householdController = self.householdController
             createVC.userController = self.userController
-            createVC.currentUser = self.currentUser
         }
     }
     
     @IBOutlet weak var householdPicker: UIPickerView!
     @IBOutlet weak var householdMemberTableView: UITableView!
-    let householdController = HouseholdController()
-    var userController = UserController()
+    var householdController: HouseholdController?
+    var userController: UserController?
     var household: Household? {
         didSet {
             DispatchQueue.main.async {
@@ -91,7 +95,11 @@ class HouseholdViewController: UIViewController {
         }
     }
     
-    var currentUser: User?
+    var currentUser: User? {
+        didSet {
+            fetchAndAssign()
+        }
+    }
     
     var pickerDataSource: [Household]? {
         didSet {
@@ -111,7 +119,7 @@ extension HouseholdViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCell", for: indexPath)
         guard let userCell = cell as? HouseholdUserTableViewCell,
-        let household = household else { return cell }
+        let household = household, let currentUser = currentUser else { return cell }
         
         let userId = household.memberIds[indexPath.row]
         userCell.userId = userId
@@ -133,7 +141,7 @@ extension HouseholdViewController: UIPickerViewDelegate, UIPickerViewDataSource 
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        guard let currentUser = currentUser else { return }
+        guard let currentUser = currentUser, let userController = userController else { return }
         
         let household = pickerDataSource?[row].identifier
         

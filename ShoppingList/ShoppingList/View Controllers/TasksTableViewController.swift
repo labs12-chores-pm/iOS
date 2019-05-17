@@ -102,5 +102,6 @@ class TasksTableViewController: UITableViewController {
         }
     }
     
+    var currentUser: User?
     let taskController = TaskController()
 }

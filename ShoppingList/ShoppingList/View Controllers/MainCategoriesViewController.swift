@@ -15,6 +15,11 @@ class MainCategoriesViewController: UIViewController {
         categoriesTableView.dataSource = self
         categoriesTableView.delegate = self
         
+        if let tabBar = self.tabBarController as? TabViewViewController {
+            self.currentUser = tabBar.currentUser
+            self.householdController = tabBar.householdController
+            self.userController = tabBar.userController
+        }
         fetchCategories()
     }
     
@@ -25,7 +30,7 @@ class MainCategoriesViewController: UIViewController {
     
     @objc func fetchCategories() {
         // Test Code
-        let user = userController.currentUser
+        guard let user = currentUser else { return }
         let householdId = user.currentHouseholdId
         categoryController.fetchCategories(householdId: householdId) { (categories, error) in
             if let error = error {
@@ -34,17 +39,6 @@ class MainCategoriesViewController: UIViewController {
             }
             self.categories = categories
         }
-        
-        //        if let user = userController.currentUser {
-        //            let householdId = user.currentHouseholdId
-        //            categoryController.fetchCategories(householdId: householdId) { (categories, error) in
-        //                if let error = error {
-        //                    print(error)
-        //                    return
-        //                }
-        //                self.categories = categories
-        //            }
-        //        }
     }
     
     func refresh() {
@@ -53,20 +47,21 @@ class MainCategoriesViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddCategory" {
-            guard let destinationVC = segue.destination as? AddCategoryViewController else { return }
-            
+            guard let destinationVC = segue.destination as? AddCategoryViewController, let user = currentUser else { return }
             destinationVC.categoryController = categoryController
-            destinationVC.userController = userController
+            destinationVC.currentUser = user
         }
         
         if segue.identifier == "ShowTasks" {
             guard let destinationVC = segue.destination as? TasksTableViewController,
             let index = categoriesTableView.indexPathForSelectedRow,
-            let categories = categories
+            let categories = categories,
+            let user = currentUser
             else { return }
             
             let category = categories[index.row]
             
+            destinationVC.currentUser = user
             destinationVC.category = category
         }
     }
@@ -75,7 +70,9 @@ class MainCategoriesViewController: UIViewController {
     @IBOutlet weak var categoriesLabel: UILabel!
     @IBOutlet weak var categoriesTableView: UITableView!
     
-    let userController = UserController()
+    var userController: UserController?
+    var currentUser: User?
+    var householdController: HouseholdController?
     let categoryController = CategoryController()
     var categories: [Category]? {
         didSet {

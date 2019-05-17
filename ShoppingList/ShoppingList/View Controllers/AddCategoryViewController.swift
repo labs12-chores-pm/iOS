@@ -12,10 +12,9 @@ class AddCategoryViewController: UIViewController {
     
     @IBAction func createCategoryButtonWasTapped(_ sender: UIButton) {
         guard let categoryController = categoryController,
-            let userController = userController,
-            let name = categoryNameField.text else { return }
+            let name = categoryNameField.text,
+            let user = currentUser else { return }
         
-        let user = userController.currentUser
         categoryController.createCategory(householdId: user.currentHouseholdId, name: name)
         
         NotificationCenter.default.post(name: NSNotification.Name("addedCategory"), object: nil)
@@ -25,5 +24,5 @@ class AddCategoryViewController: UIViewController {
     
     @IBOutlet weak var categoryNameField: UITextField!
     var categoryController: CategoryController?
-    var userController: UserController?
+    var currentUser: User?
 }

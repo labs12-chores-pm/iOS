@@ -21,34 +21,60 @@ class StartViewController: UIViewController {
         
         if needsNewAccount {
             
-            Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+            Auth.auth().createUser(withEmail: email, password: password) { (authResponse, error) in
                 
                 if let error = error {
                     print(error)
                     return
                 }
                 
-                if let user = user {
-                    self.performSegue(withIdentifier: "ShowMain", sender: self)
+                if let authResponse = authResponse {
+                    
+                    let currentUser = authResponse.user
+                    
+                    guard let email = currentUser.email else { return }
+                    
+                    let userUID = UUID()
+                    
+                    let name = currentUser.displayName ?? email
+                    let picture = currentUser.photoURL
+                    
+                    let household = self.householdController.createHousehold(name: name, creatorId: userUID)
+                    
+                    let user = self.userController.createUser(email: email, name: name, profilePicture: picture?.absoluteString, currentHouseholdId: household.identifier, identifier: userUID)
+                    
+                    self.currentUser = user
                 }
                 
             }
         } else {
             
-            Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            Auth.auth().signIn(withEmail: email, password: password) { (authResponse, error) in
                 if let error = error {
                     print(error)
                     return
                 }
                 
-                if let user = user {
-                    self.performSegue(withIdentifier: "ShowMain", sender: self)
+                if let authResponse = authResponse {
+            
+                    let currentUser = authResponse.user
+                    guard let email = currentUser.email else { return }
+                        
+                        self.userController.fetchUserWithEmail(email: email, completion: { (user, error) in
+                            if let error = error {
+                                print(error)
+                                return
+                            }
+                            
+                            if let user = user {
+                                self.currentUser = user
+                            }
+                        })
+        
                 }
-                
                 
             }
         }
-        
     }
     
     
@@ -66,18 +92,32 @@ class StartViewController: UIViewController {
     
     var needsNewAccount: Bool = false
     
+    var currentUser: User? {
+        didSet {
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "ShowMain", sender: self)
+            }
+        }
+    }
+    
+    let userController = UserController()
+    let householdController = HouseholdController()
+    
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "ShowMain" {
+            guard let destinationVC = segue.destination as? TabViewViewController else { return }
+            destinationVC.userController = userController
+            destinationVC.householdController = householdController
+            if let user = currentUser {
+                destinationVC.currentUser = user
+            }
+        }
     }
-    */
 
 }

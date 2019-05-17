@@ -18,4 +18,8 @@ class TabViewViewController: UITabBarController {
             
         }
     }
+    
+    var userController: UserController?
+    var currentUser: User?
+    var householdController: HouseholdController?
 }

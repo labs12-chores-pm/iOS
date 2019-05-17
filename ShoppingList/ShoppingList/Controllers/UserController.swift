@@ -243,11 +243,10 @@
 
 class UserController {
     
-    var currentUser: User = User(email: "email@email.com", identifier: UUID(), name: "Test", subscriptionType: 0, profilePicture: nil, currentHouseholdId: UUID())
-    
-    func createUser(email: String, name: String, subscriptionType: Int = 0, profilePicture: String?, currentHouseholdId: UUID) {
-        let user = User(email: email, identifier: UUID(), name: name, subscriptionType: subscriptionType, profilePicture: profilePicture, currentHouseholdId: currentHouseholdId)
+    func createUser(email: String, name: String, subscriptionType: Int = 0, profilePicture: String?, currentHouseholdId: UUID, identifier: UUID) -> User {
+        let user = User(email: email, identifier: identifier, name: name, subscriptionType: subscriptionType, profilePicture: profilePicture, currentHouseholdId: currentHouseholdId)
         put(user: user)
+        return user
     }
     
     func updateUser(user: User, email: String? = nil, name: String? = nil, subscriptionType: Int? = nil, profilePicture: String? = nil, currentHouseholdId: UUID? = nil) {
@@ -293,6 +292,40 @@ class UserController {
         task.resume()
     }
     
+    func fetchUserWithEmail(email: String, completion: @escaping (User?, Error?) -> Void) {
+        
+        let usersURL = baseURL.appendingPathComponent("users").appendingPathExtension("json")
+        let request = URLRequest(url: usersURL)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            
+            if let error = error {
+                print(error)
+                completion(nil, NetworkError.urlSession)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data")
+                completion(nil, NetworkError.dataMissing)
+                return
+            }
+            
+            do {
+                let usersResponse = try JSONDecoder().decode([String: User].self, from: data)
+                let users = usersResponse.compactMap({ $0.value })
+                let filteredUsers = users.filter({ $0.email == email })
+                let user = filteredUsers.first
+                completion(user, nil)
+            } catch {
+                completion(nil, NetworkError.decodingData)
+            }
+            return
+        }
+        
+        task.resume()
+    }
+    
     private func put(user: User, completion: @escaping (Error?) -> Void = {_ in }) {
         
         let id = user.identifier.uuidString
@@ -321,5 +354,5 @@ class UserController {
         task.resume()
     }
     
-    let baseURL = URL(string: "https://my-json-server.typicode.com/ryanboris/mockiosserver")!
+    let baseURL = URL(string: "https://test-6f4fe.firebaseio.com/")!
 }
