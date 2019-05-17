@@ -13,6 +13,7 @@ import PusherSwift
 import UserNotifications
 import PushNotifications
 import Firebase
+import FirebaseUI
 
 
 let defaults = UserDefaults.standard
@@ -28,31 +29,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         FirebaseApp.configure()
         
         
-        PushNotifications.shared.start(instanceId: "1c17ef2c-92ea-486e-af1b-7bc8faa62607")
-        PushNotifications.shared.registerForRemoteNotifications()
-
-        UNUserNotificationCenter.current().delegate = self
-      //  try? self.pushNotifications.subscribe(interest: "group-103")
-
-      
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-            if (granted) {
-                DispatchQueue.main.async(execute: {
-                    application.registerForRemoteNotifications()
-                })
-            }
-        }
         
-        window = UIWindow()
-        window?.makeKeyAndVisible()
-        
-        let loginVC = LoginViewController.instantiate()
-        let mainVC = MainViewController.instantiate()
-        
-        self.window?.rootViewController = SessionManager.tokens == nil ? loginVC : mainVC
-        
+//        PushNotifications.shared.start(instanceId: "1c17ef2c-92ea-486e-af1b-7bc8faa62607")
+//        PushNotifications.shared.registerForRemoteNotifications()
+//
+//        UNUserNotificationCenter.current().delegate = self
+//      //  try? self.pushNotifications.subscribe(interest: "group-103")
+//
+//
+//        let center = UNUserNotificationCenter.current()
+//        center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+//            if (granted) {
+//                DispatchQueue.main.async(execute: {
+//                    application.registerForRemoteNotifications()
+//                })
+//            }
+//        }
+//
+//        window = UIWindow()
+//        window?.makeKeyAndVisible()
+//
+//        let loginVC = LoginViewController.instantiate()
+//        let mainVC = MainViewController.instantiate()
+//
+//        self.window?.rootViewController = SessionManager.tokens == nil ? loginVC : mainVC
+//
         return true
+    }
+    
+    // FIREBASE UI
+    func application(_ app: UIApplication, open url: URL,
+                     options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+        let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?
+        if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
+            return true
+        }
+        // other URL handling goes here.
+        return false
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken : Data) {

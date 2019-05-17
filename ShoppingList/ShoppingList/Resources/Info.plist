@@ -23,11 +23,21 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.netlify.labs10-shopping-list-iOS</string>
+			<string>com.ChoreMonkey.ChoreMonkey</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.netlify.labs10-shopping-list-iOS</string>
+				<string>com.ChoreMonkey.ChoreMonkey</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.682615121437-jjifq2csh6h6p4gdfrjb45475li3aqv0</string>
 			</array>
 		</dict>
 	</array>
@@ -40,7 +50,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>We need to access your camera for scanning QR code</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>&quot;We need access to your photos to update your profile picture&quot; </string>
+	<string>"We need access to your photos to update your profile picture" </string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

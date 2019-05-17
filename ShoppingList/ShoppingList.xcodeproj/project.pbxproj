@@ -23,6 +23,8 @@
 		44A1680922318BE700227DFB /* InviteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1680822318BE700227DFB /* InviteController.swift */; };
 		44A1680C22381C0C00227DFB /* BarcodeScannerController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44A1680B22381C0B00227DFB /* BarcodeScannerController.storyboard */; };
 		44A16810223820DC00227DFB /* BarcodeScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1680E223820DC00227DFB /* BarcodeScannerController.swift */; };
+		4716034B228E14CE00318DDE /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4716034A228E14CE00318DDE /* Login.storyboard */; };
+		4716034D228E167600318DDE /* LoginViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4716034C228E167600318DDE /* LoginViewController2.swift */; };
 		473ED23B228DD4A900678E7E /* TaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473ED23A228DD4A900678E7E /* TaskController.swift */; };
 		473ED23D228DDE3E00678E7E /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473ED23C228DDE3E00678E7E /* CategoryController.swift */; };
 		771D343B228C654000C8BA13 /* Household.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 771D343A228C654000C8BA13 /* Household.storyboard */; };
@@ -117,6 +119,8 @@
 		44A1680822318BE700227DFB /* InviteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteController.swift; sourceTree = "<group>"; };
 		44A1680B22381C0B00227DFB /* BarcodeScannerController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BarcodeScannerController.storyboard; sourceTree = "<group>"; };
 		44A1680E223820DC00227DFB /* BarcodeScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerController.swift; sourceTree = "<group>"; };
+		4716034A228E14CE00318DDE /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		4716034C228E167600318DDE /* LoginViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController2.swift; sourceTree = "<group>"; };
 		473ED23A228DD4A900678E7E /* TaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskController.swift; sourceTree = "<group>"; };
 		473ED23C228DDE3E00678E7E /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
 		771D343A228C654000C8BA13 /* Household.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Household.storyboard; sourceTree = "<group>"; };
@@ -524,6 +528,8 @@
 			isa = PBXGroup;
 			children = (
 				96029A412231604700F7F7AE /* MainViewController.storyboard */,
+				4716034A228E14CE00318DDE /* Login.storyboard */,
+				4716034C228E167600318DDE /* LoginViewController2.swift */,
 				96DE302E221637FE00213C3E /* MainViewController.swift */,
 			);
 			path = MainViewController;
@@ -625,6 +631,7 @@
 				44A1680C22381C0C00227DFB /* BarcodeScannerController.storyboard in Resources */,
 				9691AB552225AEB600C1EE1E /* GroupsPopoverView.xib in Resources */,
 				96476B522215D41300E57EB9 /* Assets.xcassets in Resources */,
+				4716034B228E14CE00318DDE /* Login.storyboard in Resources */,
 				771D3441228C775F00C8BA13 /* HouseholdUserTableViewCell.xib in Resources */,
 				968D512C222EBA5900179241 /* NewItemPopoverView.xib in Resources */,
 				9663C68D2231D9250019FCED /* HistoryTableViewCell.xib in Resources */,
@@ -772,6 +779,7 @@
 				969A84032215C99A0003BB37 /* ChameleonConstants.m in Sources */,
 				969A841E2215C99A0003BB37 /* Identifier.swift in Sources */,
 				969A84192215C99A0003BB37 /* Reusable+UITableView.swift in Sources */,
+				4716034D228E167600318DDE /* LoginViewController2.swift in Sources */,
 				969A84142215C99A0003BB37 /* Reusable.swift in Sources */,
 				96029A46223198FA00F7F7AE /* Double+Currency.swift in Sources */,
 				969A84052215C99A0003BB37 /* UIButton+Chameleon.m in Sources */,
@@ -953,14 +961,14 @@
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VXUQXR6S56;
+				DEVELOPMENT_TEAM = 7JG93VFG2G;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/ShoppingList/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.netlify.labs10-shopping-list-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ChoreMonkey.ChoreMonkey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShoppingList/Frameworks/Chameleon/ShoppingList-Bridging-Header.h";
@@ -979,14 +987,14 @@
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VXUQXR6S56;
+				DEVELOPMENT_TEAM = 7JG93VFG2G;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/ShoppingList/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.netlify.labs10-shopping-list-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ChoreMonkey.ChoreMonkey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShoppingList/Frameworks/Chameleon/ShoppingList-Bridging-Header.h";
