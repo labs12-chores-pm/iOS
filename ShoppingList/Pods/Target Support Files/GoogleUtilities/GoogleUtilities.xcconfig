@@ -1,6 +1,10 @@
 CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+<<<<<<< HEAD
+OTHER_LDFLAGS = -l"z" -framework "Security" -framework "SystemConfiguration"
+=======
 OTHER_LDFLAGS = $(inherited) -l"z" -framework "Security" -framework "SystemConfiguration"
+>>>>>>> ff05580a30f6ee2ce8781e811f30204b0256a477
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_ROOT = ${SRCROOT}
