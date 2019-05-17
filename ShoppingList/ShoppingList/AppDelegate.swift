@@ -22,7 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+<<<<<<< HEAD
       FirebaseApp.configure()
+=======
+        FirebaseApp.configure()
+>>>>>>> ff05580a30f6ee2ce8781e811f30204b0256a477
         
         
 //        PushNotifications.shared.start(instanceId: "1c17ef2c-92ea-486e-af1b-7bc8faa62607")
@@ -47,11 +51,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let loginVC = LoginViewController.instantiate()
 //        let mainVC = MainViewController.instantiate()
         
+<<<<<<< HEAD
         
         
         let mainStoryboard = UIStoryboard(name: "FirebaseLogin", bundle: .main)
         let categoriesVC = mainStoryboard.instantiateViewController(withIdentifier: "FirebaseLogin")
         self.window?.rootViewController = categoriesVC
+=======
+        let mainStoryboard = UIStoryboard(name: "TabView", bundle: .main)
+        let categoriesVC = mainStoryboard.instantiateViewController(withIdentifier: "TabViewViewController")
+        
+        let loginStoryboard = UIStoryboard(name: "FirebaseLogin", bundle: .main)
+        let loginVC = loginStoryboard.instantiateViewController(withIdentifier: "StartViewController")
+        
+        self.window?.rootViewController = loginVC
+>>>>>>> ff05580a30f6ee2ce8781e811f30204b0256a477
         
 //        self.window?.rootViewController = SessionManager.tokens == nil ? loginVC : mainVC
         

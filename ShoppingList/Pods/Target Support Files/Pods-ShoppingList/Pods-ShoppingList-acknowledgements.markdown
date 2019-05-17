@@ -833,6 +833,7 @@ Copyright 2019 Google
    limitations under the License.
 
 
+<<<<<<< HEAD
 ## FirebaseUI
 
 
@@ -1039,6 +1040,8 @@ Copyright 2019 Google
    limitations under the License.
 
 
+=======
+>>>>>>> ff05580a30f6ee2ce8781e811f30204b0256a477
 ## GTMSessionFetcher
 
 
@@ -1249,6 +1252,7 @@ Copyright 2019 Google
 
 Copyright 2019 Google
 
+<<<<<<< HEAD
 ## GoogleSignIn
 
 Copyright 2018 Google
@@ -1459,6 +1463,8 @@ Copyright 2018 Google
    limitations under the License.
 
 
+=======
+>>>>>>> ff05580a30f6ee2ce8781e811f30204b0256a477
 ## GoogleUtilities
 
 

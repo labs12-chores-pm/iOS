@@ -1086,6 +1086,7 @@
    limitations under the License.
 </string>
 			<key>License</key>
+<<<<<<< HEAD
 			<string>Apache 2.0</string>
 			<key>Title</key>
 			<string>FirebaseUI</string>
@@ -1298,6 +1299,8 @@
    limitations under the License.
 </string>
 			<key>License</key>
+=======
+>>>>>>> ff05580a30f6ee2ce8781e811f30204b0256a477
 			<string>Apache</string>
 			<key>Title</key>
 			<string>GTMSessionFetcher</string>
@@ -1316,6 +1319,7 @@
 		</dict>
 		<dict>
 			<key>FooterText</key>
+<<<<<<< HEAD
 			<string>Copyright 2018 Google</string>
 			<key>License</key>
 			<string>Copyright</string>
@@ -1538,6 +1542,8 @@
 		</dict>
 		<dict>
 			<key>FooterText</key>
+=======
+>>>>>>> ff05580a30f6ee2ce8781e811f30204b0256a477
 			<string>
                                  Apache License
                            Version 2.0, January 2004

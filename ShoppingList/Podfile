@@ -7,6 +7,7 @@ target 'ShoppingList' do
 
   # Pods for ShoppingList
 
+<<<<<<< HEAD
 
    pod 'Firebase/Auth'
    pod 'Firebase/Core'
@@ -16,5 +17,9 @@ target 'ShoppingList' do
    pod 'FirebaseUI/Google'
    
    pod 'FirebaseUI/Phone'
+=======
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
+>>>>>>> ff05580a30f6ee2ce8781e811f30204b0256a477
 
 end
