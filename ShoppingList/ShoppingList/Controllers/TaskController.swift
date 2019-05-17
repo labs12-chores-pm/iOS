@@ -12,7 +12,7 @@ class TaskController {
     
     func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, notes: [Note] = [] , isComplete: Bool) {
         
-        let task = Task(description: description, categoryId: categoryId, assigneeIds: assineeIds, dueDate: dueDate, notes: notes, identifier: UUID(), isComplete: isComplete)
+        let task = Task(description: description, categoryId: categoryId, assigneeIds: assineeIds, dueDate: dueDate, notes: notes)
         put(task: task)
     }
     
@@ -54,7 +54,11 @@ class TaskController {
             }
             
             do {
-                let tasks = try JSONDecoder().decode([Task].self, from: data)
+                let tasksResponse = try JSONDecoder().decode([String: Task].self, from: data)
+                var tasks: [Task] = []
+                for task in tasksResponse {
+                    tasks.append(task.value)
+                }
                 let tasksInCategory = tasks.filter({ $0.categoryId == categoryId })
                 completion(tasksInCategory, nil)
             } catch {
@@ -95,6 +99,6 @@ class TaskController {
         task.resume()
     }
     
-     let baseURL = URL(string: "https://my-json-server.typicode.com/ryanboris/mockiosserver")!
+     let baseURL = URL(string: "https://test-6f4fe.firebaseio.com/")!
     
 }

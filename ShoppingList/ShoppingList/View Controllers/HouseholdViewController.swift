@@ -23,25 +23,24 @@ class HouseholdViewController: UIViewController {
     }
     
     @objc private func fetchAndAssign() {
-        if let currentUser = userController.currentUser {
+        let currentUser = userController.currentUser
             
-            self.currentUser = currentUser
-            
-            householdController.fetchHousehold(householdId: currentUser.currentHouseholdId) { (household, error) in
-                if let error = error {
-                    print(error)
-                    return
-                }
-                self.household = household
+        self.currentUser = currentUser
+        
+        householdController.fetchHousehold(householdId: currentUser.currentHouseholdId) { (household, error) in
+            if let error = error {
+                print(error)
+                return
             }
-            
-            householdController.fetchHouseholds(user: currentUser) { (households, error) in
-                if let error = error {
-                    print(error)
-                    return
-                }
-                self.pickerDataSource = households
+            self.household = household
+        }
+        
+        householdController.fetchHouseholds(user: currentUser) { (households, error) in
+            if let error = error {
+                print(error)
+                return
             }
+            self.pickerDataSource = households
         }
     }
     

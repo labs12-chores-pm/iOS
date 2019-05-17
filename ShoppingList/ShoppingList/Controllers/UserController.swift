@@ -243,7 +243,7 @@
 
 class UserController {
     
-    var currentUser: User?
+    var currentUser: User = User(email: "email@email.com", identifier: UUID(), name: "Test", subscriptionType: 0, profilePicture: nil, currentHouseholdId: UUID())
     
     func createUser(email: String, name: String, subscriptionType: Int = 0, profilePicture: String?, currentHouseholdId: UUID) {
         let user = User(email: email, identifier: UUID(), name: name, subscriptionType: subscriptionType, profilePicture: profilePicture, currentHouseholdId: currentHouseholdId)

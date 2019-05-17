@@ -37,11 +37,6 @@ class HouseholdUserTableViewCell: UITableViewCell {
             roleSegmentedControl.selectedSegmentIndex = 1
         }
         
-        let dummyTask = Task(description: "Some task", categoryId: UUID(), assigneeIds: [user.identifier], dueDate: Date(), notes: [], identifier: UUID(), isComplete: false)
-        let dummyTask2 = Task(description: "Some task 2", categoryId: UUID(), assigneeIds: [user.identifier], dueDate: Date(), notes: [], identifier: UUID(), isComplete: false)
-        
-        currentTasks.append(dummyTask)
-        currentTasks.append(dummyTask2)
         
         currentTaskLabel.text = currentTasks[0].description
         nextTaskLabel.text = currentTasks[1].description

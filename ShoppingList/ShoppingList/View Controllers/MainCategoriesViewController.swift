@@ -15,7 +15,10 @@ class MainCategoriesViewController: UIViewController {
         categoriesTableView.dataSource = self
         categoriesTableView.delegate = self
         
-        categoryController.fetchCategoriesTest { (categories, error) in
+        // Test Code
+        let user = userController.currentUser
+        let householdId = user.currentHouseholdId
+        categoryController.fetchCategories(householdId: householdId) { (categories, error) in
             if let error = error {
                 print(error)
                 return
@@ -23,15 +26,44 @@ class MainCategoriesViewController: UIViewController {
             self.categories = categories
         }
         
-        if let user = userController.currentUser {
-            let householdId = user.currentHouseholdId
-            categoryController.fetchCategories(householdId: householdId) { (categories, error) in
-                if let error = error {
-                    print(error)
-                    return
-                }
-                self.categories = categories
-            }
+//        if let user = userController.currentUser {
+//            let householdId = user.currentHouseholdId
+//            categoryController.fetchCategories(householdId: householdId) { (categories, error) in
+//                if let error = error {
+//                    print(error)
+//                    return
+//                }
+//                self.categories = categories
+//            }
+//        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh(_:)), name: NSNotification.Name("addedCategory"), object: nil)
+    }
+    
+    @objc func refresh(_ sender: Any) {
+        categoriesTableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AddCategory" {
+            guard let destinationVC = segue.destination as? AddCategoryViewController else { return }
+            
+            destinationVC.categoryController = categoryController
+            destinationVC.userController = userController
+        }
+        
+        if segue.identifier == "ShowTasks" {
+            guard let destinationVC = segue.destination as? TasksTableViewController,
+            let index = categoriesTableView.indexPathForSelectedRow,
+            let categories = categories
+            else { return }
+            
+            let category = categories[index.row]
+            
+            destinationVC.category = category
         }
     }
     

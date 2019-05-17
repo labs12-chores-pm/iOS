@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xeI-eW-470">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tasks Table View Controller-->
+        <scene sceneID="m2b-hL-Wo8">
+            <objects>
+                <tableViewController storyboardIdentifier="TasksTableView" id="xeI-eW-470" customClass="TasksTableViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="l5N-tk-2NB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="FEo-xv-GRE">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hui-9e-GER">
+                                    <rect key="frame" x="8" y="8" width="398" height="58"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hi-C0-1qQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="398" height="58"/>
+                                            <state key="normal" title="Add"/>
+                                            <connections>
+                                                <action selector="AddTaskButtonWasTapped:" destination="xeI-eW-470" eventType="touchUpInside" id="dId-GH-euP"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="hui-9e-GER" firstAttribute="top" secondItem="FEo-xv-GRE" secondAttribute="top" constant="8" id="BIn-Iv-BdP"/>
+                                <constraint firstItem="hui-9e-GER" firstAttribute="leading" secondItem="FEo-xv-GRE" secondAttribute="leading" constant="8" id="MiE-zk-JsY"/>
+                                <constraint firstAttribute="bottom" secondItem="hui-9e-GER" secondAttribute="bottom" constant="8" id="TY6-fI-Pe6"/>
+                                <constraint firstAttribute="trailing" secondItem="hui-9e-GER" secondAttribute="trailing" constant="8" id="jgw-Ob-xn7"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskCell" textLabel="Hax-i3-xFU" style="IBUITableViewCellStyleDefault" id="h3c-Eu-ivK">
+                                <rect key="frame" x="0.0" y="102" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="h3c-Eu-ivK" id="O0m-MU-MNN">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hax-i3-xFU">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="xeI-eW-470" id="4NG-wc-RWy"/>
+                            <outlet property="delegate" destination="xeI-eW-470" id="Mbw-Wn-NP0"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="Aqf-Ff-cXC" kind="show" identifier="ShowTask" id="Tyy-iP-Vzw"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b2F-lR-gkb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="290" y="37"/>
+        </scene>
+        <!--Task View Controller-->
+        <scene sceneID="khs-tJ-bAa">
+            <objects>
+                <viewController id="Aqf-Ff-cXC" customClass="TaskViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ydf-Fw-Bvs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="S8E-MU-HfC">
+                                <rect key="frame" x="8" y="52" width="398" height="384.5"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DBu-f3-XDz">
+                                        <rect key="frame" x="0.0" y="0.0" width="398" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Assignee" translatesAutoresizingMaskIntoConstraints="NO" id="ysP-dz-vbN">
+                                        <rect key="frame" x="0.0" y="38" width="398" height="56"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Due Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTa-tE-Wgz">
+                                        <rect key="frame" x="0.0" y="102" width="398" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="fxL-eQ-oIj">
+                                        <rect key="frame" x="0.0" y="130.5" width="398" height="216"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="579793012.77566004">
+                                            <!--2019-05-17 13:36:52 +0000-->
+                                        </date>
+                                    </datePicker>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VN6-Cj-Lki">
+                                        <rect key="frame" x="0.0" y="354.5" width="398" height="30"/>
+                                        <state key="normal" title="Complete"/>
+                                        <connections>
+                                            <action selector="completeButtonWasTapped:" destination="Aqf-Ff-cXC" eventType="touchUpInside" id="vkH-5A-M5k"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="4OU-Je-xbR" firstAttribute="trailing" secondItem="S8E-MU-HfC" secondAttribute="trailing" constant="8" id="5cP-jH-Gnq"/>
+                            <constraint firstItem="S8E-MU-HfC" firstAttribute="leading" secondItem="ydf-Fw-Bvs" secondAttribute="leading" constant="8" id="TTn-7Q-Hxc"/>
+                            <constraint firstItem="S8E-MU-HfC" firstAttribute="top" secondItem="4OU-Je-xbR" secondAttribute="top" constant="8" id="nDw-lH-ipc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4OU-Je-xbR"/>
+                    </view>
+                    <connections>
+                        <outlet property="assigneeSearch" destination="ysP-dz-vbN" id="ky6-4g-eBb"/>
+                        <outlet property="completeButton" destination="VN6-Cj-Lki" id="mgH-jc-zDt"/>
+                        <outlet property="descriptionField" destination="DBu-f3-XDz" id="HXJ-fp-jXG"/>
+                        <outlet property="dueDatePicker" destination="fxL-eQ-oIj" id="Ame-AB-Cff"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZLz-4l-h6j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1089.8550724637682" y="45.535714285714285"/>
+        </scene>
+    </scenes>
+</document>

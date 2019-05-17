@@ -39,6 +39,10 @@
 		7721FE4D228E0A7700334208 /* MainCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7721FE4C228E0A7700334208 /* MainCategoriesViewController.swift */; };
 		7721FE4F228E238200334208 /* TabViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7721FE4E228E238200334208 /* TabViewViewController.swift */; };
 		773DC4AC228ED52C00EB3121 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DC4AB228ED52C00EB3121 /* StartViewController.swift */; };
+		773DC4AE228EE7AD00EB3121 /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DC4AD228EE7AD00EB3121 /* AddCategoryViewController.swift */; };
+		773DC4B0228EEB0F00EB3121 /* Tasks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 773DC4AF228EEB0F00EB3121 /* Tasks.storyboard */; };
+		773DC4B2228EEBE800EB3121 /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DC4B1228EEBE800EB3121 /* TasksTableViewController.swift */; };
+		773DC4B6228EF15E00EB3121 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DC4B5228EF15E00EB3121 /* TaskViewController.swift */; };
 		776BBD0E228DB93A0097A4D4 /* CreateHouseholdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */; };
 		776BBD10228DC3900097A4D4 /* JoinCreateHousehold.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */; };
 		776BBD12228DCFCA0097A4D4 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */; };
@@ -125,6 +129,10 @@
 		7721FE4C228E0A7700334208 /* MainCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoriesViewController.swift; sourceTree = "<group>"; };
 		7721FE4E228E238200334208 /* TabViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewViewController.swift; sourceTree = "<group>"; };
 		773DC4AB228ED52C00EB3121 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		773DC4AD228EE7AD00EB3121 /* AddCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
+		773DC4AF228EEB0F00EB3121 /* Tasks.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tasks.storyboard; sourceTree = "<group>"; };
+		773DC4B1228EEBE800EB3121 /* TasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
+		773DC4B5228EF15E00EB3121 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHouseholdViewController.swift; sourceTree = "<group>"; };
 		776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoinCreateHousehold.storyboard; sourceTree = "<group>"; };
 		776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
@@ -307,6 +315,7 @@
 				771D3444228C7EFE00C8BA13 /* TabView.storyboard */,
 				776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */,
 				7721FE4A228E098200334208 /* MainCategories.storyboard */,
+				773DC4AF228EEB0F00EB3121 /* Tasks.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -467,6 +476,9 @@
 				776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */,
 				7721FE4C228E0A7700334208 /* MainCategoriesViewController.swift */,
 				7721FE4E228E238200334208 /* TabViewViewController.swift */,
+				773DC4AD228EE7AD00EB3121 /* AddCategoryViewController.swift */,
+				773DC4B1228EEBE800EB3121 /* TasksTableViewController.swift */,
+				773DC4B5228EF15E00EB3121 /* TaskViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -576,6 +588,7 @@
 				443C1B4E221B628D00220C28 /* Auth0.plist in Resources */,
 				9663C6892231D4880019FCED /* ItemTableViewCell.xib in Resources */,
 				7721FE4B228E098200334208 /* MainCategories.storyboard in Resources */,
+				773DC4B0228EEB0F00EB3121 /* Tasks.storyboard in Resources */,
 				771D343B228C654000C8BA13 /* Household.storyboard in Resources */,
 				96029A44223189D500F7F7AE /* NoItemsView.xib in Resources */,
 				96476B512215D41300E57EB9 /* LaunchScreen.storyboard in Resources */,
@@ -660,6 +673,7 @@
 				773DC4AC228ED52C00EB3121 /* StartViewController.swift in Sources */,
 				969A84092215C99A0003BB37 /* UINavigationController+Chameleon.m in Sources */,
 				118646E0221DCE9B00D0F04B /* UserController.swift in Sources */,
+				773DC4B6228EF15E00EB3121 /* TaskViewController.swift in Sources */,
 				968D512D222EBA5900179241 /* NewItemPopoverView.swift in Sources */,
 				9663C6842231CF400019FCED /* NoItemsView.swift in Sources */,
 				771D3443228C7B7F00C8BA13 /* Roles.swift in Sources */,
@@ -683,6 +697,7 @@
 				9691AB572225B07600C1EE1E /* GroupsPopoverView.swift in Sources */,
 				118646D4221CA8CD00D0F04B /* Household.swift in Sources */,
 				969A84032215C99A0003BB37 /* ChameleonConstants.m in Sources */,
+				773DC4AE228EE7AD00EB3121 /* AddCategoryViewController.swift in Sources */,
 				96029A46223198FA00F7F7AE /* Double+Currency.swift in Sources */,
 				776BBD0E228DB93A0097A4D4 /* CreateHouseholdViewController.swift in Sources */,
 				969A84052215C99A0003BB37 /* UIButton+Chameleon.m in Sources */,
@@ -711,6 +726,7 @@
 				77F678AF228A2B99005C7C94 /* HouseholdController.swift in Sources */,
 				77F678AC228A1268005C7C94 /* Note.swift in Sources */,
 				9663C6882231D4880019FCED /* ItemTableViewCell.swift in Sources */,
+				773DC4B2228EEBE800EB3121 /* TasksTableViewController.swift in Sources */,
 				960FBF68221C31E60076C662 /* AboutShopTrakTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
