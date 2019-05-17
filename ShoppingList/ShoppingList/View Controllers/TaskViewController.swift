@@ -54,10 +54,11 @@ class TaskViewController: UIViewController {
             taskController.createTask(description: description, categoryId: categoryId, assineeIds: assigneeId, dueDate: dueDatePicker.date, notes: [], isComplete: false)
         }
         
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func updateViews() {
+        guard isViewLoaded else { return }
         if let task = task {
             descriptionField.text = task.description
             assigneeSearch.text = assignee?.name ?? ""
