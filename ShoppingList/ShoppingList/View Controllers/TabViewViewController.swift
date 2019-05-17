@@ -7,6 +7,15 @@
 //
 
 import UIKit
+import Firebase
 
 class TabViewViewController: UITabBarController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        Auth.auth().addIDTokenDidChangeListener { (auth, user) in
+            
+        }
+    }
 }

@@ -40,7 +40,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>We need to access your camera for scanning QR code</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>&quot;We need access to your photos to update your profile picture&quot; </string>
+	<string>"We need access to your photos to update your profile picture" </string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

@@ -38,6 +38,7 @@
 		7721FE4B228E098200334208 /* MainCategories.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7721FE4A228E098200334208 /* MainCategories.storyboard */; };
 		7721FE4D228E0A7700334208 /* MainCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7721FE4C228E0A7700334208 /* MainCategoriesViewController.swift */; };
 		7721FE4F228E238200334208 /* TabViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7721FE4E228E238200334208 /* TabViewViewController.swift */; };
+		773DC4AC228ED52C00EB3121 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DC4AB228ED52C00EB3121 /* StartViewController.swift */; };
 		776BBD0E228DB93A0097A4D4 /* CreateHouseholdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */; };
 		776BBD10228DC3900097A4D4 /* JoinCreateHousehold.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */; };
 		776BBD12228DCFCA0097A4D4 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */; };
@@ -123,6 +124,7 @@
 		7721FE4A228E098200334208 /* MainCategories.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainCategories.storyboard; sourceTree = "<group>"; };
 		7721FE4C228E0A7700334208 /* MainCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoriesViewController.swift; sourceTree = "<group>"; };
 		7721FE4E228E238200334208 /* TabViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewViewController.swift; sourceTree = "<group>"; };
+		773DC4AB228ED52C00EB3121 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHouseholdViewController.swift; sourceTree = "<group>"; };
 		776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoinCreateHousehold.storyboard; sourceTree = "<group>"; };
 		776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 			children = (
 				47E3FCA4228E780800A1CECE /* FirebaseLoginViewController.swift */,
 				47E3FCA6228E782200A1CECE /* FirebaseLogin.storyboard */,
+				773DC4AB228ED52C00EB3121 /* StartViewController.swift */,
 			);
 			path = "Firebase Auth";
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				443C1B2E2214A45100220C28 /* Sources */,
 				443C1B2F2214A45100220C28 /* Frameworks */,
 				443C1B302214A45100220C28 /* Resources */,
+				ABA912CF2C52C710A1ED11B2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -615,6 +619,32 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		ABA912CF2C52C710A1ED11B2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ShoppingList/Pods-ShoppingList-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ShoppingList/Pods-ShoppingList-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -627,6 +657,7 @@
 				118646D8221CA9D900D0F04B /* User.swift in Sources */,
 				44A16801222746E600227DFB /* ItemController.swift in Sources */,
 				44A1680922318BE700227DFB /* InviteController.swift in Sources */,
+				773DC4AC228ED52C00EB3121 /* StartViewController.swift in Sources */,
 				969A84092215C99A0003BB37 /* UINavigationController+Chameleon.m in Sources */,
 				118646E0221DCE9B00D0F04B /* UserController.swift in Sources */,
 				968D512D222EBA5900179241 /* NewItemPopoverView.swift in Sources */,
@@ -834,7 +865,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.netlify.labs10-shopping-list-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ChoreMonkey.ChoreMonkey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShoppingList/Frameworks/Chameleon/ShoppingList-Bridging-Header.h";
@@ -860,7 +891,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.netlify.labs10-shopping-list-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ChoreMonkey.ChoreMonkey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShoppingList/Frameworks/Chameleon/ShoppingList-Bridging-Header.h";
