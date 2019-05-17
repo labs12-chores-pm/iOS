@@ -24,6 +24,8 @@
 		44A1680C22381C0C00227DFB /* BarcodeScannerController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44A1680B22381C0B00227DFB /* BarcodeScannerController.storyboard */; };
 		44A16810223820DC00227DFB /* BarcodeScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1680E223820DC00227DFB /* BarcodeScannerController.swift */; };
 		47209B83228F072C00CDC3CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47209B82228F072C00CDC3CA /* GoogleService-Info.plist */; };
+		472521A8228F22D900B08DA8 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472521A7228F22D900B08DA8 /* TasksViewController.swift */; };
+		472521AA228F22F100B08DA8 /* Tasks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 472521A9228F22F100B08DA8 /* Tasks.storyboard */; };
 		473ED23B228DD4A900678E7E /* TaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473ED23A228DD4A900678E7E /* TaskController.swift */; };
 		473ED23D228DDE3E00678E7E /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473ED23C228DDE3E00678E7E /* CategoryController.swift */; };
 		47E3FCA5228E780800A1CECE /* FirebaseLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E3FCA4228E780800A1CECE /* FirebaseLoginViewController.swift */; };
@@ -109,6 +111,8 @@
 		44A1680B22381C0B00227DFB /* BarcodeScannerController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BarcodeScannerController.storyboard; sourceTree = "<group>"; };
 		44A1680E223820DC00227DFB /* BarcodeScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerController.swift; sourceTree = "<group>"; };
 		47209B82228F072C00CDC3CA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		472521A7228F22D900B08DA8 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
+		472521A9228F22F100B08DA8 /* Tasks.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tasks.storyboard; sourceTree = "<group>"; };
 		473ED23A228DD4A900678E7E /* TaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskController.swift; sourceTree = "<group>"; };
 		473ED23C228DDE3E00678E7E /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
 		47E3FCA4228E780800A1CECE /* FirebaseLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseLoginViewController.swift; sourceTree = "<group>"; };
@@ -460,6 +464,8 @@
 				96DE302F221637FE00213C3E /* LoginViewController */,
 				96700E2F221C034000F084B3 /* SettingsViewControllers */,
 				77CABBD6228BAC98000E00A3 /* HouseholdViewController.swift */,
+				472521A7228F22D900B08DA8 /* TasksViewController.swift */,
+				472521A9228F22F100B08DA8 /* Tasks.storyboard */,
 				776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */,
 				776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */,
 				7721FE4C228E0A7700334208 /* MainCategoriesViewController.swift */,
@@ -574,6 +580,7 @@
 				443C1B4E221B628D00220C28 /* Auth0.plist in Resources */,
 				9663C6892231D4880019FCED /* ItemTableViewCell.xib in Resources */,
 				7721FE4B228E098200334208 /* MainCategories.storyboard in Resources */,
+				472521AA228F22F100B08DA8 /* Tasks.storyboard in Resources */,
 				771D343B228C654000C8BA13 /* Household.storyboard in Resources */,
 				96029A44223189D500F7F7AE /* NoItemsView.xib in Resources */,
 				96476B512215D41300E57EB9 /* LaunchScreen.storyboard in Resources */,
@@ -699,6 +706,7 @@
 				11F5380D221F51EA0046BDFC /* HelperFile.swift in Sources */,
 				96CBFBED22285E7200A6B41E /* NewGroupPopoverView.swift in Sources */,
 				44A16810223820DC00227DFB /* BarcodeScannerController.swift in Sources */,
+				472521A8228F22D900B08DA8 /* TasksViewController.swift in Sources */,
 				77CABBD7228BAC98000E00A3 /* HouseholdViewController.swift in Sources */,
 				771D344D228CB33300C8BA13 /* NotesController.swift in Sources */,
 				96E7BE60221DC149004EE9FF /* Helpers.swift in Sources */,
