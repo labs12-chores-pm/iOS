@@ -70,7 +70,7 @@ struct Task: Codable, Equatable {
         }
         
         let identifierString = try container.decode(String.self, forKey: .identifier)
-        let identifier = UUID(uuidString: identifierString)
+        let identifier = UUID(uuidString: identifierString)!
         
         let isComplete = try container.decode(Bool.self, forKey: .isComplete)
         
@@ -79,7 +79,7 @@ struct Task: Codable, Equatable {
         self.assigneeIds = []
         self.dueDate = dueDate
         self.notes = []
-        self.identifier = UUID()
-        self.isComplete = false
+        self.identifier = identifier
+        self.isComplete = isComplete
     }
 }

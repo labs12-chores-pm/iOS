@@ -16,17 +16,6 @@ class MainCategoriesViewController: UIViewController {
         categoriesTableView.delegate = self
         
         fetchCategories()
-        
-//        if let user = userController.currentUser {
-//            let householdId = user.currentHouseholdId
-//            categoryController.fetchCategories(householdId: householdId) { (categories, error) in
-//                if let error = error {
-//                    print(error)
-//                    return
-//                }
-//                self.categories = categories
-//            }
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +34,17 @@ class MainCategoriesViewController: UIViewController {
             }
             self.categories = categories
         }
+        
+        //        if let user = userController.currentUser {
+        //            let householdId = user.currentHouseholdId
+        //            categoryController.fetchCategories(householdId: householdId) { (categories, error) in
+        //                if let error = error {
+        //                    print(error)
+        //                    return
+        //                }
+        //                self.categories = categories
+        //            }
+        //        }
     }
     
     func refresh() {

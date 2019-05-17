@@ -94,6 +94,8 @@ class CategoryController {
             completion(nil)
         }
         task.resume()
+        
+        print(category)
     }
     
     let baseURL = URL(string: "https://test-6f4fe.firebaseio.com/")!

@@ -60,6 +60,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Aqf-Ff-cXC" kind="show" identifier="ShowTask" id="8Z9-IU-51K"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -68,7 +71,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="Aqf-Ff-cXC" kind="show" identifier="ShowTask" id="Tyy-iP-Vzw"/>
+                        <segue destination="Aqf-Ff-cXC" kind="show" identifier="AddTask" id="lvk-JG-c8Q"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b2F-lR-gkb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -135,7 +138,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZLz-4l-h6j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1089.8550724637682" y="45.535714285714285"/>
+            <point key="canvasLocation" x="1271" y="-28"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="8Z9-IU-51K"/>
+    </inferredMetricsTieBreakers>
 </document>

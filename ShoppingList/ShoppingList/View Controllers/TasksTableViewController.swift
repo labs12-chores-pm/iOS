@@ -10,8 +10,12 @@ import UIKit
 
 class TasksTableViewController: UITableViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getTasks()
+    }
+    
+    func getTasks() {
         guard let category = category else { return }
         
         taskController.fetchTasks(categoryId: category.identifier) { (tasks, error) in
@@ -46,7 +50,7 @@ class TasksTableViewController: UITableViewController {
     }
     
     @IBAction func AddTaskButtonWasTapped(_ sender: UIButton) {
-        performSegue(withIdentifier: "ShowTask", sender: self)
+        performSegue(withIdentifier: "AddTask", sender: self)
     }
 
     // MARK: - Navigation
@@ -59,8 +63,16 @@ class TasksTableViewController: UITableViewController {
             
             let task = tasks[index.row]
             
-            destinationVC.taskController = self.taskController
+            destinationVC.taskController = taskController
             destinationVC.task = task
+            destinationVC.category = category
+        }
+        
+        if segue.identifier == "AddTask" {
+            guard let destinationVC = segue.destination as? TaskViewController,
+            let category = category else { return }
+            
+            destinationVC.taskController = taskController
             destinationVC.category = category
         }
     }
