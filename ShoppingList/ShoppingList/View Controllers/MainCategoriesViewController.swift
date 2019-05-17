@@ -100,4 +100,21 @@ extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSour
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard let categories = categories else { return }
+            
+            let category = categories[indexPath.row]
+            
+            categoryController.delete(category: category) { (error) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                
+                self.fetchCategories()
+            }
+        }
+    }
 }

@@ -67,6 +67,22 @@ class CategoryController {
         task.resume()
     }
     
+    func delete(category: Category, completion: @escaping (Error?) -> Void) {
+        
+        let id = category.identifier.uuidString
+        let categoriesURL = baseURL.appendingPathComponent("categories")
+        let requestURL = categoriesURL.appendingPathComponent(id).appendingPathExtension("json")
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "DELETE"
+        
+        let task = URLSession.shared.dataTask(with: request) { (_, response, error) in
+            print(response!)
+            completion(error)
+        }
+        
+        task.resume()
+    }
+    
     
     private func put(category: Category, completion: @escaping (Error?) -> Void = {_ in }) {
         

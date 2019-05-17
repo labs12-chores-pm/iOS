@@ -70,6 +70,22 @@ class TaskController {
         task.resume()
     }
     
+    func delete(task: Task, completion: @escaping (Error?) -> Void) {
+        
+        let id = task.identifier.uuidString
+        let tasksURL = baseURL.appendingPathComponent("tasks")
+        let requestURL = tasksURL.appendingPathComponent(id).appendingPathExtension("json")
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "DELETE"
+        
+        let task = URLSession.shared.dataTask(with: request) { (_, response, error) in
+            print(response!)
+            completion(error)
+        }
+        
+        task.resume()
+    }
+    
     
     private func put(task: Task, completion: @escaping (Error?) -> Void = {_ in }) {
         

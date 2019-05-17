@@ -52,6 +52,21 @@ class TasksTableViewController: UITableViewController {
     @IBAction func AddTaskButtonWasTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "AddTask", sender: self)
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard let tasks = tasks else { return }
+            let task = tasks[indexPath.row]
+            taskController.delete(task: task) { (error) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                
+                self.getTasks()
+            }
+        }
+    }
 
     // MARK: - Navigation
 
