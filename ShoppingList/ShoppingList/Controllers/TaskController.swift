@@ -34,6 +34,42 @@ class TaskController {
         
     }
     
+    func fetchTasks(userId: UUID, completion: @escaping ([Task]?, Error?) -> Void) {
+        
+        let tasksURL = baseURL.appendingPathComponent("tasks").appendingPathExtension("json")
+        let request = URLRequest(url: tasksURL)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            
+            if let error = error {
+                print(error)
+                completion(nil, NetworkError.urlSession)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data")
+                completion(nil, NetworkError.dataMissing)
+                return
+            }
+            
+            do {
+                let tasksResponse = try JSONDecoder().decode([String: Task].self, from: data)
+                var tasks: [Task] = []
+                for task in tasksResponse {
+                    tasks.append(task.value)
+                }
+                let tasksAssignedToUser = tasks.filter({ $0.assigneeIds.contains(userId) })
+                completion(tasksAssignedToUser, nil)
+            } catch {
+                completion(nil, NetworkError.decodingData)
+            }
+            return
+        }
+        
+        task.resume()
+    }
+    
     func fetchTasks(categoryId: UUID, completion: @escaping ([Task]?, Error?) -> Void) {
         
         let tasksURL = baseURL.appendingPathComponent("tasks").appendingPathExtension("json")

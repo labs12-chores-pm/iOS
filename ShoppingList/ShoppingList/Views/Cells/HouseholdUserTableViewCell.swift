@@ -17,12 +17,26 @@ class HouseholdUserTableViewCell: UITableViewCell {
                 print(error)
                 return
             }
-            self.user = user
+            self.member = user
+        }
+    }
+    
+    private func getTasks() {
+        guard let taskController = taskController, let member = member else { return }
+        taskController.fetchTasks(userId: member.identifier) { (tasks, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            if let tasks = tasks {
+                self.currentTasks = tasks
+            }
         }
     }
     
     private func updateViews() {
-        guard let user = user, let household = household, let currentUser = currentUser else { return }
+        guard let user = member, let household = household, let currentUser = currentUser else { return }
         userNameLabel.text = user.name
         
         let adminIds = household.adminIds
@@ -36,14 +50,10 @@ class HouseholdUserTableViewCell: UITableViewCell {
         } else {
             roleSegmentedControl.selectedSegmentIndex = 1
         }
-        
-        
-        currentTaskLabel.text = currentTasks[0].description
-        nextTaskLabel.text = currentTasks[1].description
     }
     
     @IBAction func roleSegmentedControlValueChanged(_ sender: UISegmentedControl) {
-        guard let householdController = householdController, let household = household, let user = user else { return }
+        guard let householdController = householdController, let household = household, let user = member else { return }
         
         var adminIds = household.adminIds
         
@@ -65,8 +75,12 @@ class HouseholdUserTableViewCell: UITableViewCell {
     
     @IBOutlet weak var roleSegmentedControl: UISegmentedControl!
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var currentTaskLabel: UILabel!
-    @IBOutlet weak var nextTaskLabel: UILabel!
+    @IBOutlet weak var tasksTableView: UITableView! {
+        didSet {
+            tasksTableView.delegate = self
+            tasksTableView.dataSource = self
+        }
+    }
     
     var userController: UserController?
     
@@ -78,16 +92,45 @@ class HouseholdUserTableViewCell: UITableViewCell {
     
     var currentUser: User?
     
-    var user: User? {
+    var member: User? {
         didSet {
-            updateViews()
+            DispatchQueue.main.async {
+                self.updateViews()
+            }
         }
     }
     
     var householdController: HouseholdController?
     var household: Household?
+    var taskController: TaskController?
     
     let roles: [Roles] = [.admin, .nonAdmin]
     
-    var currentTasks: [Task] = []
+    var currentTasks: [Task]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.tasksTableView.reloadData()
+            }
+        }
+    }
+}
+
+extension HouseholdUserTableViewCell: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return currentTasks?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CurrentTasksCell", for: indexPath)
+        guard let tasks = currentTasks else { return cell }
+        let task = tasks[indexPath.row]
+        
+        cell.textLabel?.text = task.description
+        cell.detailTextLabel?.text = task.dueDate.dateToString()
+        
+        return cell
+    }
+    
+    
 }

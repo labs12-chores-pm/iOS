@@ -16,6 +16,8 @@ class MainCategoriesViewController: UIViewController {
         categoriesTableView.delegate = self
         
         if let tabBar = self.tabBarController as? TabViewViewController {
+            
+            self.taskController = tabBar.taskController
             self.currentUser = tabBar.currentUser
             self.householdController = tabBar.householdController
             self.userController = tabBar.userController
@@ -41,10 +43,6 @@ class MainCategoriesViewController: UIViewController {
         }
     }
     
-    func refresh() {
-        categoriesTableView.reloadData()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddCategory" {
             guard let destinationVC = segue.destination as? AddCategoryViewController, let user = currentUser else { return }
@@ -56,13 +54,15 @@ class MainCategoriesViewController: UIViewController {
             guard let destinationVC = segue.destination as? TasksTableViewController,
             let index = categoriesTableView.indexPathForSelectedRow,
             let categories = categories,
-            let user = currentUser
+            let user = currentUser,
+            let taskController = taskController
             else { return }
             
             let category = categories[index.row]
             
             destinationVC.currentUser = user
             destinationVC.category = category
+            destinationVC.taskController = taskController
         }
     }
     
@@ -70,6 +70,7 @@ class MainCategoriesViewController: UIViewController {
     @IBOutlet weak var categoriesLabel: UILabel!
     @IBOutlet weak var categoriesTableView: UITableView!
     
+    var taskController: TaskController?
     var userController: UserController?
     var currentUser: User?
     var householdController: HouseholdController?
@@ -90,7 +91,7 @@ extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = categoriesTableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         
         if let categories = categories {
             cell.textLabel?.text = categories[indexPath.row].name

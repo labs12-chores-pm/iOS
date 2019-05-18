@@ -13,11 +13,13 @@ class HouseholdViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         householdMemberTableView.delegate = self
+        householdMemberTableView.dataSource = self
         householdPicker.delegate = self
         householdPicker.dataSource = self
         
         if let tabBar = self.tabBarController as? TabViewViewController {
             
+            self.taskController = tabBar.taskController
             self.householdController = tabBar.householdController
             self.userController = tabBar.userController
             self.currentUser = tabBar.currentUser
@@ -25,6 +27,7 @@ class HouseholdViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         fetchAndAssign()
     }
     
@@ -70,6 +73,7 @@ class HouseholdViewController: UIViewController {
         }
         
         householdPicker.selectRow(index, inComponent: 0, animated: true)
+        householdMemberTableView.reloadData()
     }
     
     @IBAction func leaveHouseholdButtonTapped(_ sender: UIButton) {
@@ -113,6 +117,8 @@ class HouseholdViewController: UIViewController {
     
     @IBOutlet weak var householdPicker: UIPickerView!
     @IBOutlet weak var householdMemberTableView: UITableView!
+    
+    var taskController: TaskController?
     var householdController: HouseholdController?
     var userController: UserController?
     var household: Household? {
@@ -148,11 +154,19 @@ extension HouseholdViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCell", for: indexPath)
         guard let userCell = cell as? HouseholdUserTableViewCell,
-        let household = household, let currentUser = currentUser else { return cell }
+        let household = household, let currentUser = currentUser,
+        let userController = userController, let taskController = taskController,
+        let householdController = householdController else { return cell }
         
         let userId = household.memberIds[indexPath.row]
         userCell.userId = userId
         userCell.currentUser = currentUser
+        
+        userCell.household = household
+        userCell.userController = userController
+        userCell.taskController = taskController
+        userCell.householdController = householdController
+        
         return userCell
     }
 }
@@ -171,6 +185,7 @@ extension HouseholdViewController: UIPickerViewDelegate, UIPickerViewDataSource 
         guard let currentUser = currentUser, let userController = userController else { return }
         let household = pickerDataSource?[row].identifier
         userController.updateUser(user: currentUser, currentHouseholdId: household)
+        fetchAndAssign()
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

@@ -18,43 +18,112 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Hx0-iM-qj9">
-                                <rect key="frame" x="8" y="96" width="398" height="792"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hx0-iM-qj9">
+                                <rect key="frame" x="8" y="96" width="398" height="758"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DnH-zO-aqm">
-                                        <rect key="frame" x="180.5" y="0.0" width="37" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="398" height="100"/>
                                         <state key="normal" title="Invite"/>
                                         <connections>
                                             <segue destination="Jdb-Uu-qz5" kind="show" identifier="ShowInvite" id="6u3-Qv-FRA"/>
                                         </connections>
                                     </button>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6N-s9-41K">
-                                        <rect key="frame" x="39" y="46" width="320" height="216"/>
-                                    </pickerView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsA-Mz-UIM">
-                                        <rect key="frame" x="184" y="278" width="30" height="30"/>
-                                        <state key="normal" title="+"/>
-                                        <connections>
-                                            <segue destination="2oc-W8-6wX" kind="show" identifier="ShowCreateHousehold" id="0rr-qR-Qg4"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="PmU-nR-jSO">
+                                        <rect key="frame" x="0.0" y="108" width="398" height="216"/>
+                                        <subviews>
+                                            <pickerView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X6N-s9-41K">
+                                                <rect key="frame" x="0.0" y="0.0" width="352" height="216"/>
+                                            </pickerView>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsA-Mz-UIM">
+                                                <rect key="frame" x="368" y="0.0" width="30" height="216"/>
+                                                <state key="normal" title="+"/>
+                                                <connections>
+                                                    <segue destination="2oc-W8-6wX" kind="show" identifier="ShowCreateHousehold" id="0rr-qR-Qg4"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U5t-Xb-OQL">
-                                        <rect key="frame" x="12" y="324" width="374" height="422"/>
+                                        <rect key="frame" x="0.0" y="332" width="398" height="388"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MemberCell" rowHeight="55" id="IUQ-2k-yRx" customClass="HouseholdUserTableViewCell" customModule="ShoppingList" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="374" height="55"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MemberCell" rowHeight="150" id="IUQ-2k-yRx" customClass="HouseholdUserTableViewCell" customModule="ShoppingList" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="398" height="150"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IUQ-2k-yRx" id="AAM-gY-xF0" customClass="HouseholdUserTableViewCell" customModule="ShoppingList" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="54.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="398" height="149.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="McI-aY-Tgq">
+                                                            <rect key="frame" x="8" y="8" width="358" height="28"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ep-W1-lqU">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="175" height="28"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8wh-wp-00O">
+                                                                    <rect key="frame" x="183" y="0.0" width="175" height="29"/>
+                                                                    <segments>
+                                                                        <segment title="Admin"/>
+                                                                        <segment title="Non-admin"/>
+                                                                    </segments>
+                                                                </segmentedControl>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XD6-qd-tUB">
+                                                            <rect key="frame" x="0.0" y="44" width="374" height="105.5"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <prototypes>
+                                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CurrentTasksCell" textLabel="Y2Q-EE-RHN" detailTextLabel="InB-p8-lbX" style="IBUITableViewCellStyleValue1" id="kWc-eh-Wo9">
+                                                                    <rect key="frame" x="0.0" y="28" width="374" height="44"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kWc-eh-Wo9" id="3Ij-SC-BxX">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Y2Q-EE-RHN">
+                                                                                <rect key="frame" x="20" y="12" width="33.5" height="20.5"/>
+                                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="InB-p8-lbX">
+                                                                                <rect key="frame" x="310" y="12" width="44" height="20.5"/>
+                                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                    </tableViewCellContentView>
+                                                                </tableViewCell>
+                                                            </prototypes>
+                                                        </tableView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="XD6-qd-tUB" secondAttribute="trailing" id="0n8-0n-kAO"/>
+                                                        <constraint firstItem="XD6-qd-tUB" firstAttribute="top" secondItem="McI-aY-Tgq" secondAttribute="bottom" constant="8" id="2ml-dg-PHM"/>
+                                                        <constraint firstItem="XD6-qd-tUB" firstAttribute="leading" secondItem="AAM-gY-xF0" secondAttribute="leading" id="Mzp-FI-DCX"/>
+                                                        <constraint firstItem="McI-aY-Tgq" firstAttribute="top" secondItem="AAM-gY-xF0" secondAttribute="topMargin" id="QsX-WW-7E1"/>
+                                                        <constraint firstItem="McI-aY-Tgq" firstAttribute="leading" secondItem="AAM-gY-xF0" secondAttribute="leadingMargin" id="T5h-aa-HYw"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="McI-aY-Tgq" secondAttribute="trailing" id="UPR-LX-7tZ"/>
+                                                        <constraint firstAttribute="bottom" secondItem="XD6-qd-tUB" secondAttribute="bottom" id="ZXz-U1-xCg"/>
+                                                    </constraints>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="roleSegmentedControl" destination="8wh-wp-00O" id="Wh1-uj-gBw"/>
+                                                    <outlet property="tasksTableView" destination="XD6-qd-tUB" id="pj9-5i-DLQ"/>
+                                                    <outlet property="userNameLabel" destination="3ep-W1-lqU" id="6aL-6t-kO1"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                         <sections/>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78d-dv-iaz">
-                                        <rect key="frame" x="140" y="762" width="118" height="30"/>
+                                        <rect key="frame" x="0.0" y="728" width="398" height="30"/>
                                         <state key="normal" title="Leave Household"/>
                                         <connections>
                                             <action selector="leaveHouseholdButtonTapped:" destination="h1P-f9-Baw" eventType="touchUpInside" id="Cja-YF-cWB"/>
@@ -68,7 +137,7 @@
                             <constraint firstItem="Hx0-iM-qj9" firstAttribute="top" secondItem="RvG-ib-hbU" secondAttribute="top" constant="8" id="YYX-EI-2Bh"/>
                             <constraint firstItem="Hx0-iM-qj9" firstAttribute="leading" secondItem="RvG-ib-hbU" secondAttribute="leading" constant="8" id="Ypk-5m-Wa2"/>
                             <constraint firstAttribute="trailing" secondItem="Hx0-iM-qj9" secondAttribute="trailing" constant="8" id="mTW-1V-I2k"/>
-                            <constraint firstAttribute="bottom" secondItem="Hx0-iM-qj9" secondAttribute="bottom" constant="8" id="y1D-tf-fAd"/>
+                            <constraint firstItem="RvG-ib-hbU" firstAttribute="bottom" secondItem="Hx0-iM-qj9" secondAttribute="bottom" constant="8" id="y1D-tf-fAd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RvG-ib-hbU"/>
                     </view>
@@ -140,7 +209,7 @@
                 <viewControllerPlaceholder storyboardName="JoinCreateHousehold" id="2oc-W8-6wX" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n3k-Kl-P6P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1597.8260869565217" y="298.66071428571428"/>
+            <point key="canvasLocation" x="1737" y="229"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qJW-XA-VS0">

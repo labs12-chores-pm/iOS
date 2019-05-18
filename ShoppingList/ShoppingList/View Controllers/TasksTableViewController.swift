@@ -9,14 +9,9 @@
 import UIKit
 
 class TasksTableViewController: UITableViewController {
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        getTasks()
-    }
     
     func getTasks() {
-        guard let category = category else { return }
+        guard let category = category, let taskController = taskController else { return }
         
         taskController.fetchTasks(categoryId: category.identifier) { (tasks, error) in
             
@@ -55,7 +50,7 @@ class TasksTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let tasks = tasks else { return }
+            guard let tasks = tasks, let taskController = taskController else { return }
             let task = tasks[indexPath.row]
             taskController.delete(task: task) { (error) in
                 if let error = error {
@@ -103,5 +98,10 @@ class TasksTableViewController: UITableViewController {
     }
     
     var currentUser: User?
-    let taskController = TaskController()
+    
+    var taskController: TaskController? {
+        didSet {
+            getTasks()
+        }
+    }
 }
