@@ -60,7 +60,7 @@ class HouseholdUserTableViewCell: UITableViewCell {
             }
         }
         
-        householdController.updateHousehold(household: household, memberIds: household.memberIds, adminIds: adminIds, categories: household.categories)
+        householdController.updateHousehold(household: household, memberIds: household.memberIds, adminIds: adminIds, categories: household.categories ?? [])
     }
     
     @IBOutlet weak var roleSegmentedControl: UISegmentedControl!

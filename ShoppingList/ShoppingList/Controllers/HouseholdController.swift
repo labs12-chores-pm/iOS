@@ -26,7 +26,12 @@ class HouseholdController {
         updatedHousehold.name = name ?? household.name
         updatedHousehold.memberIds.append(contentsOf: memberIds)
         updatedHousehold.adminIds.append(contentsOf: adminIds)
-        updatedHousehold.categories.append(contentsOf: categories)
+        
+        if updatedHousehold.categories != nil {
+            updatedHousehold.categories?.append(contentsOf: categories)
+        } else {
+            updatedHousehold.categories = categories
+        }
         
         put(household: updatedHousehold)
     }
@@ -103,7 +108,10 @@ class HouseholdController {
                     households.append(household.value)
                 }
                 let userHouseholds = households.filter({ return $0.memberIds.contains(user.identifier) })
-                completion(userHouseholds, nil)
+                let sortedHouseholds = userHouseholds.sorted(by: { (household1, household2) -> Bool in
+                    household1.name < household2.name
+                })
+                completion(sortedHouseholds, nil)
             } catch {
                 completion(nil, NetworkError.decodingData)
             }

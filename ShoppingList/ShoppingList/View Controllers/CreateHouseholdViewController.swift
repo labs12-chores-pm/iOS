@@ -10,31 +10,50 @@ import UIKit
 
 class CreateHouseholdViewController: UIViewController {
     
-    @IBAction func createButtonWasTapped(_ sender: UIButton) {
-        guard let text = householdNameField.text,
-            let userController = userController,
-            let householdController = householdController,
-            let currentUser = currentUser else { return }
-        
-        let newHousehold = householdController.createHousehold(name: text, creatorId: currentUser.identifier)
-        userController.updateUser(user: currentUser, currentHouseholdId: newHousehold.identifier)
-        
-        NotificationCenter.default.post(name: NSNotification.Name("newHousehold"), object: nil)
-        
-        self.dismiss(animated: true, completion: nil)
+    private func updateViews() {
+        if isJoinForm {
+            createJoinButton.setTitle("Join", for: .normal)
+            createNameInviteCodeField.placeholder = "Enter Join Code..."
+        } else {
+            createJoinButton.setTitle("Create", for: .normal)
+            createNameInviteCodeField.placeholder = "Enter Household Name..."
+        }
     }
     
-    @IBAction func joinButtonWasTapped(_ sender: UIButton) {
+    @IBAction func createJoinButtonWasTapped(_ sender: UIButton) {
+        guard let text = createNameInviteCodeField.text,
+        let userController = userController,
+        let householdController = householdController,
+        let currentUser = currentUser else { return }
         
+        var newHousehold: Household!
+        if isJoinForm {
+            
+        } else {
+            newHousehold = householdController.createHousehold(name: text, creatorId: currentUser.identifier)
+        }
+
+        userController.updateUser(user: currentUser, currentHouseholdId: newHousehold.identifier)        
+        self.navigationController?.popViewController(animated: true)
     }
     
-    @IBOutlet weak var householdNameField: UITextField!
-    @IBOutlet weak var createButton: UIButton!
+    @IBAction func joinCreateSegmentedControlValueChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            isJoinForm = true
+        case 1:
+            isJoinForm = false
+        default:
+            break
+        }
+        updateViews()
+    }
     
-    @IBOutlet weak var inviteCodeField: UITextField!
-    @IBOutlet weak var joinButton: UIButton!
+    @IBOutlet weak var createNameInviteCodeField: UITextField!
+    @IBOutlet weak var createJoinButton: UIButton!
     
     var householdController: HouseholdController?
     var userController: UserController?
     var currentUser: User?
+    var isJoinForm: Bool = true
 }

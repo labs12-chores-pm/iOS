@@ -14,7 +14,7 @@ struct Household: Codable, Equatable {
     let creatorId: UUID
     var memberIds: [UUID]
     var adminIds: [UUID]
-    var categories: [Category]
+    var categories: [Category]?
     
     static func == (lhs: Household, rhs: Household) -> Bool {
         return lhs.name == rhs.name &&
@@ -58,7 +58,7 @@ struct Household: Codable, Equatable {
         
         let adminIds = adminStrings.compactMap { UUID(uuidString: $0)! }
         
-        let categories = try container.decode([Category].self, forKey: .categories)
+        let categories = try container.decodeIfPresent([Category].self, forKey: .categories)
         
         self.name = name
         self.identifier = identifier

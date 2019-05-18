@@ -25,9 +25,7 @@
                                         <rect key="frame" x="180.5" y="0.0" width="37" height="30"/>
                                         <state key="normal" title="Invite"/>
                                         <connections>
-                                            <segue destination="Jdb-Uu-qz5" kind="popoverPresentation" identifier="PopInvite" popoverAnchorView="DnH-zO-aqm" id="6u3-Qv-FRA">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
+                                            <segue destination="Jdb-Uu-qz5" kind="show" identifier="ShowInvite" id="6u3-Qv-FRA"/>
                                         </connections>
                                     </button>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6N-s9-41K">
@@ -37,9 +35,7 @@
                                         <rect key="frame" x="184" y="278" width="30" height="30"/>
                                         <state key="normal" title="+"/>
                                         <connections>
-                                            <segue destination="2oc-W8-6wX" kind="popoverPresentation" identifier="PopCreateHousehold" popoverAnchorView="zsA-Mz-UIM" id="0rr-qR-Qg4">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
+                                            <segue destination="2oc-W8-6wX" kind="show" identifier="ShowCreateHousehold" id="0rr-qR-Qg4"/>
                                         </connections>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U5t-Xb-OQL">

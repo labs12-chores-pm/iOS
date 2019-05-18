@@ -39,7 +39,7 @@ class StartViewController: UIViewController {
                     let name = currentUser.displayName ?? email
                     let picture = currentUser.photoURL
                     
-                    let household = self.householdController.createHousehold(name: name, creatorId: userUID)
+                    let household = self.householdController.createHousehold(name: name, creatorId: userUID, memberIds: [userUID])
                     
                     let user = self.userController.createUser(email: email, name: name, profilePicture: picture?.absoluteString, currentHouseholdId: household.identifier, identifier: userUID)
                     
