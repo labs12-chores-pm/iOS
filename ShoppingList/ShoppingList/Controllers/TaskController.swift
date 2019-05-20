@@ -12,7 +12,7 @@ class TaskController {
     
     func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, notes: [Note] = [] , isComplete: Bool) {
         
-        let task = Task(description: description, categoryId: categoryId, assigneeIds: assineeIds, dueDate: dueDate, notes: notes, identifier: UUID(), isComplete: isComplete)
+        let task = Task(description: description, categoryId: categoryId, assigneeIds: assineeIds, dueDate: dueDate, notes: notes)
         put(task: task)
     }
     
@@ -32,6 +32,42 @@ class TaskController {
        
         put(task: taskCopy)
         
+    }
+    
+    func fetchTasks(userId: UUID, completion: @escaping ([Task]?, Error?) -> Void) {
+        
+        let tasksURL = baseURL.appendingPathComponent("tasks").appendingPathExtension("json")
+        let request = URLRequest(url: tasksURL)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            
+            if let error = error {
+                print(error)
+                completion(nil, NetworkError.urlSession)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data")
+                completion(nil, NetworkError.dataMissing)
+                return
+            }
+            
+            do {
+                let tasksResponse = try JSONDecoder().decode([String: Task].self, from: data)
+                var tasks: [Task] = []
+                for task in tasksResponse {
+                    tasks.append(task.value)
+                }
+                let tasksAssignedToUser = tasks.filter({ $0.assigneeIds.contains(userId) })
+                completion(tasksAssignedToUser, nil)
+            } catch {
+                completion(nil, NetworkError.decodingData)
+            }
+            return
+        }
+        
+        task.resume()
     }
     
     func fetchTasks(categoryId: UUID, completion: @escaping ([Task]?, Error?) -> Void) {
@@ -54,13 +90,33 @@ class TaskController {
             }
             
             do {
-                let tasks = try JSONDecoder().decode([Task].self, from: data)
+                let tasksResponse = try JSONDecoder().decode([String: Task].self, from: data)
+                var tasks: [Task] = []
+                for task in tasksResponse {
+                    tasks.append(task.value)
+                }
                 let tasksInCategory = tasks.filter({ $0.categoryId == categoryId })
                 completion(tasksInCategory, nil)
             } catch {
                 completion(nil, NetworkError.decodingData)
             }
             return
+        }
+        
+        task.resume()
+    }
+    
+    func delete(task: Task, completion: @escaping (Error?) -> Void) {
+        
+        let id = task.identifier.uuidString
+        let tasksURL = baseURL.appendingPathComponent("tasks")
+        let requestURL = tasksURL.appendingPathComponent(id).appendingPathExtension("json")
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "DELETE"
+        
+        let task = URLSession.shared.dataTask(with: request) { (_, response, error) in
+            print(response!)
+            completion(error)
         }
         
         task.resume()
@@ -95,6 +151,6 @@ class TaskController {
         task.resume()
     }
     
-     let baseURL = URL(string: "https://my-json-server.typicode.com/ryanboris/mockiosserver")!
+     let baseURL = URL(string: "https://test-6f4fe.firebaseio.com/")!
     
 }

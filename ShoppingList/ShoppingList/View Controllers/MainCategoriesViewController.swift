@@ -15,23 +15,54 @@ class MainCategoriesViewController: UIViewController {
         categoriesTableView.dataSource = self
         categoriesTableView.delegate = self
         
-        categoryController.fetchCategoriesTest { (categories, error) in
+        if let tabBar = self.tabBarController as? TabViewViewController {
+            
+            self.taskController = tabBar.taskController
+            self.currentUser = tabBar.currentUser
+            self.householdController = tabBar.householdController
+            self.userController = tabBar.userController
+        }
+        fetchCategories()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchCategories), name: NSNotification.Name("addedCategory"), object: nil)
+    }
+    
+    @objc func fetchCategories() {
+        // Test Code
+        guard let user = currentUser else { return }
+        let householdId = user.currentHouseholdId
+        categoryController.fetchCategories(householdId: householdId) { (categories, error) in
             if let error = error {
                 print(error)
                 return
             }
             self.categories = categories
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AddCategory" {
+            guard let destinationVC = segue.destination as? AddCategoryViewController, let user = currentUser else { return }
+            destinationVC.categoryController = categoryController
+            destinationVC.currentUser = user
+        }
         
-        if let user = userController.currentUser {
-            let householdId = user.currentHouseholdId
-            categoryController.fetchCategories(householdId: householdId) { (categories, error) in
-                if let error = error {
-                    print(error)
-                    return
-                }
-                self.categories = categories
-            }
+        if segue.identifier == "ShowTasks" {
+            guard let destinationVC = segue.destination as? TasksTableViewController,
+            let index = categoriesTableView.indexPathForSelectedRow,
+            let categories = categories,
+            let user = currentUser,
+            let taskController = taskController
+            else { return }
+            
+            let category = categories[index.row]
+            
+            destinationVC.currentUser = user
+            destinationVC.category = category
+            destinationVC.taskController = taskController
         }
     }
     
@@ -39,7 +70,10 @@ class MainCategoriesViewController: UIViewController {
     @IBOutlet weak var categoriesLabel: UILabel!
     @IBOutlet weak var categoriesTableView: UITableView!
     
-    let userController = UserController()
+    var taskController: TaskController?
+    var userController: UserController?
+    var currentUser: User?
+    var householdController: HouseholdController?
     let categoryController = CategoryController()
     var categories: [Category]? {
         didSet {
@@ -57,11 +91,28 @@ extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = categoriesTableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         
         if let categories = categories {
             cell.textLabel?.text = categories[indexPath.row].name
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard let categories = categories else { return }
+            
+            let category = categories[indexPath.row]
+            
+            categoryController.delete(category: category) { (error) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                
+                self.fetchCategories()
+            }
+        }
     }
 }
