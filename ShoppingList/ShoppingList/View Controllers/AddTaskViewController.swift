@@ -24,9 +24,13 @@ class AddTaskViewController: UIViewController {
     // IBOutlets
     
     @IBAction func categoryTextField(_ sender: Any) {
+        
     }
+    
     @IBAction func taskTextField(_ sender: Any) {
     }
+    
+    
     
 
     /*
