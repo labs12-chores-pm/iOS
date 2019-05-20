@@ -12,6 +12,9 @@ class TaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        assigneeSearch.delegate = self
+        
+        guard let userController = userController else { return }
         
         if let task = task, let userId = task.assigneeIds.first {
             
@@ -24,6 +27,16 @@ class TaskViewController: UIViewController {
             }
         } else {
             updateViews()
+        }
+        
+        if let household = household {
+            userController.fetchUsers(inHousehold: household) { (members, error) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                self.householdMembers = members
+            }
         }
     }
     
@@ -67,6 +80,16 @@ class TaskViewController: UIViewController {
         } else {
             completeButton.setTitle("Create", for: .normal)
         }
+        if let searchResult = searchResult {
+            assigneeSearch.text = searchResult.name
+        } else {
+            if let task = task, let assigneeId = task.assigneeIds.first {
+                if let assignee = householdMembers?.filter({ $0.identifier == assigneeId }).first {
+                    self.searchResult = assignee
+                    self.assigneeSearch.text = assignee.name
+                }
+            }
+        }
     }
     
     @IBOutlet weak var completeButton: UIButton!
@@ -82,7 +105,19 @@ class TaskViewController: UIViewController {
     
     var category: Category?
     var taskController: TaskController?
-    var userController = UserController()
-    
+    var userController: UserController?
+    var household: Household?
     var assignee: User?
+    var householdMembers: [User]?
+    var searchResult: User?
+}
+
+extension TaskViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard let householdMembers = householdMembers else { return }
+        let searchResults = householdMembers.filter { $0.name.contains(searchText) }
+        self.searchResult = searchResults.first
+        self.updateViews()
+    }
 }
