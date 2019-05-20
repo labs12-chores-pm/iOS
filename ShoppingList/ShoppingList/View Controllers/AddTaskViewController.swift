@@ -13,21 +13,50 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
 
     // Load sample values
     
+    
     var sampleCategories = ["Kitchen", "Bathroom", "Dining Room", "Living Room" ,"Master Bedroom"]
     var sampleTask = ["Clean up", "Wipe Down", "Wash dishes", "Vaccum", ]
+    
+    // Properties
+    var categories: [Category]?
+    var userController: UserController?
+    var currentUser: User?
+    var householdController: HouseholdController?
+    var taskController = TaskController()
+    var categoryController = CategoryController()
+    
+    //∫???
+    // let tabBarController = TabViewViewController.self
+    
+    let mainCategoriesViewController = MainCategoriesViewController()
     
     // category reuse Identifier
     
     let reuseIdentifier = "searchCategoryCell"
     
+    var filteredResults : [String] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.categoryTableView.reloadData()
+            }
+        }
+    }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        fetchCategories()
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-      //  categoriesTableView.dataSource = self
-      //  categoriesTableView.delegate = self
+        categoryTableView.delegate = self
+        categoryTableView.dataSource = self
+        addCategoryTextField.delegate = self
+        
+        categoryTableView.rowHeight = UITableView.automaticDimension
         
         if let tabBar = self.tabBarController as? TabViewViewController {
             
@@ -38,8 +67,6 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         fetchCategories()
-        
-        
     }
     
     @objc func fetchCategories() {
@@ -51,19 +78,16 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
                 print(error)
                 return
             }
-            // ??
-            // self.categories = categories
+            self.categories = categories
         }
     }
     
     
     
-    
-    
-    
     // IBOutlets
     
-  
+    @IBOutlet weak var categoryTableView: UITableView!
+    
     @IBOutlet weak var addCategoryTextField: UITextField!
    
     @IBOutlet weak var addTextField: UITextField!
@@ -79,51 +103,57 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
     
     //  add the the TextField
     
-    // Properties
     
-    var userController: UserController?
-    var currentUser: User?
-    var householdController: HouseholdController?
-    var taskController = TaskController()
-    var categoryController = CategoryController()
-    
-    //∫???
-   // let tabBarController = TabViewViewController.self
-    
-    let mainCategoriesViewController = MainCategoriesViewController()
     
     // MARK: UITextFieldDelegate
     func textFieldDidEndEditing(_ textField: UITextField) {
-        // TODO: Your app can do something when textField finishes editing
-        print("The textField ended editing. Do something based on app requirements.")
+    
+        print("What whould you like to go here?")
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        guard let text = addCategoryTextField.text, let categories = categories else { return true }
+        let filteredResults = categories.filter{$0.name.lowercased().contains(text.lowercased())}
+        let filteredNames = filteredResults.compactMap { $0.name }
+        
+        self.filteredResults = filteredNames
+        
+        return true
+    }
     
     
     // Tableview protocols
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return filteredResults.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return sampleCategories.count // change to the fetched categories
-    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as UITableViewCell!
-    
-        cell.textLabel?.text = sampleCategories[indexPath.row]
-        cell.textLabel?.font = textField.text
+         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        print(cell)
+        cell.textLabel?.text = filteredResults[indexPath.row]
         
-    return cell
+        return cell
     }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        <#code#>
+        // Row selected, so set textField to relevant value, hide tableView
+        // endEditing can trigger some other action according to requirements
+        addCategoryTextField.text = filteredResults[indexPath.row]
+        tableView.isHidden = true
+        addCategoryTextField.endEditing(true)
     }
     
-    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.0
+    }
     
     
     /*
@@ -175,4 +205,5 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
 //            }
 //        }
 // }
+
 

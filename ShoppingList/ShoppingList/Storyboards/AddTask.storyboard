@@ -18,17 +18,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="FC8-1j-82L">
-                                <rect key="frame" x="87" y="118" width="240" height="258"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="67" translatesAutoresizingMaskIntoConstraints="NO" id="FC8-1j-82L">
+                                <rect key="frame" x="87" y="118" width="240" height="647"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BB-sN-b0f">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="29"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search or Add a Category" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hzT-Wi-05y">
-                                        <rect key="frame" x="0.0" y="46" width="240" height="28.5"/>
+                                        <rect key="frame" x="0.0" y="87.5" width="240" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -36,60 +37,65 @@
                                             <action selector="tappedCategoryTextField:" destination="ljQ-a4-7EZ" eventType="editingDidEnd" id="EpL-or-yYh"/>
                                         </connections>
                                     </textField>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zBK-nZ-Qzu">
-                                        <rect key="frame" x="0.0" y="91.5" width="240" height="29"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zBK-nZ-Qzu">
+                                        <rect key="frame" x="0.0" y="184.5" width="240" height="181"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="181" id="wNO-vK-uTA"/>
+                                        </constraints>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchCategoryCell" textLabel="ZoT-QN-NI3" style="IBUITableViewCellStyleDefault" id="5Pb-fz-hM9">
+                                                <rect key="frame" x="0.0" y="28" width="240" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5Pb-fz-hM9" id="fUz-Qg-Ptq">
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZoT-QN-NI3">
+                                                            <rect key="frame" x="16" y="0.0" width="208" height="43.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
                                         <connections>
                                             <outlet property="dataSource" destination="ljQ-a4-7EZ" id="AdD-PZ-jRI"/>
                                             <outlet property="delegate" destination="ljQ-a4-7EZ" id="STT-m6-BOO"/>
                                         </connections>
                                     </tableView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSQ-mq-uaG">
-                                        <rect key="frame" x="0.0" y="137.5" width="240" height="29"/>
+                                        <rect key="frame" x="0.0" y="432.5" width="240" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add Task" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ijq-gC-0bn">
-                                        <rect key="frame" x="0.0" y="183.5" width="240" height="28.5"/>
+                                        <rect key="frame" x="0.0" y="520" width="240" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJl-8Q-5lS">
-                                        <rect key="frame" x="0.0" y="229" width="240" height="29"/>
+                                        <rect key="frame" x="0.0" y="617" width="240" height="30"/>
                                         <state key="normal" title="Add Task"/>
                                         <connections>
                                             <action selector="addTaskButton:" destination="ljQ-a4-7EZ" eventType="touchUpInside" id="mrn-Py-FB8"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="aSQ-mq-uaG" secondAttribute="trailing" id="2Kz-tW-xfr"/>
-                                    <constraint firstAttribute="trailing" secondItem="QJl-8Q-5lS" secondAttribute="trailing" id="46L-zz-HyO"/>
-                                    <constraint firstItem="hzT-Wi-05y" firstAttribute="leading" secondItem="FC8-1j-82L" secondAttribute="leading" id="GZI-B5-DDk"/>
-                                    <constraint firstItem="Ijq-gC-0bn" firstAttribute="leading" secondItem="FC8-1j-82L" secondAttribute="leading" id="Txg-VT-64l"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ijq-gC-0bn" secondAttribute="trailing" id="Xf1-dn-cpp"/>
-                                    <constraint firstItem="QJl-8Q-5lS" firstAttribute="leading" secondItem="FC8-1j-82L" secondAttribute="leading" id="cDi-xG-4O3"/>
-                                    <constraint firstItem="aSQ-mq-uaG" firstAttribute="leading" secondItem="FC8-1j-82L" secondAttribute="leading" id="ohs-ki-S4E"/>
-                                    <constraint firstAttribute="trailing" secondItem="hzT-Wi-05y" secondAttribute="trailing" id="qlz-wa-7G5"/>
-                                    <constraint firstItem="2BB-sN-b0f" firstAttribute="leading" secondItem="FC8-1j-82L" secondAttribute="leading" id="szl-1J-T7E"/>
-                                    <constraint firstAttribute="trailing" secondItem="2BB-sN-b0f" secondAttribute="trailing" id="uQG-Fi-a19"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="FC8-1j-82L" firstAttribute="top" secondItem="WPa-D7-Nnx" secondAttribute="top" constant="74" id="Udf-wi-E6l"/>
-                            <constraint firstItem="FC8-1j-82L" firstAttribute="centerY" secondItem="gd5-Bi-LK4" secondAttribute="centerY" constant="-201" id="cna-rK-sd8"/>
-                            <constraint firstItem="FC8-1j-82L" firstAttribute="leading" secondItem="WPa-D7-Nnx" secondAttribute="leading" constant="87" id="ldb-dR-1OU"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="WPa-D7-Nnx"/>
                     </view>
                     <connections>
                         <outlet property="addCategoryTextField" destination="hzT-Wi-05y" id="QO8-kw-ysN"/>
                         <outlet property="addTextField" destination="Ijq-gC-0bn" id="Od8-bX-lrY"/>
-                        <outlet property="taskTextField" destination="hzT-Wi-05y" id="HQ4-Ot-6DQ"/>
+                        <outlet property="categoryTableView" destination="zBK-nZ-Qzu" id="8FN-E9-gjo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cWp-9U-zhY" userLabel="First Responder" sceneMemberID="firstResponder"/>
