@@ -21,25 +21,43 @@ class TasksTableViewController: UITableViewController {
             }
             
             if let tasks = tasks {
-                self.tasks = tasks
+                self.tasks = tasks.filter({ $0.isComplete == false })
+                self.completedTasks = tasks.filter({ $0.isComplete == true })
             }
         }
     }
 
     // MARK: - Table view data source
 
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return completedTasks == nil ? 1 : 2
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks?.count ?? 0
+        if section == 0 {
+           return tasks?.count ?? 0
+        } else {
+            return completedTasks?.count ?? 0
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        if section == 0 {
+            label.text = ""
+        } else {
+            label.text = "Completed"
+        }
+        return label
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
-        guard let tasks = tasks else { return cell }
-        let task = tasks[indexPath.row]
+        guard let tasks = tasks, let completedTasks = completedTasks else { return cell }
         
-        if task.isComplete == false {
-            cell.textLabel?.text = task.description
-        }
+        let task = indexPath.section == 0 ? tasks[indexPath.row] : completedTasks[indexPath.row]
+ 
+        cell.textLabel?.text = task.description
         
         return cell
     }
@@ -69,21 +87,28 @@ class TasksTableViewController: UITableViewController {
         if segue.identifier == "ShowTask" {
             guard let destinationVC = segue.destination as? TaskViewController,
             let index = self.tableView.indexPathForSelectedRow,
-            let tasks = tasks, let category = category else { return }
+            let tasks = tasks, let category = category, let household = household, let userController = userController,
+            let user = currentUser, let completedTasks = completedTasks else { return }
             
-            let task = tasks[index.row]
+            let task = index.section == 0 ? tasks[index.row] : completedTasks[index.row]
             
             destinationVC.taskController = taskController
             destinationVC.task = task
             destinationVC.category = category
+            destinationVC.household = household
+            destinationVC.userController = userController
+            destinationVC.currentUser = user
         }
         
         if segue.identifier == "AddTask" {
             guard let destinationVC = segue.destination as? TaskViewController,
-            let category = category else { return }
+            let category = category, let household = household, let userController = userController, let user = currentUser else { return }
             
             destinationVC.taskController = taskController
             destinationVC.category = category
+            destinationVC.household = household
+            destinationVC.userController = userController
+            destinationVC.currentUser = user
         }
     }
 
@@ -97,6 +122,9 @@ class TasksTableViewController: UITableViewController {
         }
     }
     
+    var completedTasks: [Task]?
+    
+    var userController: UserController?
     var currentUser: User?
     
     var taskController: TaskController? {
@@ -104,4 +132,6 @@ class TasksTableViewController: UITableViewController {
             getTasks()
         }
     }
+    
+    var household: Household?
 }

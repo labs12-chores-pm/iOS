@@ -41,6 +41,16 @@ class MainCategoriesViewController: UIViewController {
             }
             self.categories = categories
         }
+        
+        if let householdController = householdController {
+            householdController.fetchHousehold(householdId: householdId) { (household, error) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                self.household = household
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -55,7 +65,9 @@ class MainCategoriesViewController: UIViewController {
             let index = categoriesTableView.indexPathForSelectedRow,
             let categories = categories,
             let user = currentUser,
-            let taskController = taskController
+            let taskController = taskController,
+            let household = household,
+            let userController = userController
             else { return }
             
             let category = categories[index.row]
@@ -63,6 +75,8 @@ class MainCategoriesViewController: UIViewController {
             destinationVC.currentUser = user
             destinationVC.category = category
             destinationVC.taskController = taskController
+            destinationVC.household = household
+            destinationVC.userController = userController
         }
     }
     
@@ -82,6 +96,7 @@ class MainCategoriesViewController: UIViewController {
             }
         }
     }
+    var household: Household?
 }
 
 extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSource {
