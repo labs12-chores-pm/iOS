@@ -14,10 +14,7 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
     // Load sample values
     
     
-    
-    var sampleCategories = ["Kitchen", "Bathroom", "Dining Room", "Living Room" ,"Master Bedroom"]
-    var sampleTask = ["Clean up", "Wipe Down", "Wash dishes", "Vaccum", ]
-    
+
     // Properties
     var categories: [Category]?
     var userController: UserController?
