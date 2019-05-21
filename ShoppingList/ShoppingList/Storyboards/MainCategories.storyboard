@@ -80,7 +80,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="n0W-2g-Ydt"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Home" id="Eon-SF-7Vh"/>
                     <navigationItem key="navigationItem" id="gEb-CJ-auc"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addCategoryButton" destination="GuG-Z9-puT" id="dxU-Sd-S7O"/>
                         <outlet property="categoriesLabel" destination="BqN-q9-5xN" id="OXl-cf-QMB"/>

@@ -262,6 +262,39 @@ class UserController {
         }
     }
     
+    func fetchUsers(inHousehold household: Household, completion: @escaping ([User]?, Error?) -> Void) {
+        
+        let usersURL = baseURL.appendingPathComponent("users").appendingPathExtension("json")
+        let request = URLRequest(url: usersURL)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            
+            if let error = error {
+                print(error)
+                completion(nil, NetworkError.urlSession)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data")
+                completion(nil, NetworkError.dataMissing)
+                return
+            }
+            
+            do {
+                let usersResponse = try JSONDecoder().decode([String: User].self, from: data)
+                let userValues = usersResponse.compactMap({ $0.value })
+                let usersInHousehold = userValues.filter({ household.memberIds.contains($0.identifier) })
+                completion(usersInHousehold, nil)
+            } catch {
+                completion(nil, NetworkError.decodingData)
+            }
+            return
+        }
+        
+        task.resume()
+    }
+    
     func fetchUser(userId: UUID, completion: @escaping (User?, Error?) -> Void) {
         
         let usersURL = baseURL.appendingPathComponent("users")

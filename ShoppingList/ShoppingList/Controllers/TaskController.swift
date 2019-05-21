@@ -19,18 +19,21 @@ class TaskController {
     }
     
     
-    func updateTask(task: Task , description: String?, categoryId: UUID? = nil, assignIds: [UUID]? = nil, dueDate: Date? = nil, notes: [Note]? = nil, isComplete: Bool = false) {
+    func updateTask(task: Task , description: String? = nil, categoryId: UUID? = nil, assignIds: [UUID]? = nil, dueDate: Date? = nil, notes: [Note]? = nil, isComplete: Bool = false, recurrence: Recurrence? = nil, isPending: Bool = false) {
         
         var taskCopy = task
         
-        taskCopy.description = description ?? taskCopy.description
+        taskCopy.description = description ?? task.description
         
         if let assigneeIds = assignIds {
             taskCopy.assigneeIds = task.assigneeIds + assigneeIds
         }
         
+        taskCopy.recurrence = recurrence ?? task.recurrence
         taskCopy.dueDate = dueDate ?? taskCopy.dueDate
         taskCopy.notes = notes ?? taskCopy.notes
+        taskCopy.isPending = isPending
+        taskCopy.isComplete = isComplete
        
         put(task: taskCopy)
         
@@ -93,10 +96,7 @@ class TaskController {
             
             do {
                 let tasksResponse = try JSONDecoder().decode([String: Task].self, from: data)
-                var tasks: [Task] = []
-                for task in tasksResponse {
-                    tasks.append(task.value)
-                }
+                let tasks = tasksResponse.compactMap({ $0.value })
                 let tasksInCategory = tasks.filter({ $0.categoryId == categoryId })
                 completion(tasksInCategory, nil)
             } catch {
