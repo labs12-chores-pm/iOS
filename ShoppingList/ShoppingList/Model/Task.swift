@@ -8,27 +8,38 @@
 
 import Foundation
 
+enum Recurrence: Int, Codable {
+    case once = 0
+    case weekly = 1
+    case monthly = 2
+    case yearly = 3
+}
+
 struct Task: Codable, Equatable {
     var description: String
     let categoryId: UUID
     var assigneeIds: [UUID]
     var dueDate: Date
+    var recurrence: Recurrence
     var notes: [Note]
     let identifier: UUID
     var isComplete: Bool
+    var isPending: Bool
     
     static func == (lhs: Task, rhs: Task) -> Bool {
         return lhs.description == rhs.description &&
         lhs.assigneeIds == rhs.assigneeIds &&
         lhs.dueDate == rhs.dueDate &&
-        lhs.isComplete == rhs.isComplete
+        lhs.isComplete == rhs.isComplete &&
+        lhs.recurrence == rhs.recurrence &&
+        lhs.isPending == rhs.isPending
     }
     
     enum CodingKeys: String, CodingKey {
-        case description, categoryId, assigneeIds, dueDate, notes, identifier, isComplete
+        case description, categoryId, assigneeIds, dueDate, notes, identifier, isComplete, recurrence, isPending
     }
     
-    init(description: String, categoryId: UUID, assigneeIds: [UUID]?, dueDate: Date, notes: [Note]?) {
+    init(description: String, categoryId: UUID, assigneeIds: [UUID]?, dueDate: Date, notes: [Note]?, recurrence: Recurrence = .once) {
         self.description = description
         self.categoryId = categoryId
         self.assigneeIds = assigneeIds ?? []
@@ -36,6 +47,26 @@ struct Task: Codable, Equatable {
         self.notes = notes ?? []
         self.identifier = UUID()
         self.isComplete = false
+        self.recurrence = recurrence
+        self.isPending = false
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(description, forKey: .description)
+        try container.encode(categoryId, forKey: .categoryId)
+        var assigneesContainer = container.nestedUnkeyedContainer(forKey: .assigneeIds)
+        for assignee in assigneeIds {
+            try assigneesContainer.encode(assignee.uuidString)
+        }
+        try container.encode(dueDate, forKey: .dueDate)
+        try container.encode(recurrence.rawValue, forKey: .recurrence)
+        try container.encode(notes, forKey: .notes)
+        try container.encode(identifier, forKey: .identifier)
+        try container.encode(isComplete, forKey: .isComplete)
+        try container.encode(isPending, forKey: .isPending)
     }
     
     init(from decoder: Decoder) throws {
@@ -46,15 +77,14 @@ struct Task: Codable, Equatable {
         let categoryIdString = try container.decode(String.self, forKey: .categoryId)
         let categoryId = UUID(uuidString: categoryIdString)!
         
-        let assigneeIdsStrings = try container.decodeIfPresent([String].self, forKey: .assigneeIds)
+        var assigneeIdsContainer = try container.nestedUnkeyedContainer(forKey: .assigneeIds)
         
-        if let assigneeIdsStrings = assigneeIdsStrings {
-            var assignees: [UUID] = []
-            for assignee in assigneeIdsStrings {
-                if let uuid = UUID(uuidString: assignee) {
-                    assignees += [uuid]
-                }
-            }
+        var assigneeIds: [UUID] = []
+        
+        while !assigneeIdsContainer.isAtEnd {
+            let idString = try assigneeIdsContainer.decode(String.self)
+            guard let id = UUID(uuidString: idString) else { continue }
+            assigneeIds.append(id)
         }
         
         let dueDateDouble = try container.decode(Double.self, forKey: .dueDate)
@@ -74,12 +104,19 @@ struct Task: Codable, Equatable {
         
         let isComplete = try container.decode(Bool.self, forKey: .isComplete)
         
+        let recurrenceValue = try container.decodeIfPresent(Int.self, forKey: .recurrence)
+        let recurrence = Recurrence.init(rawValue: recurrenceValue ?? 0)!
+        
+        let isPending = try container.decodeIfPresent(Bool.self, forKey: .isPending)
+        
         self.description = description
         self.categoryId = categoryId
-        self.assigneeIds = []
+        self.assigneeIds = assigneeIds
         self.dueDate = dueDate
         self.notes = []
         self.identifier = identifier
         self.isComplete = isComplete
+        self.recurrence = recurrence
+        self.isPending = isPending ?? false
     }
 }

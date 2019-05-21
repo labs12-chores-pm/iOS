@@ -17,18 +17,20 @@ class TaskController {
     }
     
     
-    func updateTask(task: Task , description: String?, categoryId: UUID? = nil, assignIds: [UUID]? = nil, dueDate: Date? = nil, notes: [Note]? = nil, isComplete: Bool = false) {
+    func updateTask(task: Task , description: String? = nil, categoryId: UUID? = nil, assignIds: [UUID]? = nil, dueDate: Date? = nil, notes: [Note]? = nil, isComplete: Bool = false, recurrence: Recurrence? = nil, isPending: Bool = false) {
         
         var taskCopy = task
         
-        taskCopy.description = description ?? taskCopy.description
+        taskCopy.description = description ?? task.description
         
         if let assigneeIds = assignIds {
             taskCopy.assigneeIds = task.assigneeIds + assigneeIds
         }
         
+        taskCopy.recurrence = recurrence ?? task.recurrence
         taskCopy.dueDate = dueDate ?? taskCopy.dueDate
         taskCopy.notes = notes ?? taskCopy.notes
+        taskCopy.isPending = isPending
        
         put(task: taskCopy)
         

@@ -10,9 +10,41 @@ import Foundation
 
 class NotesController {
     
-    func createNote(text: String, memberId: UUID, taskId: UUID) {
+    func createNote(text: String, memberId: UUID, taskId: UUID) -> Note {
         let newNote = Note(text: text, memberId: memberId, date: Date(), taskId: taskId, identifier: UUID())
         put(note: newNote)
+        return newNote
+    }
+    
+    func fetchNotes(taskId: UUID, completion: @escaping ([Note]?, Error?) -> Void) {
+        
+        let notesURL = baseURL.appendingPathComponent("notes").appendingPathExtension("json")
+        
+        let task = URLSession.shared.dataTask(with: notesURL) { (data, _, error) in
+            if let error = error {
+                print(error)
+                completion(nil, NetworkError.urlSession)
+                return
+            }
+            
+            guard let data = data else {
+                print(NetworkError.dataMissing)
+                completion(nil, NetworkError.dataMissing)
+                return
+            }
+            
+            do {
+                let notesResponse = try JSONDecoder().decode([String: Note].self, from: data)
+                let allNotes = notesResponse.map({ $0.value })
+                let taskNotes = allNotes.filter({ $0.taskId == taskId })
+                completion(taskNotes, nil)
+            } catch {
+                completion(nil, NetworkError.decodingData)
+            }
+            return
+        }
+        
+        task.resume()
     }
     
     private func put(note: Note, completion: @escaping (Error?) -> Void = {_ in }) {
@@ -43,5 +75,5 @@ class NotesController {
         task.resume()
     }
     
-    let baseURL = URL(string: "https://my-json-server.typicode.com/ryanboris/mockiosserver")!
+    let baseURL = URL(string: "https://test-6f4fe.firebaseio.com/")!
 }

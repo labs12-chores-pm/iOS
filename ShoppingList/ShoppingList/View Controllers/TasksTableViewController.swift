@@ -69,7 +69,8 @@ class TasksTableViewController: UITableViewController {
         if segue.identifier == "ShowTask" {
             guard let destinationVC = segue.destination as? TaskViewController,
             let index = self.tableView.indexPathForSelectedRow,
-            let tasks = tasks, let category = category, let household = household, let userController = userController else { return }
+            let tasks = tasks, let category = category, let household = household, let userController = userController,
+            let user = currentUser else { return }
             
             let task = tasks[index.row]
             
@@ -78,16 +79,18 @@ class TasksTableViewController: UITableViewController {
             destinationVC.category = category
             destinationVC.household = household
             destinationVC.userController = userController
+            destinationVC.currentUser = user
         }
         
         if segue.identifier == "AddTask" {
             guard let destinationVC = segue.destination as? TaskViewController,
-            let category = category, let household = household, let userController = userController else { return }
+            let category = category, let household = household, let userController = userController, let user = currentUser else { return }
             
             destinationVC.taskController = taskController
             destinationVC.category = category
             destinationVC.household = household
             destinationVC.userController = userController
+            destinationVC.currentUser = user
         }
     }
 
