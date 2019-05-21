@@ -77,21 +77,25 @@ struct Task: Codable, Equatable {
         let categoryIdString = try container.decode(String.self, forKey: .categoryId)
         let categoryId = UUID(uuidString: categoryIdString)!
         
-        var assigneeIdsContainer = try container.nestedUnkeyedContainer(forKey: .assigneeIds)
+        let assigneeIdsContainer = try container.decodeIfPresent([String].self, forKey: .assigneeIds)
         
         var assigneeIds: [UUID] = []
         
-        while !assigneeIdsContainer.isAtEnd {
-            let idString = try assigneeIdsContainer.decode(String.self)
-            guard let id = UUID(uuidString: idString) else { continue }
-            assigneeIds.append(id)
+        if let assigneeIdsContainer = assigneeIdsContainer {
+            
+//            let assigneeValues = assigneeIdsContainer.compactMap { $0.value }
+            
+            for assignee in assigneeIdsContainer {
+                let id = UUID(uuidString: assignee)!
+                assigneeIds.append(id)
+            }
         }
         
         let dueDateDouble = try container.decode(Double.self, forKey: .dueDate)
         let dueDate = Date(timeIntervalSince1970: dueDateDouble)
         
         let notesGroup = try container.decodeIfPresent([String: Note].self, forKey: .notes)
-        
+
         if let notesGroup = notesGroup {
             var notes: [Note] = []
             for note in notesGroup {

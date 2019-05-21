@@ -20,7 +20,9 @@ class TaskViewController: UIViewController {
         notesTableView.dataSource = self
         notesTableView.delegate = self
         
-        guard let userController = userController else { return }
+        guard let userController = userController, let currentUser = currentUser, let household = household else { return }
+        
+        self.hasAdminAccess = household.adminIds.contains(currentUser.identifier) ? true : false
         
         if let task = task, let userId = task.assigneeIds.first {
             
@@ -40,43 +42,37 @@ class TaskViewController: UIViewController {
             updateViews()
         }
         
-        if let household = household {
-            userController.fetchUsers(inHousehold: household) { (members, error) in
-                if let error = error {
-                    print(error)
-                    return
-                }
-                self.householdMembers = members
+        userController.fetchUsers(inHousehold: household) { (members, error) in
+            if let error = error {
+                print(error)
+                return
             }
+            self.householdMembers = members
         }
     }
     
     @IBAction func completeButtonWasTapped(_ sender: UIButton) {
         guard let description = descriptionField.text,
-            let taskController = taskController, let household = household, let currentUser = currentUser else { return }
+            let taskController = taskController, let hasAdminAccess = hasAdminAccess else { return }
         
-        if household.adminIds.contains(currentUser.identifier) {
+        if hasAdminAccess {
             if let task = task {
                 
-                var assigneeId: [UUID]!
+                var ids: [UUID] = []
                 if let assignee = assignee {
-                    assigneeId = [assignee.identifier]
-                } else {
-                    assigneeId = []
+                    ids.append(assignee.identifier)
                 }
                 
-                taskController.updateTask(task: task, description: description, assignIds: assigneeId, dueDate: dueDatePicker.date)
+                taskController.updateTask(task: task, description: description, assignIds: ids, dueDate: dueDatePicker.date, isComplete: true, isPending: false)
             } else {
                 guard let categoryId = category?.identifier else { return }
                 
-                var assigneeId: [UUID]!
+                var ids: [UUID] = []
                 if let assignee = assignee {
-                    assigneeId = [assignee.identifier]
-                } else {
-                    assigneeId = []
+                    ids.append(assignee.identifier)
                 }
                 
-                taskController.createTask(description: description, categoryId: categoryId, assineeIds: assigneeId, dueDate: dueDatePicker.date, notes: [], isComplete: false)
+                taskController.createTask(description: description, categoryId: categoryId, assineeIds: ids, dueDate: dueDatePicker.date, notes: [], isComplete: false)
             }
         } else {
             guard let task = task else { return }
@@ -117,14 +113,28 @@ class TaskViewController: UIViewController {
             descriptionField.text = task.description
             dueDatePicker.date = task.dueDate
             recurrencePicker.selectRow(task.recurrence.rawValue, inComponent: 0, animated: true)
-            if task.isPending {
+            if task.isPending && !task.isComplete {
                 completeButton.setTitle("Pending Approval", for: .normal)
+            } else if task.isComplete {
+                completeButton.setTitle("Task Complete!", for: .normal)
+                completeButton.isEnabled = false
+                descriptionField.isEnabled = false
+                dueDatePicker.isEnabled = false
+                recurrencePicker.isUserInteractionEnabled = false
+                assigneeSearch.isUserInteractionEnabled = false
             } else {
                 completeButton.setTitle("Complete", for: .normal)
             }
         } else {
             completeButton.setTitle("Create", for: .normal)
             recurrencePicker.selectRow(0, inComponent: 0, animated: true)
+        }
+        
+        if hasAdminAccess == false {
+            descriptionField.isEnabled = false
+            dueDatePicker.isEnabled = false
+            recurrencePicker.isUserInteractionEnabled = false
+            assigneeSearch.isUserInteractionEnabled = false
         }
         
         self.setNotes()
@@ -163,6 +173,8 @@ class TaskViewController: UIViewController {
     var householdMembers: [User]?
     var currentUser: User?
     let notesController = NotesController()
+    
+    var hasAdminAccess: Bool?
 
     @IBOutlet weak var taskScrollView: UIScrollView!
     
@@ -180,7 +192,7 @@ class TaskViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.notesTableView.reloadData()
-                if self.notes?.count != 0 {
+                if self.notes?.count != 0 && self.notes?.count != nil {
                     let last = self.notes!.count - 1
                     self.notesTableView.scrollToRow(at: IndexPath(row: last, section: 0), at: .bottom, animated: true)
                 }

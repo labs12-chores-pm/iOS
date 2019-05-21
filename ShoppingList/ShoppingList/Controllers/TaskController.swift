@@ -31,6 +31,7 @@ class TaskController {
         taskCopy.dueDate = dueDate ?? taskCopy.dueDate
         taskCopy.notes = notes ?? taskCopy.notes
         taskCopy.isPending = isPending
+        taskCopy.isComplete = isComplete
        
         put(task: taskCopy)
         
@@ -93,10 +94,7 @@ class TaskController {
             
             do {
                 let tasksResponse = try JSONDecoder().decode([String: Task].self, from: data)
-                var tasks: [Task] = []
-                for task in tasksResponse {
-                    tasks.append(task.value)
-                }
+                let tasks = tasksResponse.compactMap({ $0.value })
                 let tasksInCategory = tasks.filter({ $0.categoryId == categoryId })
                 completion(tasksInCategory, nil)
             } catch {
