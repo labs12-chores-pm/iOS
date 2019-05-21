@@ -10,26 +10,18 @@ import UIKit
 
 class AddTaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
    
-
-    // Load sample values
-    
-    
-
     // Properties
     var categories: [Category]?
     var userController: UserController?
     var currentUser: User?
     var householdController: HouseholdController?
-    var taskController = TaskController()
-    var categoryController = CategoryController()
+    var taskController : TaskController?
+    var categoryController : CategoryController?
     
     var task : Task?
     var catID : UUID?
     var category : Category?
     var household : Household?
-    
-    //∫???
-    // let tabBarController = TabViewViewController.self
     
     let mainCategoriesViewController = MainCategoriesViewController()
     
@@ -93,7 +85,7 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
         // Test Code
         guard let user = currentUser else { return }
         let householdId = user.currentHouseholdId
-        categoryController.fetchCategories(householdId: householdId) { (categories, error) in
+        categoryController?.fetchCategories(householdId: householdId) { (categories, error) in
             if let error = error {
                 print(error)
                 return
@@ -113,7 +105,7 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
                   let name = addCategoryTextField.text else { return }
             let householdId = user.currentHouseholdId
            
-            self.category = categoryController.createCategory(householdId: householdId, name: name)
+            self.category = categoryController?.createCategory(householdId: householdId, name: name)
         }
         
         
@@ -138,7 +130,7 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
               let categoryID = catID
                else { return }
         
-        self.task = taskController.createTask(description: addTask, categoryId: categoryID, assineeIds: [], dueDate: Date(), isComplete: false)
+        self.task = taskController?.createTask(description: addTask, categoryId: categoryID, assineeIds: [], dueDate: Date(), isComplete: false)
         
        performSegue(withIdentifier: "back2task", sender: self)
         
@@ -217,9 +209,9 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
             destinationVC.taskController = taskController
             destinationVC.task = task
             destinationVC.category = category
-            //destinationVC.household = household
+            destinationVC.household = household
             destinationVC.userController = userController
-            //destinationVC.currentUser = currentUser
+            destinationVC.currentUser = currentUser
         }
         
     }
