@@ -14,6 +14,7 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
     // Load sample values
     
     
+    
     var sampleCategories = ["Kitchen", "Bathroom", "Dining Room", "Living Room" ,"Master Bedroom"]
     var sampleTask = ["Clean up", "Wipe Down", "Wash dishes", "Vaccum", ]
     
@@ -25,6 +26,11 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
     var taskController = TaskController()
     var categoryController = CategoryController()
     
+    var task : Task?
+    var catID : UUID?
+    var category : Category?
+    var household : Household?
+    
     //∫???
     // let tabBarController = TabViewViewController.self
     
@@ -34,7 +40,7 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
     
     let reuseIdentifier = "searchCategoryCell"
     
-    var filteredResults : [String] = [] {
+    var filteredResults : [Category] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.categoryTableView.reloadData()
@@ -59,14 +65,31 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
         categoryTableView.rowHeight = UITableView.automaticDimension
         
         if let tabBar = self.tabBarController as? TabViewViewController {
-            
+        
             self.taskController = tabBar.taskController
             self.currentUser = tabBar.currentUser
             self.householdController = tabBar.householdController
             self.userController = tabBar.userController
+            
+            
         }
         
+        if let householdController = householdController, let user = currentUser {
+            householdController.fetchHousehold(householdId: user.currentHouseholdId) { (household, error) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                self.household = household
+            }
+        }
+    
         fetchCategories()
+        print(categories)
+        
+        
+        
+        
     }
     
     @objc func fetchCategories() {
@@ -83,6 +106,21 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
+    func checkCategory() {
+        // check inside the filtered category
+        if let category = filteredResults.first {
+            self.catID = category.identifier
+            self.category = category
+        } else {
+            guard let user = currentUser,
+                  let name = addCategoryTextField.text else { return }
+            let householdId = user.currentHouseholdId
+           
+            self.category = categoryController.createCategory(householdId: householdId, name: name)
+        }
+        
+        
+    }
     
     // IBOutlets
     
@@ -90,15 +128,25 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBOutlet weak var addCategoryTextField: UITextField!
    
-    @IBOutlet weak var addTextField: UITextField!
+    @IBOutlet weak var addTaskTextField: UITextField!
     
     @IBAction func tappedCategoryTextField(_ sender: Any) {
     }
     
     @IBAction func addTaskButton(_ sender: Any) {
+        
+        checkCategory()
+        
+        guard let addTask = addTaskTextField.text ,
+              let categoryID = catID
+               else { return }
+        
+        self.task = taskController.createTask(description: addTask, categoryId: categoryID, assineeIds: [], dueDate: Date(), isComplete: false)
+        
+       performSegue(withIdentifier: "back2task", sender: self)
+        
+    
     }
-    
-    
     
     
     //  add the the TextField
@@ -109,6 +157,7 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
     func textFieldDidEndEditing(_ textField: UITextField) {
     
         print("What whould you like to go here?")
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -120,9 +169,9 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
         
         guard let text = addCategoryTextField.text, let categories = categories else { return true }
         let filteredResults = categories.filter{$0.name.lowercased().contains(text.lowercased())}
-        let filteredNames = filteredResults.compactMap { $0.name }
+        //let filteredNames = filteredResults.compactMap { $0.name }
         
-        self.filteredResults = filteredNames
+        self.filteredResults = filteredResults
         
         return true
     }
@@ -137,7 +186,7 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         print(cell)
-        cell.textLabel?.text = filteredResults[indexPath.row]
+        cell.textLabel?.text = filteredResults[indexPath.row].name
         
         return cell
     }
@@ -146,64 +195,42 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Row selected, so set textField to relevant value, hide tableView
         // endEditing can trigger some other action according to requirements
-        addCategoryTextField.text = filteredResults[indexPath.row]
-        tableView.isHidden = true
+        addCategoryTextField.text = filteredResults[indexPath.row].name
+        categoryTableView.isHidden = true
         addCategoryTextField.endEditing(true)
     }
+    
+    // perform segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "back2task" {
+            guard let destinationVC = segue.destination as? TaskViewController,
+                  let task = task,
+                  let category = category,
+                  let currentUser = currentUser,
+                  let household = household,
+            let userController = userController else {return}
+            
+            
+           
+            print(task)
+            print(category)
+            
+        
+            destinationVC.taskController = taskController
+            destinationVC.task = task
+            destinationVC.category = category
+            //destinationVC.household = household
+            destinationVC.userController = userController
+            //destinationVC.currentUser = currentUser
+        }
+        
+    }
+    
+    
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.0
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    
-    
-    
-    
-    
 }
-
-//
-// extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSource {
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return categories?.count ?? 0
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-//
-//        if let categories = categories {
-//            cell.textLabel?.text = categories[indexPath.row].name
-//        }
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            guard let categories = categories else { return }
-//
-//            let category = categories[indexPath.row]
-//
-//            categoryController.delete(category: category) { (error) in
-//                if let error = error {
-//                    print(error)
-//                    return
-//                }
-//
-//                self.fetchCategories()
-//            }
-//        }
-// }
-
 

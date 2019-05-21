@@ -10,10 +10,12 @@ import Foundation
 
 class TaskController {
     
-    func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, notes: [Note] = [] , isComplete: Bool) {
+    @discardableResult func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, notes: [Note] = [] , isComplete: Bool) -> Task {
         
         let task = Task(description: description, categoryId: categoryId, assigneeIds: assineeIds, dueDate: dueDate, notes: notes)
         put(task: task)
+        
+        return task
     }
     
     
