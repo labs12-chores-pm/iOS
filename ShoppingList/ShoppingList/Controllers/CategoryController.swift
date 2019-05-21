@@ -12,9 +12,11 @@ class CategoryController {
     
     // CRUD
     // Tasks vs Task ?? (Naming)
-    func createCategory(householdId: UUID, name: String) {
+    @discardableResult func createCategory(householdId: UUID, name: String) -> Category {
         let category = Category(tasks: nil, householdId: householdId, name: name)
         put(category: category)
+        
+        return category
     }
     
     func updateCategory(category: Category, tasks: [Task]?, householdId: UUID? = nil, name: String? = nil ) {

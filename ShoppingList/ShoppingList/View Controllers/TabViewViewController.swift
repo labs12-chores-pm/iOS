@@ -23,4 +23,5 @@ class TabViewViewController: UITabBarController {
     var currentUser: User?
     var householdController: HouseholdController?
     let taskController = TaskController()
+    let categoryController = CategoryController()
 }
