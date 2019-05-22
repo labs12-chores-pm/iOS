@@ -64,7 +64,7 @@
 		960FBF68221C31E60076C662 /* AboutShopTrakTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960FBF67221C31E60076C662 /* AboutShopTrakTableViewController.swift */; };
 		960FBF6B221C41570076C662 /* MessagePopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 960FBF6A221C41570076C662 /* MessagePopoverView.xib */; };
 		960FBF6D221C427A0076C662 /* MessagePopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960FBF6C221C427A0076C662 /* MessagePopoverView.swift */; };
-		96476B512215D41300E57EB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96476B4D2215D41300E57EB9 /* LaunchScreen.storyboard */; };
+		96476B512215D41300E57EB9 /* LaunchScreen1.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96476B4D2215D41300E57EB9 /* LaunchScreen1.storyboard */; };
 		9663C6842231CF400019FCED /* NoItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9663C6832231CF400019FCED /* NoItemsView.swift */; };
 		9663C6882231D4880019FCED /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9663C6862231D4880019FCED /* ItemTableViewCell.swift */; };
 		9663C6892231D4880019FCED /* ItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9663C6872231D4880019FCED /* ItemTableViewCell.xib */; };
@@ -164,7 +164,7 @@
 		960FBF6A221C41570076C662 /* MessagePopoverView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessagePopoverView.xib; sourceTree = "<group>"; };
 		960FBF6C221C427A0076C662 /* MessagePopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePopoverView.swift; sourceTree = "<group>"; };
 		96476B482215D40700E57EB9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		96476B4E2215D41300E57EB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		96476B4E2215D41300E57EB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen1.storyboard; sourceTree = "<group>"; };
 		9663C6832231CF400019FCED /* NoItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoItemsView.swift; sourceTree = "<group>"; };
 		9663C6862231D4880019FCED /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		9663C6872231D4880019FCED /* ItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemTableViewCell.xib; sourceTree = "<group>"; };
@@ -393,7 +393,7 @@
 				771D344A228CAEC700C8BA13 /* GoogleService-Info.plist */,
 				77F678C5228B37C2005C7C94 /* CoreDataStack.swift */,
 				96476B482215D40700E57EB9 /* Info.plist */,
-				96476B4D2215D41300E57EB9 /* LaunchScreen.storyboard */,
+				96476B4D2215D41300E57EB9 /* LaunchScreen1.storyboard */,
 				443C1B4D221B628D00220C28 /* Auth0.plist */,
 			);
 			path = Resources;
@@ -610,7 +610,7 @@
 				771D343B228C654000C8BA13 /* Household.storyboard in Resources */,
 				471BCA082295E3940056194D /* FBGoogleAuth.storyboard in Resources */,
 				96029A44223189D500F7F7AE /* NoItemsView.xib in Resources */,
-				96476B512215D41300E57EB9 /* LaunchScreen.storyboard in Resources */,
+				96476B512215D41300E57EB9 /* LaunchScreen1.storyboard in Resources */,
 				96CBFBEB22285A7700A6B41E /* NewGroupPopoverView.xib in Resources */,
 				96DE3035221637FE00213C3E /* LoginViewController.storyboard in Resources */,
 				96700E2E221C025E00F084B3 /* SettingsTableViewController.storyboard in Resources */,
@@ -785,12 +785,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		96476B4D2215D41300E57EB9 /* LaunchScreen.storyboard */ = {
+		96476B4D2215D41300E57EB9 /* LaunchScreen1.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				96476B4E2215D41300E57EB9 /* Base */,
 			);
-			name = LaunchScreen.storyboard;
+			name = LaunchScreen1.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

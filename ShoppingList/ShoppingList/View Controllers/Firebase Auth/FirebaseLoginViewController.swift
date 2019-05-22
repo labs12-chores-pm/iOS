@@ -79,11 +79,33 @@ extension UIViewController: FUIAuthDelegate {
             return
         }
         
-        // var providers: [FUIAuthProvider] = [FUIEmailAuth()]
-        
+      
         // you can access the UI
         
-        // authDataResult?.user.uid
+        let userID = authDataResult?.user.uid
+        print("This is the UserID \(userID)")
+        
+        let metaData = authDataResult?.user.metadata
+        print("This is the User's Meta Data \(metaData)")
+        
+        
+        // Grab the token
+        
+        let currentUser = Auth.auth().currentUser
+        currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
+            if let error = error {
+            print("This is the error \(error)")
+                return;
+            }
+            
+            print("this is the usser's token \(idToken)")
+            
+            
+            // Send token to your backend via HTTPS
+            // ...
+        }
+        
+        
         
         let mainStoryboard = UIStoryboard(name: "TabView", bundle: .main)
         let categoriesVC = mainStoryboard.instantiateViewController(withIdentifier: "TabViewViewController")
