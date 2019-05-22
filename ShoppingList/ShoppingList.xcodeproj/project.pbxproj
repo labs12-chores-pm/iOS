@@ -30,6 +30,7 @@
 		47E3FCA7228E782200A1CECE /* FirebaseLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47E3FCA6228E782200A1CECE /* FirebaseLogin.storyboard */; };
 		47F0A97022931E9500AF2EA9 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */; };
 		47F0A97222931EAC00AF2EA9 /* AddTask.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F0A97122931EAC00AF2EA9 /* AddTask.storyboard */; };
+		770271312295FBBE002134A2 /* AppearanceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770271302295FBBE002134A2 /* AppearanceHelper.swift */; };
 		771D343B228C654000C8BA13 /* Household.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 771D343A228C654000C8BA13 /* Household.storyboard */; };
 		771D3440228C775F00C8BA13 /* HouseholdUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D343E228C775F00C8BA13 /* HouseholdUserTableViewCell.swift */; };
 		771D3443228C7B7F00C8BA13 /* Roles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D3442228C7B7F00C8BA13 /* Roles.swift */; };
@@ -124,6 +125,9 @@
 		47E3FCA6228E782200A1CECE /* FirebaseLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FirebaseLogin.storyboard; sourceTree = "<group>"; };
 		47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		47F0A97122931EAC00AF2EA9 /* AddTask.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddTask.storyboard; sourceTree = "<group>"; };
+		770271302295FBBE002134A2 /* AppearanceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceHelper.swift; sourceTree = "<group>"; };
+		770271322295FE82002134A2 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
+		770271332295FE82002134A2 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		771D343A228C654000C8BA13 /* Household.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Household.storyboard; sourceTree = "<group>"; };
 		771D343E228C775F00C8BA13 /* HouseholdUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdUserTableViewCell.swift; sourceTree = "<group>"; };
 		771D3442228C7B7F00C8BA13 /* Roles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roles.swift; sourceTree = "<group>"; };
@@ -394,12 +398,15 @@
 		969A83C02215C94F0003BB37 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				770271332295FE82002134A2 /* Nunito-Bold.ttf */,
+				770271322295FE82002134A2 /* Nunito-Regular.ttf */,
 				771D344A228CAEC700C8BA13 /* GoogleService-Info.plist */,
 				77F678C5228B37C2005C7C94 /* CoreDataStack.swift */,
 				96476B482215D40700E57EB9 /* Info.plist */,
 				96476B4F2215D41300E57EB9 /* Assets.xcassets */,
 				96476B4D2215D41300E57EB9 /* LaunchScreen.storyboard */,
 				443C1B4D221B628D00220C28 /* Auth0.plist */,
+				770271302295FBBE002134A2 /* AppearanceHelper.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -698,6 +705,7 @@
 				77C645BB22948F710030AD34 /* MessagesTableViewController.swift in Sources */,
 				47F0A97022931E9500AF2EA9 /* AddTaskViewController.swift in Sources */,
 				96CBFBED22285E7200A6B41E /* NewGroupPopoverView.swift in Sources */,
+				770271312295FBBE002134A2 /* AppearanceHelper.swift in Sources */,
 				44A16810223820DC00227DFB /* BarcodeScannerController.swift in Sources */,
 				473D56852295B1B600C1CFF4 /* AlertExtension.swift in Sources */,
 				77CABBD7228BAC98000E00A3 /* HouseholdViewController.swift in Sources */,

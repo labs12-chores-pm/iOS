@@ -40,7 +40,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>We need to access your camera for scanning QR code</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>"We need access to your photos to update your profile picture" </string>
+	<string>&quot;We need access to your photos to update your profile picture&quot; </string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -66,6 +66,11 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Nunito-Bold.ttf</string>
+		<string>Nunito-Regular.ttf</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
