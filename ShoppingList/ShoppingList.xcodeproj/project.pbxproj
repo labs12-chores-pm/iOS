@@ -322,11 +322,8 @@
 				776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */,
 				7721FE4A228E098200334208 /* MainCategories.storyboard */,
 				773DC4AF228EEB0F00EB3121 /* Tasks.storyboard */,
-<<<<<<< HEAD
 				77C645B822948EE80030AD34 /* Messages.storyboard */,
-=======
 				47F0A97122931EAC00AF2EA9 /* AddTask.storyboard */,
->>>>>>> master
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
