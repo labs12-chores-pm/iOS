@@ -72,18 +72,18 @@ class AddTaskViewController: UIViewController {
     
     @IBAction func addTaskButton(_ sender: Any) {
         
+        guard let addTask = self.addTaskTextField.text,
+        let categoryID = self.catID, let taskController = self.taskController,
+        let household = household else { return }
+        
         checkCategory()
   
         displayMsg(title: "Please Confirm", msg: "Are you sure you want to add this task?", style: .alert) { (isConfirmed) in
             
     
             if let isConfirmed = isConfirmed, isConfirmed == true {
-                guard let addTask = self.addTaskTextField.text ,
-                    let categoryID = self.catID,
-                let taskController = self.taskController
-                    else { return }
                 
-                self.task = taskController.createTask(description: addTask, categoryId: categoryID, assineeIds: [], dueDate: Date(), isComplete: false)
+                self.task = taskController.createTask(description: addTask, categoryId: categoryID, assineeIds: [], dueDate: Date(), isComplete: false, householdId: household.identifier)
                 
                 
                 self.performSegue(withIdentifier: "back2task", sender: self)

@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ilY-rw-2Mf">
-                                <rect key="frame" x="31.5" y="246" width="351" height="404"/>
+                                <rect key="frame" x="31.5" y="129" width="351" height="638"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="237" translatesAutoresizingMaskIntoConstraints="NO" id="ZdM-y6-8oo">
                                         <rect key="frame" x="0.0" y="0.0" width="351" height="30"/>
@@ -42,10 +42,10 @@
                                         </subviews>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fji-w2-MEI">
-                                        <rect key="frame" x="0.0" y="38" width="351" height="366"/>
+                                        <rect key="frame" x="0.0" y="38" width="351" height="600"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="366" id="hSs-Nm-dnb"/>
+                                            <constraint firstAttribute="height" constant="600" id="hSs-Nm-dnb"/>
                                         </constraints>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" textLabel="gdR-qz-BqY" style="IBUITableViewCellStyleDefault" id="H0A-TM-cfo">
@@ -80,7 +80,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="n0W-2g-Ydt"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" id="Eon-SF-7Vh"/>
                     <navigationItem key="navigationItem" id="gEb-CJ-auc"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -146,11 +145,13 @@
             </objects>
             <point key="canvasLocation" x="2073.913043478261" y="496.875"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Home-->
         <scene sceneID="sTf-75-2GO">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tc2-A2-Q60" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" id="Eon-SF-7Vh"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XAG-Zo-5v7">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

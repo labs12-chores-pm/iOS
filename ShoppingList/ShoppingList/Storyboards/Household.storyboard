@@ -141,7 +141,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RvG-ib-hbU"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Household" id="J4L-u9-IL0"/>
                     <navigationItem key="navigationItem" id="EES-v1-6of">
                         <barButtonItem key="rightBarButtonItem" title="Messages" id="J10-E0-OG9">
                             <connections>
@@ -229,11 +228,13 @@
             </objects>
             <point key="canvasLocation" x="1737" y="229"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Household-->
         <scene sceneID="qJW-XA-VS0">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TGd-iI-quK" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Household" id="J4L-u9-IL0"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zYd-8f-iWv">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
