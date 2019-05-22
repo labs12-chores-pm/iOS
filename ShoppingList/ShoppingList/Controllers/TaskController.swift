@@ -10,8 +10,8 @@ import Foundation
 
 class TaskController {
     
-
-    @discardableResult func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, notes: [Note] = [] , isComplete: Bool) -> Task {
+    
+    @discardableResult func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, notes: [Note] = [] , isComplete: Bool, householdId: UUID) -> Task {
         
         let task = Task(description: description, categoryId: categoryId, assigneeIds: assineeIds, dueDate: dueDate, notes: notes, householdId: householdId)
         put(task: task)
@@ -35,7 +35,7 @@ class TaskController {
         taskCopy.notes = notes ?? taskCopy.notes
         taskCopy.isPending = isPending
         taskCopy.isComplete = isComplete
-       
+        
         put(task: taskCopy)
         
     }
@@ -217,6 +217,7 @@ class TaskController {
         }
         task.resume()
         
-        let baseURL = URL(string: "https://test-6f4fe.firebaseio.com/")!
     }
+    
+    let baseURL = URL(string: "https://test-6f4fe.firebaseio.com/")!
 }

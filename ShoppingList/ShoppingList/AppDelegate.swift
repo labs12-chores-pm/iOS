@@ -50,8 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainStoryboard = UIStoryboard(name: "TabView", bundle: .main)
         let categoriesVC = mainStoryboard.instantiateViewController(withIdentifier: "TabViewViewController")
         
-        let loginStoryboard = UIStoryboard(name: "FirebaseLogin", bundle: .main)
-        let loginVC = loginStoryboard.instantiateViewController(withIdentifier: "StartViewController")
+        let loginStoryboard = UIStoryboard(name: "FBGoogleAuth", bundle: .main)
+        let loginVC = loginStoryboard.instantiateViewController(withIdentifier: "FirebaseLoginViewController")
         
         self.window?.rootViewController = loginVC
         
