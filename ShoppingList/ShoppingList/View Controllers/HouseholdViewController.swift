@@ -23,12 +23,14 @@ class HouseholdViewController: UIViewController {
             self.householdController = tabBar.householdController
             self.userController = tabBar.userController
             self.currentUser = tabBar.currentUser
+            self.notesController = tabBar.notesController
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchAndAssign()
+        setDataSource()
     }
     
     @objc private func fetchAndAssign() {
@@ -61,6 +63,37 @@ class HouseholdViewController: UIViewController {
         }
     }
     
+    private func setDataSource() {
+        defer {
+            updateViews()
+        }
+        var messages: [Any] = []
+        
+        guard let taskController = taskController, let household = household, let notesController = notesController else { return }
+        
+        taskController.fetchTasks(inHouseholdWith: household.identifier) { (tasks, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            guard let tasks = tasks else { return }
+            messages += tasks.filter({ $0.isPending == true })
+            self.messages = messages
+            for task in tasks {
+                notesController.fetchNotes(taskId: task.identifier, completion: { (notes, error) in
+                    if let error = error {
+                        print(error)
+                        return
+                    }
+                    guard let notes = notes else { return }
+                    messages += notes
+                    self.messages = messages
+                    
+                })
+            }
+        }
+    }
+    
     private func updateViews() {
         guard let household = household, let pickerDataSource = pickerDataSource else { return }
         
@@ -74,6 +107,14 @@ class HouseholdViewController: UIViewController {
         
         householdPicker.selectRow(index, inComponent: 0, animated: true)
         householdMemberTableView.reloadData()
+        
+        if let messages = messages {
+            if messages.count > UserDefaults.standard.integer(forKey: "MessageCount") {
+                messagesBarButton.tintColor = .red
+            } else {
+                messagesBarButton.tintColor = .lightGray
+            }
+        }
     }
     
     @IBAction func leaveHouseholdButtonTapped(_ sender: UIButton) {
@@ -113,14 +154,39 @@ class HouseholdViewController: UIViewController {
             let household = household else { return }
             inviteVC.household = household
         }
+        
+        if segue.identifier == "ShowMessages" {
+            guard let messagesVC = segue.destination as? MessagesTableViewController,
+            let userController = userController, let user = currentUser, let taskController = taskController,
+            let householdController = householdController, let household = household, let notesController = notesController,
+            let messages = messages
+            else { return }
+            
+            messagesVC.userController = userController
+            messagesVC.currentUser = user
+            messagesVC.taskController = taskController
+            messagesVC.householdController = householdController
+            messagesVC.household = household
+            messagesVC.notesController = notesController
+            messagesVC.messages = messages
+        }
     }
     
+    @IBOutlet weak var messagesBarButton: UIBarButtonItem!
     @IBOutlet weak var householdPicker: UIPickerView!
     @IBOutlet weak var householdMemberTableView: UITableView!
     
+    var messages: [Any]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.updateViews()
+            }
+        }
+    }
     var taskController: TaskController?
     var householdController: HouseholdController?
     var userController: UserController?
+    var notesController: NotesController?
     var household: Household? {
         didSet {
             DispatchQueue.main.async {

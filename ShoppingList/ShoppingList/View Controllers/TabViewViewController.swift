@@ -22,5 +22,7 @@ class TabViewViewController: UITabBarController {
     var userController: UserController?
     var currentUser: User?
     var householdController: HouseholdController?
+    let notesController = NotesController()
     let taskController = TaskController()
+    let categoryController = CategoryController()
 }

@@ -65,14 +65,14 @@ class TaskViewController: UIViewController {
                 
                 taskController.updateTask(task: task, description: description, assignIds: ids, dueDate: dueDatePicker.date, isComplete: true, isPending: false)
             } else {
-                guard let categoryId = category?.identifier else { return }
+                guard let categoryId = category?.identifier, let householdId = household?.identifier else { return }
                 
                 var ids: [UUID] = []
                 if let assignee = assignee {
                     ids.append(assignee.identifier)
                 }
                 
-                taskController.createTask(description: description, categoryId: categoryId, assineeIds: ids, dueDate: dueDatePicker.date, notes: [], isComplete: false)
+                taskController.createTask(description: description, categoryId: categoryId, assineeIds: ids, dueDate: dueDatePicker.date, notes: [], isComplete: false, householdId: householdId)
             }
         } else {
             guard let task = task else { return }
@@ -84,7 +84,7 @@ class TaskViewController: UIViewController {
     }
     
     @IBAction func addNoteButtonWasTapped(_ sender: UIButton) {
-        guard let text = noteTextField.text, let memberId = currentUser?.identifier, let task = task else { return }
+        guard let text = noteTextField.text, let memberId = currentUser?.identifier, let task = task, let notesController = notesController else { return }
         let note = notesController.createNote(text: text, memberId: memberId, taskId: task.identifier)
         self.notes?.append(note)
         DispatchQueue.main.async {
@@ -93,7 +93,7 @@ class TaskViewController: UIViewController {
     }
     
     private func setNotes() {
-        if let task = task {
+        if let task = task, let notesController = notesController {
             notesController.fetchNotes(taskId: task.identifier) { (notes, error) in
                 if let error = error {
                     print(error)
@@ -172,7 +172,7 @@ class TaskViewController: UIViewController {
     
     var householdMembers: [User]?
     var currentUser: User?
-    let notesController = NotesController()
+    var notesController: NotesController?
     
     var hasAdminAccess: Bool?
 

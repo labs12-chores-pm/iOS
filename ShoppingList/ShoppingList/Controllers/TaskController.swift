@@ -10,9 +10,9 @@ import Foundation
 
 class TaskController {
     
-    func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, notes: [Note] = [] , isComplete: Bool) {
+    func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, notes: [Note] = [] , isComplete: Bool, householdId: UUID) {
         
-        let task = Task(description: description, categoryId: categoryId, assigneeIds: assineeIds, dueDate: dueDate, notes: notes)
+        let task = Task(description: description, categoryId: categoryId, assigneeIds: assineeIds, dueDate: dueDate, notes: notes, householdId: householdId)
         put(task: task)
     }
     
@@ -97,6 +97,70 @@ class TaskController {
                 let tasks = tasksResponse.compactMap({ $0.value })
                 let tasksInCategory = tasks.filter({ $0.categoryId == categoryId })
                 completion(tasksInCategory, nil)
+            } catch {
+                completion(nil, NetworkError.decodingData)
+            }
+            return
+        }
+        
+        task.resume()
+    }
+    
+    func fetchTasks(inHouseholdWith householdId: UUID, completion: @escaping ([Task]?, Error?) -> Void) {
+        
+        let tasksURL = baseURL.appendingPathComponent("tasks").appendingPathExtension("json")
+        let request = URLRequest(url: tasksURL)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            
+            if let error = error {
+                print(error)
+                completion(nil, NetworkError.urlSession)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data")
+                completion(nil, NetworkError.dataMissing)
+                return
+            }
+            
+            do {
+                let tasksResponse = try JSONDecoder().decode([String: Task].self, from: data)
+                let tasks = tasksResponse.compactMap({ $0.value })
+                let tasksInHousehold = tasks.filter({ $0.householdId == householdId })
+                completion(tasksInHousehold, nil)
+            } catch {
+                completion(nil, NetworkError.decodingData)
+            }
+            return
+        }
+        
+        task.resume()
+    }
+    
+    func fetchSingleTask(taskId: UUID, completion: @escaping (Task?, Error?) -> Void) {
+        
+        let tasksURL = baseURL.appendingPathComponent("tasks").appendingPathComponent(taskId.uuidString).appendingPathExtension("json")
+        let request = URLRequest(url: tasksURL)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            
+            if let error = error {
+                print(error)
+                completion(nil, NetworkError.urlSession)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data")
+                completion(nil, NetworkError.dataMissing)
+                return
+            }
+            
+            do {
+                let task = try JSONDecoder().decode(Task.self, from: data)
+                completion(task, nil)
             } catch {
                 completion(nil, NetworkError.decodingData)
             }

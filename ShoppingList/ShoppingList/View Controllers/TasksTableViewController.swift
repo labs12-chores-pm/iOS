@@ -88,7 +88,7 @@ class TasksTableViewController: UITableViewController {
             guard let destinationVC = segue.destination as? TaskViewController,
             let index = self.tableView.indexPathForSelectedRow,
             let tasks = tasks, let category = category, let household = household, let userController = userController,
-            let user = currentUser, let completedTasks = completedTasks else { return }
+            let user = currentUser, let completedTasks = completedTasks, let notesController = notesController else { return }
             
             let task = index.section == 0 ? tasks[index.row] : completedTasks[index.row]
             
@@ -98,17 +98,20 @@ class TasksTableViewController: UITableViewController {
             destinationVC.household = household
             destinationVC.userController = userController
             destinationVC.currentUser = user
+            destinationVC.notesController = notesController
         }
         
         if segue.identifier == "AddTask" {
             guard let destinationVC = segue.destination as? TaskViewController,
-            let category = category, let household = household, let userController = userController, let user = currentUser else { return }
+            let category = category, let household = household, let userController = userController, let user = currentUser,
+            let notesController = notesController else { return }
             
             destinationVC.taskController = taskController
             destinationVC.category = category
             destinationVC.household = household
             destinationVC.userController = userController
             destinationVC.currentUser = user
+            destinationVC.notesController = notesController
         }
     }
 
@@ -126,6 +129,7 @@ class TasksTableViewController: UITableViewController {
     
     var userController: UserController?
     var currentUser: User?
+    var notesController: NotesController?
     
     var taskController: TaskController? {
         didSet {
