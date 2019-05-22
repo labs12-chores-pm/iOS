@@ -486,11 +486,8 @@
 				773DC4AD228EE7AD00EB3121 /* AddCategoryViewController.swift */,
 				773DC4B1228EEBE800EB3121 /* TasksTableViewController.swift */,
 				773DC4B5228EF15E00EB3121 /* TaskViewController.swift */,
-<<<<<<< HEAD
 				77C645BA22948F710030AD34 /* MessagesTableViewController.swift */,
-=======
 				47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */,
->>>>>>> master
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -695,11 +692,8 @@
 				7721FE4D228E0A7700334208 /* MainCategoriesViewController.swift in Sources */,
 				969A840C2215C99A0003BB37 /* UIAppearance+Swift.m in Sources */,
 				11F5380D221F51EA0046BDFC /* HelperFile.swift in Sources */,
-<<<<<<< HEAD
 				77C645BB22948F710030AD34 /* MessagesTableViewController.swift in Sources */,
-=======
 				47F0A97022931E9500AF2EA9 /* AddTaskViewController.swift in Sources */,
->>>>>>> master
 				96CBFBED22285E7200A6B41E /* NewGroupPopoverView.swift in Sources */,
 				44A16810223820DC00227DFB /* BarcodeScannerController.swift in Sources */,
 				77CABBD7228BAC98000E00A3 /* HouseholdViewController.swift in Sources */,
