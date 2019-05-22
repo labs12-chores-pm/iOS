@@ -292,14 +292,14 @@ extension HouseholdViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            guard let householdController = householdController, let household = household,
-            let index = tableView.indexPathForSelectedRow, let currentUser = currentUser else { return }
+        guard let householdController = householdController, let household = household,
+        let index = tableView.indexPathForSelectedRow, let currentUser = currentUser else { return }
         
-            let userId = household.memberIds[index.row]
-            
-            guard userId != currentUser.identifier else { return }
-            
+        let userId = household.memberIds[index.row]
+        
+        guard userId != currentUser.identifier, household.adminIds.contains(currentUser.identifier) else { return }
+        
+        if editingStyle == .delete {
             let newMembers = household.memberIds.filter { $0 != userId }
             let newAdmin = household.adminIds.filter { $0 != userId }
             
