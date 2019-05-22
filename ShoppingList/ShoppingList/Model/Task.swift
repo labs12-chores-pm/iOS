@@ -18,6 +18,7 @@ enum Recurrence: Int, Codable {
 struct Task: Codable, Equatable {
     var description: String
     let categoryId: UUID
+    let householdId: UUID
     var assigneeIds: [UUID]
     var dueDate: Date
     var recurrence: Recurrence
@@ -36,10 +37,10 @@ struct Task: Codable, Equatable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case description, categoryId, assigneeIds, dueDate, notes, identifier, isComplete, recurrence, isPending
+        case description, categoryId, assigneeIds, dueDate, notes, identifier, isComplete, recurrence, isPending, householdId
     }
     
-    init(description: String, categoryId: UUID, assigneeIds: [UUID]?, dueDate: Date, notes: [Note]?, recurrence: Recurrence = .once) {
+    init(description: String, categoryId: UUID, assigneeIds: [UUID]?, dueDate: Date, notes: [Note]?, recurrence: Recurrence = .once, householdId: UUID) {
         self.description = description
         self.categoryId = categoryId
         self.assigneeIds = assigneeIds ?? []
@@ -49,6 +50,7 @@ struct Task: Codable, Equatable {
         self.isComplete = false
         self.recurrence = recurrence
         self.isPending = false
+        self.householdId = householdId
     }
     
     func encode(to encoder: Encoder) throws {
@@ -67,6 +69,7 @@ struct Task: Codable, Equatable {
         try container.encode(identifier, forKey: .identifier)
         try container.encode(isComplete, forKey: .isComplete)
         try container.encode(isPending, forKey: .isPending)
+        try container.encode(householdId, forKey: .householdId)
     }
     
     init(from decoder: Decoder) throws {
@@ -82,8 +85,6 @@ struct Task: Codable, Equatable {
         var assigneeIds: [UUID] = []
         
         if let assigneeIdsContainer = assigneeIdsContainer {
-            
-//            let assigneeValues = assigneeIdsContainer.compactMap { $0.value }
             
             for assignee in assigneeIdsContainer {
                 let id = UUID(uuidString: assignee)!
@@ -102,6 +103,9 @@ struct Task: Codable, Equatable {
                 notes += [note.value]
             }
         }
+        
+        let householdIdString = try container.decode(String.self, forKey: .householdId)
+        let householdId = UUID(uuidString: householdIdString)!
         
         let identifierString = try container.decode(String.self, forKey: .identifier)
         let identifier = UUID(uuidString: identifierString)!
@@ -122,5 +126,6 @@ struct Task: Codable, Equatable {
         self.isComplete = isComplete
         self.recurrence = recurrence
         self.isPending = isPending ?? false
+        self.householdId = householdId
     }
 }

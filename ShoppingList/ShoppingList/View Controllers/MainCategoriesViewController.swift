@@ -21,6 +21,8 @@ class MainCategoriesViewController: UIViewController {
             self.currentUser = tabBar.currentUser
             self.householdController = tabBar.householdController
             self.userController = tabBar.userController
+            self.categoryController = tabBar.categoryController
+            self.notesController = tabBar.notesController
         }
         fetchCategories()
     }
@@ -31,8 +33,7 @@ class MainCategoriesViewController: UIViewController {
     }
     
     @objc func fetchCategories() {
-        // Test Code
-        guard let user = currentUser else { return }
+        guard let user = currentUser, let categoryController = categoryController else { return }
         let householdId = user.currentHouseholdId
         categoryController.fetchCategories(householdId: householdId) { (categories, error) in
             if let error = error {
@@ -67,7 +68,8 @@ class MainCategoriesViewController: UIViewController {
             let user = currentUser,
             let taskController = taskController,
             let household = household,
-            let userController = userController
+            let userController = userController,
+            let notesController = notesController
             else { return }
             
             let category = categories[index.row]
@@ -77,6 +79,7 @@ class MainCategoriesViewController: UIViewController {
             destinationVC.taskController = taskController
             destinationVC.household = household
             destinationVC.userController = userController
+            destinationVC.notesController = notesController
         }
     }
     
@@ -88,7 +91,8 @@ class MainCategoriesViewController: UIViewController {
     var userController: UserController?
     var currentUser: User?
     var householdController: HouseholdController?
-    let categoryController = CategoryController()
+    var categoryController: CategoryController?
+    var notesController: NotesController?
     var categories: [Category]? {
         didSet {
             DispatchQueue.main.async {
@@ -116,7 +120,7 @@ extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let categories = categories else { return }
+            guard let categories = categories, let categoryController = categoryController else { return }
             
             let category = categories[indexPath.row]
             

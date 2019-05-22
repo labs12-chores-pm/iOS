@@ -23,12 +23,14 @@ class HouseholdViewController: UIViewController {
             self.householdController = tabBar.householdController
             self.userController = tabBar.userController
             self.currentUser = tabBar.currentUser
+            self.notesController = tabBar.notesController
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchAndAssign()
+        setDataSource()
     }
     
     @objc private func fetchAndAssign() {
@@ -61,6 +63,39 @@ class HouseholdViewController: UIViewController {
         }
     }
     
+    private func setDataSource() {
+        defer {
+            DispatchQueue.main.async {
+                self.updateViews()
+            }
+        }
+        var messages: [Any] = []
+        
+        guard let taskController = taskController, let household = household, let notesController = notesController else { return }
+        
+        taskController.fetchTasks(inHouseholdWith: household.identifier) { (tasks, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            guard let tasks = tasks else { return }
+            messages += tasks.filter({ $0.isPending == true })
+            self.messages = messages
+            for task in tasks {
+                notesController.fetchNotes(taskId: task.identifier, completion: { (notes, error) in
+                    if let error = error {
+                        print(error)
+                        return
+                    }
+                    guard let notes = notes else { return }
+                    messages += notes
+                    self.messages = messages
+                    
+                })
+            }
+        }
+    }
+    
     private func updateViews() {
         guard let household = household, let pickerDataSource = pickerDataSource else { return }
         
@@ -74,6 +109,30 @@ class HouseholdViewController: UIViewController {
         
         householdPicker.selectRow(index, inComponent: 0, animated: true)
         householdMemberTableView.reloadData()
+        
+        if let messages = messages {
+            if messages.count > UserDefaults.standard.integer(forKey: "MessageCount") {
+                messagesBarButton.tintColor = .red
+            } else {
+                messagesBarButton.tintColor = .lightGray
+            }
+        }
+        
+        if let currentUser = currentUser {
+            let admin = household.adminIds
+            
+            if !admin.contains(currentUser.identifier) && currentUser.identifier != household.creatorId {
+                leaveButton.isHidden = true
+                leaveButton.isEnabled = false
+            } else if currentUser.identifier == household.creatorId {
+                leaveButton.isEnabled = true
+                leaveButton.isHidden = false
+                leaveButton.setTitle("Delete Household", for: .normal)
+            } else {
+                leaveButton.isEnabled = true
+                leaveButton.isHidden = false
+            }
+        }
     }
     
     @IBAction func leaveHouseholdButtonTapped(_ sender: UIButton) {
@@ -83,6 +142,42 @@ class HouseholdViewController: UIViewController {
         if let currentUser = currentUser {
             var members = household.memberIds
             var admins = household.adminIds
+            
+            guard admins.contains(currentUser.identifier) else { return }
+            
+            if currentUser.identifier == household.creatorId {
+                
+                householdController.fetchHouseholds(user: currentUser) { (households, error) in
+                    if let error = error {
+                        print(error)
+                        return
+                    }
+                    guard let households = households, let userController = self.userController else { return }
+                    
+                    let householdsMinusHousehold = households.filter({ $0.identifier != household.identifier })
+                    guard let newHousehold = householdsMinusHousehold.first else { return }
+                    
+                    userController.updateUser(user: currentUser, currentHouseholdId: newHousehold.identifier, completion: { (error) in
+                        if let error = error {
+                            print(error)
+                            return
+                        }
+                        
+                        if households.count > 1 {
+                            householdController.deleteHousehold(household: household) { (error) in
+                                if let error = error {
+                                    print(error)
+                                    return
+                                }
+                                
+                                self.fetchAndAssign()
+                                self.setDataSource()
+                            }
+                        }
+                    })
+                }
+
+            }
             
             for (index, id) in members.enumerated() {
                 if id == currentUser.identifier {
@@ -113,14 +208,40 @@ class HouseholdViewController: UIViewController {
             let household = household else { return }
             inviteVC.household = household
         }
+        
+        if segue.identifier == "ShowMessages" {
+            guard let messagesVC = segue.destination as? MessagesTableViewController,
+            let userController = userController, let user = currentUser, let taskController = taskController,
+            let householdController = householdController, let household = household, let notesController = notesController,
+            let messages = messages
+            else { return }
+            
+            messagesVC.userController = userController
+            messagesVC.currentUser = user
+            messagesVC.taskController = taskController
+            messagesVC.householdController = householdController
+            messagesVC.household = household
+            messagesVC.notesController = notesController
+            messagesVC.messages = messages
+        }
     }
     
+    @IBOutlet weak var leaveButton: UIButton!
+    @IBOutlet weak var messagesBarButton: UIBarButtonItem!
     @IBOutlet weak var householdPicker: UIPickerView!
     @IBOutlet weak var householdMemberTableView: UITableView!
     
+    var messages: [Any]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.updateViews()
+            }
+        }
+    }
     var taskController: TaskController?
     var householdController: HouseholdController?
     var userController: UserController?
+    var notesController: NotesController?
     var household: Household? {
         didSet {
             DispatchQueue.main.async {
@@ -168,6 +289,27 @@ extension HouseholdViewController: UITableViewDelegate, UITableViewDataSource {
         userCell.householdController = householdController
         
         return userCell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard let householdController = householdController, let household = household,
+        let index = tableView.indexPathForSelectedRow, let currentUser = currentUser else { return }
+        
+        let userId = household.memberIds[index.row]
+        
+        guard userId != currentUser.identifier, household.adminIds.contains(currentUser.identifier) else { return }
+        
+        if editingStyle == .delete {
+            let newMembers = household.memberIds.filter { $0 != userId }
+            let newAdmin = household.adminIds.filter { $0 != userId }
+            
+            householdController.updateHousehold(household: household, memberIds: newMembers, adminIds: newAdmin, categories: household.categories ?? [])
+            
+            DispatchQueue.main.async {
+                tableView.reloadData()
+                self.updateViews()
+            }
+        }
     }
 }
 

@@ -23,6 +23,7 @@
 		44A1680922318BE700227DFB /* InviteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1680822318BE700227DFB /* InviteController.swift */; };
 		44A1680C22381C0C00227DFB /* BarcodeScannerController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44A1680B22381C0B00227DFB /* BarcodeScannerController.storyboard */; };
 		44A16810223820DC00227DFB /* BarcodeScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1680E223820DC00227DFB /* BarcodeScannerController.swift */; };
+		473D56852295B1B600C1CFF4 /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473D56842295B1B600C1CFF4 /* AlertExtension.swift */; };
 		473ED23B228DD4A900678E7E /* TaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473ED23A228DD4A900678E7E /* TaskController.swift */; };
 		473ED23D228DDE3E00678E7E /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473ED23C228DDE3E00678E7E /* CategoryController.swift */; };
 		47E3FCA5228E780800A1CECE /* FirebaseLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E3FCA4228E780800A1CECE /* FirebaseLoginViewController.swift */; };
@@ -47,6 +48,8 @@
 		776BBD0E228DB93A0097A4D4 /* CreateHouseholdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */; };
 		776BBD10228DC3900097A4D4 /* JoinCreateHousehold.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */; };
 		776BBD12228DCFCA0097A4D4 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */; };
+		77C645B922948EE80030AD34 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77C645B822948EE80030AD34 /* Messages.storyboard */; };
+		77C645BB22948F710030AD34 /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C645BA22948F710030AD34 /* MessagesTableViewController.swift */; };
 		77CABBD7228BAC98000E00A3 /* HouseholdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CABBD6228BAC98000E00A3 /* HouseholdViewController.swift */; };
 		77F678AC228A1268005C7C94 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678AB228A1268005C7C94 /* Note.swift */; };
 		77F678AF228A2B99005C7C94 /* HouseholdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678AE228A2B99005C7C94 /* HouseholdController.swift */; };
@@ -114,6 +117,7 @@
 		44A1680822318BE700227DFB /* InviteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteController.swift; sourceTree = "<group>"; };
 		44A1680B22381C0B00227DFB /* BarcodeScannerController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BarcodeScannerController.storyboard; sourceTree = "<group>"; };
 		44A1680E223820DC00227DFB /* BarcodeScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerController.swift; sourceTree = "<group>"; };
+		473D56842295B1B600C1CFF4 /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 		473ED23A228DD4A900678E7E /* TaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskController.swift; sourceTree = "<group>"; };
 		473ED23C228DDE3E00678E7E /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
 		47E3FCA4228E780800A1CECE /* FirebaseLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseLoginViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +142,8 @@
 		776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHouseholdViewController.swift; sourceTree = "<group>"; };
 		776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoinCreateHousehold.storyboard; sourceTree = "<group>"; };
 		776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
+		77C645B822948EE80030AD34 /* Messages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
+		77C645BA22948F710030AD34 /* MessagesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewController.swift; sourceTree = "<group>"; };
 		77CABBD6228BAC98000E00A3 /* HouseholdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdViewController.swift; sourceTree = "<group>"; };
 		77F678AB228A1268005C7C94 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		77F678AE228A2B99005C7C94 /* HouseholdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdController.swift; sourceTree = "<group>"; };
@@ -318,6 +324,7 @@
 				776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */,
 				7721FE4A228E098200334208 /* MainCategories.storyboard */,
 				773DC4AF228EEB0F00EB3121 /* Tasks.storyboard */,
+				77C645B822948EE80030AD34 /* Messages.storyboard */,
 				47F0A97122931EAC00AF2EA9 /* AddTask.storyboard */,
 			);
 			path = Storyboards;
@@ -326,6 +333,7 @@
 		77F678AD228A1273005C7C94 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				473D56842295B1B600C1CFF4 /* AlertExtension.swift */,
 				96029A45223198FA00F7F7AE /* Double+Currency.swift */,
 			);
 			path = Extensions;
@@ -481,6 +489,7 @@
 				773DC4AD228EE7AD00EB3121 /* AddCategoryViewController.swift */,
 				773DC4B1228EEBE800EB3121 /* TasksTableViewController.swift */,
 				773DC4B5228EF15E00EB3121 /* TaskViewController.swift */,
+				77C645BA22948F710030AD34 /* MessagesTableViewController.swift */,
 				47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */,
 			);
 			path = "View Controllers";
@@ -590,6 +599,7 @@
 				96029A422231604800F7F7AE /* MainViewController.storyboard in Resources */,
 				771D3445228C7EFE00C8BA13 /* TabView.storyboard in Resources */,
 				443C1B4E221B628D00220C28 /* Auth0.plist in Resources */,
+				77C645B922948EE80030AD34 /* Messages.storyboard in Resources */,
 				9663C6892231D4880019FCED /* ItemTableViewCell.xib in Resources */,
 				7721FE4B228E098200334208 /* MainCategories.storyboard in Resources */,
 				773DC4B0228EEB0F00EB3121 /* Tasks.storyboard in Resources */,
@@ -685,9 +695,11 @@
 				7721FE4D228E0A7700334208 /* MainCategoriesViewController.swift in Sources */,
 				969A840C2215C99A0003BB37 /* UIAppearance+Swift.m in Sources */,
 				11F5380D221F51EA0046BDFC /* HelperFile.swift in Sources */,
+				77C645BB22948F710030AD34 /* MessagesTableViewController.swift in Sources */,
 				47F0A97022931E9500AF2EA9 /* AddTaskViewController.swift in Sources */,
 				96CBFBED22285E7200A6B41E /* NewGroupPopoverView.swift in Sources */,
 				44A16810223820DC00227DFB /* BarcodeScannerController.swift in Sources */,
+				473D56852295B1B600C1CFF4 /* AlertExtension.swift in Sources */,
 				77CABBD7228BAC98000E00A3 /* HouseholdViewController.swift in Sources */,
 				771D344D228CB33300C8BA13 /* NotesController.swift in Sources */,
 				96E7BE60221DC149004EE9FF /* Helpers.swift in Sources */,
