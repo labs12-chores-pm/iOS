@@ -19,7 +19,7 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
     var categoryController : CategoryController?
     
     var task : Task?
-    var catID : UUID?
+    var catID : UUID?  
     var category : Category?
     var household : Household?
     
@@ -75,9 +75,6 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
     
         fetchCategories()
         print(categories)
-        
-        
-        
         
     }
     
