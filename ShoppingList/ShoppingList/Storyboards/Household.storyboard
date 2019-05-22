@@ -76,7 +76,7 @@
                                                             <rect key="frame" x="0.0" y="47" width="398" height="102.5"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <prototypes>
-                                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CurrentTasksCell" textLabel="Y2Q-EE-RHN" detailTextLabel="InB-p8-lbX" style="IBUITableViewCellStyleValue1" id="kWc-eh-Wo9">
+                                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CurrentTasksCell" textLabel="Y2Q-EE-RHN" detailTextLabel="InB-p8-lbX" style="IBUITableViewCellStyleValue1" id="kWc-eh-Wo9">
                                                                     <rect key="frame" x="0.0" y="28" width="398" height="44"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kWc-eh-Wo9" id="3Ij-SC-BxX">
@@ -142,11 +142,19 @@
                         <viewLayoutGuide key="safeArea" id="RvG-ib-hbU"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Household" id="J4L-u9-IL0"/>
-                    <navigationItem key="navigationItem" id="dp1-fU-EJ5"/>
+                    <navigationItem key="navigationItem" id="EES-v1-6of">
+                        <barButtonItem key="rightBarButtonItem" title="Messages" id="J10-E0-OG9">
+                            <connections>
+                                <segue destination="hdO-Nf-Y0F" kind="show" identifier="ShowMessages" id="leR-EM-qjp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="householdMemberTableView" destination="U5t-Xb-OQL" id="baI-5w-6DF"/>
                         <outlet property="householdPicker" destination="X6N-s9-41K" id="QdH-cT-PfP"/>
+                        <outlet property="leaveButton" destination="78d-dv-iaz" id="ZQj-AN-fYz"/>
+                        <outlet property="messagesBarButton" destination="J10-E0-OG9" id="fSo-Wh-wJX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bWC-R0-ulJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -203,7 +211,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R5y-4T-jVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1995.6521739130437" y="-134.59821428571428"/>
+            <point key="canvasLocation" x="2038" y="653"/>
+        </scene>
+        <!--MessagesTableViewController-->
+        <scene sceneID="Iyx-MD-ZHD">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="MessagesTableViewController" storyboardName="Messages" referencedIdentifier="MessagesTableViewController" id="hdO-Nf-Y0F" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Lj-Wr-nlG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1851" y="-264"/>
         </scene>
         <!--JoinCreateHousehold-->
         <scene sceneID="nvL-mv-Yeq">
