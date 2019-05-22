@@ -319,10 +319,10 @@
 		77CABBD5228BAC77000E00A3 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				771D343A228C654000C8BA13 /* Household.storyboard */,
 				771D3444228C7EFE00C8BA13 /* TabView.storyboard */,
-				776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */,
 				7721FE4A228E098200334208 /* MainCategories.storyboard */,
+				771D343A228C654000C8BA13 /* Household.storyboard */,
+				776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */,
 				773DC4AF228EEB0F00EB3121 /* Tasks.storyboard */,
 				77C645B822948EE80030AD34 /* Messages.storyboard */,
 				47F0A97122931EAC00AF2EA9 /* AddTask.storyboard */,
