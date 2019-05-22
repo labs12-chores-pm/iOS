@@ -9,28 +9,32 @@
 import Foundation
 
 extension UIViewController {
-func displayMsg(title : String?, msg : String,
-                style: UIAlertController.Style = .alert,
-                cancelKey : String? = nil) {
-    if cancelKey != nil,
-        UserDefaults.standard.bool(forKey: cancelKey!) == true {
-        return
-    }
     
-    let ac = UIAlertController.init(title: title,
-                                    message: msg, preferredStyle: style)
-    ac.addAction(UIAlertAction.init(title: "Confirm",
-                                    style: .default, handler: nil))
+func displayMsg(title : String?,
+                msg : String,
+                style : UIAlertController.Style = .alert,
+                completion: @escaping (Bool?) -> Void = { _ in } )
+                {
     
-    if cancelKey != nil {
-        ac.addAction(UIAlertAction.init(title: "Cancel",
-                                        style: .default, handler: { (aa) in
-                                            UserDefaults.standard.set(true, forKey: cancelKey!)
-                                            UserDefaults.standard.synchronize()
-        }))
+
+        let ac = UIAlertController.init(title: title,
+                                        message: msg, preferredStyle: style)
+                    
+        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
+            completion(true)
+        }
+                    
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .default,
+                                         handler: { (_) in
+            completion(false)
+        })
+                    
+        ac.addAction(confirmAction)
+        ac.addAction(cancelAction)
+                    
+        DispatchQueue.main.async {
+            self.present(ac, animated: true, completion: nil)
+        }
     }
-    DispatchQueue.main.async {
-        self.present(ac, animated: true, completion: nil)
-    }
-}
 }

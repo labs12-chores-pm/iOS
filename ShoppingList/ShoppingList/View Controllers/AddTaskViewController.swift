@@ -15,6 +15,7 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
     var userController: UserController?
     var currentUser: User?
     var householdController: HouseholdController?
+    
     var taskController : TaskController?
     var categoryController : CategoryController?
     
@@ -59,6 +60,7 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
             self.currentUser = tabBar.currentUser
             self.householdController = tabBar.householdController
             self.userController = tabBar.userController
+            self.categoryController = tabBar.categoryController
             
             
         }
@@ -122,16 +124,23 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBAction func addTaskButton(_ sender: Any) {
         
         checkCategory()
+  
         
-        guard let addTask = addTaskTextField.text ,
-              let categoryID = catID
-               else { return }
-        
-        self.task = taskController?.createTask(description: addTask, categoryId: categoryID, assineeIds: [], dueDate: Date(), isComplete: false)
-        
-       performSegue(withIdentifier: "back2task", sender: self)
-        
+        displayMsg(title: "Please Confirm", msg: "Are you sure you want to add this task?", style: .alert) { (isConfirmed) in
+            
     
+            if let isConfirmed = isConfirmed, isConfirmed == true {
+                guard let addTask = self.addTaskTextField.text ,
+                    let categoryID = self.catID,
+                let taskController = self.taskController
+                    else { return }
+                
+                self.task = taskController.createTask(description: addTask, categoryId: categoryID, assineeIds: [], dueDate: Date(), isComplete: false)
+                
+                
+                self.performSegue(withIdentifier: "back2task", sender: self)
+            }
+        }
     }
     
     
