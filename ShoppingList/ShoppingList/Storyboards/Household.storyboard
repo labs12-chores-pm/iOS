@@ -153,6 +153,7 @@
                     <connections>
                         <outlet property="householdMemberTableView" destination="U5t-Xb-OQL" id="baI-5w-6DF"/>
                         <outlet property="householdPicker" destination="X6N-s9-41K" id="QdH-cT-PfP"/>
+                        <outlet property="leaveButton" destination="78d-dv-iaz" id="ZQj-AN-fYz"/>
                         <outlet property="messagesBarButton" destination="J10-E0-OG9" id="fSo-Wh-wJX"/>
                     </connections>
                 </viewController>
