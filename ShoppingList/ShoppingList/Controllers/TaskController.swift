@@ -10,10 +10,13 @@ import Foundation
 
 class TaskController {
     
-    func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, notes: [Note] = [] , isComplete: Bool, householdId: UUID) {
+
+    @discardableResult func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, notes: [Note] = [] , isComplete: Bool) -> Task {
         
         let task = Task(description: description, categoryId: categoryId, assigneeIds: assineeIds, dueDate: dueDate, notes: notes, householdId: householdId)
         put(task: task)
+        
+        return task
     }
     
     
@@ -213,8 +216,7 @@ class TaskController {
             completion(nil)
         }
         task.resume()
+        
+        let baseURL = URL(string: "https://test-6f4fe.firebaseio.com/")!
     }
-    
-     let baseURL = URL(string: "https://test-6f4fe.firebaseio.com/")!
-    
 }
