@@ -62,7 +62,7 @@ class TasksTableViewController: UITableViewController {
         return cell
     }
     
-    @IBAction func AddTaskButtonWasTapped(_ sender: UIButton) {
+    @IBAction func addTaskButtonWasTapped(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "AddTask", sender: self)
     }
     

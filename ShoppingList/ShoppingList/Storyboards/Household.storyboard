@@ -21,20 +21,13 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hx0-iM-qj9">
                                 <rect key="frame" x="8" y="96" width="398" height="709"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DnH-zO-aqm">
-                                        <rect key="frame" x="0.0" y="0.0" width="398" height="51"/>
-                                        <state key="normal" title="Invite"/>
-                                        <connections>
-                                            <segue destination="Jdb-Uu-qz5" kind="show" identifier="ShowInvite" id="6u3-Qv-FRA"/>
-                                        </connections>
-                                    </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="PmU-nR-jSO">
-                                        <rect key="frame" x="0.0" y="59" width="398" height="216"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PmU-nR-jSO">
+                                        <rect key="frame" x="0.0" y="0.0" width="398" height="216"/>
                                         <subviews>
-                                            <pickerView contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X6N-s9-41K">
-                                                <rect key="frame" x="0.0" y="0.0" width="352" height="216"/>
+                                            <pickerView contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="X6N-s9-41K">
+                                                <rect key="frame" x="0.0" y="0.0" width="360" height="216"/>
                                             </pickerView>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsA-Mz-UIM">
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsA-Mz-UIM">
                                                 <rect key="frame" x="368" y="0.0" width="30" height="216"/>
                                                 <state key="normal" title="+"/>
                                                 <connections>
@@ -44,7 +37,7 @@
                                         </subviews>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U5t-Xb-OQL">
-                                        <rect key="frame" x="0.0" y="283" width="398" height="388"/>
+                                        <rect key="frame" x="0.0" y="224" width="398" height="388"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MemberCell" rowHeight="150" id="IUQ-2k-yRx" customClass="HouseholdUserTableViewCell" customModule="ShoppingList" customModuleProvider="target">
@@ -123,7 +116,7 @@
                                         <sections/>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78d-dv-iaz">
-                                        <rect key="frame" x="0.0" y="679" width="398" height="30"/>
+                                        <rect key="frame" x="0.0" y="620" width="398" height="89"/>
                                         <state key="normal" title="Leave Household"/>
                                         <connections>
                                             <action selector="leaveHouseholdButtonTapped:" destination="h1P-f9-Baw" eventType="touchUpInside" id="Cja-YF-cWB"/>
@@ -142,6 +135,11 @@
                         <viewLayoutGuide key="safeArea" id="RvG-ib-hbU"/>
                     </view>
                     <navigationItem key="navigationItem" id="EES-v1-6of">
+                        <barButtonItem key="leftBarButtonItem" title="Invite" id="FEh-3c-hGU">
+                            <connections>
+                                <segue destination="Jdb-Uu-qz5" kind="show" identifier="ShowInvite" id="DxJ-bl-FLM"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Messages" id="J10-E0-OG9">
                             <connections>
                                 <segue destination="hdO-Nf-Y0F" kind="show" identifier="ShowMessages" id="leR-EM-qjp"/>
@@ -168,38 +166,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rZw-Ft-2Hy">
-                                <rect key="frame" x="116" y="371" width="182" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TYF-GO-zeA">
-                                <rect key="frame" x="116" y="424" width="182" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="iZX-aY-4LK">
-                                <rect key="frame" x="116" y="318" width="182" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Admin"/>
-                                    <segment title="Non-admin"/>
-                                </segments>
-                            </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6c-52-0A4">
-                                <rect key="frame" x="169" y="479" width="76" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Send Invite"/>
-                                <connections>
-                                    <action selector="sendInviteButtonWasTapped:" destination="Jdb-Uu-qz5" eventType="touchUpInside" id="uVO-2J-2iR"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="xjZ-DV-iiS">
+                                <rect key="frame" x="107" y="353" width="200" height="190"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="iZX-aY-4LK">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="29"/>
+                                        <segments>
+                                            <segment title="Admin"/>
+                                            <segment title="Non-admin"/>
+                                        </segments>
+                                    </segmentedControl>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rZw-Ft-2Hy">
+                                        <rect key="frame" x="0.0" y="52" width="200" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="x5D-dk-lAC"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TYF-GO-zeA">
+                                        <rect key="frame" x="0.0" y="106" width="200" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6c-52-0A4">
+                                        <rect key="frame" x="0.0" y="160" width="200" height="30"/>
+                                        <state key="normal" title="Send Invite"/>
+                                        <connections>
+                                            <action selector="sendInviteButtonWasTapped:" destination="Jdb-Uu-qz5" eventType="touchUpInside" id="uVO-2J-2iR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="xjZ-DV-iiS" firstAttribute="centerY" secondItem="UuP-7I-kgq" secondAttribute="centerY" id="T3A-ro-gVy"/>
+                            <constraint firstItem="xjZ-DV-iiS" firstAttribute="centerX" secondItem="UuP-7I-kgq" secondAttribute="centerX" id="yhN-ai-cgD"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="gj7-i2-KxZ"/>
                     </view>
                     <connections>
