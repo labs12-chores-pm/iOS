@@ -15,7 +15,6 @@
 		119B303D2225ABC300DF93E6 /* GroupMemberController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119B303C2225ABC300DF93E6 /* GroupMemberController.swift */; };
 		11F5380D221F51EA0046BDFC /* HelperFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5380C221F51EA0046BDFC /* HelperFile.swift */; };
 		3E4A05782BD43D7F4A2A4CF1 /* Pods_ShoppingList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9680B9B09C09F66F2ABF9AFB /* Pods_ShoppingList.framework */; };
-		443C1B4E221B628D00220C28 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 443C1B4D221B628D00220C28 /* Auth0.plist */; };
 		447BEE43221F473300FA1D82 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447BEE42221F473300FA1D82 /* SessionManager.swift */; };
 		44A16801222746E600227DFB /* ItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A16800222746E600227DFB /* ItemController.swift */; };
 		44A1680522276F1000227DFB /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1680422276F1000227DFB /* HistoryController.swift */; };
@@ -31,6 +30,10 @@
 		47F0A97022931E9500AF2EA9 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */; };
 		47F0A97222931EAC00AF2EA9 /* AddTask.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F0A97122931EAC00AF2EA9 /* AddTask.storyboard */; };
 		770271312295FBBE002134A2 /* AppearanceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770271302295FBBE002134A2 /* AppearanceHelper.swift */; };
+		770271352296ECE8002134A2 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770271342296ECE8002134A2 /* NavigationViewController.swift */; };
+		770271362297052D002134A2 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 770271332295FE82002134A2 /* Nunito-Bold.ttf */; };
+		7702713722970530002134A2 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 770271322295FE82002134A2 /* Nunito-Regular.ttf */; };
+		7702713B22971401002134A2 /* MonkeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7702713A22971401002134A2 /* MonkeyButton.swift */; };
 		771D343B228C654000C8BA13 /* Household.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 771D343A228C654000C8BA13 /* Household.storyboard */; };
 		771D3440228C775F00C8BA13 /* HouseholdUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D343E228C775F00C8BA13 /* HouseholdUserTableViewCell.swift */; };
 		771D3443228C7B7F00C8BA13 /* Roles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D3442228C7B7F00C8BA13 /* Roles.swift */; };
@@ -110,7 +113,6 @@
 		119B303C2225ABC300DF93E6 /* GroupMemberController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMemberController.swift; sourceTree = "<group>"; };
 		11F5380C221F51EA0046BDFC /* HelperFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFile.swift; sourceTree = "<group>"; };
 		443C1B322214A45100220C28 /* ShoppingList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingList.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		443C1B4D221B628D00220C28 /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
 		447BEE42221F473300FA1D82 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		44A16800222746E600227DFB /* ItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemController.swift; sourceTree = "<group>"; };
 		44A1680422276F1000227DFB /* HistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,8 @@
 		770271302295FBBE002134A2 /* AppearanceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceHelper.swift; sourceTree = "<group>"; };
 		770271322295FE82002134A2 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		770271332295FE82002134A2 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		770271342296ECE8002134A2 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		7702713A22971401002134A2 /* MonkeyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonkeyButton.swift; sourceTree = "<group>"; };
 		771D343A228C654000C8BA13 /* Household.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Household.storyboard; sourceTree = "<group>"; };
 		771D343E228C775F00C8BA13 /* HouseholdUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdUserTableViewCell.swift; sourceTree = "<group>"; };
 		771D3442228C7B7F00C8BA13 /* Roles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roles.swift; sourceTree = "<group>"; };
@@ -368,6 +372,7 @@
 				96029A43223189D500F7F7AE /* NoItemsView.xib */,
 				9663C6832231CF400019FCED /* NoItemsView.swift */,
 				771D3450228CCCC300C8BA13 /* CustomTableView.swift */,
+				7702713A22971401002134A2 /* MonkeyButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -405,7 +410,6 @@
 				96476B482215D40700E57EB9 /* Info.plist */,
 				96476B4F2215D41300E57EB9 /* Assets.xcassets */,
 				96476B4D2215D41300E57EB9 /* LaunchScreen.storyboard */,
-				443C1B4D221B628D00220C28 /* Auth0.plist */,
 				770271302295FBBE002134A2 /* AppearanceHelper.swift */,
 			);
 			path = Resources;
@@ -498,6 +502,7 @@
 				773DC4B5228EF15E00EB3121 /* TaskViewController.swift */,
 				77C645BA22948F710030AD34 /* MessagesTableViewController.swift */,
 				47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */,
+				770271342296ECE8002134A2 /* NavigationViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -600,12 +605,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7702713722970530002134A2 /* Nunito-Regular.ttf in Resources */,
 				47F0A97222931EAC00AF2EA9 /* AddTask.storyboard in Resources */,
 				776BBD10228DC3900097A4D4 /* JoinCreateHousehold.storyboard in Resources */,
 				96A6E0142231C4040006994E /* CheckoutPopoverView.xib in Resources */,
 				96029A422231604800F7F7AE /* MainViewController.storyboard in Resources */,
 				771D3445228C7EFE00C8BA13 /* TabView.storyboard in Resources */,
-				443C1B4E221B628D00220C28 /* Auth0.plist in Resources */,
 				77C645B922948EE80030AD34 /* Messages.storyboard in Resources */,
 				9663C6892231D4880019FCED /* ItemTableViewCell.xib in Resources */,
 				7721FE4B228E098200334208 /* MainCategories.storyboard in Resources */,
@@ -623,6 +628,7 @@
 				96476B522215D41300E57EB9 /* Assets.xcassets in Resources */,
 				968D512C222EBA5900179241 /* NewItemPopoverView.xib in Resources */,
 				9663C68D2231D9250019FCED /* HistoryTableViewCell.xib in Resources */,
+				770271362297052D002134A2 /* Nunito-Bold.ttf in Resources */,
 				960FBF6B221C41570076C662 /* MessagePopoverView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -705,6 +711,7 @@
 				77C645BB22948F710030AD34 /* MessagesTableViewController.swift in Sources */,
 				47F0A97022931E9500AF2EA9 /* AddTaskViewController.swift in Sources */,
 				96CBFBED22285E7200A6B41E /* NewGroupPopoverView.swift in Sources */,
+				770271352296ECE8002134A2 /* NavigationViewController.swift in Sources */,
 				770271312295FBBE002134A2 /* AppearanceHelper.swift in Sources */,
 				44A16810223820DC00227DFB /* BarcodeScannerController.swift in Sources */,
 				473D56852295B1B600C1CFF4 /* AlertExtension.swift in Sources */,
@@ -736,6 +743,7 @@
 				47E3FCA5228E780800A1CECE /* FirebaseLoginViewController.swift in Sources */,
 				77F678C6228B37C2005C7C94 /* CoreDataStack.swift in Sources */,
 				44A16807222F418C00227DFB /* Invitation.swift in Sources */,
+				7702713B22971401002134A2 /* MonkeyButton.swift in Sources */,
 				96A6E0162231C5240006994E /* CheckoutPopoverView.swift in Sources */,
 				969A840A2215C99A0003BB37 /* UILabel+Chameleon.m in Sources */,
 				7721FE4F228E238200334208 /* TabViewViewController.swift in Sources */,
@@ -898,7 +906,7 @@
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7JG93VFG2G;
+				DEVELOPMENT_TEAM = VXUQXR6S56;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/ShoppingList/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -924,7 +932,7 @@
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7JG93VFG2G;
+				DEVELOPMENT_TEAM = VXUQXR6S56;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/ShoppingList/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -256,10 +256,10 @@
             </objects>
             <point key="canvasLocation" x="2932" y="1"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation View Controller-->
         <scene sceneID="EXv-bf-qR8">
             <objects>
-                <navigationController storyboardIdentifier="TasksNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="1Wf-pi-46m" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TasksNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="1Wf-pi-46m" customClass="NavigationViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hLV-JT-ELs">
                         <rect key="frame" x="0.0" y="20" width="1024" height="50"/>

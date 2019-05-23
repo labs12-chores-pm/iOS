@@ -19,17 +19,22 @@
 	<key>STORAGE_BUCKET</key>
 	<string>chore-monkey-app.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:682615121437:ios:e573abd03270f120</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Nunito-Regular.ttf</string>
+		<string>Nunito-Bold.ttf</string>
+	</array>
 	<key>DATABASE_URL</key>
 	<string>https://chore-monkey-app.firebaseio.com</string>
 </dict>

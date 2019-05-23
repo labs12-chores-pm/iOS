@@ -10,7 +10,23 @@ import Foundation
 
 class AppearanceHelper {
     
-    static let pink = UIColor(red: 223/255, green: 78/255, blue: 144/255, alpha: 1)
+    static let teal = UIColor(red: 106/255, green: 204/255, blue: 198/255, alpha: 1)
+    static let lightYellow = UIColor(red: 255/255, green: 218/255, blue: 158/255, alpha: 1)
+    static let babyBlue = UIColor(red: 222/255, green: 248/255, blue: 255/255, alpha: 1)
+    static let yellowBrown = UIColor(red: 204/255, green: 186/255, blue: 106/255, alpha: 1)
+    
+    static func setNavigationStyle() {
+        let buttonAttributes: [NSAttributedString.Key: Any] = [
+            .font: styleFont(with: .body, pointSize: 16),
+            .foregroundColor: babyBlue,
+        ]
+        
+        UIBarButtonItem.appearance().setTitleTextAttributes(buttonAttributes, for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes(buttonAttributes, for: .selected)
+        UIBarButtonItem.appearance().setTitleTextAttributes(buttonAttributes, for: .highlighted)
+    }
+    
+    
     
     static func styleFont(with textStyle: UIFont.TextStyle, pointSize: CGFloat) -> UIFont {
         let font = UIFont(name: "Nunito", size: pointSize)!

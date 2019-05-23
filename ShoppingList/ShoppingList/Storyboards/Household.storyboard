@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TGd-iI-quK">
-    <device id="ipad9_7" orientation="landscape">
+    <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -9,26 +9,31 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Nunito-Regular.ttf">
+            <string>Nunito-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Household-->
         <scene sceneID="eTL-LV-jds">
             <objects>
                 <viewController title="Household" id="h1P-f9-Baw" customClass="HouseholdViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CUL-Fy-iBy">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hx0-iM-qj9">
-                                <rect key="frame" x="8" y="78" width="1008" height="632"/>
+                                <rect key="frame" x="8" y="78" width="752" height="888"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PmU-nR-jSO">
-                                        <rect key="frame" x="0.0" y="0.0" width="1008" height="216"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="752" height="216"/>
                                         <subviews>
                                             <pickerView contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="X6N-s9-41K">
-                                                <rect key="frame" x="0.0" y="0.0" width="970" height="216"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="714" height="216"/>
                                             </pickerView>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsA-Mz-UIM">
-                                                <rect key="frame" x="978" y="0.0" width="30" height="216"/>
+                                                <rect key="frame" x="722" y="0.0" width="30" height="216"/>
                                                 <state key="normal" title="+"/>
                                                 <connections>
                                                     <segue destination="2oc-W8-6wX" kind="show" identifier="ShowCreateHousehold" id="0rr-qR-Qg4"/>
@@ -37,14 +42,14 @@
                                         </subviews>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U5t-Xb-OQL">
-                                        <rect key="frame" x="0.0" y="224" width="1008" height="208"/>
+                                        <rect key="frame" x="0.0" y="224" width="752" height="208"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MemberCell" rowHeight="150" id="IUQ-2k-yRx" customClass="HouseholdUserTableViewCell" customModule="ShoppingList" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="1008" height="150"/>
+                                                <rect key="frame" x="0.0" y="28" width="752" height="150"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IUQ-2k-yRx" id="AAM-gY-xF0" customClass="HouseholdUserTableViewCell" customModule="ShoppingList" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="1008" height="149.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="752" height="149.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="McI-aY-Tgq">
@@ -72,7 +77,7 @@
                                                             <rect key="frame" x="0.0" y="47" width="1008" height="102.5"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <prototypes>
-                                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CurrentTasksCell" textLabel="Y2Q-EE-RHN" detailTextLabel="InB-p8-lbX" style="IBUITableViewCellStyleValue1" id="kWc-eh-Wo9">
+                                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CurrentTasksCell" textLabel="Y2Q-EE-RHN" detailTextLabel="InB-p8-lbX" style="IBUITableViewCellStyleValue1" id="kWc-eh-Wo9">
                                                                     <rect key="frame" x="0.0" y="28" width="1008" height="44"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kWc-eh-Wo9" id="3Ij-SC-BxX">
@@ -119,7 +124,8 @@
                                         <sections/>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78d-dv-iaz">
-                                        <rect key="frame" x="0.0" y="440" width="1008" height="192"/>
+                                        <rect key="frame" x="0.0" y="440" width="752" height="448"/>
+                                        <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="17"/>
                                         <state key="normal" title="Leave Household"/>
                                         <connections>
                                             <action selector="leaveHouseholdButtonTapped:" destination="h1P-f9-Baw" eventType="touchUpInside" id="Cja-YF-cWB"/>
@@ -166,11 +172,11 @@
             <objects>
                 <viewController id="Jdb-Uu-qz5" customClass="InvitationViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UuP-7I-kgq">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="xjZ-DV-iiS">
-                                <rect key="frame" x="412" y="289" width="200" height="190"/>
+                                <rect key="frame" x="284" y="417" width="200" height="190"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="iZX-aY-4LK">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="29"/>
@@ -237,15 +243,18 @@
             </objects>
             <point key="canvasLocation" x="1737" y="229"/>
         </scene>
-        <!--Household-->
+        <!--Navigation View Controller-->
         <scene sceneID="qJW-XA-VS0">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TGd-iI-quK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Household" id="J4L-u9-IL0"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TGd-iI-quK" customClass="NavigationViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="icons8-family-filled-50" id="J4L-u9-IL0">
+                        <inset key="imageInsets" minX="5" minY="10" maxX="5" maxY="0.0"/>
+                        <color key="badgeColor" red="0.86128216981887817" green="0.30987441539764404" blue="0.57130712270736694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zYd-8f-iWv">
-                        <rect key="frame" x="0.0" y="20" width="1024" height="50"/>
+                        <rect key="frame" x="0.0" y="20" width="768" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -258,4 +267,7 @@
             <point key="canvasLocation" x="-7.2463768115942031" y="217.63392857142856"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icons8-family-filled-50" width="50" height="50"/>
+    </resources>
 </document>

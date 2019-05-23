@@ -26,6 +26,7 @@ class AddTaskViewController: UIViewController {
             self.householdController = tabBar.householdController
             self.userController = tabBar.userController
             self.categoryController = tabBar.categoryController
+            self.notesController = tabBar.notesController
         }
         
         if let householdController = householdController, let user = currentUser {
@@ -72,11 +73,14 @@ class AddTaskViewController: UIViewController {
     
     @IBAction func addTaskButton(_ sender: Any) {
         
+        checkCategory()
+        
         guard let addTask = self.addTaskTextField.text,
         let categoryID = self.catID, let taskController = self.taskController,
-        let household = household else { return }
-        
-        checkCategory()
+        let household = household else {
+            addTaskButton.shake()
+            return
+        }
   
         displayMsg(title: "Please Confirm", msg: "Are you sure you want to add this task?", style: .alert) { (isConfirmed) in
             
@@ -100,7 +104,10 @@ class AddTaskViewController: UIViewController {
                   let category = category,
                   let currentUser = currentUser,
                   let household = household,
-            let userController = userController else {return}
+            let userController = userController,
+            let notesController = notesController,
+            let taskController = taskController
+            else {return}
             
             destinationVC.taskController = taskController
             destinationVC.task = task
@@ -108,6 +115,7 @@ class AddTaskViewController: UIViewController {
             destinationVC.household = household
             destinationVC.userController = userController
             destinationVC.currentUser = currentUser
+            destinationVC.notesController = notesController
         }
     }
     
@@ -116,6 +124,8 @@ class AddTaskViewController: UIViewController {
     @IBOutlet weak var categoryTableView: UITableView!
     @IBOutlet weak var addCategoryTextField: UITextField!
     @IBOutlet weak var addTaskTextField: UITextField!
+    @IBOutlet weak var addTaskButton: MonkeyButton!
+    
     @IBAction func tappedCategoryTextField(_ sender: Any) {
     }
     
@@ -126,6 +136,7 @@ class AddTaskViewController: UIViewController {
     var householdController: HouseholdController?
     var taskController : TaskController?
     var categoryController : CategoryController?
+    var notesController: NotesController?
     
     var task : Task?
     var catID : UUID?

@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FC8-1j-82L">
-                                <rect key="frame" x="8" y="68" width="1008" height="632"/>
+                                <rect key="frame" x="8" y="78" width="1008" height="612"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Urs-rx-nzR">
                                         <rect key="frame" x="0.0" y="0.0" width="1008" height="30"/>
@@ -88,7 +88,7 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJl-8Q-5lS">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJl-8Q-5lS" customClass="MonkeyButton" customModule="ShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="234" width="1008" height="30"/>
                                         <state key="normal" title="Add Task"/>
                                         <connections>
@@ -96,7 +96,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="248" horizontalCompressionResistancePriority="748" verticalCompressionResistancePriority="748" translatesAutoresizingMaskIntoConstraints="NO" id="3G4-qz-Q4w">
-                                        <rect key="frame" x="0.0" y="272" width="1008" height="360"/>
+                                        <rect key="frame" x="0.0" y="272" width="1008" height="340"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
@@ -110,13 +110,14 @@
                             <constraint firstItem="FC8-1j-82L" firstAttribute="width" secondItem="WPa-D7-Nnx" secondAttribute="width" constant="-16" id="8nr-aM-3k9"/>
                             <constraint firstItem="FC8-1j-82L" firstAttribute="centerX" secondItem="gd5-Bi-LK4" secondAttribute="centerX" id="Dh3-2N-iVQ"/>
                             <constraint firstItem="FC8-1j-82L" firstAttribute="centerY" secondItem="gd5-Bi-LK4" secondAttribute="centerY" id="DwY-M9-pva"/>
-                            <constraint firstItem="FC8-1j-82L" firstAttribute="height" secondItem="WPa-D7-Nnx" secondAttribute="height" constant="-16" id="jlv-SN-k0Q"/>
+                            <constraint firstItem="WPa-D7-Nnx" firstAttribute="top" secondItem="FC8-1j-82L" secondAttribute="top" constant="-8" id="lmj-rW-uuT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WPa-D7-Nnx"/>
                     </view>
                     <navigationItem key="navigationItem" id="itp-vz-8uI"/>
                     <connections>
                         <outlet property="addCategoryTextField" destination="hzT-Wi-05y" id="QO8-kw-ysN"/>
+                        <outlet property="addTaskButton" destination="QJl-8Q-5lS" id="chU-4b-T6v"/>
                         <outlet property="addTaskTextField" destination="Ijq-gC-0bn" id="Od8-bX-lrY"/>
                         <outlet property="categoryTableView" destination="zBK-nZ-Qzu" id="8FN-E9-gjo"/>
                         <segue destination="Vxp-ub-MbA" kind="show" identifier="back2task" id="DrD-d5-FHz"/>
@@ -134,11 +135,14 @@
             </objects>
             <point key="canvasLocation" x="2634.057971014493" y="-186.16071428571428"/>
         </scene>
-        <!--Add-->
+        <!--Navigation View Controller-->
         <scene sceneID="KW6-Sq-Jdu">
             <objects>
-                <navigationController storyboardIdentifier="AddTaskNav" automaticallyAdjustsScrollViewInsets="NO" id="cHF-33-M9j" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Add" id="dNa-Qb-MxJ"/>
+                <navigationController storyboardIdentifier="AddTaskNav" automaticallyAdjustsScrollViewInsets="NO" id="cHF-33-M9j" customClass="NavigationViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="icons8-add-filled-50" id="dNa-Qb-MxJ">
+                        <inset key="imageInsets" minX="5" minY="10" maxX="5" maxY="0.0"/>
+                        <color key="badgeColor" red="0.86128216981887817" green="0.30987441539764404" blue="0.57130712270736694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pNJ-Y8-BR6">
@@ -155,4 +159,7 @@
             <point key="canvasLocation" x="671.01449275362324" y="83.705357142857139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icons8-add-filled-50" width="50" height="50"/>
+    </resources>
 </document>
