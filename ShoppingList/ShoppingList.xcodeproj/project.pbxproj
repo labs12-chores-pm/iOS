@@ -24,6 +24,7 @@
 		44A16810223820DC00227DFB /* BarcodeScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1680E223820DC00227DFB /* BarcodeScannerController.swift */; };
 		471BCA082295E3940056194D /* FBGoogleAuth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 471BCA072295E3940056194D /* FBGoogleAuth.storyboard */; };
 		471FF3912295FDB900BD09FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 471FF3902295FDB900BD09FC /* Assets.xcassets */; };
+		471FF39322961DC100BD09FC /* CustomLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471FF39222961DC100BD09FC /* CustomLoginViewController.swift */; };
 		473D56852295B1B600C1CFF4 /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473D56842295B1B600C1CFF4 /* AlertExtension.swift */; };
 		473ED23B228DD4A900678E7E /* TaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473ED23A228DD4A900678E7E /* TaskController.swift */; };
 		473ED23D228DDE3E00678E7E /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473ED23C228DDE3E00678E7E /* CategoryController.swift */; };
@@ -121,6 +122,7 @@
 		44A1680E223820DC00227DFB /* BarcodeScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerController.swift; sourceTree = "<group>"; };
 		471BCA072295E3940056194D /* FBGoogleAuth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FBGoogleAuth.storyboard; sourceTree = "<group>"; };
 		471FF3902295FDB900BD09FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		471FF39222961DC100BD09FC /* CustomLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginViewController.swift; sourceTree = "<group>"; };
 		473D56842295B1B600C1CFF4 /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 		473ED23A228DD4A900678E7E /* TaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskController.swift; sourceTree = "<group>"; };
 		473ED23C228DDE3E00678E7E /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 		47E3FCA8228E783000A1CECE /* Firebase Auth */ = {
 			isa = PBXGroup;
 			children = (
+				471FF39222961DC100BD09FC /* CustomLoginViewController.swift */,
 				47E3FCA4228E780800A1CECE /* FirebaseLoginViewController.swift */,
 				47E3FCA6228E782200A1CECE /* FirebaseLogin.storyboard */,
 				471BCA072295E3940056194D /* FBGoogleAuth.storyboard */,
@@ -746,6 +749,7 @@
 				969A840B2215C99A0003BB37 /* UIViewController+Chameleon.m in Sources */,
 				473ED23B228DD4A900678E7E /* TaskController.swift in Sources */,
 				9691AB572225B07600C1EE1E /* GroupsPopoverView.swift in Sources */,
+				471FF39322961DC100BD09FC /* CustomLoginViewController.swift in Sources */,
 				118646D4221CA8CD00D0F04B /* Household.swift in Sources */,
 				969A84032215C99A0003BB37 /* ChameleonConstants.m in Sources */,
 				773DC4AE228EE7AD00EB3121 /* AddCategoryViewController.swift in Sources */,

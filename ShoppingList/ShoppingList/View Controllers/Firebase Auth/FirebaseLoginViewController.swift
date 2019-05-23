@@ -47,12 +47,16 @@ class FirebaseLoginViewController: UIViewController {
         
         
         // Get a reference to the auth UI view controller
-        let authViewController = authUI!.authViewController()
+       // let authViewController = authUI!.authViewController()
         
         // Show it.
-        present(authViewController, animated: true, completion: nil)
+       // present(authViewController, animated: true, completion: nil)
         
+        let authViewController = CustomLoginViewController(authUI: authUI!)
         
+        let navc = UINavigationController(rootViewController: authViewController)
+        
+        self.present(navc, animated: true, completion: nil)
     }
     
     
