@@ -22,6 +22,7 @@ class InvitationViewController: UIViewController {
         let householdController = householdController else { return }
         
         let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .full
         
         if let date = dateFormatter.date(from: household.inviteDate) {
             
@@ -31,6 +32,10 @@ class InvitationViewController: UIViewController {
                 
                 householdController.updateHousehold(household: household, memberIds: household.memberIds, adminIds: household.adminIds, categories: household.categories ?? [], invite: invite)
             }
+        } else {
+            let invite = Invite()
+            
+            householdController.updateHousehold(household: household, memberIds: household.memberIds, adminIds: household.adminIds, categories: household.categories ?? [], invite: invite)
         }
         
         let code = [household.inviteCode]

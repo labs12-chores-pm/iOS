@@ -41,6 +41,7 @@ struct Household: Codable, Equatable {
         
         let invite = Invite()
         let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .full
         
         self.inviteDate = dateFormatter.string(from: invite.createdAt)
         self.inviteCode = invite.inviteCode
@@ -81,6 +82,7 @@ struct Household: Codable, Equatable {
         let invite = Invite()
         
         let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .full
         
         self.inviteDate = inviteDate ?? dateFormatter.string(from: invite.createdAt)
         self.inviteCode = inviteCode ?? invite.inviteCode

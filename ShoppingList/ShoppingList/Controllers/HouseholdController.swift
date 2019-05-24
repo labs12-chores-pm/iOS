@@ -30,14 +30,15 @@ class HouseholdController {
         let dateFormatter = DateFormatter()
         
         
-        if let createdAt = invite?.createdAt {
-            let dateString = dateFormatter.string(from: createdAt)
+        if let invite = invite {
+            updatedHousehold.inviteCode = invite.inviteCode
+            
+            let dateString = dateFormatter.string(from: invite.createdAt)
             updatedHousehold.inviteDate = dateString
         } else {
+            updatedHousehold.inviteCode = household.inviteCode
             updatedHousehold.inviteDate = household.inviteDate
         }
-        
-        updatedHousehold.inviteCode = invite?.inviteCode ?? household.inviteCode
         
         if updatedHousehold.categories != nil {
             updatedHousehold.categories?.append(contentsOf: categories)
@@ -116,7 +117,8 @@ class HouseholdController {
             }
             
             do {
-                let households = try JSONDecoder().decode([Household].self, from: data)
+                let householdsResponse = try JSONDecoder().decode([String: Household].self, from: data)
+                let households = householdsResponse.compactMap({ $0.value })
                 let household = households.filter({ $0.inviteCode == inviteCode }).first
                 completion(household, nil)
             } catch {

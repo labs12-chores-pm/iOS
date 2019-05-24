@@ -53,6 +53,16 @@ class MainCategoriesViewController: UIViewController {
         }
     }
     
+    private func updateViews() {
+        guard let household = household, let user = currentUser else { return }
+        
+        if household.adminIds.contains(user.identifier) {
+            addCategoryButton.isEnabled = true
+        } else {
+            addCategoryButton.isEnabled = false
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddCategory" {
             guard let destinationVC = segue.destination as? AddCategoryViewController, let user = currentUser else { return }
@@ -99,7 +109,13 @@ class MainCategoriesViewController: UIViewController {
             }
         }
     }
-    var household: Household?
+    var household: Household? {
+        didSet {
+            DispatchQueue.main.async {
+                self.updateViews()
+            }
+        }
+    }
 }
 
 extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSource {

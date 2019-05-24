@@ -26,7 +26,6 @@ class CreateHouseholdViewController: UIViewController {
         let householdController = householdController,
         let currentUser = currentUser else { return }
         
-        var newHousehold: Household!
         if isJoinForm {
             
             householdController.fetchHousehold(inviteCode: text) { (household, error) in
@@ -37,15 +36,23 @@ class CreateHouseholdViewController: UIViewController {
                 
                 guard let household = household else { return }
                 
-                newHousehold = household
+                let members = household.memberIds + [currentUser.identifier]
+                
+                householdController.updateHousehold(household: household, memberIds: members, adminIds: household.adminIds, categories: household.categories ?? [])
+                
+                userController.updateUser(user: currentUser, currentHouseholdId: household.identifier)
+                
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
             
         } else {
-            newHousehold = householdController.createHousehold(name: text, creatorId: currentUser.identifier)
+            let newHousehold = householdController.createHousehold(name: text, creatorId: currentUser.identifier)
+            
+            userController.updateUser(user: currentUser, currentHouseholdId: newHousehold.identifier)
+            self.navigationController?.popViewController(animated: true)
         }
-
-        userController.updateUser(user: currentUser, currentHouseholdId: newHousehold.identifier)        
-        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func joinCreateSegmentedControlValueChanged(_ sender: UISegmentedControl) {

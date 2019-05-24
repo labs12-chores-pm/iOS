@@ -46,16 +46,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="ZwL-LB-zGA">
-                        <barButtonItem key="leftBarButtonItem" title="Show Completed" id="lBt-qm-3wc">
-                            <connections>
-                                <action selector="showCompletedButtonWasTapped:" destination="xeI-eW-470" id="PcC-An-XxX"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="VyC-Ss-6JD">
-                            <connections>
-                                <action selector="addTaskButtonWasTapped:" destination="xeI-eW-470" id="qjO-ol-fzy"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="VyC-Ss-6JD">
+                                <connections>
+                                    <action selector="addTaskButtonWasTapped:" destination="xeI-eW-470" id="qjO-ol-fzy"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Completed" id="lBt-qm-3wc">
+                                <connections>
+                                    <action selector="showCompletedButtonWasTapped:" destination="xeI-eW-470" id="PcC-An-XxX"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="showCompletedButton" destination="lBt-qm-3wc" id="8md-9z-ONH"/>

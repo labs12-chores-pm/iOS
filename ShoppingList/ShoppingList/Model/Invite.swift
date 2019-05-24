@@ -101,11 +101,9 @@ extension String {
 struct Invite: Codable {
     let inviteCode: String
     let createdAt: Date
-    let identifier: UUID
     
     init() {
         self.inviteCode = .generateCode()
         self.createdAt = Date()
-        self.identifier = UUID()
     }
 }

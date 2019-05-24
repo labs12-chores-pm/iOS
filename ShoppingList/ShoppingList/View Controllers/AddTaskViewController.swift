@@ -160,7 +160,7 @@ class AddTaskViewController: UIViewController {
 extension AddTaskViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredResults.count
+        return filteredResults.count > 0 ? 1 : 0
     }
     
     
@@ -175,7 +175,7 @@ extension AddTaskViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         addCategoryTextField.text = filteredResults[indexPath.row].name
-        categoryTableView.isHidden = true
+        filteredResults = []
         addCategoryTextField.endEditing(true)
     }
 }
