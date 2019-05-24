@@ -29,6 +29,8 @@ class StartViewController: UIViewController {
                 }
                 
                 if let authResponse = authResponse {
+                
+                    self.authResponse = authResponse
                     
                     let currentUser = authResponse.user
                     
@@ -56,7 +58,9 @@ class StartViewController: UIViewController {
                 }
                 
                 if let authResponse = authResponse {
-            
+                    
+                    self.authResponse = authResponse
+                    
                     let currentUser = authResponse.user
                     guard let email = currentUser.email else { return }
                         
@@ -100,6 +104,8 @@ class StartViewController: UIViewController {
         }
     }
     
+    var authResponse: AuthDataResult?
+    
     let userController = UserController()
     let householdController = HouseholdController()
     
@@ -111,7 +117,10 @@ class StartViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowMain" {
-            guard let destinationVC = segue.destination as? TabViewViewController else { return }
+            guard let destinationVC = segue.destination as? TabViewViewController,
+            let authResponse = authResponse
+            else { return }
+            destinationVC.authResponse = authResponse
             destinationVC.userController = userController
             destinationVC.householdController = householdController
             if let user = currentUser {

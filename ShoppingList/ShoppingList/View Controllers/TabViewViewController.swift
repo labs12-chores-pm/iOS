@@ -25,6 +25,7 @@ class TabViewViewController: UITabBarController {
         }
     }
     
+    var authResponse: AuthDataResult?
     var userController: UserController?
     var currentUser: User?
     var householdController: HouseholdController?

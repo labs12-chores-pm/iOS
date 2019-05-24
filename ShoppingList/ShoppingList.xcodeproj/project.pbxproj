@@ -57,6 +57,8 @@
 		776BBD12228DCFCA0097A4D4 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */; };
 		77C645B922948EE80030AD34 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77C645B822948EE80030AD34 /* Messages.storyboard */; };
 		77C645BB22948F710030AD34 /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C645BA22948F710030AD34 /* MessagesTableViewController.swift */; };
+		77C9664522986A1E00549C89 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77C9664422986A1E00549C89 /* Profile.storyboard */; };
+		77C9664722986B4A00549C89 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9664622986B4A00549C89 /* ProfileViewController.swift */; };
 		77CABBD7228BAC98000E00A3 /* HouseholdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CABBD6228BAC98000E00A3 /* HouseholdViewController.swift */; };
 		77F678AC228A1268005C7C94 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678AB228A1268005C7C94 /* Note.swift */; };
 		77F678AF228A2B99005C7C94 /* HouseholdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678AE228A2B99005C7C94 /* HouseholdController.swift */; };
@@ -158,6 +160,8 @@
 		776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
 		77C645B822948EE80030AD34 /* Messages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
 		77C645BA22948F710030AD34 /* MessagesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewController.swift; sourceTree = "<group>"; };
+		77C9664422986A1E00549C89 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		77C9664622986B4A00549C89 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		77CABBD6228BAC98000E00A3 /* HouseholdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdViewController.swift; sourceTree = "<group>"; };
 		77F678AB228A1268005C7C94 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		77F678AE228A2B99005C7C94 /* HouseholdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdController.swift; sourceTree = "<group>"; };
@@ -339,6 +343,7 @@
 				773DC4AF228EEB0F00EB3121 /* Tasks.storyboard */,
 				77C645B822948EE80030AD34 /* Messages.storyboard */,
 				47F0A97122931EAC00AF2EA9 /* AddTask.storyboard */,
+				77C9664422986A1E00549C89 /* Profile.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -512,6 +517,7 @@
 				77C645BA22948F710030AD34 /* MessagesTableViewController.swift */,
 				47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */,
 				770271342296ECE8002134A2 /* NavigationViewController.swift */,
+				77C9664622986B4A00549C89 /* ProfileViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -632,6 +638,7 @@
 				96700E2E221C025E00F084B3 /* SettingsTableViewController.storyboard in Resources */,
 				771D344B228CAEC700C8BA13 /* GoogleService-Info.plist in Resources */,
 				44A1680C22381C0C00227DFB /* BarcodeScannerController.storyboard in Resources */,
+				77C9664522986A1E00549C89 /* Profile.storyboard in Resources */,
 				47E3FCA7228E782200A1CECE /* FirebaseLogin.storyboard in Resources */,
 				9691AB552225AEB600C1EE1E /* GroupsPopoverView.xib in Resources */,
 				96476B522215D41300E57EB9 /* Assets.xcassets in Resources */,
@@ -764,6 +771,7 @@
 				969A840D2215C99A0003BB37 /* UIImage+ChameleonPrivate.m in Sources */,
 				771D3440228C775F00C8BA13 /* HouseholdUserTableViewCell.swift in Sources */,
 				9663C68C2231D9250019FCED /* HistoryTableViewCell.swift in Sources */,
+				77C9664722986B4A00549C89 /* ProfileViewController.swift in Sources */,
 				771D3451228CCCC300C8BA13 /* CustomTableView.swift in Sources */,
 				447BEE43221F473300FA1D82 /* SessionManager.swift in Sources */,
 				77F678B1228A2D57005C7C94 /* Error.swift in Sources */,
