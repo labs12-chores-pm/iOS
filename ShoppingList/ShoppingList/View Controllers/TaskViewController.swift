@@ -39,7 +39,9 @@ class TaskViewController: UIViewController {
                 }
             }
         } else {
-            updateViews()
+            DispatchQueue.main.async {
+                self.updateViews()
+            }
         }
         
         userController.fetchUsers(inHousehold: household) { (members, error) in
@@ -152,7 +154,9 @@ class TaskViewController: UIViewController {
     
     var task: Task? {
         didSet {
-            updateViews()
+            DispatchQueue.main.async {
+                self.updateViews()
+            }
         }
     }
     

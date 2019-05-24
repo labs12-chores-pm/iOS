@@ -32,7 +32,7 @@
                                             <pickerView contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="X6N-s9-41K">
                                                 <rect key="frame" x="0.0" y="0.0" width="714" height="216"/>
                                             </pickerView>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsA-Mz-UIM">
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsA-Mz-UIM" customClass="MonkeyButton" customModule="ShoppingList" customModuleProvider="target">
                                                 <rect key="frame" x="722" y="0.0" width="30" height="216"/>
                                                 <state key="normal" title="+"/>
                                                 <connections>
@@ -53,16 +53,16 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="McI-aY-Tgq">
-                                                            <rect key="frame" x="15" y="11" width="978" height="28"/>
+                                                            <rect key="frame" x="15" y="11" width="722" height="28"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ep-W1-lqU">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="485" height="28"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="357" height="28"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8wh-wp-00O">
-                                                                    <rect key="frame" x="493" y="0.0" width="485" height="29"/>
+                                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8wh-wp-00O" customClass="YellowSegments" customModule="ShoppingList" customModuleProvider="target">
+                                                                    <rect key="frame" x="365" y="0.0" width="357" height="29"/>
                                                                     <segments>
                                                                         <segment title="Admin"/>
                                                                         <segment title="Non-admin"/>
@@ -74,14 +74,14 @@
                                                             </constraints>
                                                         </stackView>
                                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XD6-qd-tUB">
-                                                            <rect key="frame" x="0.0" y="47" width="1008" height="102.5"/>
+                                                            <rect key="frame" x="0.0" y="47" width="752" height="102.5"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <prototypes>
                                                                 <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CurrentTasksCell" textLabel="Y2Q-EE-RHN" detailTextLabel="InB-p8-lbX" style="IBUITableViewCellStyleValue1" id="kWc-eh-Wo9">
-                                                                    <rect key="frame" x="0.0" y="28" width="1008" height="44"/>
+                                                                    <rect key="frame" x="0.0" y="28" width="752" height="44"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kWc-eh-Wo9" id="3Ij-SC-BxX">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="1008" height="43.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="752" height="43.5"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
                                                                             <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Y2Q-EE-RHN">
@@ -92,7 +92,7 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="InB-p8-lbX">
-                                                                                <rect key="frame" x="949" y="12" width="44" height="20.5"/>
+                                                                                <rect key="frame" x="693" y="12" width="44" height="20.5"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
@@ -123,7 +123,7 @@
                                         </prototypes>
                                         <sections/>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78d-dv-iaz">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78d-dv-iaz" customClass="DiscreteButton" customModule="ShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="440" width="752" height="448"/>
                                         <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="17"/>
                                         <state key="normal" title="Leave Household"/>
@@ -178,14 +178,14 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="xjZ-DV-iiS">
                                 <rect key="frame" x="284" y="417" width="200" height="190"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="iZX-aY-4LK">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="iZX-aY-4LK" customClass="YellowSegments" customModule="ShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="29"/>
                                         <segments>
                                             <segment title="Admin"/>
                                             <segment title="Non-admin"/>
                                         </segments>
                                     </segmentedControl>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rZw-Ft-2Hy">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rZw-Ft-2Hy" customClass="BlueField" customModule="ShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="52" width="200" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="x5D-dk-lAC"/>
@@ -194,13 +194,13 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TYF-GO-zeA">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TYF-GO-zeA" customClass="BlueField" customModule="ShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="106" width="200" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6c-52-0A4">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6c-52-0A4" customClass="MonkeyButton" customModule="ShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="160" width="200" height="30"/>
                                         <state key="normal" title="Send Invite"/>
                                         <connections>

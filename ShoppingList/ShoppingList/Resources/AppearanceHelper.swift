@@ -26,8 +26,6 @@ class AppearanceHelper {
         UIBarButtonItem.appearance().setTitleTextAttributes(buttonAttributes, for: .highlighted)
     }
     
-    
-    
     static func styleFont(with textStyle: UIFont.TextStyle, pointSize: CGFloat) -> UIFont {
         let font = UIFont(name: "Nunito", size: pointSize)!
         return UIFontMetrics(forTextStyle: textStyle).scaledFont(for: font)

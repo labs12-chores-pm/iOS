@@ -34,6 +34,10 @@
 		770271362297052D002134A2 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 770271332295FE82002134A2 /* Nunito-Bold.ttf */; };
 		7702713722970530002134A2 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 770271322295FE82002134A2 /* Nunito-Regular.ttf */; };
 		7702713B22971401002134A2 /* MonkeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7702713A22971401002134A2 /* MonkeyButton.swift */; };
+		7702713D22972F0D002134A2 /* BlueField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7702713C22972F0D002134A2 /* BlueField.swift */; };
+		7702713F229734A4002134A2 /* YellowSegments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7702713E229734A4002134A2 /* YellowSegments.swift */; };
+		77027141229736C1002134A2 /* WhiteSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77027140229736C1002134A2 /* WhiteSegmentedControl.swift */; };
+		7702714322977746002134A2 /* DiscreteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7702714222977746002134A2 /* DiscreteButton.swift */; };
 		771D343B228C654000C8BA13 /* Household.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 771D343A228C654000C8BA13 /* Household.storyboard */; };
 		771D3440228C775F00C8BA13 /* HouseholdUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D343E228C775F00C8BA13 /* HouseholdUserTableViewCell.swift */; };
 		771D3443228C7B7F00C8BA13 /* Roles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D3442228C7B7F00C8BA13 /* Roles.swift */; };
@@ -132,6 +136,10 @@
 		770271332295FE82002134A2 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		770271342296ECE8002134A2 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		7702713A22971401002134A2 /* MonkeyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonkeyButton.swift; sourceTree = "<group>"; };
+		7702713C22972F0D002134A2 /* BlueField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueField.swift; sourceTree = "<group>"; };
+		7702713E229734A4002134A2 /* YellowSegments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowSegments.swift; sourceTree = "<group>"; };
+		77027140229736C1002134A2 /* WhiteSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteSegmentedControl.swift; sourceTree = "<group>"; };
+		7702714222977746002134A2 /* DiscreteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscreteButton.swift; sourceTree = "<group>"; };
 		771D343A228C654000C8BA13 /* Household.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Household.storyboard; sourceTree = "<group>"; };
 		771D343E228C775F00C8BA13 /* HouseholdUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdUserTableViewCell.swift; sourceTree = "<group>"; };
 		771D3442228C7B7F00C8BA13 /* Roles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roles.swift; sourceTree = "<group>"; };
@@ -373,6 +381,10 @@
 				9663C6832231CF400019FCED /* NoItemsView.swift */,
 				771D3450228CCCC300C8BA13 /* CustomTableView.swift */,
 				7702713A22971401002134A2 /* MonkeyButton.swift */,
+				7702713C22972F0D002134A2 /* BlueField.swift */,
+				7702713E229734A4002134A2 /* YellowSegments.swift */,
+				77027140229736C1002134A2 /* WhiteSegmentedControl.swift */,
+				7702714222977746002134A2 /* DiscreteButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -697,6 +709,7 @@
 				44A16801222746E600227DFB /* ItemController.swift in Sources */,
 				44A1680922318BE700227DFB /* InviteController.swift in Sources */,
 				773DC4AC228ED52C00EB3121 /* StartViewController.swift in Sources */,
+				7702713F229734A4002134A2 /* YellowSegments.swift in Sources */,
 				969A84092215C99A0003BB37 /* UINavigationController+Chameleon.m in Sources */,
 				118646E0221DCE9B00D0F04B /* UserController.swift in Sources */,
 				773DC4B6228EF15E00EB3121 /* TaskViewController.swift in Sources */,
@@ -710,6 +723,7 @@
 				11F5380D221F51EA0046BDFC /* HelperFile.swift in Sources */,
 				77C645BB22948F710030AD34 /* MessagesTableViewController.swift in Sources */,
 				47F0A97022931E9500AF2EA9 /* AddTaskViewController.swift in Sources */,
+				77027141229736C1002134A2 /* WhiteSegmentedControl.swift in Sources */,
 				96CBFBED22285E7200A6B41E /* NewGroupPopoverView.swift in Sources */,
 				770271352296ECE8002134A2 /* NavigationViewController.swift in Sources */,
 				770271312295FBBE002134A2 /* AppearanceHelper.swift in Sources */,
@@ -718,6 +732,7 @@
 				77CABBD7228BAC98000E00A3 /* HouseholdViewController.swift in Sources */,
 				771D344D228CB33300C8BA13 /* NotesController.swift in Sources */,
 				96E7BE60221DC149004EE9FF /* Helpers.swift in Sources */,
+				7702714322977746002134A2 /* DiscreteButton.swift in Sources */,
 				776BBD12228DCFCA0097A4D4 /* InvitationViewController.swift in Sources */,
 				96700E31221C035600F084B3 /* SettingsTableViewController.swift in Sources */,
 				969A84022215C99A0003BB37 /* UIColor+ChameleonPrivate.m in Sources */,
@@ -737,6 +752,7 @@
 				969A84062215C99A0003BB37 /* UIView+ChameleonPrivate.m in Sources */,
 				44A1680522276F1000227DFB /* HistoryController.swift in Sources */,
 				96DE3033221637FE00213C3E /* MainViewController.swift in Sources */,
+				7702713D22972F0D002134A2 /* BlueField.swift in Sources */,
 				119B303D2225ABC300DF93E6 /* GroupMemberController.swift in Sources */,
 				96DE3034221637FE00213C3E /* LoginViewController.swift in Sources */,
 				969A84082215C99A0003BB37 /* NSArray+Chameleon.m in Sources */,
