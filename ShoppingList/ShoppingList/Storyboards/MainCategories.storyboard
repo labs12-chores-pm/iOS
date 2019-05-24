@@ -32,7 +32,10 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuG-Z9-puT" customClass="MonkeyButton" customModule="ShoppingList" customModuleProvider="target">
                                                 <rect key="frame" x="368" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="Add"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="GuG-Z9-puT" secondAttribute="height" multiplier="1:1" id="TvI-h0-xru"/>
+                                                </constraints>
+                                                <state key="normal" title="➕"/>
                                                 <connections>
                                                     <segue destination="nIq-1m-TZz" kind="show" identifier="AddCategory" id="szb-0X-gfk"/>
                                                 </connections>
@@ -118,13 +121,19 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P4t-Cd-GeO" customClass="MonkeyButton" customModule="ShoppingList" customModuleProvider="target">
-                                        <rect key="frame" x="43.5" y="38" width="113" height="30"/>
+                                        <rect key="frame" x="0.0" y="38" width="200" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="HYy-Zw-L1S"/>
+                                        </constraints>
                                         <state key="normal" title="Create Category"/>
                                         <connections>
                                             <action selector="createCategoryButtonWasTapped:" destination="nIq-1m-TZz" eventType="touchUpInside" id="I2n-Cq-4t3"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="P4t-Cd-GeO" firstAttribute="width" secondItem="TVX-ua-eQJ" secondAttribute="width" id="KGT-ks-DKx"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
