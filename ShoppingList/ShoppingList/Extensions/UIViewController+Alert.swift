@@ -1,5 +1,5 @@
 //
-//  AlertExtension.swift
+//  UIViewController+Alert.swift
 //  ShoppingList
 //
 //  Created by Jerrick Warren on 5/22/19.
