@@ -80,7 +80,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="n0W-2g-Ydt"/>
                     </view>
-                    <navigationItem key="navigationItem" id="gEb-CJ-auc"/>
+                    <navigationItem key="navigationItem" id="xMr-td-8qH">
+                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="N9Y-0O-yU1">
+                            <connections>
+                                <action selector="signOutButtonTapped:" destination="Pts-uP-NbP" id="Ufp-Cs-hY9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addCategoryButton" destination="GuG-Z9-puT" id="dxU-Sd-S7O"/>

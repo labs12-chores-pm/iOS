@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class MainCategoriesViewController: UIViewController {
     
@@ -60,6 +61,13 @@ class MainCategoriesViewController: UIViewController {
             addCategoryButton.isEnabled = true
         } else {
             addCategoryButton.isEnabled = false
+        }
+    }
+    
+    @IBAction func signOutButtonTapped(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true) {
+            self.currentUser = nil
+            try? Auth.auth().signOut()
         }
     }
     
