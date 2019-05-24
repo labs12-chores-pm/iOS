@@ -205,8 +205,9 @@ class HouseholdViewController: UIViewController {
         
         if segue.identifier == "ShowInvite" {
             guard let inviteVC = segue.destination as? InvitationViewController,
-            let household = household else { return }
+            let household = household, let householdController = householdController else { return }
             inviteVC.household = household
+            inviteVC.householdController = householdController
         }
         
         if segue.identifier == "ShowMessages" {

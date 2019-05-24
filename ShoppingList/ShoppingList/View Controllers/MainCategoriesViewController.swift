@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class MainCategoriesViewController: UIViewController {
     
@@ -24,15 +25,14 @@ class MainCategoriesViewController: UIViewController {
             self.categoryController = tabBar.categoryController
             self.notesController = tabBar.notesController
         }
-        fetchCategories()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(fetchCategories), name: NSNotification.Name("addedCategory"), object: nil)
+        fetchCategories()
     }
     
-    @objc func fetchCategories() {
+    private func fetchCategories() {
         guard let user = currentUser, let categoryController = categoryController else { return }
         let householdId = user.currentHouseholdId
         categoryController.fetchCategories(householdId: householdId) { (categories, error) in
@@ -51,6 +51,23 @@ class MainCategoriesViewController: UIViewController {
                 }
                 self.household = household
             }
+        }
+    }
+    
+    private func updateViews() {
+        guard let household = household, let user = currentUser else { return }
+        
+        if household.adminIds.contains(user.identifier) {
+            addCategoryButton.isEnabled = true
+        } else {
+            addCategoryButton.isEnabled = false
+        }
+    }
+    
+    @IBAction func signOutButtonTapped(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true) {
+            self.currentUser = nil
+            try? Auth.auth().signOut()
         }
     }
     
@@ -100,7 +117,13 @@ class MainCategoriesViewController: UIViewController {
             }
         }
     }
-    var household: Household?
+    var household: Household? {
+        didSet {
+            DispatchQueue.main.async {
+                self.updateViews()
+            }
+        }
+    }
 }
 
 extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSource {

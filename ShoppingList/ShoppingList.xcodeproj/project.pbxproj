@@ -15,21 +15,28 @@
 		119B303D2225ABC300DF93E6 /* GroupMemberController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119B303C2225ABC300DF93E6 /* GroupMemberController.swift */; };
 		11F5380D221F51EA0046BDFC /* HelperFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5380C221F51EA0046BDFC /* HelperFile.swift */; };
 		3E4A05782BD43D7F4A2A4CF1 /* Pods_ShoppingList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9680B9B09C09F66F2ABF9AFB /* Pods_ShoppingList.framework */; };
-		443C1B4E221B628D00220C28 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 443C1B4D221B628D00220C28 /* Auth0.plist */; };
 		447BEE43221F473300FA1D82 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447BEE42221F473300FA1D82 /* SessionManager.swift */; };
 		44A16801222746E600227DFB /* ItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A16800222746E600227DFB /* ItemController.swift */; };
 		44A1680522276F1000227DFB /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1680422276F1000227DFB /* HistoryController.swift */; };
-		44A16807222F418C00227DFB /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A16806222F418C00227DFB /* Invitation.swift */; };
-		44A1680922318BE700227DFB /* InviteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1680822318BE700227DFB /* InviteController.swift */; };
+		44A16807222F418C00227DFB /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A16806222F418C00227DFB /* Invite.swift */; };
 		44A1680C22381C0C00227DFB /* BarcodeScannerController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44A1680B22381C0B00227DFB /* BarcodeScannerController.storyboard */; };
 		44A16810223820DC00227DFB /* BarcodeScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1680E223820DC00227DFB /* BarcodeScannerController.swift */; };
-		473D56852295B1B600C1CFF4 /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473D56842295B1B600C1CFF4 /* AlertExtension.swift */; };
+		473D56852295B1B600C1CFF4 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473D56842295B1B600C1CFF4 /* UIViewController+Alert.swift */; };
 		473ED23B228DD4A900678E7E /* TaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473ED23A228DD4A900678E7E /* TaskController.swift */; };
 		473ED23D228DDE3E00678E7E /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473ED23C228DDE3E00678E7E /* CategoryController.swift */; };
 		47E3FCA5228E780800A1CECE /* FirebaseLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E3FCA4228E780800A1CECE /* FirebaseLoginViewController.swift */; };
 		47E3FCA7228E782200A1CECE /* FirebaseLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47E3FCA6228E782200A1CECE /* FirebaseLogin.storyboard */; };
 		47F0A97022931E9500AF2EA9 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */; };
 		47F0A97222931EAC00AF2EA9 /* AddTask.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F0A97122931EAC00AF2EA9 /* AddTask.storyboard */; };
+		770271312295FBBE002134A2 /* AppearanceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770271302295FBBE002134A2 /* AppearanceHelper.swift */; };
+		770271352296ECE8002134A2 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770271342296ECE8002134A2 /* NavigationViewController.swift */; };
+		770271362297052D002134A2 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 770271332295FE82002134A2 /* Nunito-Bold.ttf */; };
+		7702713722970530002134A2 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 770271322295FE82002134A2 /* Nunito-Regular.ttf */; };
+		7702713B22971401002134A2 /* MonkeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7702713A22971401002134A2 /* MonkeyButton.swift */; };
+		7702713D22972F0D002134A2 /* BlueField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7702713C22972F0D002134A2 /* BlueField.swift */; };
+		7702713F229734A4002134A2 /* YellowSegments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7702713E229734A4002134A2 /* YellowSegments.swift */; };
+		77027141229736C1002134A2 /* WhiteSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77027140229736C1002134A2 /* WhiteSegmentedControl.swift */; };
+		7702714322977746002134A2 /* DiscreteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7702714222977746002134A2 /* DiscreteButton.swift */; };
 		771D343B228C654000C8BA13 /* Household.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 771D343A228C654000C8BA13 /* Household.storyboard */; };
 		771D3440228C775F00C8BA13 /* HouseholdUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D343E228C775F00C8BA13 /* HouseholdUserTableViewCell.swift */; };
 		771D3443228C7B7F00C8BA13 /* Roles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D3442228C7B7F00C8BA13 /* Roles.swift */; };
@@ -109,21 +116,28 @@
 		119B303C2225ABC300DF93E6 /* GroupMemberController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMemberController.swift; sourceTree = "<group>"; };
 		11F5380C221F51EA0046BDFC /* HelperFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFile.swift; sourceTree = "<group>"; };
 		443C1B322214A45100220C28 /* ShoppingList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingList.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		443C1B4D221B628D00220C28 /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
 		447BEE42221F473300FA1D82 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		44A16800222746E600227DFB /* ItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemController.swift; sourceTree = "<group>"; };
 		44A1680422276F1000227DFB /* HistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
-		44A16806222F418C00227DFB /* Invitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invitation.swift; sourceTree = "<group>"; };
-		44A1680822318BE700227DFB /* InviteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteController.swift; sourceTree = "<group>"; };
+		44A16806222F418C00227DFB /* Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
 		44A1680B22381C0B00227DFB /* BarcodeScannerController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BarcodeScannerController.storyboard; sourceTree = "<group>"; };
 		44A1680E223820DC00227DFB /* BarcodeScannerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerController.swift; sourceTree = "<group>"; };
-		473D56842295B1B600C1CFF4 /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
+		473D56842295B1B600C1CFF4 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		473ED23A228DD4A900678E7E /* TaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskController.swift; sourceTree = "<group>"; };
 		473ED23C228DDE3E00678E7E /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
 		47E3FCA4228E780800A1CECE /* FirebaseLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseLoginViewController.swift; sourceTree = "<group>"; };
 		47E3FCA6228E782200A1CECE /* FirebaseLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FirebaseLogin.storyboard; sourceTree = "<group>"; };
 		47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		47F0A97122931EAC00AF2EA9 /* AddTask.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddTask.storyboard; sourceTree = "<group>"; };
+		770271302295FBBE002134A2 /* AppearanceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceHelper.swift; sourceTree = "<group>"; };
+		770271322295FE82002134A2 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
+		770271332295FE82002134A2 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		770271342296ECE8002134A2 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		7702713A22971401002134A2 /* MonkeyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonkeyButton.swift; sourceTree = "<group>"; };
+		7702713C22972F0D002134A2 /* BlueField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueField.swift; sourceTree = "<group>"; };
+		7702713E229734A4002134A2 /* YellowSegments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowSegments.swift; sourceTree = "<group>"; };
+		77027140229736C1002134A2 /* WhiteSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteSegmentedControl.swift; sourceTree = "<group>"; };
+		7702714222977746002134A2 /* DiscreteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscreteButton.swift; sourceTree = "<group>"; };
 		771D343A228C654000C8BA13 /* Household.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Household.storyboard; sourceTree = "<group>"; };
 		771D343E228C775F00C8BA13 /* HouseholdUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseholdUserTableViewCell.swift; sourceTree = "<group>"; };
 		771D3442228C7B7F00C8BA13 /* Roles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roles.swift; sourceTree = "<group>"; };
@@ -238,7 +252,6 @@
 				44A16800222746E600227DFB /* ItemController.swift */,
 				118646DF221DCE9B00D0F04B /* UserController.swift */,
 				44A1680422276F1000227DFB /* HistoryController.swift */,
-				44A1680822318BE700227DFB /* InviteController.swift */,
 				77F678AE228A2B99005C7C94 /* HouseholdController.swift */,
 				771D344C228CB33300C8BA13 /* NotesController.swift */,
 			);
@@ -289,7 +302,7 @@
 				118646D3221CA8CD00D0F04B /* Household.swift */,
 				118646D5221CA93900D0F04B /* Task.swift */,
 				118646D7221CA9D900D0F04B /* User.swift */,
-				44A16806222F418C00227DFB /* Invitation.swift */,
+				44A16806222F418C00227DFB /* Invite.swift */,
 				77F678AB228A1268005C7C94 /* Note.swift */,
 				77F678B0228A2D57005C7C94 /* Error.swift */,
 				771D3442228C7B7F00C8BA13 /* Roles.swift */,
@@ -319,10 +332,10 @@
 		77CABBD5228BAC77000E00A3 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				771D343A228C654000C8BA13 /* Household.storyboard */,
 				771D3444228C7EFE00C8BA13 /* TabView.storyboard */,
-				776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */,
 				7721FE4A228E098200334208 /* MainCategories.storyboard */,
+				771D343A228C654000C8BA13 /* Household.storyboard */,
+				776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */,
 				773DC4AF228EEB0F00EB3121 /* Tasks.storyboard */,
 				77C645B822948EE80030AD34 /* Messages.storyboard */,
 				47F0A97122931EAC00AF2EA9 /* AddTask.storyboard */,
@@ -333,7 +346,7 @@
 		77F678AD228A1273005C7C94 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				473D56842295B1B600C1CFF4 /* AlertExtension.swift */,
+				473D56842295B1B600C1CFF4 /* UIViewController+Alert.swift */,
 				96029A45223198FA00F7F7AE /* Double+Currency.swift */,
 			);
 			path = Extensions;
@@ -364,6 +377,11 @@
 				96029A43223189D500F7F7AE /* NoItemsView.xib */,
 				9663C6832231CF400019FCED /* NoItemsView.swift */,
 				771D3450228CCCC300C8BA13 /* CustomTableView.swift */,
+				7702713A22971401002134A2 /* MonkeyButton.swift */,
+				7702713C22972F0D002134A2 /* BlueField.swift */,
+				7702713E229734A4002134A2 /* YellowSegments.swift */,
+				77027140229736C1002134A2 /* WhiteSegmentedControl.swift */,
+				7702714222977746002134A2 /* DiscreteButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -394,12 +412,14 @@
 		969A83C02215C94F0003BB37 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				770271332295FE82002134A2 /* Nunito-Bold.ttf */,
+				770271322295FE82002134A2 /* Nunito-Regular.ttf */,
 				771D344A228CAEC700C8BA13 /* GoogleService-Info.plist */,
 				77F678C5228B37C2005C7C94 /* CoreDataStack.swift */,
 				96476B482215D40700E57EB9 /* Info.plist */,
 				96476B4F2215D41300E57EB9 /* Assets.xcassets */,
 				96476B4D2215D41300E57EB9 /* LaunchScreen.storyboard */,
-				443C1B4D221B628D00220C28 /* Auth0.plist */,
+				770271302295FBBE002134A2 /* AppearanceHelper.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -491,6 +511,7 @@
 				773DC4B5228EF15E00EB3121 /* TaskViewController.swift */,
 				77C645BA22948F710030AD34 /* MessagesTableViewController.swift */,
 				47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */,
+				770271342296ECE8002134A2 /* NavigationViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -593,12 +614,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7702713722970530002134A2 /* Nunito-Regular.ttf in Resources */,
 				47F0A97222931EAC00AF2EA9 /* AddTask.storyboard in Resources */,
 				776BBD10228DC3900097A4D4 /* JoinCreateHousehold.storyboard in Resources */,
 				96A6E0142231C4040006994E /* CheckoutPopoverView.xib in Resources */,
 				96029A422231604800F7F7AE /* MainViewController.storyboard in Resources */,
 				771D3445228C7EFE00C8BA13 /* TabView.storyboard in Resources */,
-				443C1B4E221B628D00220C28 /* Auth0.plist in Resources */,
 				77C645B922948EE80030AD34 /* Messages.storyboard in Resources */,
 				9663C6892231D4880019FCED /* ItemTableViewCell.xib in Resources */,
 				7721FE4B228E098200334208 /* MainCategories.storyboard in Resources */,
@@ -616,6 +637,7 @@
 				96476B522215D41300E57EB9 /* Assets.xcassets in Resources */,
 				968D512C222EBA5900179241 /* NewItemPopoverView.xib in Resources */,
 				9663C68D2231D9250019FCED /* HistoryTableViewCell.xib in Resources */,
+				770271362297052D002134A2 /* Nunito-Bold.ttf in Resources */,
 				960FBF6B221C41570076C662 /* MessagePopoverView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -682,8 +704,8 @@
 				96DE302A221637EB00213C3E /* Constants.swift in Sources */,
 				118646D8221CA9D900D0F04B /* User.swift in Sources */,
 				44A16801222746E600227DFB /* ItemController.swift in Sources */,
-				44A1680922318BE700227DFB /* InviteController.swift in Sources */,
 				773DC4AC228ED52C00EB3121 /* StartViewController.swift in Sources */,
+				7702713F229734A4002134A2 /* YellowSegments.swift in Sources */,
 				969A84092215C99A0003BB37 /* UINavigationController+Chameleon.m in Sources */,
 				118646E0221DCE9B00D0F04B /* UserController.swift in Sources */,
 				773DC4B6228EF15E00EB3121 /* TaskViewController.swift in Sources */,
@@ -697,12 +719,16 @@
 				11F5380D221F51EA0046BDFC /* HelperFile.swift in Sources */,
 				77C645BB22948F710030AD34 /* MessagesTableViewController.swift in Sources */,
 				47F0A97022931E9500AF2EA9 /* AddTaskViewController.swift in Sources */,
+				77027141229736C1002134A2 /* WhiteSegmentedControl.swift in Sources */,
 				96CBFBED22285E7200A6B41E /* NewGroupPopoverView.swift in Sources */,
+				770271352296ECE8002134A2 /* NavigationViewController.swift in Sources */,
+				770271312295FBBE002134A2 /* AppearanceHelper.swift in Sources */,
 				44A16810223820DC00227DFB /* BarcodeScannerController.swift in Sources */,
-				473D56852295B1B600C1CFF4 /* AlertExtension.swift in Sources */,
+				473D56852295B1B600C1CFF4 /* UIViewController+Alert.swift in Sources */,
 				77CABBD7228BAC98000E00A3 /* HouseholdViewController.swift in Sources */,
 				771D344D228CB33300C8BA13 /* NotesController.swift in Sources */,
 				96E7BE60221DC149004EE9FF /* Helpers.swift in Sources */,
+				7702714322977746002134A2 /* DiscreteButton.swift in Sources */,
 				776BBD12228DCFCA0097A4D4 /* InvitationViewController.swift in Sources */,
 				96700E31221C035600F084B3 /* SettingsTableViewController.swift in Sources */,
 				969A84022215C99A0003BB37 /* UIColor+ChameleonPrivate.m in Sources */,
@@ -722,12 +748,14 @@
 				969A84062215C99A0003BB37 /* UIView+ChameleonPrivate.m in Sources */,
 				44A1680522276F1000227DFB /* HistoryController.swift in Sources */,
 				96DE3033221637FE00213C3E /* MainViewController.swift in Sources */,
+				7702713D22972F0D002134A2 /* BlueField.swift in Sources */,
 				119B303D2225ABC300DF93E6 /* GroupMemberController.swift in Sources */,
 				96DE3034221637FE00213C3E /* LoginViewController.swift in Sources */,
 				969A84082215C99A0003BB37 /* NSArray+Chameleon.m in Sources */,
 				47E3FCA5228E780800A1CECE /* FirebaseLoginViewController.swift in Sources */,
 				77F678C6228B37C2005C7C94 /* CoreDataStack.swift in Sources */,
-				44A16807222F418C00227DFB /* Invitation.swift in Sources */,
+				44A16807222F418C00227DFB /* Invite.swift in Sources */,
+				7702713B22971401002134A2 /* MonkeyButton.swift in Sources */,
 				96A6E0162231C5240006994E /* CheckoutPopoverView.swift in Sources */,
 				969A840A2215C99A0003BB37 /* UILabel+Chameleon.m in Sources */,
 				7721FE4F228E238200334208 /* TabViewViewController.swift in Sources */,
@@ -890,7 +918,7 @@
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7JG93VFG2G;
+				DEVELOPMENT_TEAM = VXUQXR6S56;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/ShoppingList/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -903,7 +931,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "ShoppingList/Frameworks/Chameleon/ShoppingList-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -916,7 +944,7 @@
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7JG93VFG2G;
+				DEVELOPMENT_TEAM = VXUQXR6S56;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/ShoppingList/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -928,7 +956,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShoppingList/Frameworks/Chameleon/ShoppingList-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

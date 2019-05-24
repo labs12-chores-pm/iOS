@@ -19,13 +19,26 @@ class HouseholdController {
         return newHousehold
     }
     
-    func updateHousehold(household: Household, name: String? = nil, memberIds: [UUID], adminIds: [UUID], categories: [Category]) {
+    func updateHousehold(household: Household, name: String? = nil, memberIds: [UUID], adminIds: [UUID], categories: [Category], invite: Invite? = nil) {
         
         var updatedHousehold = household
         
         updatedHousehold.name = name ?? household.name
         updatedHousehold.memberIds.append(contentsOf: memberIds)
         updatedHousehold.adminIds.append(contentsOf: adminIds)
+        
+        let dateFormatter = DateFormatter()
+        
+        
+        if let invite = invite {
+            updatedHousehold.inviteCode = invite.inviteCode
+            
+            let dateString = dateFormatter.string(from: invite.createdAt)
+            updatedHousehold.inviteDate = dateString
+        } else {
+            updatedHousehold.inviteCode = household.inviteCode
+            updatedHousehold.inviteDate = household.inviteDate
+        }
         
         if updatedHousehold.categories != nil {
             updatedHousehold.categories?.append(contentsOf: categories)
@@ -74,6 +87,39 @@ class HouseholdController {
             
             do {
                 let household = try JSONDecoder().decode(Household.self, from: data)
+                completion(household, nil)
+            } catch {
+                completion(nil, NetworkError.decodingData)
+            }
+            return
+        }
+        
+        task.resume()
+    }
+    
+    func fetchHousehold(inviteCode: String, completion: @escaping (Household?, Error?) -> Void) {
+        
+        let householdsURL = baseURL.appendingPathComponent("households").appendingPathExtension("json")
+        let request = URLRequest(url: householdsURL)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            
+            if let error = error {
+                print(error)
+                completion(nil, NetworkError.urlSession)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data")
+                completion(nil, NetworkError.dataMissing)
+                return
+            }
+            
+            do {
+                let householdsResponse = try JSONDecoder().decode([String: Household].self, from: data)
+                let households = householdsResponse.compactMap({ $0.value })
+                let household = households.filter({ $0.inviteCode == inviteCode }).first
                 completion(household, nil)
             } catch {
                 completion(nil, NetworkError.decodingData)

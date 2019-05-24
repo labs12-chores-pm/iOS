@@ -8,42 +8,7 @@
 
 import UIKit
 
-class AddTaskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
-   
-    // Properties
-    var categories: [Category]?
-    var userController: UserController?
-    var currentUser: User?
-    var householdController: HouseholdController?
-    
-    var taskController : TaskController?
-    var categoryController : CategoryController?
-    
-    var task : Task?
-    var catID : UUID?  
-    var category : Category?
-    var household : Household?
-    
-    let mainCategoriesViewController = MainCategoriesViewController()
-    
-    // category reuse Identifier
-    
-    let reuseIdentifier = "searchCategoryCell"
-    
-    var filteredResults : [Category] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.categoryTableView.reloadData()
-            }
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        fetchCategories()
-    }
-    
+class AddTaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,8 +26,7 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
             self.householdController = tabBar.householdController
             self.userController = tabBar.userController
             self.categoryController = tabBar.categoryController
-            
-            
+            self.notesController = tabBar.notesController
         }
         
         if let householdController = householdController, let user = currentUser {
@@ -74,10 +38,11 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
                 self.household = household
             }
         }
+    }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         fetchCategories()
-        print(categories)
-        
     }
     
     @objc func fetchCategories() {
@@ -93,9 +58,8 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
-    
     func checkCategory() {
-        // check inside the filtered category
+
         if let category = filteredResults.first {
             self.catID = category.identifier
             self.category = category
@@ -103,96 +67,32 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
             guard let user = currentUser,
                   let name = addCategoryTextField.text else { return }
             let householdId = user.currentHouseholdId
-           
             self.category = categoryController?.createCategory(householdId: householdId, name: name)
         }
-        
-        
-    }
-    
-    // IBOutlets
-    
-    @IBOutlet weak var categoryTableView: UITableView!
-    
-    @IBOutlet weak var addCategoryTextField: UITextField!
-   
-    @IBOutlet weak var addTaskTextField: UITextField!
-    
-    @IBAction func tappedCategoryTextField(_ sender: Any) {
     }
     
     @IBAction func addTaskButton(_ sender: Any) {
         
         checkCategory()
-  
         
+        guard let addTask = self.addTaskTextField.text,
+        let categoryID = self.catID, let taskController = self.taskController,
+        let household = household else {
+            addTaskButton.shake()
+            return
+        }
+  
         displayMsg(title: "Please Confirm", msg: "Are you sure you want to add this task?", style: .alert) { (isConfirmed) in
             
     
             if let isConfirmed = isConfirmed, isConfirmed == true {
-                guard let addTask = self.addTaskTextField.text ,
-                    let categoryID = self.catID,
-                let taskController = self.taskController
-                    else { return }
                 
-                self.task = taskController.createTask(description: addTask, categoryId: categoryID, assineeIds: [], dueDate: Date(), isComplete: false)
+                self.task = taskController.createTask(description: addTask, categoryId: categoryID, assineeIds: [], dueDate: Date(), isComplete: false, householdId: household.identifier)
                 
                 
                 self.performSegue(withIdentifier: "back2task", sender: self)
             }
         }
-    }
-    
-    
-    //  add the the TextField
-    
-    
-    
-    // MARK: UITextFieldDelegate
-    func textFieldDidEndEditing(_ textField: UITextField) {
-    
-        print("What whould you like to go here?")
-        
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    textField.resignFirstResponder()
-    return true
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        guard let text = addCategoryTextField.text, let categories = categories else { return true }
-        let filteredResults = categories.filter{$0.name.lowercased().contains(text.lowercased())}
-        //let filteredNames = filteredResults.compactMap { $0.name }
-        
-        self.filteredResults = filteredResults
-        
-        return true
-    }
-    
-    
-    // Tableview protocols
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredResults.count
-    }
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-        print(cell)
-        cell.textLabel?.text = filteredResults[indexPath.row].name
-        
-        return cell
-    }
-    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Row selected, so set textField to relevant value, hide tableView
-        // endEditing can trigger some other action according to requirements
-        addCategoryTextField.text = filteredResults[indexPath.row].name
-        categoryTableView.isHidden = true
-        addCategoryTextField.endEditing(true)
     }
     
     // perform segue
@@ -204,28 +104,97 @@ class AddTaskViewController: UIViewController, UITableViewDataSource, UITableVie
                   let category = category,
                   let currentUser = currentUser,
                   let household = household,
-            let userController = userController else {return}
+            let userController = userController,
+            let notesController = notesController,
+            let taskController = taskController
+            else {return}
             
-            
-           
-            print(task)
-            print(category)
-            
-        
             destinationVC.taskController = taskController
             destinationVC.task = task
             destinationVC.category = category
             destinationVC.household = household
             destinationVC.userController = userController
             destinationVC.currentUser = currentUser
+            destinationVC.notesController = notesController
         }
-        
+    }
+    
+    // IBOutlets
+    
+    @IBOutlet weak var categoryTableView: UITableView!
+    @IBOutlet weak var addCategoryTextField: UITextField!
+    @IBOutlet weak var addTaskTextField: UITextField!
+    @IBOutlet weak var addTaskButton: MonkeyButton!
+    
+    @IBAction func tappedCategoryTextField(_ sender: Any) {
+    }
+    
+    // Properties
+    var categories: [Category]?
+    var userController: UserController?
+    var currentUser: User?
+    var householdController: HouseholdController?
+    var taskController : TaskController?
+    var categoryController : CategoryController?
+    var notesController: NotesController?
+    
+    var task : Task?
+    var catID : UUID?
+    var category : Category?
+    var household : Household?
+    
+    //    let mainCategoriesViewController = MainCategoriesViewController()
+    
+    let reuseIdentifier = "searchCategoryCell"
+    
+    var filteredResults : [Category] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.categoryTableView.reloadData()
+            }
+        }
+    }
+    
+}
+
+extension AddTaskViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredResults.count > 0 ? 1 : 0
     }
     
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        print(cell)
+        cell.textLabel?.text = filteredResults[indexPath.row].name
+        
+        return cell
+    }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0.0
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        addCategoryTextField.text = filteredResults[indexPath.row].name
+        filteredResults = []
+        addCategoryTextField.endEditing(true)
+    }
+}
+
+extension AddTaskViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        guard let text = addCategoryTextField.text, let categories = categories else { return true }
+        let filteredResults = categories.filter{$0.name.lowercased().contains(text.lowercased())}
+        
+        self.filteredResults = filteredResults
+        
+        return true
     }
 }
 

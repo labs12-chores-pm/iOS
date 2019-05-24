@@ -39,7 +39,9 @@ class TaskViewController: UIViewController {
                 }
             }
         } else {
-            updateViews()
+            DispatchQueue.main.async {
+                self.updateViews()
+            }
         }
         
         userController.fetchUsers(inHousehold: household) { (members, error) in
@@ -91,6 +93,12 @@ class TaskViewController: UIViewController {
             self.noteTextField.text = ""
         }
     }
+    
+    @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
+        guard let taskController = taskController, let task = task else { return }
+        taskController.updateTask(task: task, dueDate: sender.date)
+    }
+    
     
     private func setNotes() {
         if let task = task, let notesController = notesController {
@@ -152,7 +160,9 @@ class TaskViewController: UIViewController {
     
     var task: Task? {
         didSet {
-            updateViews()
+            DispatchQueue.main.async {
+                self.updateViews()
+            }
         }
     }
     

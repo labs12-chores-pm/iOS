@@ -24,13 +24,17 @@ class TasksTableViewController: UITableViewController {
                 self.tasks = tasks.filter({ $0.isComplete == false })
                 self.completedTasks = tasks.filter({ $0.isComplete == true })
             }
+            
+            DispatchQueue.main.async {
+                self.updateViews()
+            }
         }
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return completedTasks == nil ? 1 : 2
+        return showCompleted ? 2 : 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,8 +66,24 @@ class TasksTableViewController: UITableViewController {
         return cell
     }
     
-    @IBAction func AddTaskButtonWasTapped(_ sender: UIButton) {
+    @IBAction func addTaskButtonWasTapped(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "AddTask", sender: self)
+    }
+    
+    @IBAction func showCompletedButtonWasTapped(_ sender: UIBarButtonItem) {
+        showCompleted = showCompleted ? false : true
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.updateViews()
+        }
+    }
+    
+    private func updateViews() {
+        if showCompleted {
+            showCompletedButton.title = "- Completed"
+        } else {
+            showCompletedButton.title = "+ Completed"
+        }
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -114,7 +134,9 @@ class TasksTableViewController: UITableViewController {
             destinationVC.notesController = notesController
         }
     }
-
+    
+    @IBOutlet weak var showCompletedButton: UIBarButtonItem!
+    
     var category: Category?
     
     var tasks: [Task]? {
@@ -124,6 +146,8 @@ class TasksTableViewController: UITableViewController {
             }
         }
     }
+    
+    var showCompleted: Bool = false
     
     var completedTasks: [Task]?
     
