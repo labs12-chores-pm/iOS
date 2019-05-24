@@ -17,9 +17,7 @@ class AddCategoryViewController: UIViewController {
         
         categoryController.createCategory(householdId: user.currentHouseholdId, name: name)
         
-        NotificationCenter.default.post(name: NSNotification.Name("addedCategory"), object: nil)
-        
-        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBOutlet weak var categoryNameField: UITextField!
