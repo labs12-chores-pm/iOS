@@ -10,20 +10,37 @@ import UIKit
 
 class InvitationViewController: UIViewController {
     
-    @IBAction func sendInviteButtonWasTapped(_ sender: UIButton) {
-        guard let household = household,
-            let name = nameField.text,
-            let email = emailField.text else { return }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        
-        inviteController.sendInvite(household: household, name: name, email: email)
-        self.dismiss(animated: true, completion: nil)
+        guard let household = household else { return }
+        codeLabel.text = household.inviteCode
     }
     
-    @IBOutlet weak var roleSegmentedControl: UISegmentedControl!
-    @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var emailField: UITextField!
-
+    @IBAction func sendInviteButtonWasTapped(_ sender: UIButton) {
+        guard let household = household,
+        let householdController = householdController else { return }
+        
+        let dateFormatter = DateFormatter()
+        
+        if let date = dateFormatter.date(from: household.inviteDate) {
+            
+            if date.timeIntervalSinceNow > 86400 {
+                
+                let invite = Invite()
+                
+                householdController.updateHousehold(household: household, memberIds: household.memberIds, adminIds: household.adminIds, categories: household.categories ?? [], invite: invite)
+            }
+        }
+        
+        let code = [household.inviteCode]
+        
+        let ac = UIActivityViewController(activityItems: code, applicationActivities: nil)
+        present(ac, animated: true, completion: nil)
+    }
+    
+    @IBOutlet weak var codeLabel: UILabel!
+    
     var household: Household?
-    let inviteController = InviteController()
+    var householdController: HouseholdController?
 }

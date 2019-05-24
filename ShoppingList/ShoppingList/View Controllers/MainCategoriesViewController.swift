@@ -24,15 +24,14 @@ class MainCategoriesViewController: UIViewController {
             self.categoryController = tabBar.categoryController
             self.notesController = tabBar.notesController
         }
-        fetchCategories()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(fetchCategories), name: NSNotification.Name("addedCategory"), object: nil)
+        fetchCategories()
     }
     
-    @objc func fetchCategories() {
+    private func fetchCategories() {
         guard let user = currentUser, let categoryController = categoryController else { return }
         let householdId = user.currentHouseholdId
         categoryController.fetchCategories(householdId: householdId) { (categories, error) in

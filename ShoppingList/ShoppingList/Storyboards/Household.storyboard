@@ -182,32 +182,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="xjZ-DV-iiS">
-                                <rect key="frame" x="284" y="417" width="200" height="190"/>
+                                <rect key="frame" x="284" y="460" width="200" height="104"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="iZX-aY-4LK" customClass="YellowSegments" customModule="ShoppingList" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="200" height="29"/>
-                                        <segments>
-                                            <segment title="Admin"/>
-                                            <segment title="Non-admin"/>
-                                        </segments>
-                                    </segmentedControl>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rZw-Ft-2Hy" customClass="BlueField" customModule="ShoppingList" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="52" width="200" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="x5D-dk-lAC"/>
-                                        </constraints>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOM-vM-o3J">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TYF-GO-zeA" customClass="BlueField" customModule="ShoppingList" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="106" width="200" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6c-52-0A4" customClass="MonkeyButton" customModule="ShoppingList" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="160" width="200" height="30"/>
+                                        <rect key="frame" x="0.0" y="74" width="200" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="nIu-qg-EHI"/>
+                                        </constraints>
                                         <state key="normal" title="Send Invite"/>
                                         <connections>
                                             <action selector="sendInviteButtonWasTapped:" destination="Jdb-Uu-qz5" eventType="touchUpInside" id="uVO-2J-2iR"/>
@@ -224,9 +211,7 @@
                         <viewLayoutGuide key="safeArea" id="gj7-i2-KxZ"/>
                     </view>
                     <connections>
-                        <outlet property="emailField" destination="TYF-GO-zeA" id="J1T-7G-DLz"/>
-                        <outlet property="nameField" destination="rZw-Ft-2Hy" id="uWs-sz-GCL"/>
-                        <outlet property="roleSegmentedControl" destination="iZX-aY-4LK" id="mVo-Fc-GNl"/>
+                        <outlet property="codeLabel" destination="WOM-vM-o3J" id="hyJ-vE-gy4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R5y-4T-jVa" userLabel="First Responder" sceneMemberID="firstResponder"/>

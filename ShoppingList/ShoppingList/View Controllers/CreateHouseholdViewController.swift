@@ -29,6 +29,17 @@ class CreateHouseholdViewController: UIViewController {
         var newHousehold: Household!
         if isJoinForm {
             
+            householdController.fetchHousehold(inviteCode: text) { (household, error) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                
+                guard let household = household else { return }
+                
+                newHousehold = household
+            }
+            
         } else {
             newHousehold = householdController.createHousehold(name: text, creatorId: currentUser.identifier)
         }

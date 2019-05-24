@@ -15,6 +15,8 @@ struct Household: Codable, Equatable {
     var memberIds: [UUID]
     var adminIds: [UUID]
     var categories: [Category]?
+    var inviteDate: String
+    var inviteCode: String
     
     static func == (lhs: Household, rhs: Household) -> Bool {
         return lhs.name == rhs.name &&
@@ -26,7 +28,7 @@ struct Household: Codable, Equatable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case name, identifier, creatorId, memberIds, adminIds, categories
+        case name, identifier, creatorId, memberIds, adminIds, categories, inviteDate, inviteCode
     }
     
     init(name: String, identifier: UUID, creatorId: UUID, memberIds: [UUID], adminIds: [UUID], categories: [Category]) {
@@ -36,6 +38,12 @@ struct Household: Codable, Equatable {
         self.memberIds = memberIds
         self.adminIds = adminIds
         self.categories = categories
+        
+        let invite = Invite()
+        let dateFormatter = DateFormatter()
+        
+        self.inviteDate = dateFormatter.string(from: invite.createdAt)
+        self.inviteCode = invite.inviteCode
     }
     
     init(from decoder: Decoder) throws {
@@ -60,11 +68,21 @@ struct Household: Codable, Equatable {
         
         let categories = try container.decodeIfPresent([Category].self, forKey: .categories)
         
+        let inviteDate = try container.decodeIfPresent(String.self, forKey: .inviteDate)
+        let inviteCode = try container.decodeIfPresent(String.self, forKey: .inviteCode)
+        
         self.name = name
         self.identifier = identifier
         self.creatorId = creatorId
         self.memberIds = membersIds
         self.adminIds = adminIds
         self.categories = categories
+        
+        let invite = Invite()
+        
+        let dateFormatter = DateFormatter()
+        
+        self.inviteDate = inviteDate ?? dateFormatter.string(from: invite.createdAt)
+        self.inviteCode = inviteCode ?? invite.inviteCode
     }
 }
