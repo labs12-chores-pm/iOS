@@ -94,6 +94,12 @@ class TaskViewController: UIViewController {
         }
     }
     
+    @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
+        guard let taskController = taskController, let task = task else { return }
+        taskController.updateTask(task: task, dueDate: sender.date)
+    }
+    
+    
     private func setNotes() {
         if let task = task, let notesController = notesController {
             notesController.fetchNotes(taskId: task.identifier) { (notes, error) in

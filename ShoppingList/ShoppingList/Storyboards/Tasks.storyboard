@@ -137,6 +137,9 @@
                                                 <date key="date" timeIntervalSinceReferenceDate="579793012.77566004">
                                                     <!--2019-05-17 13:36:52 +0000-->
                                                 </date>
+                                                <connections>
+                                                    <action selector="datePickerValueChanged:" destination="Aqf-Ff-cXC" eventType="valueChanged" id="MYD-js-8e5"/>
+                                                </connections>
                                             </datePicker>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bzX-eO-lAL">
                                                 <rect key="frame" x="0.0" y="346.33333333333331" width="374" height="80"/>
