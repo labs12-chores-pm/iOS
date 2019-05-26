@@ -40,7 +40,14 @@ class MainCategoriesViewController: UIViewController {
                 print(error)
                 return
             }
-            self.categories = categories
+            let sorted = categories?.sorted(by: { (cat1, cat2) -> Bool in
+                cat1.createdAt.timeIntervalSince1970 > cat2.createdAt.timeIntervalSince1970
+            })
+            self.categories = sorted
+            
+            DispatchQueue.main.async {
+                self.categoriesTableView.reloadData()
+            }
         }
         
         if let householdController = householdController {
@@ -50,6 +57,10 @@ class MainCategoriesViewController: UIViewController {
                     return
                 }
                 self.household = household
+                
+                DispatchQueue.main.async {
+                    self.updateViews()
+                }
             }
         }
     }
@@ -110,20 +121,8 @@ class MainCategoriesViewController: UIViewController {
     var householdController: HouseholdController?
     var categoryController: CategoryController?
     var notesController: NotesController?
-    var categories: [Category]? {
-        didSet {
-            DispatchQueue.main.async {
-                self.categoriesTableView.reloadData()
-            }
-        }
-    }
-    var household: Household? {
-        didSet {
-            DispatchQueue.main.async {
-                self.updateViews()
-            }
-        }
-    }
+    var categories: [Category]?
+    var household: Household?
 }
 
 extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSource {
