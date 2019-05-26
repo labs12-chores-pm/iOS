@@ -93,7 +93,8 @@ struct Task: Codable, Equatable {
         }
         
         let dueDateDouble = try container.decode(Double.self, forKey: .dueDate)
-        let dueDate = Date(timeIntervalSince1970: dueDateDouble)
+        // let dueDate = Date(timeIntervalSince1970: dueDateDouble)
+        let dueDate = Date(timeIntervalSinceReferenceDate: dueDateDouble)
         
         let notesGroup = try container.decodeIfPresent([String: Note].self, forKey: .notes)
 

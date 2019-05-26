@@ -20,6 +20,8 @@ class TaskViewController: UIViewController {
         notesTableView.dataSource = self
         notesTableView.delegate = self
         
+        searchResultsHeightConstraint.constant = 0
+        
         guard let userController = userController, let currentUser = currentUser, let household = household else { return }
         
         self.hasAdminAccess = household.adminIds.contains(currentUser.identifier) ? true : false
@@ -145,10 +147,18 @@ class TaskViewController: UIViewController {
             assigneeSearch.isUserInteractionEnabled = false
         }
         
+        if searchResults == nil || searchResults!.isEmpty {
+            assigneeSearchTableView.isHidden = true
+            searchResultsHeightConstraint.constant = 0
+        } else {
+            assigneeSearchTableView.isHidden = false
+            searchResultsHeightConstraint.constant = 120
+        }
+        
         self.setNotes()
     }
     
-    
+    @IBOutlet weak var searchResultsHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var noteTextField: UITextField!
     @IBOutlet weak var assigneeSearchTableView: UITableView!
     @IBOutlet weak var completeButton: UIButton!
@@ -175,7 +185,7 @@ class TaskViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.assigneeSearch.text = self.assignee?.name
-                self.searchResults = []
+                self.searchResults = nil
             }
         }
     }
@@ -219,6 +229,7 @@ extension TaskViewController: UISearchBarDelegate {
         guard let householdMembers = householdMembers else { return }
         let searchResults = householdMembers.filter { $0.name.lowercased().contains(searchText.lowercased()) }
         self.searchResults = searchResults
+        updateViews()
     }
 }
 
@@ -261,6 +272,8 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
             self.assigneeSearch.text = selectedMember.name
             taskController.updateTask(task: task, description: task.description, assignIds: [selectedMember.identifier])
             self.assignee = selectedMember
+            self.searchResults = nil
+            self.updateViews()
         }
     }
 }
