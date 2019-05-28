@@ -109,6 +109,17 @@ class TaskViewController: UIViewController {
                 
                 // Add notification set function
                 // sender.date
+                
+                notificationHelper.requestAuthorization { success in
+                    if success {
+                        notificationHelper.scheduleTask(task: addTask, date: taskViewController.dueDatePicker.date)
+                    } else {
+                        NSLog("There was an error with the notification")
+                    }
+                }
+                navigationController?.popViewController(animated: true)
+
+                
             }
         }
         
