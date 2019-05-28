@@ -182,8 +182,8 @@ class HouseholdViewController: UIViewController {
                 }
 
             }
-            
-            if
+//
+//            if
             
             for (index, id) in members.enumerated() {
                 if id == currentUser.identifier {
