@@ -66,6 +66,7 @@
 		77F678B1228A2D57005C7C94 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678B0228A2D57005C7C94 /* Error.swift */; };
 		77F678C6228B37C2005C7C94 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F678C5228B37C2005C7C94 /* CoreDataStack.swift */; };
 		77F7A2F9229DD73E00768E7E /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F7A2F8229DD73E00768E7E /* Settings.swift */; };
+		77F7A2FB229DE0FC00768E7E /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F7A2FA229DE0FC00768E7E /* PasswordResetViewController.swift */; };
 		96029A422231604800F7F7AE /* MainViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96029A412231604700F7F7AE /* MainViewController.storyboard */; };
 		96029A44223189D500F7F7AE /* NoItemsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96029A43223189D500F7F7AE /* NoItemsView.xib */; };
 		96029A46223198FA00F7F7AE /* Double+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96029A45223198FA00F7F7AE /* Double+Currency.swift */; };
@@ -171,6 +172,7 @@
 		77F678B0228A2D57005C7C94 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		77F678C5228B37C2005C7C94 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		77F7A2F8229DD73E00768E7E /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		77F7A2FA229DE0FC00768E7E /* PasswordResetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
 		8644713A7D17BC52D89F3F13 /* Pods-ShoppingList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShoppingList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShoppingList/Pods-ShoppingList.debug.xcconfig"; sourceTree = "<group>"; };
 		96029A412231604700F7F7AE /* MainViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainViewController.storyboard; sourceTree = "<group>"; };
 		96029A43223189D500F7F7AE /* NoItemsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoItemsView.xib; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 				47E3FCA4228E780800A1CECE /* FirebaseLoginViewController.swift */,
 				47E3FCA6228E782200A1CECE /* FirebaseLogin.storyboard */,
 				773DC4AB228ED52C00EB3121 /* StartViewController.swift */,
+				77F7A2FA229DE0FC00768E7E /* PasswordResetViewController.swift */,
 			);
 			path = "Firebase Auth";
 			sourceTree = "<group>";
@@ -786,6 +789,7 @@
 				447BEE43221F473300FA1D82 /* SessionManager.swift in Sources */,
 				77F678B1228A2D57005C7C94 /* Error.swift in Sources */,
 				77F678AF228A2B99005C7C94 /* HouseholdController.swift in Sources */,
+				77F7A2FB229DE0FC00768E7E /* PasswordResetViewController.swift in Sources */,
 				77F678AC228A1268005C7C94 /* Note.swift in Sources */,
 				9663C6882231D4880019FCED /* ItemTableViewCell.swift in Sources */,
 				773DC4B2228EEBE800EB3121 /* TasksTableViewController.swift in Sources */,

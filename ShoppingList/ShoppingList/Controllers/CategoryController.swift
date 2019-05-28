@@ -58,7 +58,6 @@ class CategoryController {
                 }
                 let householdCategories = categories.filter({ $0.householdId == householdId })
                 completion(householdCategories, nil)
-//                completion(categories, nil)
             } catch {
                 completion(nil, NetworkError.decodingData)
             }

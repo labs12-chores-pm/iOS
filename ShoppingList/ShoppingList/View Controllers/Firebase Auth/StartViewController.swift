@@ -149,6 +149,11 @@ class StartViewController: UIViewController {
             }
             destinationVC.keychain = keychain
         }
+        
+        if segue.identifier == "ShowPasswordReset" {
+            guard let passwordResetVC = segue.destination as? PasswordResetViewController else { return }
+            passwordResetVC.keychain = keychain
+        }
     }
 
 }
