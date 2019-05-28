@@ -50,6 +50,7 @@ class HouseholdViewController: UIViewController {
                     print(error)
                     return
                 }
+                self.household = nil
                 self.household = household
             }
             
@@ -58,6 +59,7 @@ class HouseholdViewController: UIViewController {
                     print(error)
                     return
                 }
+                self.pickerDataSource = nil
                 self.pickerDataSource = households
             }
         }
@@ -69,6 +71,8 @@ class HouseholdViewController: UIViewController {
                 self.updateViews()
             }
         }
+        
+        self.messages = nil
         var messages: [Any] = []
         
         guard let taskController = taskController, let household = household, let notesController = notesController else { return }
@@ -172,25 +176,26 @@ class HouseholdViewController: UIViewController {
                                 
                                 self.fetchAndAssign()
                                 self.setDataSource()
+                                self.updateViews()
                             }
                         }
                     })
                 }
 
-            }
-            
-            for (index, id) in members.enumerated() {
-                if id == currentUser.identifier {
-                    members.remove(at: index)
+            } else {
+                for (index, id) in members.enumerated() {
+                    if id == currentUser.identifier {
+                        members.remove(at: index)
+                    }
                 }
-            }
-            
-            for (index, id) in admins.enumerated() {
-                if id == currentUser.identifier {
-                    admins.remove(at: index)
+                
+                for (index, id) in admins.enumerated() {
+                    if id == currentUser.identifier {
+                        admins.remove(at: index)
+                    }
                 }
+                householdController.updateHousehold(household: household, memberIds: members, adminIds: admins, categories: [])
             }
-            householdController.updateHousehold(household: household, memberIds: members, adminIds: admins, categories: [])
         }
     }
     
@@ -247,6 +252,7 @@ class HouseholdViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.householdMemberTableView.reloadData()
+                self.updateViews()
             }
         }
     }
@@ -329,6 +335,7 @@ extension HouseholdViewController: UIPickerViewDelegate, UIPickerViewDataSource 
         let household = pickerDataSource?[row].identifier
         userController.updateUser(user: currentUser, currentHouseholdId: household)
         fetchAndAssign()
+        setDataSource()
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

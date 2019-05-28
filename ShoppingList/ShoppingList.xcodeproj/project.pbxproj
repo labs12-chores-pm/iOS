@@ -52,6 +52,7 @@
 		773DC4B0228EEB0F00EB3121 /* Tasks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 773DC4AF228EEB0F00EB3121 /* Tasks.storyboard */; };
 		773DC4B2228EEBE800EB3121 /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DC4B1228EEBE800EB3121 /* TasksTableViewController.swift */; };
 		773DC4B6228EF15E00EB3121 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DC4B5228EF15E00EB3121 /* TaskViewController.swift */; };
+		77679530229DAA73005A8336 /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7767952F229DAA73005A8336 /* Date+String.swift */; };
 		776BBD0E228DB93A0097A4D4 /* CreateHouseholdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */; };
 		776BBD10228DC3900097A4D4 /* JoinCreateHousehold.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */; };
 		776BBD12228DCFCA0097A4D4 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */; };
@@ -155,6 +156,7 @@
 		773DC4AF228EEB0F00EB3121 /* Tasks.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tasks.storyboard; sourceTree = "<group>"; };
 		773DC4B1228EEBE800EB3121 /* TasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
 		773DC4B5228EF15E00EB3121 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		7767952F229DAA73005A8336 /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
 		776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHouseholdViewController.swift; sourceTree = "<group>"; };
 		776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoinCreateHousehold.storyboard; sourceTree = "<group>"; };
 		776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 			children = (
 				473D56842295B1B600C1CFF4 /* UIViewController+Alert.swift */,
 				96029A45223198FA00F7F7AE /* Double+Currency.swift */,
+				7767952F229DAA73005A8336 /* Date+String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -759,6 +762,7 @@
 				119B303D2225ABC300DF93E6 /* GroupMemberController.swift in Sources */,
 				96DE3034221637FE00213C3E /* LoginViewController.swift in Sources */,
 				969A84082215C99A0003BB37 /* NSArray+Chameleon.m in Sources */,
+				77679530229DAA73005A8336 /* Date+String.swift in Sources */,
 				47E3FCA5228E780800A1CECE /* FirebaseLoginViewController.swift in Sources */,
 				77F678C6228B37C2005C7C94 /* CoreDataStack.swift in Sources */,
 				44A16807222F418C00227DFB /* Invite.swift in Sources */,

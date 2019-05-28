@@ -11,9 +11,9 @@ import Foundation
 class TaskController {
     
 
-    @discardableResult func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, notes: [Note] = [] , isComplete: Bool, householdId: UUID) -> Task {
+    @discardableResult func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, notes: [Note] = [] , isComplete: Bool, householdId: UUID, recurrence: Recurrence) -> Task {
         
-        let task = Task(description: description, categoryId: categoryId, assigneeIds: assineeIds, dueDate: dueDate, notes: notes, householdId: householdId)
+        let task = Task(description: description, categoryId: categoryId, assigneeIds: assineeIds, dueDate: dueDate, notes: notes, recurrence: recurrence, householdId: householdId)
         put(task: task)
         
         return task
@@ -38,6 +38,36 @@ class TaskController {
        
         put(task: taskCopy)
         
+    }
+    
+    func resetRecurringTask(task: Task) {
+        
+        var taskCopy = task
+        let calendar = Calendar.current
+        
+        switch task.recurrence {
+        case .once:
+            return
+        case .daily:
+            taskCopy.dueDate = calendar.date(byAdding: .day, value: 1, to: task.dueDate)!
+        case .weekly:
+            taskCopy.dueDate = calendar.date(byAdding: .day, value: 7, to: task.dueDate)!
+        case .monthly:
+            taskCopy.dueDate = calendar.date(byAdding: .month, value: 1, to: task.dueDate)!
+        case .yearly:
+            taskCopy.dueDate = calendar.date(byAdding: .year, value: 1, to: task.dueDate)!
+        }
+        
+        taskCopy.isPending = false
+        taskCopy.isComplete = false
+        
+        let newTask = Task(description: taskCopy.description, categoryId: taskCopy.categoryId, assigneeIds: taskCopy.assigneeIds, dueDate: taskCopy.dueDate, notes: [], recurrence: taskCopy.recurrence, householdId: taskCopy.householdId)
+        
+        put(task: newTask)
+        updateTask(task: task, isComplete: true, isPending: false)
+        
+        // task.description, taskCopy.dueDate
+        // Call notification set function
     }
     
     func fetchTasks(userId: UUID, completion: @escaping ([Task]?, Error?) -> Void) {

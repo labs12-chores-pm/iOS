@@ -21,7 +21,7 @@ class YellowSegments: UISegmentedControl {
     }
     
     private func setUpSegmentedControl() {
-        tintColor = .brown
-        backgroundColor = AppearanceHelper.lightYellow
+        tintColor = AppearanceHelper.teal
+//        backgroundColor = AppearanceHelper.lightYellow
     }
 }

@@ -10,9 +10,10 @@ import Foundation
 
 enum Recurrence: Int, Codable {
     case once = 0
-    case weekly = 1
-    case monthly = 2
-    case yearly = 3
+    case daily = 1
+    case weekly = 2
+    case monthly = 3
+    case yearly = 4
 }
 
 struct Task: Codable, Equatable {
@@ -93,7 +94,8 @@ struct Task: Codable, Equatable {
         }
         
         let dueDateDouble = try container.decode(Double.self, forKey: .dueDate)
-        let dueDate = Date(timeIntervalSince1970: dueDateDouble)
+        // let dueDate = Date(timeIntervalSince1970: dueDateDouble)
+        let dueDate = Date(timeIntervalSinceReferenceDate: dueDateDouble)
         
         let notesGroup = try container.decodeIfPresent([String: Note].self, forKey: .notes)
 

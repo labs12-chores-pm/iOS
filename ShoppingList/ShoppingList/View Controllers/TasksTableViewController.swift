@@ -10,6 +10,11 @@ import UIKit
 
 class TasksTableViewController: UITableViewController {
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        getTasks()
+    }
+    
     func getTasks() {
         guard let category = category, let taskController = taskController else { return }
         
@@ -21,8 +26,13 @@ class TasksTableViewController: UITableViewController {
             }
             
             if let tasks = tasks {
-                self.tasks = tasks.filter({ $0.isComplete == false })
-                self.completedTasks = tasks.filter({ $0.isComplete == true })
+                self.tasks = nil
+                let sorted = tasks.sorted(by: { (one, two) -> Bool in
+                    one.dueDate.timeIntervalSince1970 < two.dueDate.timeIntervalSince1970
+                })
+                self.tasks = sorted.filter({ $0.isComplete == false })
+                self.completedTasks = nil
+                self.completedTasks = sorted.filter({ $0.isComplete == true })
             }
             
             DispatchQueue.main.async {
@@ -62,6 +72,8 @@ class TasksTableViewController: UITableViewController {
         let task = indexPath.section == 0 ? tasks[indexPath.row] : completedTasks[indexPath.row]
  
         cell.textLabel?.text = task.description
+        cell.detailTextLabel?.text = task.dueDate.string(style: .short)
+        cell.detailTextLabel?.tintColor = .gray
         
         return cell
     }
@@ -149,7 +161,13 @@ class TasksTableViewController: UITableViewController {
     
     var showCompleted: Bool = false
     
-    var completedTasks: [Task]?
+    var completedTasks: [Task]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     var userController: UserController?
     var currentUser: User?

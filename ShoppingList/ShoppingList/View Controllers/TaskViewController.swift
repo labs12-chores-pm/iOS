@@ -20,6 +20,8 @@ class TaskViewController: UIViewController {
         notesTableView.dataSource = self
         notesTableView.delegate = self
         
+        searchResultsHeightConstraint.constant = 0
+        
         guard let userController = userController, let currentUser = currentUser, let household = household else { return }
         
         self.hasAdminAccess = household.adminIds.contains(currentUser.identifier) ? true : false
@@ -65,7 +67,12 @@ class TaskViewController: UIViewController {
                     ids.append(assignee.identifier)
                 }
                 
-                taskController.updateTask(task: task, description: description, assignIds: ids, dueDate: dueDatePicker.date, isComplete: true, isPending: false)
+                if task.recurrence == .once {
+                    taskController.updateTask(task: task, description: description, assignIds: ids, dueDate: dueDatePicker.date, isComplete: true, isPending: false)
+                } else {
+                    taskController.resetRecurringTask(task: task)
+                }
+                
             } else {
                 guard let categoryId = category?.identifier, let householdId = household?.identifier else { return }
                 
@@ -74,7 +81,7 @@ class TaskViewController: UIViewController {
                     ids.append(assignee.identifier)
                 }
                 
-                taskController.createTask(description: description, categoryId: categoryId, assineeIds: ids, dueDate: dueDatePicker.date, notes: [], isComplete: false, householdId: householdId)
+                taskController.createTask(description: description, categoryId: categoryId, assineeIds: ids, dueDate: dueDatePicker.date, notes: [], isComplete: false, householdId: householdId, recurrence: self.recurrence ?? Recurrence(rawValue: 0)!)
             }
         } else {
             guard let task = task else { return }
@@ -95,6 +102,16 @@ class TaskViewController: UIViewController {
     }
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
+        
+        defer {
+            
+            if let taskDescription = descriptionField.text {
+                
+                // Add notification set function
+                // sender.date
+            }
+        }
+        
         guard let taskController = taskController, let task = task else { return }
         taskController.updateTask(task: task, dueDate: sender.date)
     }
@@ -145,10 +162,18 @@ class TaskViewController: UIViewController {
             assigneeSearch.isUserInteractionEnabled = false
         }
         
+        if searchResults == nil || searchResults!.isEmpty {
+            assigneeSearchTableView.isHidden = true
+            searchResultsHeightConstraint.constant = 0
+        } else {
+            assigneeSearchTableView.isHidden = false
+            searchResultsHeightConstraint.constant = 120
+        }
+        
         self.setNotes()
     }
     
-    
+    @IBOutlet weak var searchResultsHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var noteTextField: UITextField!
     @IBOutlet weak var assigneeSearchTableView: UITableView!
     @IBOutlet weak var completeButton: UIButton!
@@ -171,11 +196,13 @@ class TaskViewController: UIViewController {
     var userController: UserController?
     var household: Household?
     
+    var recurrence: Recurrence?
+    
     var assignee: User? {
         didSet {
             DispatchQueue.main.async {
                 self.assigneeSearch.text = self.assignee?.name
-                self.searchResults = []
+                self.searchResults = nil
             }
         }
     }
@@ -219,6 +246,7 @@ extension TaskViewController: UISearchBarDelegate {
         guard let householdMembers = householdMembers else { return }
         let searchResults = householdMembers.filter { $0.name.lowercased().contains(searchText.lowercased()) }
         self.searchResults = searchResults
+        updateViews()
     }
 }
 
@@ -257,10 +285,15 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == assigneeSearchTableView {
-            guard let selectedMember = householdMembers?[indexPath.row], let taskController = taskController, let task = task else { return }
+            defer { self.updateViews() }
+            guard let selectedMember = householdMembers?[indexPath.row], let taskController = taskController else { return }
+            
             self.assigneeSearch.text = selectedMember.name
-            taskController.updateTask(task: task, description: task.description, assignIds: [selectedMember.identifier])
             self.assignee = selectedMember
+            self.searchResults = nil
+            
+            guard let task = task else { return }
+            taskController.updateTask(task: task, description: task.description, assignIds: [selectedMember.identifier])
         }
     }
 }
@@ -281,8 +314,15 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == recurrencePicker {
-            guard let taskController = taskController, let task = task else { return }
-            taskController.updateTask(task: task, description: task.description, recurrence: Recurrence(rawValue: row))
+            
+            let recurrence = Recurrence(rawValue: row)
+            
+            guard let taskController = taskController, let task = task else {
+                self.recurrence = recurrence
+                return
+            }
+            
+            taskController.updateTask(task: task, description: task.description, recurrence: recurrence)
         }
     }
 }
