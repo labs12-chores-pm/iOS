@@ -72,6 +72,8 @@ class TasksTableViewController: UITableViewController {
         let task = indexPath.section == 0 ? tasks[indexPath.row] : completedTasks[indexPath.row]
  
         cell.textLabel?.text = task.description
+        cell.detailTextLabel?.text = task.dueDate.string(style: .short)
+        cell.detailTextLabel?.tintColor = .gray
         
         return cell
     }
