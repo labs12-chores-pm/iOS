@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import KeychainSwift
 
 class TabViewViewController: UITabBarController {
     
@@ -29,6 +30,7 @@ class TabViewViewController: UITabBarController {
     var userController: UserController?
     var currentUser: User?
     var householdController: HouseholdController?
+    var keychain: KeychainSwift?
     let notesController = NotesController()
     let taskController = TaskController()
     let categoryController = CategoryController()

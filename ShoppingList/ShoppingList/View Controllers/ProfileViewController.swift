@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import KeychainSwift
 
 class ProfileViewController: UIViewController {
 
@@ -15,11 +16,12 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
 
         if let tabBar = self.tabBarController as? TabViewViewController,
-            let authResponse = tabBar.authResponse, let currentUser = tabBar.currentUser, let userController = tabBar.userController {
+            let authResponse = tabBar.authResponse, let currentUser = tabBar.currentUser, let userController = tabBar.userController, let keychain = tabBar.keychain {
             
             self.authResponse = authResponse
             self.currentUser = currentUser
             self.userController = userController
+            self.keychain = keychain
         }
         
         userNameField.delegate = self
@@ -44,7 +46,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func saveChangesButtonTapped(_ sender: MonkeyButton) {
         
-        guard let authResponse = authResponse, let userController = userController, let currentUser = currentUser else { fatalError() }
+        guard let authResponse = authResponse, let userController = userController, let currentUser = currentUser, let keychain = keychain else { fatalError() }
         
         if let displayName = userNameField.text, !displayName.isEmpty {
             
@@ -74,6 +76,7 @@ class ProfileViewController: UIViewController {
                 }
                 
                 userController.updateUser(user: currentUser, email: email)
+                keychain.set(email, forKey: Settings.keychainEmail)
             }
             
         }
@@ -86,6 +89,7 @@ class ProfileViewController: UIViewController {
                     print(error)
                     return
                 }
+                keychain.set(password, forKey: Settings.keychainPassword)
             }
         }
     }
@@ -116,6 +120,7 @@ class ProfileViewController: UIViewController {
     var authResponse: AuthDataResult?
     var currentUser: User?
     var userController: UserController?
+    var keychain: KeychainSwift?
 }
 
 extension ProfileViewController: UITextFieldDelegate {
