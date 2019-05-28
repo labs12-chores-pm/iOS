@@ -65,6 +65,9 @@ class TaskController {
         
         put(task: newTask)
         updateTask(task: task, isComplete: true, isPending: false)
+        
+        // task.description, taskCopy.dueDate
+        // Call notification set function
     }
     
     func fetchTasks(userId: UUID, completion: @escaping ([Task]?, Error?) -> Void) {

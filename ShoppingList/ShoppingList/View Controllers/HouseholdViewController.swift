@@ -183,6 +183,8 @@ class HouseholdViewController: UIViewController {
 
             }
             
+            if
+            
             for (index, id) in members.enumerated() {
                 if id == currentUser.identifier {
                     members.remove(at: index)

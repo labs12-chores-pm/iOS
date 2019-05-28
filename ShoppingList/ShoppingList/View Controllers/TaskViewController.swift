@@ -102,6 +102,16 @@ class TaskViewController: UIViewController {
     }
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
+        
+        defer {
+            
+            if let taskDescription = descriptionField.text {
+                
+                // Add notification set function
+                // sender.date
+            }
+        }
+        
         guard let taskController = taskController, let task = task else { return }
         taskController.updateTask(task: task, dueDate: sender.date)
     }
