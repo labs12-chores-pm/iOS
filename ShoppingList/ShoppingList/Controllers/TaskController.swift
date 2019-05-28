@@ -11,9 +11,9 @@ import Foundation
 class TaskController {
     
 
-    @discardableResult func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, notes: [Note] = [] , isComplete: Bool, householdId: UUID) -> Task {
+    @discardableResult func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, notes: [Note] = [] , isComplete: Bool, householdId: UUID, recurrence: Recurrence) -> Task {
         
-        let task = Task(description: description, categoryId: categoryId, assigneeIds: assineeIds, dueDate: dueDate, notes: notes, householdId: householdId)
+        let task = Task(description: description, categoryId: categoryId, assigneeIds: assineeIds, dueDate: dueDate, notes: notes, recurrence: recurrence, householdId: householdId)
         put(task: task)
         
         return task

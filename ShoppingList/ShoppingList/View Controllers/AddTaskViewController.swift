@@ -87,8 +87,7 @@ class AddTaskViewController: UIViewController {
     
             if let isConfirmed = isConfirmed, isConfirmed == true {
                 
-                self.task = taskController.createTask(description: addTask, categoryId: categoryID, assineeIds: [], dueDate: Date(), isComplete: false, householdId: household.identifier)
-                
+                self.task = taskController.createTask(description: addTask, categoryId: categoryID, assineeIds: [], dueDate: Date(), isComplete: false, householdId: household.identifier, recurrence: Recurrence(rawValue: 0)!)
                 
                 self.performSegue(withIdentifier: "back2task", sender: self)
             }

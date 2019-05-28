@@ -81,7 +81,7 @@ class TaskViewController: UIViewController {
                     ids.append(assignee.identifier)
                 }
                 
-                taskController.createTask(description: description, categoryId: categoryId, assineeIds: ids, dueDate: dueDatePicker.date, notes: [], isComplete: false, householdId: householdId)
+                taskController.createTask(description: description, categoryId: categoryId, assineeIds: ids, dueDate: dueDatePicker.date, notes: [], isComplete: false, householdId: householdId, recurrence: self.recurrence ?? Recurrence(rawValue: 0)!)
             }
         } else {
             guard let task = task else { return }
@@ -186,6 +186,8 @@ class TaskViewController: UIViewController {
     var userController: UserController?
     var household: Household?
     
+    var recurrence: Recurrence?
+    
     var assignee: User? {
         didSet {
             DispatchQueue.main.async {
@@ -273,12 +275,15 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == assigneeSearchTableView {
-            guard let selectedMember = householdMembers?[indexPath.row], let taskController = taskController, let task = task else { return }
+            defer { self.updateViews() }
+            guard let selectedMember = householdMembers?[indexPath.row], let taskController = taskController else { return }
+            
             self.assigneeSearch.text = selectedMember.name
-            taskController.updateTask(task: task, description: task.description, assignIds: [selectedMember.identifier])
             self.assignee = selectedMember
             self.searchResults = nil
-            self.updateViews()
+            
+            guard let task = task else { return }
+            taskController.updateTask(task: task, description: task.description, assignIds: [selectedMember.identifier])
         }
     }
 }
@@ -299,8 +304,15 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == recurrencePicker {
-            guard let taskController = taskController, let task = task else { return }
-            taskController.updateTask(task: task, description: task.description, recurrence: Recurrence(rawValue: row))
+            
+            let recurrence = Recurrence(rawValue: row)
+            
+            guard let taskController = taskController, let task = task else {
+                self.recurrence = recurrence
+                return
+            }
+            
+            taskController.updateTask(task: task, description: task.description, recurrence: recurrence)
         }
     }
 }
