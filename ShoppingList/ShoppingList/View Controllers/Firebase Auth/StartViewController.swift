@@ -8,11 +8,55 @@
 
 import UIKit
 import Firebase
+import KeychainSwift
 
 class StartViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tryKeychainLogin()
+    }
+    
+    private func tryKeychainLogin() {
+        guard let email = keychain.get(Settings.keychainEmail), let password = keychain.get(Settings.keychainPassword) else { return }
+        signIn(email: email, password: password)
+    }
+    
+    private func signIn(email: String, password: String) {
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (authResponse, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            if let authResponse = authResponse {
+                
+                self.authResponse = authResponse
+                
+                let currentUser = authResponse.user
+                guard let email = currentUser.email else { return }
+                
+                self.userController.fetchUserWithEmail(email: email, completion: { (user, error) in
+                    if let error = error {
+                        print(error)
+                        return
+                    }
+                    
+                    if let user = user {
+                        self.currentUser = user
+                        
+                        if self.keychain.get(Settings.keychainEmail) == nil {
+                            self.keychain.set(email, forKey: Settings.keychainEmail)
+                        }
+                        
+                        if self.keychain.get(Settings.keychainPassword) == nil {
+                            self.keychain.set(password, forKey: Settings.keychainPassword)
+                        }
+                    }
+                })
+            }
+        }
     }
     
     @IBAction func loginButtonWasTapped(_ sender: UIButton) {
@@ -46,38 +90,14 @@ class StartViewController: UIViewController {
                     let user = self.userController.createUser(email: email, name: name, profilePicture: picture?.absoluteString, currentHouseholdId: household.identifier, identifier: userUID)
                     
                     self.currentUser = user
+                    
+                    self.keychain.set(email, forKey: Settings.keychainEmail)
+                    self.keychain.set(password, forKey: Settings.keychainPassword)
                 }
                 
             }
         } else {
-            
-            Auth.auth().signIn(withEmail: email, password: password) { (authResponse, error) in
-                if let error = error {
-                    print(error)
-                    return
-                }
-                
-                if let authResponse = authResponse {
-                    
-                    self.authResponse = authResponse
-                    
-                    let currentUser = authResponse.user
-                    guard let email = currentUser.email else { return }
-                        
-                        self.userController.fetchUserWithEmail(email: email, completion: { (user, error) in
-                            if let error = error {
-                                print(error)
-                                return
-                            }
-                            
-                            if let user = user {
-                                self.currentUser = user
-                            }
-                        })
-        
-                }
-                
-            }
+            signIn(email: email, password: password)
         }
     }
     
@@ -108,6 +128,7 @@ class StartViewController: UIViewController {
     
     let userController = UserController()
     let householdController = HouseholdController()
+    let keychain = KeychainSwift()
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -126,6 +147,7 @@ class StartViewController: UIViewController {
             if let user = currentUser {
                 destinationVC.currentUser = user
             }
+            destinationVC.keychain = keychain
         }
     }
 
