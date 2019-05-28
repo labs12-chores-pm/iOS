@@ -61,7 +61,7 @@ class TaskController {
         taskCopy.isPending = false
         taskCopy.isComplete = false
         
-        let newTask = Task(description: taskCopy.description, categoryId: taskCopy.categoryId, assigneeIds: taskCopy.assigneeIds, dueDate: taskCopy.dueDate, notes: [], householdId: taskCopy.householdId)
+        let newTask = Task(description: taskCopy.description, categoryId: taskCopy.categoryId, assigneeIds: taskCopy.assigneeIds, dueDate: taskCopy.dueDate, notes: [], recurrence: taskCopy.recurrence, householdId: taskCopy.householdId)
         
         put(task: newTask)
         updateTask(task: task, isComplete: true, isPending: false)
