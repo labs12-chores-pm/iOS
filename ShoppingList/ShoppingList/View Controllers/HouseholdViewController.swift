@@ -176,27 +176,26 @@ class HouseholdViewController: UIViewController {
                                 
                                 self.fetchAndAssign()
                                 self.setDataSource()
+                                self.updateViews()
                             }
                         }
                     })
                 }
 
-            }
-//
-//            if
-            
-            for (index, id) in members.enumerated() {
-                if id == currentUser.identifier {
-                    members.remove(at: index)
+            } else {
+                for (index, id) in members.enumerated() {
+                    if id == currentUser.identifier {
+                        members.remove(at: index)
+                    }
                 }
-            }
-            
-            for (index, id) in admins.enumerated() {
-                if id == currentUser.identifier {
-                    admins.remove(at: index)
+                
+                for (index, id) in admins.enumerated() {
+                    if id == currentUser.identifier {
+                        admins.remove(at: index)
+                    }
                 }
+                householdController.updateHousehold(household: household, memberIds: members, adminIds: admins, categories: [])
             }
-            householdController.updateHousehold(household: household, memberIds: members, adminIds: admins, categories: [])
         }
     }
     
