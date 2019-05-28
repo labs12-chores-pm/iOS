@@ -28,6 +28,7 @@
 		47E3FCA7228E782200A1CECE /* FirebaseLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47E3FCA6228E782200A1CECE /* FirebaseLogin.storyboard */; };
 		47F0A97022931E9500AF2EA9 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */; };
 		47F0A97222931EAC00AF2EA9 /* AddTask.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F0A97122931EAC00AF2EA9 /* AddTask.storyboard */; };
+		47F34DA9229CC04E00159F7F /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F34DA8229CC04E00159F7F /* NotificationHelper.swift */; };
 		770271312295FBBE002134A2 /* AppearanceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770271302295FBBE002134A2 /* AppearanceHelper.swift */; };
 		770271352296ECE8002134A2 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770271342296ECE8002134A2 /* NavigationViewController.swift */; };
 		770271362297052D002134A2 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 770271332295FE82002134A2 /* Nunito-Bold.ttf */; };
@@ -131,6 +132,7 @@
 		47E3FCA6228E782200A1CECE /* FirebaseLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FirebaseLogin.storyboard; sourceTree = "<group>"; };
 		47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		47F0A97122931EAC00AF2EA9 /* AddTask.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddTask.storyboard; sourceTree = "<group>"; };
+		47F34DA8229CC04E00159F7F /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		770271302295FBBE002134A2 /* AppearanceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceHelper.swift; sourceTree = "<group>"; };
 		770271322295FE82002134A2 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		770271332295FE82002134A2 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 			children = (
 				473D56842295B1B600C1CFF4 /* UIViewController+Alert.swift */,
 				96029A45223198FA00F7F7AE /* Double+Currency.swift */,
+				47F34DA8229CC04E00159F7F /* NotificationHelper.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -739,6 +742,7 @@
 				776BBD12228DCFCA0097A4D4 /* InvitationViewController.swift in Sources */,
 				96700E31221C035600F084B3 /* SettingsTableViewController.swift in Sources */,
 				969A84022215C99A0003BB37 /* UIColor+ChameleonPrivate.m in Sources */,
+				47F34DA9229CC04E00159F7F /* NotificationHelper.swift in Sources */,
 				969A84012215C99A0003BB37 /* ChameleonShorthand.swift in Sources */,
 				473ED23D228DDE3E00678E7E /* CategoryController.swift in Sources */,
 				969A840B2215C99A0003BB37 /* UIViewController+Chameleon.m in Sources */,

@@ -32,4 +32,5 @@ class TabViewViewController: UITabBarController {
     let notesController = NotesController()
     let taskController = TaskController()
     let categoryController = CategoryController()
+    let notificationHelper = NotificationHelper()
 }

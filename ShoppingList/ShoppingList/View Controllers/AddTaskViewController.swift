@@ -27,6 +27,7 @@ class AddTaskViewController: UIViewController {
             self.userController = tabBar.userController
             self.categoryController = tabBar.categoryController
             self.notesController = tabBar.notesController
+            self.notificationHelper = tabBar.notificationHelper
         }
         
         if let householdController = householdController, let user = currentUser {
@@ -76,11 +77,29 @@ class AddTaskViewController: UIViewController {
         checkCategory()
         
         guard let addTask = self.addTaskTextField.text,
-        let categoryID = self.catID, let taskController = self.taskController,
-        let household = household else {
-            addTaskButton.shake()
+            let categoryID = self.catID,
+            let taskController = self.taskController,
+            let household = household,
+            let taskViewController = self.taskViewController,
+            let notificationHelper = self.notificationHelper    else {
+            
+                addTaskButton.shake()
             return
         }
+        
+        // need to get task and Date()
+        notificationHelper.requestAuthorization { success in
+            if success {
+                notificationHelper.scheduleTask(task: addTask, date: taskViewController.dueDatePicker.date)
+            } else {
+                NSLog("There was an error with the notification")
+            }
+        }
+        navigationController?.popViewController(animated: true)
+    
+        
+        
+        
   
         displayMsg(title: "Please Confirm", msg: "Are you sure you want to add this task?", style: .alert) { (isConfirmed) in
             
@@ -93,6 +112,10 @@ class AddTaskViewController: UIViewController {
                 self.performSegue(withIdentifier: "back2task", sender: self)
             }
         }
+        
+        
+        
+        
     }
     
     // perform segue
@@ -142,6 +165,9 @@ class AddTaskViewController: UIViewController {
     var catID : UUID?
     var category : Category?
     var household : Household?
+    
+    var notificationHelper : NotificationHelper?
+    var taskViewController : TaskViewController?
     
     //    let mainCategoriesViewController = MainCategoriesViewController()
     

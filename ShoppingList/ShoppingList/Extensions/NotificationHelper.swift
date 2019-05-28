@@ -32,11 +32,11 @@ class NotificationHelper: NSObject, UNUserNotificationCenterDelegate {
     }
     
     // Change this function
-    func scheduleDelivery(name: String, address: String, numberOfItems: Int) {
+    func scheduleTask(task: String, date: Date ) {
         
         let content = UNMutableNotificationContent()
-        content.title = "\(name)'s order"
-        content.body = "Your \(numberOfItems) items will be delivered to \(address) within the hour"
+        content.title = "\(task) "
+        content.body = "Your task \(task) will be due at \(date)."
         
         
         
