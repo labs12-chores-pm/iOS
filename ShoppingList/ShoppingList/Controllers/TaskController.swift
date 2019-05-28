@@ -43,28 +43,28 @@ class TaskController {
     func resetRecurringTask(task: Task) {
         
         var taskCopy = task
-        guard let components = DateComponents().calendar else { return }
-        var dateComponents = components.dateComponents([.day, .hour, .minute, .second, .year], from: task.dueDate)
+        let calendar = Calendar.current
         
         switch task.recurrence {
         case .once:
             return
+        case .daily:
+            taskCopy.dueDate = calendar.date(byAdding: .day, value: 1, to: task.dueDate)!
         case .weekly:
-            dateComponents.day! += 7
-            taskCopy.isPending = false
-            taskCopy.isComplete = false
+            taskCopy.dueDate = calendar.date(byAdding: .day, value: 7, to: task.dueDate)!
         case .monthly:
-            dateComponents.month! += 1
-            taskCopy.isPending = false
-            taskCopy.isComplete = false
+            taskCopy.dueDate = calendar.date(byAdding: .month, value: 1, to: task.dueDate)!
         case .yearly:
-            dateComponents.year! += 1
-            taskCopy.isPending = false
-            taskCopy.isComplete = false
+            taskCopy.dueDate = calendar.date(byAdding: .year, value: 1, to: task.dueDate)!
         }
         
-        taskCopy.dueDate = dateComponents.date!
-        put(task: taskCopy)
+        taskCopy.isPending = false
+        taskCopy.isComplete = false
+        
+        let newTask = Task(description: taskCopy.description, categoryId: taskCopy.categoryId, assigneeIds: taskCopy.assigneeIds, dueDate: taskCopy.dueDate, notes: [], householdId: taskCopy.householdId)
+        
+        put(task: newTask)
+        updateTask(task: task, isComplete: true, isPending: false)
     }
     
     func fetchTasks(userId: UUID, completion: @escaping ([Task]?, Error?) -> Void) {
