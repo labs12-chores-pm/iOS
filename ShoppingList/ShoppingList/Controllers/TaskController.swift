@@ -40,6 +40,33 @@ class TaskController {
         
     }
     
+    func resetRecurringTask(task: Task) {
+        
+        var taskCopy = task
+        guard let components = DateComponents().calendar else { return }
+        var dateComponents = components.dateComponents([.day, .hour, .minute, .second, .year], from: task.dueDate)
+        
+        switch task.recurrence {
+        case .once:
+            return
+        case .weekly:
+            dateComponents.day! += 7
+            taskCopy.isPending = false
+            taskCopy.isComplete = false
+        case .monthly:
+            dateComponents.month! += 1
+            taskCopy.isPending = false
+            taskCopy.isComplete = false
+        case .yearly:
+            dateComponents.year! += 1
+            taskCopy.isPending = false
+            taskCopy.isComplete = false
+        }
+        
+        taskCopy.dueDate = dateComponents.date!
+        put(task: taskCopy)
+    }
+    
     func fetchTasks(userId: UUID, completion: @escaping ([Task]?, Error?) -> Void) {
         
         let tasksURL = baseURL.appendingPathComponent("tasks").appendingPathExtension("json")

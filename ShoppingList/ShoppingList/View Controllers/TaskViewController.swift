@@ -67,7 +67,12 @@ class TaskViewController: UIViewController {
                     ids.append(assignee.identifier)
                 }
                 
-                taskController.updateTask(task: task, description: description, assignIds: ids, dueDate: dueDatePicker.date, isComplete: true, isPending: false)
+                if task.recurrence == .once {
+                    taskController.updateTask(task: task, description: description, assignIds: ids, dueDate: dueDatePicker.date, isComplete: true, isPending: false)
+                } else {
+                    taskController.resetRecurringTask(task: task)
+                }
+                
             } else {
                 guard let categoryId = category?.identifier, let householdId = household?.identifier else { return }
                 
