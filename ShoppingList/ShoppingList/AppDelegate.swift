@@ -12,16 +12,16 @@ import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-   
+    
     
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+        
         checkNotificationAuthorization()
         
         FirebaseApp.configure()
-
+        
         window = UIWindow()
         window?.makeKeyAndVisible()
         
@@ -32,46 +32,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         return true
     }
-
-//
-//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken : Data) {
-//        PushNotifications.shared.registerDeviceToken(deviceToken)
-//        print(deviceToken)
-//    }
-//
-//    func application(
-//        _ application: UIApplication,
-//        didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-//        fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
-//    ) {
-//        PushNotifications.shared.handleNotification(userInfo: userInfo)
-//        print(userInfo)
-//        completionHandler(.newData)
-//    }
-//
-//    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
-//    {
-//        completionHandler([.alert, .badge, .sound])
-//    }
+    
+    //
+    //    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken : Data) {
+    //        PushNotifications.shared.registerDeviceToken(deviceToken)
+    //        print(deviceToken)
+    //    }
+    //
+    //    func application(
+    //        _ application: UIApplication,
+    //        didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+    //        fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
+    //    ) {
+    //        PushNotifications.shared.handleNotification(userInfo: userInfo)
+    //        print(userInfo)
+    //        completionHandler(.newData)
+    //    }
+    //
+    //    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    //    {
+    //        completionHandler([.alert, .badge, .sound])
+    //    }
     
     
     // MARK: UserNotification
     
     func checkNotificationAuthorization() {
-    // see whether the user has already granted permission
-    // and if not, start request process
-    let center = UNUserNotificationCenter.current()
-    center.delegate = self
-    
-    center.getNotificationSettings { settings in
-    guard settings.notificationCenterSetting != .enabled else {
-    NSLog("Location notifications have been granted")
-    return
-    }
-    
-    // Handle ungranted notification permissions
-    self.requestNotificationAuthorization()
-    }
+        // see whether the user has already granted permission
+        // and if not, start request process
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+        
+        center.getNotificationSettings { settings in
+            guard settings.notificationCenterSetting != .enabled else {
+                NSLog("Location notifications have been granted")
+                return
+            }
+            
+            // Handle ungranted notification permissions
+            self.requestNotificationAuthorization()
+        }
     }
     
     func requestNotificationAuthorization() {
@@ -115,5 +115,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         completionHandler(.alert)
         
     }
-
+    
 }
