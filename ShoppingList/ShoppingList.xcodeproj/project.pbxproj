@@ -28,6 +28,7 @@
 		47E3FCA7228E782200A1CECE /* FirebaseLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47E3FCA6228E782200A1CECE /* FirebaseLogin.storyboard */; };
 		47F0A97022931E9500AF2EA9 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */; };
 		47F0A97222931EAC00AF2EA9 /* AddTask.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47F0A97122931EAC00AF2EA9 /* AddTask.storyboard */; };
+		47F878ED229DCFE500001D7C /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F878EC229DCFE500001D7C /* NotificationHelper.swift */; };
 		770271312295FBBE002134A2 /* AppearanceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770271302295FBBE002134A2 /* AppearanceHelper.swift */; };
 		770271352296ECE8002134A2 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770271342296ECE8002134A2 /* NavigationViewController.swift */; };
 		770271362297052D002134A2 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 770271332295FE82002134A2 /* Nunito-Bold.ttf */; };
@@ -134,6 +135,7 @@
 		47E3FCA6228E782200A1CECE /* FirebaseLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FirebaseLogin.storyboard; sourceTree = "<group>"; };
 		47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		47F0A97122931EAC00AF2EA9 /* AddTask.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddTask.storyboard; sourceTree = "<group>"; };
+		47F878EC229DCFE500001D7C /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		770271302295FBBE002134A2 /* AppearanceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceHelper.swift; sourceTree = "<group>"; };
 		770271322295FE82002134A2 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		770271332295FE82002134A2 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				473D56842295B1B600C1CFF4 /* UIViewController+Alert.swift */,
 				96029A45223198FA00F7F7AE /* Double+Currency.swift */,
 				7767952F229DAA73005A8336 /* Date+String.swift */,
+				47F878EC229DCFE500001D7C /* NotificationHelper.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -785,6 +788,7 @@
 				771D3440228C775F00C8BA13 /* HouseholdUserTableViewCell.swift in Sources */,
 				9663C68C2231D9250019FCED /* HistoryTableViewCell.swift in Sources */,
 				77C9664722986B4A00549C89 /* ProfileViewController.swift in Sources */,
+				47F878ED229DCFE500001D7C /* NotificationHelper.swift in Sources */,
 				771D3451228CCCC300C8BA13 /* CustomTableView.swift in Sources */,
 				447BEE43221F473300FA1D82 /* SessionManager.swift in Sources */,
 				77F678B1228A2D57005C7C94 /* Error.swift in Sources */,

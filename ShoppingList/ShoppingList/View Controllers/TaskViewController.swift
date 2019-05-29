@@ -6,6 +6,7 @@
 //  Copyright © 2019 Lambda School Labs. All rights reserved.
 //
 
+import UserNotifications
 import UIKit
 
 class TaskViewController: UIViewController {
@@ -59,6 +60,7 @@ class TaskViewController: UIViewController {
         guard let description = descriptionField.text,
             let taskController = taskController, let hasAdminAccess = hasAdminAccess else { return }
         
+        
         if hasAdminAccess {
             if let task = task {
                 
@@ -103,17 +105,32 @@ class TaskViewController: UIViewController {
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
         
-        defer {
-            
-            if let taskDescription = descriptionField.text {
+            if let taskDescription = descriptionField.text, !taskDescription.isEmpty
+                {
                 
                 // Add notification set function
                 // sender.date
+                
+                print("This is the date from the Picker \(sender.date)")
+                
+                notificationHelper?.requestAuthorization { success in
+                    if success {
+                        self.notificationHelper?.scheduleTask(task: taskDescription, date: sender.date)
+                    }
+                }
             }
-        }
+        
         
         guard let taskController = taskController, let task = task else { return }
         taskController.updateTask(task: task, dueDate: sender.date)
+    }
+    
+    func scheduleLocal() {
+        
+        let center = UNUserNotificationCenter.current()
+        
+        center.removeAllPendingNotificationRequests()
+        
     }
     
     
@@ -212,6 +229,8 @@ class TaskViewController: UIViewController {
     var notesController: NotesController?
     
     var hasAdminAccess: Bool?
+    
+    var notificationHelper : NotificationHelper?
 
     @IBOutlet weak var taskScrollView: UIScrollView!
     

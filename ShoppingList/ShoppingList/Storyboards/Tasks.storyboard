@@ -139,7 +139,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="30" translatesAutoresizingMaskIntoConstraints="NO" id="fxL-eQ-oIj">
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="fxL-eQ-oIj">
                                                 <rect key="frame" x="0.0" y="258.33333333333331" width="374" height="80"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="80" id="NdQ-W2-Zeh"/>
