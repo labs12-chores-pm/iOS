@@ -74,14 +74,12 @@ class AddTaskViewController: UIViewController {
     @IBAction func addTaskButton(_ sender: Any) {
         
         checkCategory()
+        addTaskButton.shake()
         
         guard let addTask = self.addTaskTextField.text,
         let categoryID = self.catID, let taskController = self.taskController,
-        let household = household else {
-            addTaskButton.shake()
-            return
-        }
-  
+        let household = self.household else { return }
+        
         displayMsg(title: "Please Confirm", msg: "Are you sure you want to add this task?", style: .alert) { (isConfirmed) in
             
     
@@ -92,8 +90,9 @@ class AddTaskViewController: UIViewController {
                 self.performSegue(withIdentifier: "back2task", sender: self)
             }
         }
+        
     }
-    
+     
     // perform segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
