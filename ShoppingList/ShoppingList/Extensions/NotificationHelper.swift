@@ -33,17 +33,24 @@ class NotificationHelper: NSObject, UNUserNotificationCenterDelegate {
     }
     
     
-    func scheduleDelivery(name: String, address: String, numberOfItems: Int) {
+    func scheduleTask(task: String, date: Date) {
         
         let content = UNMutableNotificationContent()
-        content.title = "\(name)'s order"
-        content.body = "Your \(numberOfItems) items will be delivered to \(address) within the hour"
+        content.title = "\(task)"
+        content.body = "Your task:  \(task) will be due at \(date.string(style: .short, showTime: true)) "
         
+        guard let triggerDate = Calendar.current.date(byAdding: .hour, value: -1, to: date) else { return }
         
+        let components = Calendar.current.dateComponents([.year, .month, .hour, .day, .minute], from: triggerDate)
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        
+        print("This is the Triger Time \(triggerDate)")
+}
+    
+    
 }

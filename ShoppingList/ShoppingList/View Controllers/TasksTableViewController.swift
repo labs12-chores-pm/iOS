@@ -120,7 +120,7 @@ class TasksTableViewController: UITableViewController {
             guard let destinationVC = segue.destination as? TaskViewController,
             let index = self.tableView.indexPathForSelectedRow,
             let tasks = tasks, let category = category, let household = household, let userController = userController,
-            let user = currentUser, let completedTasks = completedTasks, let notesController = notesController else { return }
+            let user = currentUser, let completedTasks = completedTasks, let notesController = notesController, let notificationHelper = notificationHelper else { return }
             
             let task = index.section == 0 ? tasks[index.row] : completedTasks[index.row]
             
@@ -131,12 +131,13 @@ class TasksTableViewController: UITableViewController {
             destinationVC.userController = userController
             destinationVC.currentUser = user
             destinationVC.notesController = notesController
+            destinationVC.notificationHelper = notificationHelper
         }
         
         if segue.identifier == "AddTask" {
             guard let destinationVC = segue.destination as? TaskViewController,
             let category = category, let household = household, let userController = userController, let user = currentUser,
-            let notesController = notesController else { return }
+            let notesController = notesController, let notificationHelper = notificationHelper else { return }
             
             destinationVC.taskController = taskController
             destinationVC.category = category
@@ -144,6 +145,8 @@ class TasksTableViewController: UITableViewController {
             destinationVC.userController = userController
             destinationVC.currentUser = user
             destinationVC.notesController = notesController
+            destinationVC.notificationHelper = notificationHelper
+            
         }
     }
     
@@ -180,4 +183,5 @@ class TasksTableViewController: UITableViewController {
     }
     
     var household: Household?
+    var notificationHelper : NotificationHelper?
 }

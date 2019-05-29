@@ -24,6 +24,7 @@ class MainCategoriesViewController: UIViewController {
             self.userController = tabBar.userController
             self.categoryController = tabBar.categoryController
             self.notesController = tabBar.notesController
+            self.notificationHelper = tabBar.notificationHelper
         }
     }
     
@@ -97,7 +98,8 @@ class MainCategoriesViewController: UIViewController {
             let taskController = taskController,
             let household = household,
             let userController = userController,
-            let notesController = notesController
+            let notesController = notesController,
+            let notificationHelper = notificationHelper
             else { return }
             
             let category = categories[index.row]
@@ -108,6 +110,7 @@ class MainCategoriesViewController: UIViewController {
             destinationVC.household = household
             destinationVC.userController = userController
             destinationVC.notesController = notesController
+            destinationVC.notificationHelper = notificationHelper
         }
     }
     
@@ -123,6 +126,8 @@ class MainCategoriesViewController: UIViewController {
     var notesController: NotesController?
     var categories: [Category]?
     var household: Household?
+    var notificationHelper: NotificationHelper?
+    
 }
 
 extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSource {
