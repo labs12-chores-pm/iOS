@@ -27,6 +27,8 @@ class AddTaskViewController: UIViewController {
             self.userController = tabBar.userController
             self.categoryController = tabBar.categoryController
             self.notesController = tabBar.notesController
+        } else {
+            fatalError()
         }
         
         if let householdController = householdController, let user = currentUser {
@@ -37,6 +39,8 @@ class AddTaskViewController: UIViewController {
                 }
                 self.household = household
             }
+        } else {
+            fatalError()
         }
     }
     
@@ -46,7 +50,6 @@ class AddTaskViewController: UIViewController {
     }
     
     @objc func fetchCategories() {
-        // Test Code
         guard let user = currentUser else { return }
         let householdId = user.currentHouseholdId
         categoryController?.fetchCategories(householdId: householdId) { (categories, error) in
@@ -58,40 +61,27 @@ class AddTaskViewController: UIViewController {
         }
     }
     
-    func checkCategory() {
-
-        if let category = filteredResults.first {
-            self.catID = category.identifier
-            self.category = category
-        } else {
-            guard let user = currentUser,
-                  let name = addCategoryTextField.text else { return }
-            let householdId = user.currentHouseholdId
-            self.category = categoryController?.createCategory(householdId: householdId, name: name)
-        }
-    }
-    
     @IBAction func addTaskButton(_ sender: Any) {
         
-        checkCategory()
-        
-        guard let addTask = self.addTaskTextField.text,
-        let categoryID = self.catID, let taskController = self.taskController,
+        guard let taskController = self.taskController,
         let household = household else {
             addTaskButton.shake()
             return
         }
-  
-        displayMsg(title: "Please Confirm", msg: "Are you sure you want to add this task?", style: .alert) { (isConfirmed) in
-            
-    
-            if let isConfirmed = isConfirmed, isConfirmed == true {
-                
-                self.task = taskController.createTask(description: addTask, categoryId: categoryID, assineeIds: [], dueDate: Date(), isComplete: false, householdId: household.identifier, recurrence: Recurrence(rawValue: 0)!)
-                
-                self.performSegue(withIdentifier: "back2task", sender: self)
-            }
+        
+        guard let categoryID = self.catID else {
+            addTaskButton.shake()
+            displayMsg(title: "Missing field", msg: "Please add a category.")
+            return
         }
+        
+        guard let addTask = self.addTaskTextField.text, !addTask.trimmingCharacters(in: .whitespaces).isEmpty else {
+            addTaskButton.shake()
+            displayMsg(title: "Missing field", msg: "Please add a task description.")
+            return
+        }
+  
+        self.task = taskController.createTask(description: addTask, categoryId: categoryID, assineeIds: [], dueDate: Date(), isComplete: false, householdId: household.identifier, recurrence: Recurrence(rawValue: 0)!)
     }
     
     // perform segue
@@ -137,12 +127,17 @@ class AddTaskViewController: UIViewController {
     var categoryController : CategoryController?
     var notesController: NotesController?
     
-    var task : Task?
+    var task : Task? {
+        didSet {
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "back2task", sender: self)
+            }
+        }
+    }
+    
     var catID : UUID?
     var category : Category?
     var household : Household?
-    
-    //    let mainCategoriesViewController = MainCategoriesViewController()
     
     let reuseIdentifier = "searchCategoryCell"
     
@@ -173,8 +168,11 @@ extension AddTaskViewController: UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        addCategoryTextField.text = filteredResults[indexPath.row].name
+        let selectedResult = filteredResults[indexPath.row]
+        addCategoryTextField.text = selectedResult.name
         filteredResults = []
+        catID = selectedResult.identifier
+        category = selectedResult
         addCategoryTextField.endEditing(true)
     }
 }

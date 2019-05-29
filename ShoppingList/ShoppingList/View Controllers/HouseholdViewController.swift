@@ -24,6 +24,8 @@ class HouseholdViewController: UIViewController {
             self.userController = tabBar.userController
             self.currentUser = tabBar.currentUser
             self.notesController = tabBar.notesController
+        } else {
+            fatalError()
         }
     }
     
@@ -35,7 +37,7 @@ class HouseholdViewController: UIViewController {
     
     @objc private func fetchAndAssign() {
         guard let currentUser = currentUser, let householdController = householdController,
-            let userController = userController else { return }
+            let userController = userController else { fatalError() }
         
         userController.fetchUser(userId: currentUser.identifier) { (user, error) in
             if let error = error {
@@ -75,7 +77,8 @@ class HouseholdViewController: UIViewController {
         self.messages = nil
         var messages: [Any] = []
         
-        guard let taskController = taskController, let household = household, let notesController = notesController else { return }
+        guard let taskController = taskController, let notesController = notesController else { fatalError() }
+        guard let household = household else { return }
         
         taskController.fetchTasks(inHouseholdWith: household.identifier) { (tasks, error) in
             if let error = error {
@@ -141,13 +144,16 @@ class HouseholdViewController: UIViewController {
     
     @IBAction func leaveHouseholdButtonTapped(_ sender: UIButton) {
         
-        guard let household = household, let householdController = householdController else { return }
+        guard let household = household, let householdController = householdController else { fatalError() }
         
         if let currentUser = currentUser {
             var members = household.memberIds
             var admins = household.adminIds
             
-            guard admins.contains(currentUser.identifier) else { return }
+            guard admins.contains(currentUser.identifier) else {
+                displayMsg(title: "Cannot leave household.", msg: "You must be an admin to remove users from a household.")
+                return
+            }
             
             if currentUser.identifier == household.creatorId {
                 

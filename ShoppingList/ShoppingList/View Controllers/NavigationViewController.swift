@@ -29,8 +29,6 @@ class NavigationViewController: UINavigationController {
         
         self.navigationBar.barTintColor = AppearanceHelper.teal
         
-        self.navigationBar
-        
         AppearanceHelper.setNavigationStyle()
     }
 }

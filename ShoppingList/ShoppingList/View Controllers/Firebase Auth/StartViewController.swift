@@ -26,7 +26,10 @@ class StartViewController: UIViewController {
         
         Auth.auth().signIn(withEmail: email, password: password) { (authResponse, error) in
             if let error = error {
-                print(error)
+                DispatchQueue.main.async {
+                    self.loginButton.shake()
+                    self.displayMsg(title: "Error signing in...", msg: error.localizedDescription)
+                }
                 return
             }
             
@@ -39,7 +42,10 @@ class StartViewController: UIViewController {
                 
                 self.userController.fetchUserWithEmail(email: email, completion: { (user, error) in
                     if let error = error {
-                        print(error)
+                        DispatchQueue.main.async {
+                            self.loginButton.shake()
+                            self.displayMsg(title: "Error signing in...", msg: error.localizedDescription)
+                        }
                         return
                     }
                     
@@ -68,7 +74,10 @@ class StartViewController: UIViewController {
             Auth.auth().createUser(withEmail: email, password: password) { (authResponse, error) in
                 
                 if let error = error {
-                    print(error)
+                    DispatchQueue.main.async {
+                        self.loginButton.shake()
+                        self.displayMsg(title: "Error creating account...", msg: error.localizedDescription)
+                    }
                     return
                 }
                 
@@ -78,7 +87,13 @@ class StartViewController: UIViewController {
                     
                     let currentUser = authResponse.user
                     
-                    guard let email = currentUser.email else { return }
+                    guard let email = currentUser.email else {
+                        DispatchQueue.main.async {
+                            self.loginButton.shake()
+                            self.displayMsg(title: "Something went wrong...", msg: "Email address wasn't found. Please try again later.")
+                        }
+                        return
+                    }
                     
                     let userUID = UUID()
                     
@@ -132,8 +147,8 @@ class StartViewController: UIViewController {
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var loginButton: MonkeyButton!
     
-
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
