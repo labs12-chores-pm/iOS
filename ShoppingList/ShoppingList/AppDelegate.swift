@@ -10,11 +10,6 @@ import UserNotifications
 import UIKit
 import Firebase
 
-
-let defaults = UserDefaults.standard
-
-//, UNUserNotificationCenterDelegate
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
    
@@ -26,42 +21,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         checkNotificationAuthorization()
         
         FirebaseApp.configure()
-        
-        
-//        PushNotifications.shared.start(instanceId: "1c17ef2c-92ea-486e-af1b-7bc8faa62607")
-//        PushNotifications.shared.registerForRemoteNotifications()
-//
-//        UNUserNotificationCenter.current().delegate = self
-//      //  try? self.pushNotifications.subscribe(interest: "group-103")
-//
-//
-//        let center = UNUserNotificationCenter.current()
-//        center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-//            if (granted) {
-//                DispatchQueue.main.async(execute: {
-//                    application.registerForRemoteNotifications()
-//                })
-//            }
-//        }
-//
+
         window = UIWindow()
         window?.makeKeyAndVisible()
-//
-//        let loginVC = LoginViewController.instantiate()
-//        let mainVC = MainViewController.instantiate()
-        
-        let mainStoryboard = UIStoryboard(name: "TabView", bundle: .main)
-        let categoriesVC = mainStoryboard.instantiateViewController(withIdentifier: "TabViewViewController")
         
         let loginStoryboard = UIStoryboard(name: "FirebaseLogin", bundle: .main)
-        let loginVC = loginStoryboard.instantiateViewController(withIdentifier: "StartViewController")
+        let loginVC = loginStoryboard.instantiateViewController(withIdentifier: "StartNavController")
         
         self.window?.rootViewController = loginVC
         
-//        self.window?.rootViewController = SessionManager.tokens == nil ? loginVC : mainVC
-        
         return true
     }
+
 //
 //    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken : Data) {
 //        PushNotifications.shared.registerDeviceToken(deviceToken)
@@ -144,4 +115,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         completionHandler(.alert)
         
     }
+
 }

@@ -9,5 +9,6 @@ target 'ShoppingList' do
 
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
+  pod 'KeychainSwift'
 
 end
