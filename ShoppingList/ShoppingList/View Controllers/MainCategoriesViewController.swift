@@ -61,6 +61,7 @@ class MainCategoriesViewController: UIViewController {
                     print(error)
                     return
                 }
+                self.household = nil
                 self.household = household
                 
                 DispatchQueue.main.async {
@@ -112,6 +113,8 @@ class MainCategoriesViewController: UIViewController {
             try? Auth.auth().signOut()
         }
     }
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddCategory" {
