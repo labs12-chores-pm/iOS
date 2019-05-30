@@ -63,16 +63,27 @@ class ProfileViewController: UIViewController {
                 if let error = error {
                     DispatchQueue.main.async {
                        activityView.stopAnimating()
+                        self.displayMsg(title: "Error updating user name", msg: "\(error)")
                     }
-                    self.displayMsg(title: "Error updating user name", msg: "\(error)")
                     print(error)
                     return
                 }
                 
-                userController.updateUser(user: currentUser, name: displayName)
-                DispatchQueue.main.async {
-                    activityView.stopAnimating()
-                }
+                userController.updateUser(user: currentUser, name: displayName, completion: { (error) in
+                    if let error = error {
+                        print(error)
+                        DispatchQueue.main.async {
+                            activityView.stopAnimating()
+                            self.displayMsg(title: "Error updating user name", msg: "\(error)")
+                        }
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        activityView.stopAnimating()
+                    }
+                })
+                
             }
             
         }
