@@ -13,13 +13,13 @@ class InvitationViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        guard let household = household else { return }
+        guard let household = household else { fatalError() }
         codeLabel.text = household.inviteCode
     }
     
     @IBAction func sendInviteButtonWasTapped(_ sender: UIButton) {
         guard let household = household,
-        let householdController = householdController else { return }
+        let householdController = householdController else { fatalError() }
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .full
@@ -38,7 +38,10 @@ class InvitationViewController: UIViewController {
             householdController.updateHousehold(household: household, memberIds: household.memberIds, adminIds: household.adminIds, categories: household.categories ?? [], invite: invite)
         }
         
-        let code = [household.inviteCode]
+        let code = ["""
+                    Hey there! \n
+                    Use invite code \(household.inviteCode) to join \(household.name) on ChoreMonkey.
+                    """]
         
         let ac = UIActivityViewController(activityItems: code, applicationActivities: nil)
         present(ac, animated: true, completion: nil)

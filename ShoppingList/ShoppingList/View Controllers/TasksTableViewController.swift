@@ -16,7 +16,7 @@ class TasksTableViewController: UITableViewController {
     }
     
     func getTasks() {
-        guard let category = category, let taskController = taskController else { return }
+        guard let category = category, let taskController = taskController else { fatalError() }
         
         taskController.fetchTasks(categoryId: category.identifier) { (tasks, error) in
             
@@ -107,7 +107,6 @@ class TasksTableViewController: UITableViewController {
                     print(error)
                     return
                 }
-                
                 self.getTasks()
             }
         }

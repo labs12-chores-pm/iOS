@@ -21,10 +21,15 @@ class CreateHouseholdViewController: UIViewController {
     }
     
     @IBAction func createJoinButtonWasTapped(_ sender: UIButton) {
-        guard let text = createNameInviteCodeField.text,
-        let userController = userController,
+        guard let text = createNameInviteCodeField.text else {
+            createJoinButton.shake()
+            displayMsg(title: "Missing field", msg: "Please enter \(isJoinForm ? "an invite code" : "a household name").")
+            return
+        }
+        
+        guard let userController = userController,
         let householdController = householdController,
-        let currentUser = currentUser else { return }
+        let currentUser = currentUser else { fatalError() }
         
         if isJoinForm {
             
@@ -68,7 +73,7 @@ class CreateHouseholdViewController: UIViewController {
     }
     
     @IBOutlet weak var createNameInviteCodeField: UITextField!
-    @IBOutlet weak var createJoinButton: UIButton!
+    @IBOutlet weak var createJoinButton: MonkeyButton!
     
     var householdController: HouseholdController?
     var userController: UserController?

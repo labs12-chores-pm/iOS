@@ -80,6 +80,7 @@
                     <navigationItem key="navigationItem" id="NtV-0K-dsB"/>
                     <connections>
                         <outlet property="emailField" destination="vHJ-u0-4tB" id="Wfx-uD-tW0"/>
+                        <outlet property="loginButton" destination="HvP-Xb-yuu" id="NTU-5D-1Xz"/>
                         <outlet property="passwordField" destination="CMa-pJ-IYd" id="yZf-EG-7Hz"/>
                         <segue destination="jKz-Ol-IO2" kind="presentation" identifier="ShowMain" id="Rs0-yI-kcx"/>
                     </connections>
@@ -141,6 +142,7 @@
                     </view>
                     <connections>
                         <outlet property="emailField" destination="GbL-1b-8bc" id="toH-Ea-NC7"/>
+                        <outlet property="getResetEmailButton" destination="spV-f6-H67" id="yyd-jG-RQj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hh4-O5-7rJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

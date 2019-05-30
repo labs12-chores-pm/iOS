@@ -9,38 +9,6 @@
 import UIKit
 
 class MessagesTableViewController: UITableViewController {
-
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        setDataSource()
-//    }
-//
-//    private func setDataSource() {
-//        guard let taskController = taskController, let household = household, let notesController = notesController else { return }
-//
-//        var messages: [Any] = []
-//
-//        taskController.fetchTasks(inHouseholdWith: household.identifier) { (tasks, error) in
-//            if let error = error {
-//                print(error)
-//                return
-//            }
-//            guard let tasks = tasks else { return }
-//            messages += tasks.filter({ $0.isPending == true })
-//            self.messages = messages
-//            for task in tasks {
-//                notesController.fetchNotes(taskId: task.identifier, completion: { (notes, error) in
-//                    if let error = error {
-//                        print(error)
-//                        return
-//                    }
-//                    guard let notes = notes else { return }
-//                    messages += notes
-//                    self.messages = messages
-//                })
-//            }
-//        }
-//    }
     
     @IBAction func backButtonWasTapped(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
