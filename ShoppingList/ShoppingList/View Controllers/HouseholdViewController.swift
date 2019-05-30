@@ -39,17 +39,31 @@ class HouseholdViewController: UIViewController {
         guard let currentUser = currentUser, let householdController = householdController,
             let userController = userController else { fatalError() }
         
+        let activityView = getActivityView()
+        activityView.startAnimating()
+        
         userController.fetchUser(userId: currentUser.identifier) { (user, error) in
             if let error = error {
                 print(error)
+                DispatchQueue.main.async {
+                    activityView.stopAnimating()
+                }
                 return
             }
             
-            guard let user = user else { return }
+            guard let user = user else {
+                DispatchQueue.main.async {
+                    activityView.stopAnimating()
+                }
+                return
+            }
             
             householdController.fetchHousehold(householdId: user.currentHouseholdId) { (household, error) in
                 if let error = error {
                     print(error)
+                    DispatchQueue.main.async {
+                        activityView.stopAnimating()
+                    }
                     return
                 }
                 self.household = nil
@@ -59,18 +73,28 @@ class HouseholdViewController: UIViewController {
             householdController.fetchHouseholds(user: user) { (households, error) in
                 if let error = error {
                     print(error)
+                    DispatchQueue.main.async {
+                        activityView.stopAnimating()
+                    }
                     return
                 }
                 self.pickerDataSource = nil
                 self.pickerDataSource = households
+                DispatchQueue.main.async {
+                    activityView.stopAnimating()
+                }
             }
         }
     }
     
     private func setDataSource() {
+        let activityView = getActivityView()
+        activityView.startAnimating()
+        
         defer {
             DispatchQueue.main.async {
                 self.updateViews()
+                activityView.stopAnimating()
             }
         }
         

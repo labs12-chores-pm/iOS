@@ -22,6 +22,9 @@ class PasswordResetViewController: UIViewController {
             return
         }
         
+        let activityView = getActivityView()
+        activityView.startAnimating()
+        
         Auth.auth().sendPasswordReset(withEmail: email) { (error) in
             if let error = error {
                 DispatchQueue.main.async {
@@ -32,6 +35,7 @@ class PasswordResetViewController: UIViewController {
             }
             
             keychain.delete(Settings.keychainPassword)
+            activityView.stopAnimating()
             self.navigationController?.popViewController(animated: true)
         }
     }

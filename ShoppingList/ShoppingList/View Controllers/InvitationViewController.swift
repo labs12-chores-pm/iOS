@@ -12,7 +12,7 @@ class InvitationViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         guard let household = household else { fatalError() }
         codeLabel.text = household.inviteCode
     }

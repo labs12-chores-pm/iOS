@@ -24,6 +24,9 @@ class StartViewController: UIViewController {
     
     private func signIn(email: String, password: String) {
         
+        let activityView = getActivityView()
+        activityView.startAnimating()
+        
         Auth.auth().signIn(withEmail: email, password: password) { (authResponse, error) in
             if let error = error {
                 DispatchQueue.main.async {
@@ -62,7 +65,14 @@ class StartViewController: UIViewController {
                     }
                 })
             }
+            DispatchQueue.main.async {
+                activityView.stopAnimating()
+            }
         }
+    }
+    
+    func showActivityView() {
+        
     }
     
     @IBAction func loginButtonWasTapped(_ sender: UIButton) {
@@ -70,6 +80,9 @@ class StartViewController: UIViewController {
         guard let email = emailField.text, let password = passwordField.text else { return }
         
         if needsNewAccount {
+            
+            let activityView = getActivityView()
+            activityView.startAnimating()
             
             Auth.auth().createUser(withEmail: email, password: password) { (authResponse, error) in
                 
@@ -109,7 +122,9 @@ class StartViewController: UIViewController {
                     self.keychain.set(email, forKey: Settings.keychainEmail)
                     self.keychain.set(password, forKey: Settings.keychainPassword)
                 }
-                
+                DispatchQueue.main.async {
+                    activityView.stopAnimating()
+                }
             }
         } else {
             signIn(email: email, password: password)
