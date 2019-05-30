@@ -151,6 +151,7 @@
                     </view>
                     <connections>
                         <outlet property="categoryNameField" destination="TVX-ua-eQJ" id="v5H-Qi-UgG"/>
+                        <outlet property="createCategoryButton" destination="P4t-Cd-GeO" id="3Hh-58-FTu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1mP-NZ-SpN" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -11,9 +11,12 @@ import UIKit
 class AddCategoryViewController: UIViewController {
     
     @IBAction func createCategoryButtonWasTapped(_ sender: UIButton) {
-        guard let categoryController = categoryController,
-            let name = categoryNameField.text,
-            let user = currentUser else { return }
+        guard let categoryController = categoryController, let user = currentUser else { fatalError() }
+        guard let name = categoryNameField.text else {
+            createCategoryButton.shake()
+            displayMsg(title: "Missing field", msg: "Please add a category name")
+            return
+        }
         
         categoryController.createCategory(householdId: user.currentHouseholdId, name: name)
         
@@ -21,6 +24,8 @@ class AddCategoryViewController: UIViewController {
     }
     
     @IBOutlet weak var categoryNameField: UITextField!
+    @IBOutlet weak var createCategoryButton: MonkeyButton!
+    
     var categoryController: CategoryController?
     var currentUser: User?
 }

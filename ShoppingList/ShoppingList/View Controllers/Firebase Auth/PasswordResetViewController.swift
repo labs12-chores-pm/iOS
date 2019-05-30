@@ -13,12 +13,21 @@ import KeychainSwift
 class PasswordResetViewController: UIViewController {
     
     @IBAction func resetButtonTapped(_ sender: MonkeyButton) {
-
-        guard let email = emailField.text, let keychain = keychain else { return }
+        
+        guard let keychain = keychain else { fatalError() }
+        
+        guard let email = emailField.text else {
+            getResetEmailButton.shake()
+            displayMsg(title: "Missing field", msg: "Please enter your email address.")
+            return
+        }
         
         Auth.auth().sendPasswordReset(withEmail: email) { (error) in
             if let error = error {
-                print(error)
+                DispatchQueue.main.async {
+                    self.getResetEmailButton.shake()
+                    self.displayMsg(title: "Error sending email", msg: error.localizedDescription)
+                }
                 return
             }
             
@@ -28,5 +37,6 @@ class PasswordResetViewController: UIViewController {
     }
     
     @IBOutlet weak var emailField: BlueField!
+    @IBOutlet weak var getResetEmailButton: MonkeyButton!
     var keychain: KeychainSwift?
 }

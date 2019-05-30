@@ -25,6 +25,8 @@ class MainCategoriesViewController: UIViewController {
             self.categoryController = tabBar.categoryController
             self.notesController = tabBar.notesController
             self.notificationHelper = tabBar.notificationHelper
+        } else {
+            fatalError()
         }
     }
     
@@ -34,7 +36,7 @@ class MainCategoriesViewController: UIViewController {
     }
     
     private func fetchCategories() {
-        guard let user = currentUser, let categoryController = categoryController else { return }
+        guard let user = currentUser, let categoryController = categoryController else { fatalError() }
         let householdId = user.currentHouseholdId
         categoryController.fetchCategories(householdId: householdId) { (categories, error) in
             if let error = error {
@@ -63,6 +65,8 @@ class MainCategoriesViewController: UIViewController {
                     self.updateViews()
                 }
             }
+        } else {
+            fatalError()
         }
     }
     

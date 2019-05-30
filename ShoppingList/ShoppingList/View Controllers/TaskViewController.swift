@@ -23,7 +23,7 @@ class TaskViewController: UIViewController {
         
         searchResultsHeightConstraint.constant = 0
         
-        guard let userController = userController, let currentUser = currentUser, let household = household else { return }
+        guard let userController = userController, let currentUser = currentUser, let household = household else { fatalError() }
         
         self.hasAdminAccess = household.adminIds.contains(currentUser.identifier) ? true : false
         
@@ -57,9 +57,13 @@ class TaskViewController: UIViewController {
     }
     
     @IBAction func completeButtonWasTapped(_ sender: UIButton) {
-        guard let description = descriptionField.text,
-            let taskController = taskController, let hasAdminAccess = hasAdminAccess else { return }
+        guard let taskController = taskController, let hasAdminAccess = hasAdminAccess else { return }
         
+        guard let description = descriptionField.text else {
+            completeButton.shake()
+            displayMsg(title: "Description missing", msg: "Please add a description before creating a task.")
+            return
+        }
         
         if hasAdminAccess {
             if let task = task {
@@ -105,11 +109,7 @@ class TaskViewController: UIViewController {
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
         
-            if let taskDescription = descriptionField.text, !taskDescription.isEmpty
-                {
-                
-                // Add notification set function
-                // sender.date
+            if let taskDescription = descriptionField.text, !taskDescription.trimmingCharacters(in: .whitespaces).isEmpty {
                 
                 print("This is the date from the Picker \(sender.date)")
                 
@@ -120,19 +120,14 @@ class TaskViewController: UIViewController {
                 }
             }
         
-        
         guard let taskController = taskController, let task = task else { return }
         taskController.updateTask(task: task, dueDate: sender.date)
     }
     
-    func scheduleLocal() {
-        
-        let center = UNUserNotificationCenter.current()
-        
-        center.removeAllPendingNotificationRequests()
-        
-    }
-    
+//    func scheduleLocal() {
+//        let center = UNUserNotificationCenter.current()
+//        center.removeAllPendingNotificationRequests()
+//    }
     
     private func setNotes() {
         if let task = task, let notesController = notesController {
@@ -193,7 +188,7 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var searchResultsHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var noteTextField: UITextField!
     @IBOutlet weak var assigneeSearchTableView: UITableView!
-    @IBOutlet weak var completeButton: UIButton!
+    @IBOutlet weak var completeButton: MonkeyButton!
     @IBOutlet weak var descriptionField: UITextField!
     @IBOutlet weak var assigneeSearch: UISearchBar!
     @IBOutlet weak var dueDatePicker: UIDatePicker!

@@ -22,6 +22,8 @@ class ProfileViewController: UIViewController {
             self.currentUser = currentUser
             self.userController = userController
             self.keychain = keychain
+        } else {
+            fatalError()
         }
         
         userNameField.delegate = self
@@ -48,7 +50,7 @@ class ProfileViewController: UIViewController {
         
         guard let authResponse = authResponse, let userController = userController, let currentUser = currentUser, let keychain = keychain else { fatalError() }
         
-        if let displayName = userNameField.text, !displayName.isEmpty {
+        if let displayName = userNameField.text, !displayName.trimmingCharacters(in: .whitespaces).isEmpty {
             
             let changeRequest = authResponse.user.createProfileChangeRequest()
             
@@ -66,7 +68,7 @@ class ProfileViewController: UIViewController {
             
         }
         
-        if let email = emailField.text, !email.isEmpty {
+        if let email = emailField.text, !email.trimmingCharacters(in: .whitespaces).isEmpty {
             
             authResponse.user.updateEmail(to: email) { (error) in
                 if let error = error {
@@ -81,7 +83,7 @@ class ProfileViewController: UIViewController {
             
         }
         
-        if let password = passwordField.text, !password.isEmpty {
+        if let password = passwordField.text, !password.trimmingCharacters(in: .whitespaces).isEmpty {
             
             authResponse.user.updatePassword(to: password) { (error) in
                 if let error = error {
