@@ -15,8 +15,8 @@ class TabViewViewController: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.tabBar.tintColor = AppearanceHelper.lightYellow
-        self.tabBar.barTintColor = AppearanceHelper.teal
+        self.tabBar.tintColor = AppearanceHelper.yellow
+        self.tabBar.barTintColor = AppearanceHelper.midOrange
         self.tabBar.unselectedItemTintColor = .white
         
         self.tabBar.itemPositioning = .centered

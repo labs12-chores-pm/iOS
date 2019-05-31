@@ -27,7 +27,13 @@ class NavigationViewController: UINavigationController {
         image.centerXAnchor.constraint(equalTo: self.navigationBar.centerXAnchor, constant: 0).isActive = true
         image.widthAnchor.constraint(equalTo: image.heightAnchor, multiplier: 1).isActive = true
         
-        self.navigationBar.barTintColor = AppearanceHelper.teal
+//        let colorImage = UIImage()
+//        colorImage.
+//
+//        self.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationBar.shadowImage = UIImage()
+        
+        self.navigationBar.barTintColor = AppearanceHelper.lightOrange
         
         AppearanceHelper.setNavigationStyle()
     }

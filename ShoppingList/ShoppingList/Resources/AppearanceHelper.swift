@@ -15,17 +15,22 @@ class AppearanceHelper {
     static let babyBlue = UIColor(red: 222/255, green: 248/255, blue: 255/255, alpha: 1)
     static let yellowBrown = UIColor(red: 204/255, green: 186/255, blue: 106/255, alpha: 1)
     
+    static let yellow = #colorLiteral(red: 0.9928019643, green: 0.7650975585, blue: 0.1207756624, alpha: 1)
+    static let lightOrange = #colorLiteral(red: 0.9405652881, green: 0.663567245, blue: 0.1158531085, alpha: 1)
+    static let midOrange = #colorLiteral(red: 0.9414839149, green: 0.5269313455, blue: 0.1456429958, alpha: 1)
+    static let darkOrange = #colorLiteral(red: 0.943921864, green: 0.4410427809, blue: 0.1553348303, alpha: 1)
+    
     static func setNavigationStyle() {
         let buttonAttributes: [NSAttributedString.Key: Any] = [
             .font: styleFont(with: .body, pointSize: 16),
-            .foregroundColor: babyBlue,
+            .foregroundColor: UIColor.brown,
         ]
         
         UIBarButtonItem.appearance().setTitleTextAttributes(buttonAttributes, for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes(buttonAttributes, for: .selected)
         UIBarButtonItem.appearance().setTitleTextAttributes(buttonAttributes, for: .highlighted)
         
-        UINavigationBar.appearance().tintColor = babyBlue
+        UINavigationBar.appearance().tintColor = darkOrange
     }
     
     static func styleFont(with textStyle: UIFont.TextStyle, pointSize: CGFloat) -> UIFont {
