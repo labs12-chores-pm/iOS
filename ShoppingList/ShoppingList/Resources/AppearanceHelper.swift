@@ -10,6 +10,7 @@ import Foundation
 
 class AppearanceHelper {
     
+    static let pinkThemeColor = #colorLiteral(red: 0.9125601649, green: 0.1181406602, blue: 0.3897231221, alpha: 1)
     static let teal = UIColor(red: 106/255, green: 204/255, blue: 198/255, alpha: 1)
     static let lightYellow = UIColor(red: 255/255, green: 218/255, blue: 158/255, alpha: 1)
     static let babyBlue = UIColor(red: 222/255, green: 248/255, blue: 255/255, alpha: 1)
@@ -29,7 +30,6 @@ class AppearanceHelper {
         UIBarButtonItem.appearance().setTitleTextAttributes(buttonAttributes, for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes(buttonAttributes, for: .selected)
         UIBarButtonItem.appearance().setTitleTextAttributes(buttonAttributes, for: .highlighted)
-        
         UINavigationBar.appearance().tintColor = darkOrange
     }
     

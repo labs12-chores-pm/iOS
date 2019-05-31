@@ -4,7 +4,6 @@
 //
 //  Created by Nathanael Youngren on 5/14/19.
 //  Copyright © 2019 Lambda School Labs. All rights reserved.
-//
 
 import UIKit
 
@@ -30,6 +29,8 @@ class HouseholdViewController: UIViewController {
         } else {
             fatalError()
         }
+        
+        householdMemberTableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
