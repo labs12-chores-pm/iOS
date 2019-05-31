@@ -24,6 +24,8 @@ class AppearanceHelper {
         UIBarButtonItem.appearance().setTitleTextAttributes(buttonAttributes, for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes(buttonAttributes, for: .selected)
         UIBarButtonItem.appearance().setTitleTextAttributes(buttonAttributes, for: .highlighted)
+        
+        UINavigationBar.appearance().tintColor = babyBlue
     }
     
     static func styleFont(with textStyle: UIFont.TextStyle, pointSize: CGFloat) -> UIFont {

@@ -49,6 +49,21 @@ class AddTaskViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if let tabBar = self.tabBarController as? TabViewViewController {
+            self.currentUser = tabBar.currentUser
+        }
+        
+        if let householdController = householdController, let user = currentUser {
+            householdController.fetchHousehold(householdId: user.currentHouseholdId) { (household, error) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                self.household = household
+            }
+        } else {
+            fatalError()
+        }
         fetchCategories()
         updateViews()
     }

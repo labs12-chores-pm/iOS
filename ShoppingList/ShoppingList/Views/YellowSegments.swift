@@ -22,6 +22,7 @@ class YellowSegments: UISegmentedControl {
     
     private func setUpSegmentedControl() {
         tintColor = AppearanceHelper.teal
-//        backgroundColor = AppearanceHelper.lightYellow
+        let font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
+        setTitleTextAttributes([.font : font], for: .normal)
     }
 }

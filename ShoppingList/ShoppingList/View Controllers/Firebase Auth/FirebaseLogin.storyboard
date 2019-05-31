@@ -60,7 +60,7 @@
                                             <constraint firstAttribute="height" constant="50" id="Uog-gu-1Mm"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r93-OY-qGN" customClass="DiscreteButton" customModule="ShoppingList" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r93-OY-qGN" customClass="DiscreteWhiteButton" customModule="ShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="208" width="200" height="30"/>
                                         <state key="normal" title="Forgot password?"/>
                                         <connections>
@@ -149,10 +149,10 @@
             </objects>
             <point key="canvasLocation" x="1979.7101449275365" y="187.5"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation View Controller-->
         <scene sceneID="gfK-ou-uah">
             <objects>
-                <navigationController storyboardIdentifier="StartNavController" automaticallyAdjustsScrollViewInsets="NO" id="yOQ-1g-glV" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="StartNavController" automaticallyAdjustsScrollViewInsets="NO" id="yOQ-1g-glV" customClass="NavigationViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KKB-bg-M7s">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

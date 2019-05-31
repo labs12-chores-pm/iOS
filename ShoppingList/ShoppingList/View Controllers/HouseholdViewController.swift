@@ -115,7 +115,7 @@ class HouseholdViewController: UIViewController {
                 print(error)
             }
             if let tasks = tasks {
-                messages += tasks.filter({ $0.isPending == true })
+                messages += tasks.filter({ $0.isPending == true && $0.isComplete == false })
                 self.messages = messages
                 for task in tasks {
                     notesController.fetchNotes(taskId: task.identifier, completion: { (notes, error) in
@@ -406,11 +406,17 @@ extension HouseholdViewController: UIPickerViewDelegate, UIPickerViewDataSource 
         guard let currentUser = currentUser, let userController = userController else { return }
         let household = pickerDataSource?[row].identifier
         userController.updateUser(user: currentUser, currentHouseholdId: household)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: .householdChange), object: nil)
         fetchAndAssign()
         setDataSource()
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerDataSource?[row].name
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        let pickerLabel = UILabel()
+        pickerLabel.text = pickerDataSource?[row].name
+        pickerLabel.font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
+        
+        return pickerLabel
     }
 }
