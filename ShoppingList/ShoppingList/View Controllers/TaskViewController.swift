@@ -65,6 +65,9 @@ class TaskViewController: UIViewController {
             return
         }
         
+        let activityView = getActivityView()
+        activityView.startAnimating()
+        
         if hasAdminAccess {
             if let task = task {
                 
@@ -80,7 +83,12 @@ class TaskViewController: UIViewController {
                 }
                 
             } else {
-                guard let categoryId = category?.identifier, let householdId = household?.identifier else { return }
+                guard let categoryId = category?.identifier, let householdId = household?.identifier else {
+                    DispatchQueue.main.async {
+                        activityView.stopAnimating()
+                    }
+                    return
+                }
                 
                 var ids: [UUID] = []
                 if let assignee = assignee {
@@ -90,16 +98,33 @@ class TaskViewController: UIViewController {
                 taskController.createTask(description: description, categoryId: categoryId, assineeIds: ids, dueDate: dueDatePicker.date, notes: [], isComplete: false, householdId: householdId, recurrence: self.recurrence ?? Recurrence(rawValue: 0)!)
             }
         } else {
-            guard let task = task else { return }
+            guard let task = task else {
+                DispatchQueue.main.async {
+                    activityView.stopAnimating()
+                }
+                return
+            }
             taskController.updateTask(task: task, isPending: true)
             completeButton.setTitle("Pending Approval", for: .normal)
         }
         
+        DispatchQueue.main.async {
+            activityView.stopAnimating()
+        }
         self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func addNoteButtonWasTapped(_ sender: UIButton) {
-        guard let text = noteTextField.text, let memberId = currentUser?.identifier, let task = task, let notesController = notesController else { return }
+        guard let task = task else {
+            displayMsg(title: "No task found...", msg: "Please complete creating task before adding notes.")
+            return
+        }
+        
+        guard let text = noteTextField.text, !text.isEmpty else {
+            displayMsg(title: "Note field missing", msg: "Please enter a note.")
+            return
+        }
+        guard let memberId = currentUser?.identifier, let notesController = notesController else { return }
         let note = notesController.createNote(text: text, memberId: memberId, taskId: task.identifier)
         self.notes?.append(note)
         DispatchQueue.main.async {
@@ -124,11 +149,6 @@ class TaskViewController: UIViewController {
         taskController.updateTask(task: task, dueDate: sender.date)
     }
     
-//    func scheduleLocal() {
-//        let center = UNUserNotificationCenter.current()
-//        center.removeAllPendingNotificationRequests()
-//    }
-    
     private func setNotes() {
         if let task = task, let notesController = notesController {
             notesController.fetchNotes(taskId: task.identifier) { (notes, error) in
@@ -150,6 +170,7 @@ class TaskViewController: UIViewController {
             descriptionField.text = task.description
             dueDatePicker.date = task.dueDate
             recurrencePicker.selectRow(task.recurrence.rawValue, inComponent: 0, animated: true)
+            noteTextField.isEnabled = true
             if task.isPending && !task.isComplete {
                 completeButton.setTitle("Pending Approval", for: .normal)
             } else if task.isComplete {
@@ -163,6 +184,7 @@ class TaskViewController: UIViewController {
                 completeButton.setTitle("Complete", for: .normal)
             }
         } else {
+            noteTextField.isEnabled = false
             completeButton.setTitle("Create", for: .normal)
             recurrencePicker.selectRow(0, inComponent: 0, animated: true)
         }

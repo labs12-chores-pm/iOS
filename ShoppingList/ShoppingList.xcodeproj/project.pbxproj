@@ -57,6 +57,7 @@
 		776BBD0E228DB93A0097A4D4 /* CreateHouseholdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */; };
 		776BBD10228DC3900097A4D4 /* JoinCreateHousehold.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */; };
 		776BBD12228DCFCA0097A4D4 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */; };
+		779FAC8E22A1786700808092 /* MemberTasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779FAC8D22A1786700808092 /* MemberTasksTableViewController.swift */; };
 		77C645B922948EE80030AD34 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77C645B822948EE80030AD34 /* Messages.storyboard */; };
 		77C645BB22948F710030AD34 /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C645BA22948F710030AD34 /* MessagesTableViewController.swift */; };
 		77C9664522986A1E00549C89 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77C9664422986A1E00549C89 /* Profile.storyboard */; };
@@ -164,6 +165,7 @@
 		776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHouseholdViewController.swift; sourceTree = "<group>"; };
 		776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoinCreateHousehold.storyboard; sourceTree = "<group>"; };
 		776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
+		779FAC8D22A1786700808092 /* MemberTasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTasksTableViewController.swift; sourceTree = "<group>"; };
 		77C645B822948EE80030AD34 /* Messages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
 		77C645BA22948F710030AD34 /* MessagesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewController.swift; sourceTree = "<group>"; };
 		77C9664422986A1E00549C89 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -530,6 +532,7 @@
 				47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */,
 				770271342296ECE8002134A2 /* NavigationViewController.swift */,
 				77C9664622986B4A00549C89 /* ProfileViewController.swift */,
+				779FAC8D22A1786700808092 /* MemberTasksTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -729,6 +732,7 @@
 				7702713F229734A4002134A2 /* YellowSegments.swift in Sources */,
 				969A84092215C99A0003BB37 /* UINavigationController+Chameleon.m in Sources */,
 				118646E0221DCE9B00D0F04B /* UserController.swift in Sources */,
+				779FAC8E22A1786700808092 /* MemberTasksTableViewController.swift in Sources */,
 				773DC4B6228EF15E00EB3121 /* TaskViewController.swift in Sources */,
 				77F7A2F9229DD73E00768E7E /* Settings.swift in Sources */,
 				968D512D222EBA5900179241 /* NewItemPopoverView.swift in Sources */,

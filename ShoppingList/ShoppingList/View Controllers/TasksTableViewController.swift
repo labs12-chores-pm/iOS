@@ -10,6 +10,11 @@ import UIKit
 
 class TasksTableViewController: UITableViewController {
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        getTasks()
+    }
+    
     func getTasks() {
         guard let category = category, let taskController = taskController else { fatalError() }
         
