@@ -50,14 +50,18 @@ class MessagesTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowTask" {
             guard let index = tableView.indexPathForSelectedRow, let messages = messages,
+            let userController = userController, let currentUser = currentUser,
+            let household = household, let taskController = taskController,
             let destinationVC = segue.destination as? TaskViewController else { return }
+            
+            destinationVC.userController = userController
+            destinationVC.currentUser = currentUser
+            destinationVC.household = household
             
             if let task = messages[index.row] as? Task {
             
                 destinationVC.task = task
             } else if let note = messages[index.row] as? Note {
-                
-                guard let taskController = taskController else { return }
                 
                 taskController.fetchSingleTask(taskId: note.taskId) { (task, error) in
                     if let error = error {

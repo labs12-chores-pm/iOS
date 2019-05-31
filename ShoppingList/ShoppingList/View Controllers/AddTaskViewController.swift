@@ -42,11 +42,15 @@ class AddTaskViewController: UIViewController {
         } else {
             fatalError()
         }
+        
+        categoryTableView.isHidden = true
+        categoryTableView.alpha = 0
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         fetchCategories()
+        updateViews()
     }
     
     @objc func fetchCategories() {
@@ -85,7 +89,38 @@ class AddTaskViewController: UIViewController {
         self.task = taskController.createTask(description: addTask, categoryId: categoryID, assineeIds: [], dueDate: Date(), isComplete: false, householdId: household.identifier, recurrence: Recurrence(rawValue: 0)!)
 
     }
-     
+
+    
+    
+    private func updateViews() {
+        if filteredResults.count > 0 {
+            showSearchResultsTableView()
+        } else {
+            hideSearchResultsTableView()
+        }
+    }
+    
+    private func showSearchResultsTableView() {
+        
+        viewWillLayoutSubviews()
+        
+        UIView.animate(withDuration: 0.2) {
+            self.categoryTableView.alpha = 1
+            self.categoryTableView.isHidden = false
+        }
+    }
+    
+    private func hideSearchResultsTableView() {
+        
+        viewWillLayoutSubviews()
+        
+        UIView.animate(withDuration: 0.2) {
+            self.categoryTableView.alpha = 0
+            self.categoryTableView.isHidden = true
+        }
+    }
+    
+
     // perform segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -176,6 +211,7 @@ extension AddTaskViewController: UITableViewDataSource, UITableViewDelegate {
         catID = selectedResult.identifier
         category = selectedResult
         addCategoryTextField.endEditing(true)
+        updateViews()
     }
 }
 
@@ -185,14 +221,20 @@ extension AddTaskViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-    
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
+
         guard let text = addCategoryTextField.text, let categories = categories else { return true }
+
+        if text.trimmingCharacters(in: .whitespaces).isEmpty {
+            self.filteredResults = []
+            updateViews()
+            return true
+        }
+
         let filteredResults = categories.filter{$0.name.lowercased().contains(text.lowercased())}
-        
         self.filteredResults = filteredResults
-        
+        updateViews()
         return true
     }
 }

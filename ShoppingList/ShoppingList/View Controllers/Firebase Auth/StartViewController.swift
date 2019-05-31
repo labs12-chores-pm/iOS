@@ -24,9 +24,13 @@ class StartViewController: UIViewController {
     
     private func signIn(email: String, password: String) {
         
+        let activityView = getActivityView()
+        activityView.startAnimating()
+        
         Auth.auth().signIn(withEmail: email, password: password) { (authResponse, error) in
             if let error = error {
                 DispatchQueue.main.async {
+                    activityView.stopAnimating()
                     self.loginButton.shake()
                     self.displayMsg(title: "Error signing in...", msg: error.localizedDescription)
                 }
@@ -43,6 +47,7 @@ class StartViewController: UIViewController {
                 self.userController.fetchUserWithEmail(email: email, completion: { (user, error) in
                     if let error = error {
                         DispatchQueue.main.async {
+                            activityView.stopAnimating()
                             self.loginButton.shake()
                             self.displayMsg(title: "Error signing in...", msg: error.localizedDescription)
                         }
@@ -62,7 +67,14 @@ class StartViewController: UIViewController {
                     }
                 })
             }
+            DispatchQueue.main.async {
+                activityView.stopAnimating()
+            }
         }
+    }
+    
+    func showActivityView() {
+        
     }
     
     @IBAction func loginButtonWasTapped(_ sender: UIButton) {
@@ -71,11 +83,15 @@ class StartViewController: UIViewController {
         
         if needsNewAccount {
             
+            let activityView = getActivityView()
+            activityView.startAnimating()
+            
             Auth.auth().createUser(withEmail: email, password: password) { (authResponse, error) in
                 
                 if let error = error {
                     DispatchQueue.main.async {
                         self.loginButton.shake()
+                        activityView.stopAnimating()
                         self.displayMsg(title: "Error creating account...", msg: error.localizedDescription)
                     }
                     return
@@ -90,6 +106,7 @@ class StartViewController: UIViewController {
                     guard let email = currentUser.email else {
                         DispatchQueue.main.async {
                             self.loginButton.shake()
+                            activityView.stopAnimating()
                             self.displayMsg(title: "Something went wrong...", msg: "Email address wasn't found. Please try again later.")
                         }
                         return
@@ -109,7 +126,9 @@ class StartViewController: UIViewController {
                     self.keychain.set(email, forKey: Settings.keychainEmail)
                     self.keychain.set(password, forKey: Settings.keychainPassword)
                 }
-                
+                DispatchQueue.main.async {
+                    activityView.stopAnimating()
+                }
             }
         } else {
             signIn(email: email, password: password)

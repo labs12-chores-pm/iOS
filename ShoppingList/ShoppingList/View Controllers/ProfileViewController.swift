@@ -50,6 +50,9 @@ class ProfileViewController: UIViewController {
         
         guard let authResponse = authResponse, let userController = userController, let currentUser = currentUser, let keychain = keychain else { fatalError() }
         
+        let activityView = getActivityView()
+        activityView.startAnimating()
+        
         if let displayName = userNameField.text, !displayName.trimmingCharacters(in: .whitespaces).isEmpty {
             
             let changeRequest = authResponse.user.createProfileChangeRequest()
@@ -58,12 +61,29 @@ class ProfileViewController: UIViewController {
             
             changeRequest.commitChanges { (error) in
                 if let error = error {
-                    self.displayMsg(title: "Error updating user name", msg: "\(error)")
+                    DispatchQueue.main.async {
+                       activityView.stopAnimating()
+                        self.displayMsg(title: "Error updating user name", msg: "\(error)")
+                    }
                     print(error)
                     return
                 }
                 
-                userController.updateUser(user: currentUser, name: displayName)
+                userController.updateUser(user: currentUser, name: displayName, completion: { (error) in
+                    if let error = error {
+                        print(error)
+                        DispatchQueue.main.async {
+                            activityView.stopAnimating()
+                            self.displayMsg(title: "Error updating user name", msg: "\(error)")
+                        }
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        activityView.stopAnimating()
+                    }
+                })
+                
             }
             
         }
@@ -72,6 +92,9 @@ class ProfileViewController: UIViewController {
             
             authResponse.user.updateEmail(to: email) { (error) in
                 if let error = error {
+                    DispatchQueue.main.async {
+                        activityView.stopAnimating()
+                    }
                     self.displayMsg(title: "Error updating email", msg: "\(error)")
                     print(error)
                     return
@@ -79,6 +102,9 @@ class ProfileViewController: UIViewController {
                 
                 userController.updateUser(user: currentUser, email: email)
                 keychain.set(email, forKey: Settings.keychainEmail)
+                DispatchQueue.main.async {
+                    activityView.stopAnimating()
+                }
             }
             
         }
@@ -87,11 +113,17 @@ class ProfileViewController: UIViewController {
             
             authResponse.user.updatePassword(to: password) { (error) in
                 if let error = error {
+                    DispatchQueue.main.async {
+                        activityView.stopAnimating()
+                    }
                     self.displayMsg(title: "Error updating password", msg: "\(error)")
                     print(error)
                     return
                 }
                 keychain.set(password, forKey: Settings.keychainPassword)
+                DispatchQueue.main.async {
+                    activityView.stopAnimating()
+                }
             }
         }
     }
