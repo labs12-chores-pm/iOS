@@ -17,6 +17,9 @@ class HouseholdViewController: UIViewController {
         householdPicker.delegate = self
         householdPicker.dataSource = self
         
+        householdMemberTableView.rowHeight = UITableView.automaticDimension
+        householdMemberTableView.estimatedRowHeight = 55
+        
         if let tabBar = self.tabBarController as? TabViewViewController {
             
             self.taskController = tabBar.taskController
@@ -310,19 +313,28 @@ extension HouseholdViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCell", for: indexPath)
         guard let userCell = cell as? HouseholdUserTableViewCell,
         let household = household, let currentUser = currentUser,
-        let userController = userController, let taskController = taskController,
+        let userController = userController,
         let householdController = householdController else { return cell }
         
         let userId = household.memberIds[indexPath.row]
+        
+        userController.fetchUser(userId: userId) { (user, error) in
+            if error != nil {
+                fatalError()
+            }
+            
+            guard let member = user else { fatalError() }
+            userCell.member = member
+        }
+        
         userCell.userId = userId
         userCell.currentUser = currentUser
         
         userCell.household = household
-        userCell.userController = userController
-        userCell.taskController = taskController
         userCell.householdController = householdController
         
         return userCell
