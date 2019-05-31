@@ -21,10 +21,11 @@ class MonkeyButton: UIButton {
     }
     
     private func setupButton() {
-        backgroundColor = AppearanceHelper.lightYellow
+        backgroundColor = FlatPink()
+       // backgroundColor = AppearanceHelper.lightYellow
         titleLabel?.font = AppearanceHelper.boldFont(with: .body, pointSize: 16)
         layer.cornerRadius  = frame.size.height / 2
-        tintColor = .brown
+        tintColor = .white
     }
     
     func shake() {
