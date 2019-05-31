@@ -30,11 +30,19 @@ class MainCategoriesViewController: UIViewController {
         } else {
             fatalError()
         }
+        
+        categoriesTableView.separatorStyle = .none
+        categoriesTableView.tableFooterView = UIView()
+        myToDosTableView.tableFooterView = UIView()
+        myToDosTableView.separatorColor = FlatPink()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchCategories()
+        categoriesTableView.reloadData()
+        myToDosTableView.reloadData()
     }
     
     private func fetchCategories() {
@@ -213,6 +221,7 @@ extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSour
             
             if let categories = categories {
                 cell.textLabel?.text = categories[indexPath.row].name
+                
             }
         }
         
@@ -220,9 +229,9 @@ extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSour
             
             cell = tableView.dequeueReusableCell(withIdentifier: "MyToDosCell", for: indexPath)
             
-            if let tasks = myTasks {
+            if let tasks = myTasks, let categories = categories {
                 let task = tasks[indexPath.row]
-                cell.textLabel?.text = task.description
+                cell.textLabel?.text = "\(task.description) - \(categories[indexPath.row].name)"
                 cell.detailTextLabel?.text = task.dueDate.string(style: .short, showTime: true)
             }
         }

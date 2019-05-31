@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -69,11 +70,18 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white-large-logo" translatesAutoresizingMaskIntoConstraints="NO" id="RKl-0p-dcf">
+                                <rect key="frame" x="87" y="166" width="240" height="128"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.41568627450000001" green="0.80000000000000004" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Oie-mV-a7d" firstAttribute="top" secondItem="RKl-0p-dcf" secondAttribute="bottom" constant="35" id="5Ce-07-4eJ"/>
+                            <constraint firstItem="RKl-0p-dcf" firstAttribute="top" secondItem="stY-31-Kec" secondAttribute="top" constant="78" id="5YC-Ct-jub"/>
                             <constraint firstItem="Oie-mV-a7d" firstAttribute="centerY" secondItem="4Ad-H7-bNl" secondAttribute="centerY" id="5ko-Yz-KnS"/>
+                            <constraint firstItem="RKl-0p-dcf" firstAttribute="leading" secondItem="stY-31-Kec" secondAttribute="leading" constant="87" id="Z3D-bH-Bq5"/>
                             <constraint firstItem="Oie-mV-a7d" firstAttribute="centerX" secondItem="4Ad-H7-bNl" secondAttribute="centerX" id="d8d-ZN-95j"/>
+                            <constraint firstItem="RKl-0p-dcf" firstAttribute="centerX" secondItem="Oie-mV-a7d" secondAttribute="centerX" id="n4H-fE-lNr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="stY-31-Kec"/>
                     </view>
@@ -133,7 +141,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.41568627450000001" green="0.80000000000000004" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="Theme"/>
                         <constraints>
                             <constraint firstItem="IqU-5J-r3b" firstAttribute="centerX" secondItem="LQU-TD-ItN" secondAttribute="centerX" id="x8T-YG-9b2"/>
                             <constraint firstItem="IqU-5J-r3b" firstAttribute="centerY" secondItem="LQU-TD-ItN" secondAttribute="centerY" id="xzY-7D-yv4"/>
@@ -168,4 +176,10 @@
             <point key="canvasLocation" x="-217.39130434782609" y="92.410714285714278"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="white-large-logo" width="300" height="313"/>
+        <namedColor name="Theme">
+            <color red="0.41600000858306885" green="0.80000001192092896" blue="0.77600002288818359" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
 </document>

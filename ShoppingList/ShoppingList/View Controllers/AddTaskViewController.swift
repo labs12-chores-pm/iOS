@@ -67,6 +67,7 @@ class AddTaskViewController: UIViewController {
     
     @IBAction func addTaskButton(_ sender: Any) {
         
+
         guard let taskController = self.taskController,
         let household = household else {
             addTaskButton.shake()
@@ -86,7 +87,10 @@ class AddTaskViewController: UIViewController {
         }
   
         self.task = taskController.createTask(description: addTask, categoryId: categoryID, assineeIds: [], dueDate: Date(), isComplete: false, householdId: household.identifier, recurrence: Recurrence(rawValue: 0)!)
+
     }
+
+    
     
     private func updateViews() {
         if filteredResults.count > 0 {
@@ -116,6 +120,7 @@ class AddTaskViewController: UIViewController {
         }
     }
     
+
     // perform segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
