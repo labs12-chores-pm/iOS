@@ -10,20 +10,22 @@ import Foundation
 
 extension UIViewController {
     
-    func displayMsg(title : String?, msg : String, style : UIAlertController.Style = .alert, completion: @escaping (Bool?) -> Void = { _ in } ) {
+    func displayMsg(title : String?, msg : String, numberOfButtons: Int = 1, completion: @escaping (Bool?) -> Void = { _ in } ) {
 
-        let ac = UIAlertController.init(title: title, message: msg, preferredStyle: style)
+        let ac = UIAlertController.init(title: title, message: msg, preferredStyle: .alert)
                     
-        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { (_) in
+        let confirmAction = UIAlertAction(title: "Ok", style: .default) { (_) in
             completion(true)
         }
                     
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { (_) in
             completion(false)
         })
-                    
+        
+        if numberOfButtons > 1 {
+            ac.addAction(cancelAction)
+        }
         ac.addAction(confirmAction)
-        ac.addAction(cancelAction)
                     
         DispatchQueue.main.async {
             self.present(ac, animated: true, completion: nil)

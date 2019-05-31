@@ -35,7 +35,6 @@ class HouseholdViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchAndAssign()
-        setDataSource()
     }
     
     @objc private func fetchAndAssign() {
@@ -71,6 +70,10 @@ class HouseholdViewController: UIViewController {
                 }
                 self.household = nil
                 self.household = household
+                
+                DispatchQueue.main.async {
+                    self.setDataSource()
+                }
             }
             
             householdController.fetchHouseholds(user: user) { (households, error) in
@@ -110,23 +113,35 @@ class HouseholdViewController: UIViewController {
         taskController.fetchTasks(inHouseholdWith: household.identifier) { (tasks, error) in
             if let error = error {
                 print(error)
+            }
+            if let tasks = tasks {
+                messages += tasks.filter({ $0.isPending == true })
+                self.messages = messages
+                for task in tasks {
+                    notesController.fetchNotes(taskId: task.identifier, completion: { (notes, error) in
+                        if let error = error {
+                            print(error)
+                            return
+                        }
+                        if let notes = notes {
+                            messages += notes
+                            self.messages = messages
+                        }
+                    })
+                }
+            }
+        }
+        
+        guard let userController = userController else { fatalError() }
+        
+        userController.fetchUsers(inHousehold: household) { (members, error) in
+            if let error = error {
+                print(error)
                 return
             }
-            guard let tasks = tasks else { return }
-            messages += tasks.filter({ $0.isPending == true })
-            self.messages = messages
-            for task in tasks {
-                notesController.fetchNotes(taskId: task.identifier, completion: { (notes, error) in
-                    if let error = error {
-                        print(error)
-                        return
-                    }
-                    guard let notes = notes else { return }
-                    messages += notes
-                    self.messages = messages
-                    
-                })
-            }
+            
+            guard let members = members else { return }
+            self.members = members
         }
     }
     
@@ -233,9 +248,11 @@ class HouseholdViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let user = currentUser, let taskController = taskController, let household = household else { return }
+        
         if segue.identifier == "ShowCreateHousehold" {
-            guard let createVC = segue.destination as? CreateHouseholdViewController,
-            let user = self.currentUser else { return }
+            guard let createVC = segue.destination as? CreateHouseholdViewController else { return }
             createVC.householdController = self.householdController
             createVC.userController = self.userController
             createVC.currentUser = user
@@ -243,15 +260,15 @@ class HouseholdViewController: UIViewController {
         
         if segue.identifier == "ShowInvite" {
             guard let inviteVC = segue.destination as? InvitationViewController,
-            let household = household, let householdController = householdController else { return }
+            let householdController = householdController else { return }
             inviteVC.household = household
             inviteVC.householdController = householdController
         }
         
         if segue.identifier == "ShowMessages" {
             guard let messagesVC = segue.destination as? MessagesTableViewController,
-            let userController = userController, let user = currentUser, let taskController = taskController,
-            let householdController = householdController, let household = household, let notesController = notesController,
+            let userController = userController, let householdController = householdController,
+            let notesController = notesController,
             let messages = messages
             else { return }
             
@@ -262,6 +279,17 @@ class HouseholdViewController: UIViewController {
             messagesVC.household = household
             messagesVC.notesController = notesController
             messagesVC.messages = messages
+        }
+        
+        if segue.identifier == "ShowMemberTasks" {
+            guard let memberTasksVC = segue.destination as? MemberTasksTableViewController,
+            let members = members, let index = householdMemberTableView.indexPathForSelectedRow else { return }
+            
+            let member = members[index.row]
+            
+            memberTasksVC.household = household
+            memberTasksVC.member = member
+            memberTasksVC.taskController = taskController
         }
     }
     
@@ -295,6 +323,8 @@ class HouseholdViewController: UIViewController {
             fetchAndAssign()
         }
     }
+    
+    var members: [User]?
     
     var pickerDataSource: [Household]? {
         didSet {
