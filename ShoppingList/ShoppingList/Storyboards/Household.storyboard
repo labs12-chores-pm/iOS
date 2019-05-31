@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,9 +39,16 @@
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsA-Mz-UIM" customClass="MonkeyButton" customModule="ShoppingList" customModuleProvider="target">
                                                 <rect key="frame" x="672" y="0.0" width="80" height="80"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="24P-MQ-Mbh"/>
+                                                    <constraint firstAttribute="width" constant="45" id="MAh-Pa-YHL"/>
                                                     <constraint firstAttribute="width" secondItem="zsA-Mz-UIM" secondAttribute="height" multiplier="1:1" id="iOC-ZT-Z6s"/>
                                                 </constraints>
                                                 <state key="normal" title="➕"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <segue destination="2oc-W8-6wX" kind="show" identifier="ShowCreateHousehold" id="0rr-qR-Qg4"/>
                                                 </connections>
@@ -131,8 +139,14 @@
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78d-dv-iaz" customClass="DiscreteButton" customModule="ShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="716" width="752" height="172"/>
+                                        <color key="backgroundColor" name="Background"/>
                                         <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="17"/>
                                         <state key="normal" title="Leave Household"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="leaveHouseholdButtonTapped:" destination="h1P-f9-Baw" eventType="touchUpInside" id="Cja-YF-cWB"/>
                                         </connections>
@@ -260,5 +274,8 @@
     </scenes>
     <resources>
         <image name="icons8-family-filled-50" width="50" height="50"/>
+        <namedColor name="Background">
+            <color red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

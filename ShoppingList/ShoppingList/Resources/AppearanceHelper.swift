@@ -19,7 +19,7 @@ class AppearanceHelper {
     static func setNavigationStyle() {
         let buttonAttributes: [NSAttributedString.Key: Any] = [
             .font: styleFont(with: .body, pointSize: 16),
-            .foregroundColor: babyBlue,
+            .foregroundColor: UIColor.white
         ]
         
         UIBarButtonItem.appearance().setTitleTextAttributes(buttonAttributes, for: .normal)

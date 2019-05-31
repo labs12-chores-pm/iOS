@@ -220,7 +220,7 @@
         <scene sceneID="sTf-75-2GO">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tc2-A2-Q60" customClass="NavigationViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="SCHEDULE" springLoaded="YES" id="Eon-SF-7Vh">
+                    <tabBarItem key="tabBarItem" title="" image="icons8-banana-filled-50" springLoaded="YES" id="Eon-SF-7Vh">
                         <inset key="imageInsets" minX="5" minY="10" maxX="5" maxY="0.0"/>
                         <color key="badgeColor" red="0.86128216981887817" green="0.30987441539764404" blue="0.57130712270736694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
@@ -241,6 +241,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SCHEDULE" width="80" height="80"/>
+        <image name="icons8-banana-filled-50" width="50" height="50"/>
     </resources>
 </document>
