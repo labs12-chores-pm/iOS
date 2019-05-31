@@ -27,17 +27,18 @@
                                 <rect key="frame" x="8" y="78" width="752" height="888"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PmU-nR-jSO">
-                                        <rect key="frame" x="0.0" y="0.0" width="752" height="80"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="752" height="40"/>
                                         <subviews>
                                             <pickerView contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="X6N-s9-41K">
-                                                <rect key="frame" x="0.0" y="0.0" width="664" height="80"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="704" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="80" id="YeW-gd-W2p"/>
+                                                    <constraint firstAttribute="height" constant="40" id="YeW-gd-W2p"/>
                                                 </constraints>
                                             </pickerView>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsA-Mz-UIM" customClass="MonkeyButton" customModule="ShoppingList" customModuleProvider="target">
-                                                <rect key="frame" x="672" y="0.0" width="80" height="80"/>
+                                                <rect key="frame" x="712" y="0.0" width="40" height="40"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="aYp-ve-D3G"/>
                                                     <constraint firstAttribute="width" secondItem="zsA-Mz-UIM" secondAttribute="height" multiplier="1:1" id="iOC-ZT-Z6s"/>
                                                 </constraints>
                                                 <state key="normal" title="➕"/>
@@ -48,11 +49,16 @@
                                         </subviews>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U5t-Xb-OQL">
-                                        <rect key="frame" x="0.0" y="88" width="752" height="620"/>
+                                        <rect key="frame" x="0.0" y="48" width="752" height="620"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <view key="tableHeaderView" contentMode="scaleToFill" id="20P-lY-l6J">
+                                            <rect key="frame" x="0.0" y="0.0" width="752" height="36"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MemberCell" rowHeight="55" id="IUQ-2k-yRx" customClass="HouseholdUserTableViewCell" customModule="ShoppingList" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="752" height="55"/>
+                                                <rect key="frame" x="0.0" y="64" width="752" height="55"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IUQ-2k-yRx" id="AAM-gY-xF0" customClass="HouseholdUserTableViewCell" customModule="ShoppingList" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="752" height="55"/>
@@ -96,7 +102,7 @@
                                         <sections/>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78d-dv-iaz" customClass="DiscreteButton" customModule="ShoppingList" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="716" width="752" height="172"/>
+                                        <rect key="frame" x="0.0" y="676" width="752" height="212"/>
                                         <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="17"/>
                                         <state key="normal" title="Leave Household"/>
                                         <connections>
