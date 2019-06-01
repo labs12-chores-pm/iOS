@@ -236,7 +236,10 @@ extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSour
             
             if let tasks = myTasks, let categories = categories {
                 let task = tasks[indexPath.row]
-                cell.textLabel?.text = "\(task.description) - \(categories[indexPath.row].name)"
+                let categoryArray = categories.filter { $0.identifier == task.categoryId }
+                let category = categoryArray.first!
+                
+                cell.textLabel?.text = "\(task.description) - \(category.name)"
                 cell.detailTextLabel?.text = task.dueDate.string(style: .short, showTime: true)
             }
         }
