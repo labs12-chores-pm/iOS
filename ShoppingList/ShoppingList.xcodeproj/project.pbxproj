@@ -47,6 +47,7 @@
 		7721FE4B228E098200334208 /* MainCategories.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7721FE4A228E098200334208 /* MainCategories.storyboard */; };
 		7721FE4D228E0A7700334208 /* MainCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7721FE4C228E0A7700334208 /* MainCategoriesViewController.swift */; };
 		7721FE4F228E238200334208 /* TabViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7721FE4E228E238200334208 /* TabViewViewController.swift */; };
+		772BA34F22A2E2C200BB825A /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BA34E22A2E2C200BB825A /* DatePicker.swift */; };
 		773DC4AC228ED52C00EB3121 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DC4AB228ED52C00EB3121 /* StartViewController.swift */; };
 		773DC4AE228EE7AD00EB3121 /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DC4AD228EE7AD00EB3121 /* AddCategoryViewController.swift */; };
 		773DC4B0228EEB0F00EB3121 /* Tasks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 773DC4AF228EEB0F00EB3121 /* Tasks.storyboard */; };
@@ -140,6 +141,7 @@
 		7721FE4A228E098200334208 /* MainCategories.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainCategories.storyboard; sourceTree = "<group>"; };
 		7721FE4C228E0A7700334208 /* MainCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoriesViewController.swift; sourceTree = "<group>"; };
 		7721FE4E228E238200334208 /* TabViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewViewController.swift; sourceTree = "<group>"; };
+		772BA34E22A2E2C200BB825A /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 		773DC4AB228ED52C00EB3121 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		773DC4AD228EE7AD00EB3121 /* AddCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
 		773DC4AF228EEB0F00EB3121 /* Tasks.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tasks.storyboard; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				96476B4F2215D41300E57EB9 /* Assets.xcassets */,
 				96476B4D2215D41300E57EB9 /* LaunchScreen.storyboard */,
 				770271302295FBBE002134A2 /* AppearanceHelper.swift */,
+				772BA34E22A2E2C200BB825A /* DatePicker.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -742,6 +745,7 @@
 				77F678AC228A1268005C7C94 /* Note.swift in Sources */,
 				773DC4B2228EEBE800EB3121 /* TasksTableViewController.swift in Sources */,
 				960FBF68221C31E60076C662 /* AboutShopTrakTableViewController.swift in Sources */,
+				772BA34F22A2E2C200BB825A /* DatePicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
