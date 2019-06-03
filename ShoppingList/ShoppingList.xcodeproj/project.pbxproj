@@ -56,6 +56,7 @@
 		773DC4B2228EEBE800EB3121 /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DC4B1228EEBE800EB3121 /* TasksTableViewController.swift */; };
 		773DC4B6228EF15E00EB3121 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DC4B5228EF15E00EB3121 /* TaskViewController.swift */; };
 		7756A72522A5699400946EB2 /* ToDoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7756A72422A5699400946EB2 /* ToDoTableViewCell.swift */; };
+		7756A72722A58D8700946EB2 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7756A72622A58D8700946EB2 /* TaskTableViewCell.swift */; };
 		77679530229DAA73005A8336 /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7767952F229DAA73005A8336 /* Date+String.swift */; };
 		776BBD0E228DB93A0097A4D4 /* CreateHouseholdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */; };
 		776BBD10228DC3900097A4D4 /* JoinCreateHousehold.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */; };
@@ -153,6 +154,7 @@
 		773DC4B1228EEBE800EB3121 /* TasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
 		773DC4B5228EF15E00EB3121 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		7756A72422A5699400946EB2 /* ToDoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTableViewCell.swift; sourceTree = "<group>"; };
+		7756A72622A58D8700946EB2 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		7767952F229DAA73005A8336 /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
 		776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHouseholdViewController.swift; sourceTree = "<group>"; };
 		776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoinCreateHousehold.storyboard; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 			children = (
 				771D343E228C775F00C8BA13 /* HouseholdUserTableViewCell.swift */,
 				7756A72422A5699400946EB2 /* ToDoTableViewCell.swift */,
+				7756A72622A58D8700946EB2 /* TaskTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -751,6 +754,7 @@
 				47F878ED229DCFE500001D7C /* NotificationHelper.swift in Sources */,
 				447BEE43221F473300FA1D82 /* SessionManager.swift in Sources */,
 				77F678B1228A2D57005C7C94 /* Error.swift in Sources */,
+				7756A72722A58D8700946EB2 /* TaskTableViewCell.swift in Sources */,
 				77F678AF228A2B99005C7C94 /* HouseholdController.swift in Sources */,
 				7756A72522A5699400946EB2 /* ToDoTableViewCell.swift in Sources */,
 				77F7A2FB229DE0FC00768E7E /* PasswordResetViewController.swift in Sources */,

@@ -13,6 +13,7 @@ class TasksTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         getTasks()
+        setAppearance()
     }
     
     func getTasks() {
@@ -66,16 +67,19 @@ class TasksTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
-        guard let tasks = tasks, let completedTasks = completedTasks else { return cell }
+        guard let taskCell = cell as? TaskTableViewCell,
+        let tasks = tasks, let completedTasks = completedTasks,
+        let userController = userController
+        else { return cell }
         
         let task = indexPath.section == 0 ? tasks[indexPath.row] : completedTasks[indexPath.row]
  
-        cell.textLabel?.text = task.description
-        cell.detailTextLabel?.text = task.dueDate.string(style: .short)
-        cell.detailTextLabel?.tintColor = .gray
+        taskCell.userController = userController
+        taskCell.task = task
         
-        return cell
+        return taskCell
     }
     
     @IBAction func addTaskButtonWasTapped(_ sender: UIBarButtonItem) {
@@ -96,6 +100,13 @@ class TasksTableViewController: UITableViewController {
         } else {
             showCompletedButton.title = "+ Completed"
         }
+    }
+    
+    private func setAppearance() {
+        self.tableView.backgroundColor = AppearanceHelper.themeGray
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = 100
+        self.tableView.separatorStyle = .none
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
