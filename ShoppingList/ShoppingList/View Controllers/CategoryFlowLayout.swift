@@ -10,8 +10,8 @@ import UIKit
 
 class CategoryFlowLayout: UICollectionViewFlowLayout {
     
-    let standardItemAlpha : CGFloat = 0.5
-    let standardItemScale : CGFloat = 0.5
+    let standardItemAlpha : CGFloat = 0.75
+    let standardItemScale : CGFloat = 0.85
     var isSetup = false
     
     override func prepare() {
@@ -45,16 +45,16 @@ class CategoryFlowLayout: UICollectionViewFlowLayout {
     // PUt in var
     // Ratio for Alpha, and minimun line spacing
     func changeLayoutAttributes(_ attributes: UICollectionViewLayoutAttributes) {
-        let collectionCenter = collectionView!.frame.size.height / 2
+        let collectionCenter = collectionView!.frame.size.width / 2
         let offset = collectionView!.contentOffset.x + 150
-        let normalizedCenter = attributes.center.x - offset + 300
+        let normalizedCenter = attributes.center.x - offset
         
         let maxDistance = self.itemSize.height + self.minimumLineSpacing
-        let distance = min(abs(collectionCenter - normalizedCenter), maxDistance)
+        let distance = min(abs(collectionCenter - normalizedCenter), maxDistance) //  CGFloat(100)
         let ratio = (maxDistance - distance)/maxDistance
         
         let alpha = (ratio) * (1 - self.standardItemAlpha) + self.standardItemAlpha
-        let scale = (1.5 * (ratio) * (1 - self.standardItemScale) + self.standardItemScale )
+        let scale = (ratio * (1 - self.standardItemScale) + self.standardItemScale )
         
         attributes.alpha = alpha
         attributes.transform3D = CATransform3DScale(CATransform3DIdentity, (scale ), (scale ) , 1)
@@ -66,7 +66,7 @@ class CategoryFlowLayout: UICollectionViewFlowLayout {
         
         let layoutAttributes = self.layoutAttributesForElements(in: collectionView!.bounds)
         
-        let center = collectionView!.bounds.size.height / 2
+        let center = collectionView!.bounds.size.width / 2
         let proposedContentOffsetCenterOrigin = proposedContentOffset.x - center
         
         let closest = layoutAttributes!.sorted { abs($0.center.y - proposedContentOffsetCenterOrigin) < abs($1.center.y - proposedContentOffsetCenterOrigin) }.first ?? UICollectionViewLayoutAttributes()
