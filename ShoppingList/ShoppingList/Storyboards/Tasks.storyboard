@@ -116,21 +116,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="ZwL-LB-zGA">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="VyC-Ss-6JD">
-                                <connections>
-                                    <action selector="addTaskButtonWasTapped:" destination="xeI-eW-470" id="qjO-ol-fzy"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Completed" id="lBt-qm-3wc">
-                                <connections>
-                                    <action selector="showCompletedButtonWasTapped:" destination="xeI-eW-470" id="PcC-An-XxX"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="VyC-Ss-6JD">
+                            <connections>
+                                <action selector="addTaskButtonWasTapped:" destination="xeI-eW-470" id="qjO-ol-fzy"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="showCompletedButton" destination="lBt-qm-3wc" id="8md-9z-ONH"/>
                         <segue destination="Aqf-Ff-cXC" kind="show" identifier="AddTask" id="lvk-JG-c8Q"/>
                     </connections>
                 </tableViewController>

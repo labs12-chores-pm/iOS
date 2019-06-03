@@ -10,10 +10,14 @@ import UIKit
 
 class TasksTableViewController: UITableViewController {
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setAppearance()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         getTasks()
-        setAppearance()
     }
     
     func getTasks() {
@@ -35,35 +39,65 @@ class TasksTableViewController: UITableViewController {
                 self.completedTasks = nil
                 self.completedTasks = sorted.filter({ $0.isComplete == true })
             }
-            
-            DispatchQueue.main.async {
-                self.updateViews()
-            }
         }
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return showCompleted ? 2 : 1
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
            return tasks?.count ?? 0
         } else {
-            return completedTasks?.count ?? 0
+            
+            if showCompleted {
+                return completedTasks?.count ?? 0
+            } else {
+                return 0
+            }
         }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let view = UIView()
         let label = UILabel()
+        
+        view.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.topAnchor.constraint(equalTo: view.topAnchor, constant: 10).isActive = true
+        
         if section == 0 {
-            label.text = ""
+            
+            if let category = category {
+                label.text = category.name.capitalized
+                label.font = AppearanceHelper.boldFont(with: .title1, pointSize: 22)
+                label.textColor = .black
+                label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+            }
+            
         } else {
-            label.text = "Completed"
+            
+            if showCompleted {
+                label.text = "Hide Completed"
+            } else {
+                label.text = "Show Completed"
+            }
+            
+            label.font = AppearanceHelper.boldFont(with: .title2, pointSize: 16)
+            label.textColor = AppearanceHelper.teal
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(completedLabelWasTapped(_:)))
+            label.addGestureRecognizer(tap)
+            label.isUserInteractionEnabled = true
+            
+            label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
         }
-        return label
+        
+        return view
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -86,19 +120,10 @@ class TasksTableViewController: UITableViewController {
         performSegue(withIdentifier: "AddTask", sender: self)
     }
     
-    @IBAction func showCompletedButtonWasTapped(_ sender: UIBarButtonItem) {
+    @objc func completedLabelWasTapped(_ sender: UITapGestureRecognizer) {
         showCompleted = showCompleted ? false : true
         DispatchQueue.main.async {
             self.tableView.reloadData()
-            self.updateViews()
-        }
-    }
-    
-    private func updateViews() {
-        if showCompleted {
-            showCompletedButton.title = "- Completed"
-        } else {
-            showCompletedButton.title = "+ Completed"
         }
     }
     
@@ -159,8 +184,6 @@ class TasksTableViewController: UITableViewController {
             
         }
     }
-    
-    @IBOutlet weak var showCompletedButton: UIBarButtonItem!
     
     var category: Category?
     

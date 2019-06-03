@@ -68,6 +68,8 @@ class TaskTableViewCell: UITableViewCell {
         
         dividerLabel.layer.cornerRadius = dividerLabel.frame.width / 2
         dividerLabel.layer.masksToBounds = true
+        
+        selectionStyle = .none
     }
 
     @IBOutlet weak var descriptionLabel: UILabel!

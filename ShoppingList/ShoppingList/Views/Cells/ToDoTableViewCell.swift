@@ -35,6 +35,8 @@ class ToDoTableViewCell: UITableViewCell {
         
         dividerView.layer.cornerRadius = dividerView.frame.width / 2
         dividerView.layer.masksToBounds = true
+        
+        selectionStyle = .none
     }
     
     @IBOutlet weak var cellView: UIView!
