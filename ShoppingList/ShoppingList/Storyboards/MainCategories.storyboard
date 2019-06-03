@@ -150,15 +150,15 @@
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vy9-XB-H7H">
                                         <rect key="frame" x="0.0" y="44" width="398" height="302.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HOM-hQ-DqQ">
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HOM-hQ-DqQ" customClass="CategoryFlowLayout" customModule="ShoppingList" customModuleProvider="target">
                                             <size key="itemSize" width="337" height="255"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="HFb-Jt-lEk" customClass="CategoryCollectionViewCell" customModule="ShoppingList" customModuleProvider="target">
-                                                <rect key="frame" x="30.5" y="0.0" width="337" height="255"/>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CategoryCollectionViewCell" id="HFb-Jt-lEk" customClass="CategoryCollectionViewCell" customModule="ShoppingList" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="24" width="337" height="255"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                     <rect key="frame" x="0.0" y="0.0" width="337" height="255"/>
@@ -189,6 +189,10 @@
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="Pts-uP-NbP" id="a4n-ux-OhI"/>
+                                            <outlet property="delegate" destination="Pts-uP-NbP" id="ynG-GO-aiM"/>
+                                        </connections>
                                     </collectionView>
                                 </subviews>
                             </stackView>
@@ -211,6 +215,7 @@
                     <connections>
                         <outlet property="addCategoryButton" destination="GuG-Z9-puT" id="dxU-Sd-S7O"/>
                         <outlet property="categoriesLabel" destination="BqN-q9-5xN" id="OXl-cf-QMB"/>
+                        <outlet property="categoryCollectionView" destination="vy9-XB-H7H" id="59d-fA-KEN"/>
                         <outlet property="myToDosLabel" destination="CSF-un-451" id="4R4-un-Rxk"/>
                         <outlet property="myToDosTableView" destination="FlG-mf-aUL" id="CLz-kx-TBd"/>
                     </connections>
