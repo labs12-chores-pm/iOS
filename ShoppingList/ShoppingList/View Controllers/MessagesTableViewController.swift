@@ -20,6 +20,7 @@ class MessagesTableViewController: UITableViewController {
         self.tableView.separatorStyle = .none
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 75
+        
     }
     
     @IBAction func backButtonWasTapped(_ sender: UIBarButtonItem) {

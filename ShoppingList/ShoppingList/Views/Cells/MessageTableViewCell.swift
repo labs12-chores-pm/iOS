@@ -20,8 +20,7 @@ class MessageTableViewCell: UITableViewCell {
         backgroundColor = AppearanceHelper.themeGray
         selectionStyle = .none
         messageView.backgroundColor = .white
-        messageView.layer.cornerRadius = 12
-        
+        messageView.layer.cornerRadius = 20
         messageTextLabel.font = AppearanceHelper.styleFont(with: .body, pointSize: 16)
         
         timeLabel.font = AppearanceHelper.styleFont(with: .body, pointSize: 12)
@@ -52,14 +51,18 @@ class MessageTableViewCell: UITableViewCell {
         if let isNote = isNote, isNote {
             leadingConstraint.constant = 20
             trailingConstraint.constant = 60
+            messageView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMinYCorner]
+            messageView.isLeftBubble = true
         } else {
             leadingConstraint.constant = 60
             trailingConstraint.constant = 20
+            messageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner]
+            messageView.isLeftBubble = false
         }
-        messageView.layoutIfNeeded()
+        messageView.layoutSubviews()
     }
 
-    @IBOutlet weak var messageView: UIView!
+    @IBOutlet weak var messageView: Bubble!
     @IBOutlet weak var messageTextLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     

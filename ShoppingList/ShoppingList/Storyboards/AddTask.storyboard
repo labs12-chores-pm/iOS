@@ -118,12 +118,13 @@
             </objects>
             <point key="canvasLocation" x="2634.057971014493" y="-186.16071428571428"/>
         </scene>
-        <!--Navigation View Controller-->
+        <!--Add Task-->
         <scene sceneID="KW6-Sq-Jdu">
             <objects>
                 <navigationController storyboardIdentifier="AddTaskNav" automaticallyAdjustsScrollViewInsets="NO" id="cHF-33-M9j" customClass="NavigationViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="icons8-add-filled-50" id="dNa-Qb-MxJ">
-                        <inset key="imageInsets" minX="5" minY="10" maxX="5" maxY="0.0"/>
+                    <tabBarItem key="tabBarItem" title="Add Task" image="icons8-add-filled-50" selectedImage="icons8-add-filled-50" id="dNa-Qb-MxJ">
+                        <inset key="imageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                        <inset key="landscapeImageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                         <color key="badgeColor" red="0.86128216981887817" green="0.30987441539764404" blue="0.57130712270736694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <toolbarItems/>
