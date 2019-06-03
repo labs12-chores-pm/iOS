@@ -13,8 +13,8 @@ class MainCategoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        categoriesTableView.dataSource = self
-        categoriesTableView.delegate = self
+       // categoriesTableView.dataSource = self
+       // categoriesTableView.delegate = self
         myToDosTableView.dataSource = self
         myToDosTableView.delegate = self
         
