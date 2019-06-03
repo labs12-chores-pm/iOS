@@ -35,6 +35,8 @@ class MainCategoriesViewController: UIViewController {
             fatalError()
         }
         updateUsersHousehold()
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -314,6 +316,11 @@ extension MainCategoriesViewController: UICollectionViewDelegate, UICollectionVi
             cell.categoryImage.image = UIImage(named: "diningroom")
             cell.categoryLabel.text = categories[indexPath.row].name
             
+            cell.categoryImage.layer.borderColor = UIColor.orange.cgColor
+            cell.categoryImage.layer.borderWidth = 2
+            cell.categoryImage.clipsToBounds = true
+            
+            
         }
         
         return cell
@@ -326,17 +333,17 @@ extension MainCategoriesViewController: UICollectionViewDelegate, UICollectionVi
 //        performSegue(withIdentifier: "ShowTasks", sender: selection)
 //    }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        
-        let layout = self.categoryCollectionView?.collectionViewLayout as! CategoryFlowLayout
-        
-        let imageSize   = layout.itemSize.height + layout.minimumLineSpacing
-        let offset      = scrollView.contentOffset.y
-        
-        
-        currentCategory = Int(floor((offset - imageSize / 2) / imageSize) + 1)
-
-    }
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//
+//        let layout = self.categoryCollectionView?.collectionViewLayout as! CategoryFlowLayout
+//
+//        let imageSize   = layout.itemSize.height + layout.minimumLineSpacing
+//        let offset      = scrollView.contentOffset.y
+//
+//
+//        currentCategory = Int(floor((offset - imageSize / 2) / imageSize) + 1)
+//
+//    }
     
     
 }
