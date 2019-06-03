@@ -10,8 +10,8 @@ import Foundation
 
 class NotesController {
     
-    func createNote(text: String, memberId: UUID, taskId: UUID) -> Note {
-        let newNote = Note(text: text, memberId: memberId, date: Date(), taskId: taskId, identifier: UUID())
+    func createNote(text: String, memberId: UUID, taskId: UUID, senderName: String) -> Note {
+        let newNote = Note(text: text, memberId: memberId, date: Date(), taskId: taskId, identifier: UUID(), senderName: senderName)
         put(note: newNote)
         return newNote
     }

@@ -14,4 +14,5 @@ struct Note: Codable {
     let date: Date
     let taskId: UUID
     let identifier: UUID
+    let senderName: String
 }

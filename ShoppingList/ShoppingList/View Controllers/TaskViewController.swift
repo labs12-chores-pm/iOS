@@ -130,8 +130,8 @@ class TaskViewController: UIViewController {
             displayMsg(title: "Note field missing", msg: "Please enter a note.")
             return
         }
-        guard let memberId = currentUser?.identifier, let notesController = notesController else { return }
-        let note = notesController.createNote(text: text, memberId: memberId, taskId: task.identifier)
+        guard let memberId = currentUser?.identifier, let notesController = notesController, let name = currentUser?.name else { return }
+        let note = notesController.createNote(text: text, memberId: memberId, taskId: task.identifier, senderName: name)
         self.notes?.append(note)
         DispatchQueue.main.async {
             self.noteTextField.text = ""
