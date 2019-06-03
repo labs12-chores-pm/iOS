@@ -22,7 +22,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Oie-mV-a7d">
                                 <rect key="frame" x="107" y="329" width="200" height="238"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gf2-zH-1gc" customClass="WhiteSegmentedControl" customModule="ShoppingList" customModuleProvider="target">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gf2-zH-1gc" customClass="YellowSegments" customModule="ShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="29"/>
                                         <segments>
                                             <segment title="Login"/>
@@ -71,7 +71,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.94056528809999995" green="0.66356724499999997" blue="0.1158531085" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Oie-mV-a7d" firstAttribute="centerY" secondItem="4Ad-H7-bNl" secondAttribute="centerY" id="5ko-Yz-KnS"/>
                             <constraint firstItem="Oie-mV-a7d" firstAttribute="centerX" secondItem="4Ad-H7-bNl" secondAttribute="centerX" id="d8d-ZN-95j"/>

@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -79,7 +78,7 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8wh-wp-00O" customClass="YellowSegments" customModule="ShoppingList" customModuleProvider="target">
+                                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8wh-wp-00O" customClass="TealSegmentedControl" customModule="ShoppingList" customModuleProvider="target">
                                                                     <rect key="frame" x="365" y="0.0" width="357" height="29"/>
                                                                     <segments>
                                                                         <segment title="Admin"/>
@@ -108,7 +107,6 @@
                                         <sections/>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78d-dv-iaz" customClass="DiscreteButton" customModule="ShoppingList" customModuleProvider="target">
-
                                         <rect key="frame" x="0.0" y="676" width="752" height="212"/>
                                         <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="17"/>
                                         <state key="normal" title="Leave Household"/>
@@ -308,8 +306,5 @@
     </scenes>
     <resources>
         <image name="icons8-family-filled-50" width="50" height="50"/>
-        <namedColor name="Background">
-            <color red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
 </document>

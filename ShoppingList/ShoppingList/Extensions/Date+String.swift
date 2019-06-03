@@ -17,4 +17,15 @@ extension Date {
         
         return dateFormatter.string(from: self)
     }
+    
+    func string(format: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
+    }
+    
+    func removeTime() -> Date {
+        let components = Calendar.current.dateComponents([.month, .day, .year], from: self)
+        return Calendar.current.date(from: components)!
+    }
 }

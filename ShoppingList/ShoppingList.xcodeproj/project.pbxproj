@@ -47,11 +47,15 @@
 		7721FE4B228E098200334208 /* MainCategories.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7721FE4A228E098200334208 /* MainCategories.storyboard */; };
 		7721FE4D228E0A7700334208 /* MainCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7721FE4C228E0A7700334208 /* MainCategoriesViewController.swift */; };
 		7721FE4F228E238200334208 /* TabViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7721FE4E228E238200334208 /* TabViewViewController.swift */; };
+		772BA34F22A2E2C200BB825A /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772BA34E22A2E2C200BB825A /* DatePicker.swift */; };
+		773CEA6C22A391AE00FBAEB5 /* UIImage+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773CEA6B22A391AE00FBAEB5 /* UIImage+Draw.swift */; };
+		773CEA6E22A3999D00FBAEB5 /* TealSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773CEA6D22A3999D00FBAEB5 /* TealSegmentedControl.swift */; };
 		773DC4AC228ED52C00EB3121 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DC4AB228ED52C00EB3121 /* StartViewController.swift */; };
 		773DC4AE228EE7AD00EB3121 /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DC4AD228EE7AD00EB3121 /* AddCategoryViewController.swift */; };
 		773DC4B0228EEB0F00EB3121 /* Tasks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 773DC4AF228EEB0F00EB3121 /* Tasks.storyboard */; };
 		773DC4B2228EEBE800EB3121 /* TasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DC4B1228EEBE800EB3121 /* TasksTableViewController.swift */; };
 		773DC4B6228EF15E00EB3121 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773DC4B5228EF15E00EB3121 /* TaskViewController.swift */; };
+		7756A72522A5699400946EB2 /* ToDoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7756A72422A5699400946EB2 /* ToDoTableViewCell.swift */; };
 		77679530229DAA73005A8336 /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7767952F229DAA73005A8336 /* Date+String.swift */; };
 		776BBD0E228DB93A0097A4D4 /* CreateHouseholdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */; };
 		776BBD10228DC3900097A4D4 /* JoinCreateHousehold.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */; };
@@ -140,11 +144,15 @@
 		7721FE4A228E098200334208 /* MainCategories.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainCategories.storyboard; sourceTree = "<group>"; };
 		7721FE4C228E0A7700334208 /* MainCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCategoriesViewController.swift; sourceTree = "<group>"; };
 		7721FE4E228E238200334208 /* TabViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewViewController.swift; sourceTree = "<group>"; };
+		772BA34E22A2E2C200BB825A /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
+		773CEA6B22A391AE00FBAEB5 /* UIImage+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Draw.swift"; sourceTree = "<group>"; };
+		773CEA6D22A3999D00FBAEB5 /* TealSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TealSegmentedControl.swift; sourceTree = "<group>"; };
 		773DC4AB228ED52C00EB3121 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		773DC4AD228EE7AD00EB3121 /* AddCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
 		773DC4AF228EEB0F00EB3121 /* Tasks.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tasks.storyboard; sourceTree = "<group>"; };
 		773DC4B1228EEBE800EB3121 /* TasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewController.swift; sourceTree = "<group>"; };
 		773DC4B5228EF15E00EB3121 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		7756A72422A5699400946EB2 /* ToDoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTableViewCell.swift; sourceTree = "<group>"; };
 		7767952F229DAA73005A8336 /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
 		776BBD0D228DB93A0097A4D4 /* CreateHouseholdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHouseholdViewController.swift; sourceTree = "<group>"; };
 		776BBD0F228DC3900097A4D4 /* JoinCreateHousehold.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoinCreateHousehold.storyboard; sourceTree = "<group>"; };
@@ -338,6 +346,7 @@
 				7767952F229DAA73005A8336 /* Date+String.swift */,
 				47F878EC229DCFE500001D7C /* NotificationHelper.swift */,
 				7770786D22A1A20000597BCA /* String+Keys.swift */,
+				773CEA6B22A391AE00FBAEB5 /* UIImage+Draw.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -360,6 +369,7 @@
 				77027140229736C1002134A2 /* WhiteSegmentedControl.swift */,
 				7702714222977746002134A2 /* DiscreteButton.swift */,
 				7770786F22A1BB1500597BCA /* DiscreteWhiteButton.swift */,
+				773CEA6D22A3999D00FBAEB5 /* TealSegmentedControl.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -368,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				771D343E228C775F00C8BA13 /* HouseholdUserTableViewCell.swift */,
+				7756A72422A5699400946EB2 /* ToDoTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -394,6 +405,7 @@
 				96476B4F2215D41300E57EB9 /* Assets.xcassets */,
 				96476B4D2215D41300E57EB9 /* LaunchScreen.storyboard */,
 				770271302295FBBE002134A2 /* AppearanceHelper.swift */,
+				772BA34E22A2E2C200BB825A /* DatePicker.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -673,6 +685,7 @@
 			files = (
 				969A84072215C99A0003BB37 /* Chameleon_.m in Sources */,
 				96DE302A221637EB00213C3E /* Constants.swift in Sources */,
+				773CEA6C22A391AE00FBAEB5 /* UIImage+Draw.swift in Sources */,
 				118646D8221CA9D900D0F04B /* User.swift in Sources */,
 				44A16801222746E600227DFB /* ItemController.swift in Sources */,
 				773DC4AC228ED52C00EB3121 /* StartViewController.swift in Sources */,
@@ -704,6 +717,7 @@
 				969A84022215C99A0003BB37 /* UIColor+ChameleonPrivate.m in Sources */,
 				969A84012215C99A0003BB37 /* ChameleonShorthand.swift in Sources */,
 				473ED23D228DDE3E00678E7E /* CategoryController.swift in Sources */,
+				773CEA6E22A3999D00FBAEB5 /* TealSegmentedControl.swift in Sources */,
 				969A840B2215C99A0003BB37 /* UIViewController+Chameleon.m in Sources */,
 				473ED23B228DD4A900678E7E /* TaskController.swift in Sources */,
 				118646D4221CA8CD00D0F04B /* Household.swift in Sources */,
@@ -738,10 +752,12 @@
 				447BEE43221F473300FA1D82 /* SessionManager.swift in Sources */,
 				77F678B1228A2D57005C7C94 /* Error.swift in Sources */,
 				77F678AF228A2B99005C7C94 /* HouseholdController.swift in Sources */,
+				7756A72522A5699400946EB2 /* ToDoTableViewCell.swift in Sources */,
 				77F7A2FB229DE0FC00768E7E /* PasswordResetViewController.swift in Sources */,
 				77F678AC228A1268005C7C94 /* Note.swift in Sources */,
 				773DC4B2228EEBE800EB3121 /* TasksTableViewController.swift in Sources */,
 				960FBF68221C31E60076C662 /* AboutShopTrakTableViewController.swift in Sources */,
+				772BA34F22A2E2C200BB825A /* DatePicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

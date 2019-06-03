@@ -59,7 +59,6 @@ class MessagesTableViewController: UITableViewController {
             destinationVC.household = household
             
             if let task = messages[index.row] as? Task {
-            
                 destinationVC.task = task
             } else if let note = messages[index.row] as? Note {
                 

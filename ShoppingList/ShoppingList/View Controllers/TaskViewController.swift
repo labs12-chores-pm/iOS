@@ -21,6 +21,9 @@ class TaskViewController: UIViewController {
         notesTableView.dataSource = self
         notesTableView.delegate = self
         
+        dayPickerView.delegate = self
+        dayPickerView.dataSource = self
+        
         searchResultsHeightConstraint.constant = 0
         
         guard let userController = userController, let currentUser = currentUser, let household = household else { fatalError() }
@@ -28,6 +31,9 @@ class TaskViewController: UIViewController {
         self.hasAdminAccess = household.adminIds.contains(currentUser.identifier) ? true : false
         
         if let task = task, let userId = task.assigneeIds.first {
+            
+            self.dueDate = nil
+            self.dueDate = task.dueDate
             
             userController.fetchUser(userId: userId) { (user, error) in
                 if let error = error {
@@ -77,7 +83,7 @@ class TaskViewController: UIViewController {
                 }
                 
                 if task.recurrence == .once {
-                    taskController.updateTask(task: task, description: description, assignIds: ids, dueDate: dueDatePicker.date, isComplete: true, isPending: false)
+                    taskController.updateTask(task: task, description: description, assignIds: ids, dueDate: self.dueDate, isComplete: true, isPending: false)
                 } else {
                     taskController.resetRecurringTask(task: task)
                 }
@@ -95,7 +101,7 @@ class TaskViewController: UIViewController {
                     ids.append(assignee.identifier)
                 }
                 
-                taskController.createTask(description: description, categoryId: categoryId, assineeIds: ids, dueDate: dueDatePicker.date, notes: [], isComplete: false, householdId: householdId, recurrence: self.recurrence ?? Recurrence(rawValue: 0)!)
+                taskController.createTask(description: description, categoryId: categoryId, assineeIds: ids, dueDate: self.dueDate ?? Date(), notes: [], isComplete: false, householdId: householdId, recurrence: self.recurrence ?? Recurrence(rawValue: 0)!)
             }
         } else {
             guard let task = task else {
@@ -172,7 +178,13 @@ class TaskViewController: UIViewController {
             
         if let task = task {
             descriptionField.text = task.description
-            dueDatePicker.date = task.dueDate
+            
+            self.dueDate = task.dueDate
+            
+            if let datePicker = datePicker {
+                dayPickerView.selectRow(datePicker.getAMPMIndex(), inComponent: 3, animated: false)
+            }
+            
             recurrencePicker.selectRow(task.recurrence.rawValue, inComponent: 0, animated: true)
             noteTextField.isEnabled = true
             if task.isPending && !task.isComplete {
@@ -181,7 +193,6 @@ class TaskViewController: UIViewController {
                 completeButton.setTitle("Task Complete!", for: .normal)
                 completeButton.isEnabled = false
                 descriptionField.isEnabled = false
-                dueDatePicker.isEnabled = false
                 recurrencePicker.isUserInteractionEnabled = false
                 assigneeSearch.isUserInteractionEnabled = false
             } else {
@@ -195,7 +206,6 @@ class TaskViewController: UIViewController {
         
         if hasAdminAccess == false {
             descriptionField.isEnabled = false
-            dueDatePicker.isEnabled = false
             recurrencePicker.isUserInteractionEnabled = false
             assigneeSearch.isUserInteractionEnabled = false
         }
@@ -211,26 +221,65 @@ class TaskViewController: UIViewController {
         self.setNotes()
     }
     
+    private func setDateData() {
+        guard let datePicker = datePicker else { return }
+        
+        dates = datePicker.dates
+        datesStrings = datePicker.getDateStrings()
+        hoursStrings = datePicker.getHourStrings()
+        minutesStrings = datePicker.getMinutesStrings()
+        
+        DispatchQueue.main.async {
+            self.updateViews()
+            self.dayPickerView.reloadAllComponents()
+            self.pickSetDate()
+        }
+    }
+    
+    private func pickSetDate() {
+        
+        guard let dates = dates, let setDate = datePicker?.setDate else { return }
+        
+        for (i, date) in dates.enumerated() {
+            
+            if date.removeTime() == setDate.removeTime() {
+                self.dayPickerView.selectRow(i, inComponent: 0, animated: false)
+                return
+            }
+        }
+    }
+    
     @IBOutlet weak var searchResultsHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var noteTextField: UITextField!
     @IBOutlet weak var assigneeSearchTableView: UITableView!
     @IBOutlet weak var completeButton: MonkeyButton!
     @IBOutlet weak var descriptionField: UITextField!
     @IBOutlet weak var assigneeSearch: UISearchBar!
-    @IBOutlet weak var dueDatePicker: UIDatePicker!
     @IBOutlet weak var recurrencePicker: UIPickerView!
     @IBOutlet weak var notesTableView: UITableView!
     
     @IBOutlet var taskFormLabels: [UILabel]!
     
+    @IBOutlet weak var dayPickerView: UIPickerView!
     
     var task: Task? {
         didSet {
-            DispatchQueue.main.async {
-                self.updateViews()
-            }
+            datePicker = DatePicker(setDate: self.task?.dueDate)
         }
     }
+    
+    var datePicker: DatePicker? {
+        didSet {
+            setDateData()
+        }
+    }
+    
+    var dueDate: Date?
+    
+    var dates: [Date]?
+    var datesStrings: [String]?
+    var hoursStrings: [String]?
+    var minutesStrings: [String]?
     
     var category: Category?
     var taskController: TaskController?
@@ -346,17 +395,63 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
 extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        
+        if pickerView == dayPickerView {
+            return 4
+        } else {
+            return 1
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return recurrenceIntervals.count
+        
+        if pickerView == dayPickerView {
+            
+            switch component {
+            case 0:
+                return self.datesStrings?.count ?? 0
+            case 1:
+                return self.hoursStrings?.count ?? 0
+            case 2:
+                return self.minutesStrings?.count ?? 0
+            case 3:
+                let symbolStrings = datePicker?.getAMPM()
+                return symbolStrings?.count ?? 0
+            default:
+                return 0
+            }
+            
+        } else {
+            return recurrenceIntervals.count
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         
         let pickerLabel = UILabel()
-        pickerLabel.text = recurrenceIntervals[row]
+        
+        if pickerView == recurrencePicker {
+            pickerLabel.text = recurrenceIntervals[row]
+        }
+        
+        if pickerView == dayPickerView {
+            
+            switch component {
+            case 0:
+                pickerLabel.text = self.datesStrings?[row]
+            case 1:
+                pickerLabel.text = self.hoursStrings?[row]
+            case 2:
+                pickerLabel.text = self.minutesStrings?[row]
+            case 3:
+                let symbolStrings = datePicker?.getAMPM()
+                pickerLabel.text = symbolStrings?[row]
+            default:
+                break
+            }
+            
+        }
+        
         pickerLabel.font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
         
         return pickerLabel
@@ -374,5 +469,83 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             
             taskController.updateTask(task: task, description: task.description, recurrence: recurrence)
         }
+        
+        if pickerView == dayPickerView {
+            
+            guard let datePicker = datePicker, let dates = dates, let hoursStrings = hoursStrings, let minutesStrings = minutesStrings else { return }
+            
+            let baseDate = datePicker.setDate ?? datePicker.currentDate
+            
+            var dateComponents = Calendar.current.dateComponents([.month, .day, .hour, .minute, .second, .year], from: baseDate)
+            
+            switch component {
+            case 0:
+                let date = dates[row]
+                dateComponents.month = Calendar.current.component(.month, from: date)
+                dateComponents.day = Calendar.current.component(.day, from: date)
+            case 1:
+                let hour = Int(hoursStrings[row])!
+                dateComponents.hour = datePicker.convertTo24HourTime(hour: hour)
+            case 2:
+                let minute = Int(minutesStrings[row])!
+                dateComponents.minute = minute
+            case 3:
+                if row == 0 {
+                    datePicker.isPM = false
+                    
+                    if dateComponents.hour! >= 12 {
+                        dateComponents.hour! -= 12
+                    }
+                    
+                    datePicker.newIsPM(isPM: false)
+                    
+                } else {
+                    datePicker.isPM = true
+                    
+                    if dateComponents.hour! <= 12 {
+                        dateComponents.hour! += 12
+                    }
+                    
+                    datePicker.newIsPM(isPM: true)
+                }
+            default:
+                break
+            }
+            
+            let dateFromComponents = Calendar.current.date(from: dateComponents)
+            
+            self.dueDate = dateFromComponents
+            
+            guard let taskController = taskController, let task = task, let dueDate = dateFromComponents else {
+                return
+            }
+            
+            datePicker.setDate = dateFromComponents
+            
+            taskController.updateTask(task: task, dueDate: dueDate)
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        
+        if pickerView == dayPickerView {
+            
+            let half = pickerView.frame.width / 2
+            
+            switch component {
+            case 0:
+                return half
+            case 1:
+                return half / 3
+            case 2:
+                return half / 3
+            case 3:
+                return half / 3
+            default:
+                return 0
+            }
+        }
+        
+        return pickerView.frame.width
     }
 }

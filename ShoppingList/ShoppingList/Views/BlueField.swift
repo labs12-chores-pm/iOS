@@ -21,7 +21,7 @@ class BlueField: UITextField {
     }
     
     private func setUpField() {
-        backgroundColor = AppearanceHelper.babyBlue
+        backgroundColor = AppearanceHelper.themeGray
         layer.cornerRadius = frame.size.height / 2
         font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
     }
