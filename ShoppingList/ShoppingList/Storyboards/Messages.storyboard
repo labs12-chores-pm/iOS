@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VVO-Sl-Yiy">
-    <device id="ipad12_9" orientation="landscape">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -14,27 +14,60 @@
             <objects>
                 <tableViewController storyboardIdentifier="MessagesTableViewController" id="3P4-vK-GGU" customClass="MessagesTableViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zfW-Pb-xBe">
-                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCell" textLabel="QFp-0C-KmM" style="IBUITableViewCellStyleDefault" id="M86-MN-IJe">
-                                <rect key="frame" x="0.0" y="28" width="1366" height="52"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCell" rowHeight="112" id="M86-MN-IJe" customClass="MessageTableViewCell" customModule="ShoppingList" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="112"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M86-MN-IJe" id="Vfj-kn-8Zf">
-                                    <rect key="frame" x="0.0" y="0.0" width="1366" height="51.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="111.66666666666667"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QFp-0C-KmM">
-                                            <rect key="frame" x="20" y="0.0" width="1326" height="51.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="UhU-Na-8HP">
+                                            <rect key="frame" x="16" y="16" width="382" height="95.666666666666671"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uc7-XJ-GCI" customClass="Bubble" customModule="ShoppingList" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="79.666666666666671"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGh-In-0PB">
+                                                            <rect key="frame" x="15.999999999999996" y="15.999999999999998" width="41.666666666666657" height="20.333333333333329"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cGh-In-0PB" secondAttribute="bottom" constant="16" id="BXr-dD-DlR"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cGh-In-0PB" secondAttribute="trailing" constant="16" id="D3x-rs-NCa"/>
+                                                        <constraint firstItem="cGh-In-0PB" firstAttribute="leading" secondItem="uc7-XJ-GCI" secondAttribute="leading" constant="16" id="EsV-5Y-RLM"/>
+                                                        <constraint firstItem="cGh-In-0PB" firstAttribute="top" secondItem="uc7-XJ-GCI" secondAttribute="top" constant="16" id="cZb-pc-PGF"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yg-Y2-cuG">
+                                                    <rect key="frame" x="0.0" y="83.666666666666671" width="382" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
+                                    <color key="backgroundColor" red="0.94891661410000006" green="0.9490789771" blue="0.94890636210000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="UhU-Na-8HP" secondAttribute="bottom" id="AqZ-Ck-8e0"/>
+                                        <constraint firstItem="UhU-Na-8HP" firstAttribute="leading" secondItem="Vfj-kn-8Zf" secondAttribute="leading" constant="16" id="JUc-pw-nOs"/>
+                                        <constraint firstAttribute="trailing" secondItem="UhU-Na-8HP" secondAttribute="trailing" constant="16" id="TsM-HI-mt4"/>
+                                        <constraint firstItem="UhU-Na-8HP" firstAttribute="top" secondItem="Vfj-kn-8Zf" secondAttribute="top" constant="16" id="X9F-g2-mte"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="leadingConstraint" destination="JUc-pw-nOs" id="bPf-IA-sPo"/>
+                                    <outlet property="messageTextLabel" destination="cGh-In-0PB" id="BRc-7q-0Pi"/>
+                                    <outlet property="messageView" destination="uc7-XJ-GCI" id="0b6-Ha-mu2"/>
+                                    <outlet property="timeLabel" destination="1yg-Y2-cuG" id="v90-LW-l7X"/>
+                                    <outlet property="trailingConstraint" destination="TsM-HI-mt4" id="F3C-VM-sst"/>
                                     <segue destination="rgy-y4-UeV" kind="show" identifier="ShowTask" id="J4E-6R-l2s"/>
                                 </connections>
                             </tableViewCell>
@@ -54,7 +87,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="egX-D3-OMh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076.8115942028987" y="170.75892857142856"/>
+            <point key="canvasLocation" x="1075.3623188405797" y="170.38043478260872"/>
         </scene>
         <!--TaskVC-->
         <scene sceneID="Qv7-z1-RxA">
@@ -70,7 +103,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VVO-Sl-Yiy" customClass="NavigationViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oGV-eu-2Lg">
-                        <rect key="frame" x="0.0" y="20" width="1366" height="50"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

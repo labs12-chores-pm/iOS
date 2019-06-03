@@ -13,12 +13,12 @@ class NavigationViewController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationBar.prefersLargeTitles = true
+        navigationBar.prefersLargeTitles = true
         
         let logo = UIImage(named: "white-logo")
         let image = UIImageView(image: logo)
         
-        self.navigationBar.addSubview(image)
+        navigationBar.addSubview(image)
         
         image.translatesAutoresizingMaskIntoConstraints = false
         
@@ -27,13 +27,14 @@ class NavigationViewController: UINavigationController {
         image.centerXAnchor.constraint(equalTo: self.navigationBar.centerXAnchor, constant: 0).isActive = true
         image.widthAnchor.constraint(equalTo: image.heightAnchor, multiplier: 1).isActive = true
         
-//        let colorImage = UIImage()
-//        colorImage.
-//
-//        self.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        self.navigationBar.shadowImage = UIImage()
+        navigationBar.barTintColor = AppearanceHelper.midOrange
         
-        self.navigationBar.barTintColor = AppearanceHelper.midOrange
+        navigationBar.backgroundColor = .white
+        
+        navigationBar.isTranslucent = false
+        
+        navigationBar.tintColor = .white
+        navigationBar.barStyle = .default
         
         AppearanceHelper.setNavigationStyle()
     }

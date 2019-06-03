@@ -133,6 +133,11 @@ class MainCategoriesViewController: UIViewController {
         myToDosLabel.font = AppearanceHelper.boldFont(with: .headline, pointSize: 22)
         categoriesLabel.textColor = AppearanceHelper.teal
         myToDosLabel.textColor = AppearanceHelper.teal
+        
+        myToDosTableView.rowHeight = UITableView.automaticDimension
+        myToDosTableView.estimatedRowHeight = 150
+        myToDosTableView.backgroundColor = AppearanceHelper.themeGray
+        myToDosTableView.separatorStyle = .none
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -234,24 +239,26 @@ extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSour
                 cell.textLabel?.text = categories[indexPath.row].name
                 
             }
+            
+            cell.textLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 16)
+            cell.detailTextLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
         }
         
         if tableView == myToDosTableView {
             
             cell = tableView.dequeueReusableCell(withIdentifier: "MyToDosCell", for: indexPath)
+            guard let taskCell = cell as? ToDoTableViewCell,
+            let tasks = myTasks, let categories = categories else { return cell }
             
-            if let tasks = myTasks, let categories = categories {
-                let task = tasks[indexPath.row]
-                let categoryArray = categories.filter { $0.identifier == task.categoryId }
-                let category = categoryArray.first!
-                
-                cell.textLabel?.text = "\(task.description) - \(category.name)"
-                cell.detailTextLabel?.text = task.dueDate.string(style: .short, showTime: true)
-            }
+            let task = tasks[indexPath.row]
+            let categoryArray = categories.filter { $0.identifier == task.categoryId }
+            let category = categoryArray.first!
+ 
+            taskCell.category = category
+            taskCell.task = task
+            
+            return taskCell
         }
-        
-        cell.textLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 16)
-        cell.detailTextLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
         
         return cell
     }
