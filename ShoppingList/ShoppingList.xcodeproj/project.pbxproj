@@ -24,9 +24,7 @@
 		473D56852295B1B600C1CFF4 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473D56842295B1B600C1CFF4 /* UIViewController+Alert.swift */; };
 		473ED23B228DD4A900678E7E /* TaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473ED23A228DD4A900678E7E /* TaskController.swift */; };
 		473ED23D228DDE3E00678E7E /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473ED23C228DDE3E00678E7E /* CategoryController.swift */; };
-		47BF8B0722A5AAB900C7B8A3 /* CategoryFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BF8B0622A5AAB900C7B8A3 /* CategoryFlowLayout.swift */; };
 		47BF8B0922A5B03C00C7B8A3 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BF8B0822A5B03C00C7B8A3 /* CategoryCollectionViewCell.swift */; };
-		47BF8B0B22A5B08300C7B8A3 /* CategoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BF8B0A22A5B08300C7B8A3 /* CategoryCollectionViewController.swift */; };
 		47E3FCA5228E780800A1CECE /* FirebaseLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E3FCA4228E780800A1CECE /* FirebaseLoginViewController.swift */; };
 		47E3FCA7228E782200A1CECE /* FirebaseLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47E3FCA6228E782200A1CECE /* FirebaseLogin.storyboard */; };
 		47F0A97022931E9500AF2EA9 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */; };
@@ -124,9 +122,7 @@
 		473D56842295B1B600C1CFF4 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		473ED23A228DD4A900678E7E /* TaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskController.swift; sourceTree = "<group>"; };
 		473ED23C228DDE3E00678E7E /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
-		47BF8B0622A5AAB900C7B8A3 /* CategoryFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFlowLayout.swift; sourceTree = "<group>"; };
 		47BF8B0822A5B03C00C7B8A3 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
-		47BF8B0A22A5B08300C7B8A3 /* CategoryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewController.swift; sourceTree = "<group>"; };
 		47E3FCA4228E780800A1CECE /* FirebaseLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseLoginViewController.swift; sourceTree = "<group>"; };
 		47E3FCA6228E782200A1CECE /* FirebaseLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FirebaseLogin.storyboard; sourceTree = "<group>"; };
 		47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
@@ -489,8 +485,6 @@
 		96DE302B221637FE00213C3E /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				47BF8B0A22A5B08300C7B8A3 /* CategoryCollectionViewController.swift */,
-				47BF8B0622A5AAB900C7B8A3 /* CategoryFlowLayout.swift */,
 				47E3FCA8228E783000A1CECE /* Firebase Auth */,
 				44A1680A22381BD700227DFB /* BarCodeScanningViewController */,
 				96DE302C221637FE00213C3E /* MainViewController */,
@@ -724,7 +718,6 @@
 				7702714322977746002134A2 /* DiscreteButton.swift in Sources */,
 				776BBD12228DCFCA0097A4D4 /* InvitationViewController.swift in Sources */,
 				96700E31221C035600F084B3 /* SettingsTableViewController.swift in Sources */,
-				47BF8B0B22A5B08300C7B8A3 /* CategoryCollectionViewController.swift in Sources */,
 				969A84022215C99A0003BB37 /* UIColor+ChameleonPrivate.m in Sources */,
 				969A84012215C99A0003BB37 /* ChameleonShorthand.swift in Sources */,
 				473ED23D228DDE3E00678E7E /* CategoryController.swift in Sources */,
@@ -749,7 +742,6 @@
 				77679530229DAA73005A8336 /* Date+String.swift in Sources */,
 				47E3FCA5228E780800A1CECE /* FirebaseLoginViewController.swift in Sources */,
 				77F678C6228B37C2005C7C94 /* CoreDataStack.swift in Sources */,
-				47BF8B0722A5AAB900C7B8A3 /* CategoryFlowLayout.swift in Sources */,
 				44A16807222F418C00227DFB /* Invite.swift in Sources */,
 				7702713B22971401002134A2 /* MonkeyButton.swift in Sources */,
 				969A840A2215C99A0003BB37 /* UILabel+Chameleon.m in Sources */,
