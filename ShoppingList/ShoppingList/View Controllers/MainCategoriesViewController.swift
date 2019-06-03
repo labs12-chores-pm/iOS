@@ -69,9 +69,10 @@ class MainCategoriesViewController: UIViewController {
             })
             self.categories = sorted
             
-            DispatchQueue.main.async {
-                self.categoriesTableView.reloadData()
-            }
+            // TODO: Change to self.categegoriesCollectionView
+//            DispatchQueue.main.async {
+//                self.categoriesTableView.reloadData()
+//            }
         }
         
         if let householdController = householdController {
