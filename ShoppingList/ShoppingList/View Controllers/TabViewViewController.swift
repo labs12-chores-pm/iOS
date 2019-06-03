@@ -15,14 +15,31 @@ class TabViewViewController: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.tabBar.tintColor = AppearanceHelper.lightYellow
-        self.tabBar.barTintColor = AppearanceHelper.teal
+        self.tabBar.tintColor = AppearanceHelper.yellow
+        self.tabBar.barTintColor = AppearanceHelper.midOrange
         self.tabBar.unselectedItemTintColor = .white
         
         self.tabBar.itemPositioning = .centered
         
         Auth.auth().addIDTokenDidChangeListener { (auth, user) in
             
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(currentHouseholdWasChanged), name: Notification.Name(.householdChange), object: nil)
+    }
+    
+    @objc private func currentHouseholdWasChanged() {
+        guard let userController = userController, let currentUser = currentUser else { return }
+        userController.fetchUser(userId: currentUser.identifier) { (user, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            guard let user = user else { return }
+            self.currentUser = user
         }
     }
     

@@ -22,5 +22,7 @@ class WhiteSegmentedControl: UISegmentedControl {
     
     private func setUpSegmentedControl() {
         tintColor = AppearanceHelper.babyBlue
+        let font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
+        setTitleTextAttributes([.font : font], for: .normal)
     }
 }

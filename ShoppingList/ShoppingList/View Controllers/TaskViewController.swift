@@ -166,6 +166,10 @@ class TaskViewController: UIViewController {
         
         taskScrollView.contentInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         
+        _ = taskFormLabels.map { $0.font = AppearanceHelper.styleFont(with: .body, pointSize: 16) }
+        
+        descriptionField.font = AppearanceHelper.styleFont(with: .body, pointSize: 18)
+            
         if let task = task {
             descriptionField.text = task.description
             dueDatePicker.date = task.dueDate
@@ -216,6 +220,9 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var dueDatePicker: UIDatePicker!
     @IBOutlet weak var recurrencePicker: UIPickerView!
     @IBOutlet weak var notesTableView: UITableView!
+    
+    @IBOutlet var taskFormLabels: [UILabel]!
+    
     
     var task: Task? {
         didSet {
@@ -307,8 +314,10 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath)
             guard let notes = notes else { return cell }
             let note = notes[indexPath.row]
+            cell.textLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
             cell.textLabel?.text = note.text
-            cell.detailTextLabel?.text = note.date.dateToString()
+            cell.detailTextLabel?.text = note.date.string(style: .short, showTime: false)
+            cell.detailTextLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
             return cell
         }
     }
@@ -344,8 +353,13 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return recurrenceIntervals.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return recurrenceIntervals[row]
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        let pickerLabel = UILabel()
+        pickerLabel.text = recurrenceIntervals[row]
+        pickerLabel.font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
+        
+        return pickerLabel
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

@@ -33,28 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return true
     }
     
-    //
-    //    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken : Data) {
-    //        PushNotifications.shared.registerDeviceToken(deviceToken)
-    //        print(deviceToken)
-    //    }
-    //
-    //    func application(
-    //        _ application: UIApplication,
-    //        didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-    //        fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
-    //    ) {
-    //        PushNotifications.shared.handleNotification(userInfo: userInfo)
-    //        print(userInfo)
-    //        completionHandler(.newData)
-    //    }
-    //
-    //    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
-    //    {
-    //        completionHandler([.alert, .badge, .sound])
-    //    }
-    
-    
     // MARK: UserNotification
     
     func checkNotificationAuthorization() {

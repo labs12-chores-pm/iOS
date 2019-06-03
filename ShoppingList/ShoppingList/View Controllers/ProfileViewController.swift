@@ -81,6 +81,7 @@ class ProfileViewController: UIViewController {
                     
                     DispatchQueue.main.async {
                         activityView.stopAnimating()
+                        self.hideSaveButton()
                     }
                 })
                 
@@ -143,6 +144,17 @@ class ProfileViewController: UIViewController {
             self.saveChangesButton.alpha = 1
             self.saveChangesButton.isEnabled = true
             self.saveChangesButton.isHidden = false
+        }
+    }
+    
+    private func hideSaveButton() {
+        
+        viewWillLayoutSubviews()
+        
+        UIView.animate(withDuration: 0.2) {
+            self.saveChangesButton.alpha = 0
+            self.saveChangesButton.isEnabled = false
+            self.saveChangesButton.isHidden = true
         }
     }
 

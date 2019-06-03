@@ -19,6 +19,7 @@ class HouseholdUserTableViewCell: UITableViewCell {
         guard let member = member, let household = household, let currentUser = currentUser else { return }
         
         userNameLabel.text = member.name
+        userNameLabel.font = AppearanceHelper.styleFont(with: .body, pointSize: 16)
         
         let adminIds = household.adminIds
         

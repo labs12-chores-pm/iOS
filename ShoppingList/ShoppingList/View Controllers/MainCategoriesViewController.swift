@@ -30,19 +30,28 @@ class MainCategoriesViewController: UIViewController {
         } else {
             fatalError()
         }
-        
-        categoriesTableView.separatorStyle = .none
-        categoriesTableView.tableFooterView = UIView()
-        myToDosTableView.tableFooterView = UIView()
-        myToDosTableView.separatorColor = FlatPink()
-        
+        updateUsersHousehold()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        fetchCategories()
-        categoriesTableView.reloadData()
-        myToDosTableView.reloadData()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateUsersHousehold()
+    }
+    
+    private func updateUsersHousehold() {
+        guard let userController = userController, let user = currentUser else { return }
+        
+        userController.fetchUser(userId: user.identifier) { (user, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            guard let user = user else { return }
+            self.currentUser = nil
+            self.currentUser = user
+            self.fetchCategories()
+        }
     }
     
     private func fetchCategories() {
@@ -113,16 +122,12 @@ class MainCategoriesViewController: UIViewController {
         } else {
             addCategoryButton.isEnabled = false
         }
+        
+        categoriesLabel.font = AppearanceHelper.styleFont(with: .headline, pointSize: 20)
+        myToDosLabel.font = AppearanceHelper.styleFont(with: .headline, pointSize: 20)
+        categoriesLabel.textColor = AppearanceHelper.teal
+        myToDosLabel.textColor = AppearanceHelper.teal
     }
-    
-    @IBAction func signOutButtonTapped(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true) {
-            self.currentUser = nil
-            try? Auth.auth().signOut()
-        }
-    }
-    
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddCategory" {
@@ -181,11 +186,11 @@ class MainCategoriesViewController: UIViewController {
     
     var taskController: TaskController?
     var userController: UserController?
-    var currentUser: User?
     var householdController: HouseholdController?
     var categoryController: CategoryController?
     var notesController: NotesController?
     var categories: [Category]?
+    var currentUser: User?
     var household: Household? {
         didSet {
             fetchToDos()
@@ -231,10 +236,16 @@ extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSour
             
             if let tasks = myTasks, let categories = categories {
                 let task = tasks[indexPath.row]
-                cell.textLabel?.text = "\(task.description) - \(categories[indexPath.row].name)"
+                let categoryArray = categories.filter { $0.identifier == task.categoryId }
+                let category = categoryArray.first!
+                
+                cell.textLabel?.text = "\(task.description) - \(category.name)"
                 cell.detailTextLabel?.text = task.dueDate.string(style: .short, showTime: true)
             }
         }
+        
+        cell.textLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 16)
+        cell.detailTextLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
         
         return cell
     }
