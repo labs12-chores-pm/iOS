@@ -313,7 +313,7 @@ extension MainCategoriesViewController: UICollectionViewDelegate, UICollectionVi
         let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionReuseIdentifier, for: indexPath) as! CategoryCollectionViewCell
         
         if let categories = categories {
-            cell.categoryImage.image = UIImage(named: "diningroom")
+            //cell.categoryImage.image = UIImage(named: "diningroom")
             cell.categoryLabel.text = categories[indexPath.row].name
             
             cell.categoryImage.layer.borderColor = UIColor.orange.cgColor
