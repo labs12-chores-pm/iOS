@@ -18,6 +18,8 @@ class MainCategoriesViewController: UIViewController {
         myToDosTableView.dataSource = self
         myToDosTableView.delegate = self
         
+        setAppearance()
+        
         if let tabBar = self.tabBarController as? TabViewViewController {
             
             self.taskController = tabBar.taskController
@@ -123,8 +125,12 @@ class MainCategoriesViewController: UIViewController {
             addCategoryButton.isEnabled = false
         }
         
-        categoriesLabel.font = AppearanceHelper.styleFont(with: .headline, pointSize: 20)
-        myToDosLabel.font = AppearanceHelper.styleFont(with: .headline, pointSize: 20)
+        
+    }
+    
+    private func setAppearance() {
+        categoriesLabel.font = AppearanceHelper.boldFont(with: .headline, pointSize: 22)
+        myToDosLabel.font = AppearanceHelper.boldFont(with: .headline, pointSize: 22)
         categoriesLabel.textColor = AppearanceHelper.teal
         myToDosLabel.textColor = AppearanceHelper.teal
     }

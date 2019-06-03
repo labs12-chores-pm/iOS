@@ -33,7 +33,7 @@ class NavigationViewController: UINavigationController {
 //        self.navigationBar.setBackgroundImage(UIImage(), for: .default)
 //        self.navigationBar.shadowImage = UIImage()
         
-        self.navigationBar.barTintColor = AppearanceHelper.lightOrange
+        self.navigationBar.barTintColor = AppearanceHelper.midOrange
         
         AppearanceHelper.setNavigationStyle()
     }

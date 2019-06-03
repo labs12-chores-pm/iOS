@@ -22,6 +22,6 @@ class DiscreteWhiteButton: UIButton {
     
     private func setupButton() {
         titleLabel?.font = AppearanceHelper.boldFont(with: .body, pointSize: 14)
-        tintColor = .white
+        tintColor = .gray
     }
 }

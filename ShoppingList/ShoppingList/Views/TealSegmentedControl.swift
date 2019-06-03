@@ -1,15 +1,15 @@
 //
-//  YellowSegments.swift
+//  TealSegmentedControl.swift
 //  ShoppingList
 //
-//  Created by Nathanael Youngren on 5/23/19.
+//  Created by Nathanael Youngren on 6/1/19.
 //  Copyright © 2019 Lambda School Labs. All rights reserved.
 //
 
 import UIKit
-
-class YellowSegments: UISegmentedControl {
-
+    
+class TealSegmentedControl: UISegmentedControl {
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpSegmentedControl()
@@ -21,7 +21,7 @@ class YellowSegments: UISegmentedControl {
     }
     
     private func setUpSegmentedControl() {
-        tintColor = AppearanceHelper.midOrange
+        tintColor = AppearanceHelper.teal
         let font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
         setTitleTextAttributes([.font : font], for: .normal)
     }
