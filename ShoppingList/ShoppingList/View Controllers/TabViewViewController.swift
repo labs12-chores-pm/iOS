@@ -15,20 +15,24 @@ class TabViewViewController: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.tabBar.tintColor = AppearanceHelper.midOrange
-        self.tabBar.barTintColor = AppearanceHelper.themeGray
-        self.tabBar.unselectedItemTintColor = .gray
+        setAppearance()
         
-        self.tabBar.itemPositioning = .centered
-        
-        Auth.auth().addIDTokenDidChangeListener { (auth, user) in
-            
-        }
+//        Auth.auth().addIDTokenDidChangeListener { (auth, user) in
+//
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(currentHouseholdWasChanged), name: Notification.Name(.householdChange), object: nil)
+    }
+    
+    private func setAppearance() {
+        self.tabBar.tintColor = AppearanceHelper.midOrange
+        self.tabBar.barTintColor = AppearanceHelper.themeGray
+        self.tabBar.unselectedItemTintColor = .gray
+        
+        self.tabBar.itemPositioning = .centered
     }
     
     @objc private func currentHouseholdWasChanged() {

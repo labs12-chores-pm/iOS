@@ -89,10 +89,7 @@
         <scene sceneID="oic-4U-sS0">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fS4-HL-iLg" customClass="NavigationViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="icons8-customer-filled-50" selectedImage="icons8-customer-filled-50" id="lDe-T5-cdD">
-                        <inset key="imageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                        <inset key="landscapeImageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Profile" image="icons8-customer-filled-50" id="lDe-T5-cdD"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Q1X-mg-vna">

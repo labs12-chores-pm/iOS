@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FC8-1j-82L">
-                                <rect key="frame" x="87.666666666666686" y="327" width="200" height="158"/>
+                                <rect key="frame" x="87.666666666666686" y="277" width="200" height="158"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Urs-rx-nzR">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
@@ -92,7 +92,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="FC8-1j-82L" firstAttribute="centerY" secondItem="gd5-Bi-LK4" secondAttribute="centerY" id="Qps-oe-neW"/>
+                            <constraint firstItem="FC8-1j-82L" firstAttribute="centerY" secondItem="gd5-Bi-LK4" secondAttribute="centerY" constant="-50" id="Qps-oe-neW"/>
                             <constraint firstItem="FC8-1j-82L" firstAttribute="centerX" secondItem="gd5-Bi-LK4" secondAttribute="centerX" id="sJi-ck-jX4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WPa-D7-Nnx"/>
@@ -122,11 +122,7 @@
         <scene sceneID="KW6-Sq-Jdu">
             <objects>
                 <navigationController storyboardIdentifier="AddTaskNav" automaticallyAdjustsScrollViewInsets="NO" id="cHF-33-M9j" customClass="NavigationViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Add Task" image="icons8-add-filled-50" selectedImage="icons8-add-filled-50" id="dNa-Qb-MxJ">
-                        <inset key="imageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                        <inset key="landscapeImageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                        <color key="badgeColor" red="0.86128216981887817" green="0.30987441539764404" blue="0.57130712270736694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Add Task" image="icons8-add-filled-50" id="dNa-Qb-MxJ"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pNJ-Y8-BR6">

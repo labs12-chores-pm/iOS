@@ -86,10 +86,6 @@ class MainCategoriesViewController: UIViewController {
                 }
                 self.household = nil
                 self.household = household
-                
-                DispatchQueue.main.async {
-                    self.updateViews()
-                }
             }
         } else {
             fatalError()
@@ -120,18 +116,6 @@ class MainCategoriesViewController: UIViewController {
         }
     }
     
-    private func updateViews() {
-        guard let household = household, let user = currentUser else { return }
-        
-        if household.adminIds.contains(user.identifier) {
-            addCategoryButton.isEnabled = true
-        } else {
-            addCategoryButton.isEnabled = false
-        }
-        
-        
-    }
-    
     private func setAppearance() {
         categoriesLabel.font = AppearanceHelper.boldFont(with: .headline, pointSize: 22)
         myToDosLabel.font = AppearanceHelper.boldFont(with: .headline, pointSize: 22)
@@ -143,6 +127,17 @@ class MainCategoriesViewController: UIViewController {
         myToDosTableView.backgroundColor = AppearanceHelper.themeGray
         myToDosTableView.separatorStyle = .none
     }
+    
+    @IBAction func addCategoryButtonWasTapped(_ sender: MonkeyButton) {
+        guard let household = household, let user = currentUser else { return }
+        
+        if household.adminIds.contains(user.identifier) {
+            self.performSegue(withIdentifier: "AddCategory", sender: self)
+        } else {
+            displayMsg(title: "Can't Create Category", msg: "Only users with admin permission can add a category.")
+        }
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddCategory" {
@@ -197,7 +192,6 @@ class MainCategoriesViewController: UIViewController {
     
     @IBOutlet weak var addCategoryButton: UIButton!
     @IBOutlet weak var categoriesLabel: UILabel!
-    // @IBOutlet weak var categoriesTableView: UITableView!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var myToDosTableView: UITableView!
     @IBOutlet weak var myToDosLabel: UILabel!
@@ -300,12 +294,7 @@ extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSour
 
 extension MainCategoriesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-     
-        if collectionView == categoryCollectionView {
-            return categories?.count ?? 0
-        }
-        
-        return 0
+        return categories?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -313,8 +302,9 @@ extension MainCategoriesViewController: UICollectionViewDelegate, UICollectionVi
         let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionReuseIdentifier, for: indexPath) as! CategoryCollectionViewCell
         
         if let categories = categories {
-            //cell.categoryImage.image = UIImage(named: "diningroom")
             cell.categoryLabel.text = categories[indexPath.row].name
+            
+            cell.categoryLabel.font = AppearanceHelper.boldFont(with: .body, pointSize: 16)
             
             cell.categoryImage.layer.borderColor = UIColor.orange.cgColor
             cell.categoryImage.layer.borderWidth = 2
@@ -326,24 +316,18 @@ extension MainCategoriesViewController: UICollectionViewDelegate, UICollectionVi
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let squareDimension = collectionView.bounds.width / 2
+        let inset: CGFloat = 15
+        
+        return CGSize(width: squareDimension - inset, height: squareDimension - inset)
+    }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//
-//        let selection = categories?[indexPath.item]
-//        performSegue(withIdentifier: "ShowTasks", sender: selection)
-//    }
-    
-//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//
-//        let layout = self.categoryCollectionView?.collectionViewLayout as! CategoryFlowLayout
-//
-//        let imageSize   = layout.itemSize.height + layout.minimumLineSpacing
-//        let offset      = scrollView.contentOffset.y
-//
-//
-//        currentCategory = Int(floor((offset - imageSize / 2) / imageSize) + 1)
-//
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let inset: CGFloat = 10
+        return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+    }
+
     
     
 }

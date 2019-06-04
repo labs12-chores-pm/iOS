@@ -323,7 +323,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4OU-Je-xbR"/>
                     </view>
-                    <navigationItem key="navigationItem" id="62u-zN-LEg"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="62u-zN-LEg"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="414" height="1100"/>
                     <connections>
@@ -351,8 +351,8 @@
             <objects>
                 <navigationController storyboardIdentifier="TasksNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="1Wf-pi-46m" customClass="NavigationViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hLV-JT-ELs">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="hLV-JT-ELs">
+                        <rect key="frame" x="0.0" y="20" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
