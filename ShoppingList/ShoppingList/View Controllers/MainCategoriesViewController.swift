@@ -13,10 +13,12 @@ class MainCategoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        categoriesTableView.dataSource = self
-        categoriesTableView.delegate = self
+       // categoriesTableView.dataSource = self
+       // categoriesTableView.delegate = self
         myToDosTableView.dataSource = self
         myToDosTableView.delegate = self
+        categoryCollectionView.dataSource = self
+        categoryCollectionView.delegate = self
         
         setAppearance()
         
@@ -33,6 +35,8 @@ class MainCategoriesViewController: UIViewController {
             fatalError()
         }
         updateUsersHousehold()
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,7 +74,7 @@ class MainCategoriesViewController: UIViewController {
             self.categories = sorted
             
             DispatchQueue.main.async {
-                self.categoriesTableView.reloadData()
+                self.categoryCollectionView.reloadData()
             }
         }
         
@@ -167,7 +171,9 @@ class MainCategoriesViewController: UIViewController {
         
         if segue.identifier == "ShowTasks" {
             guard let destinationVC = segue.destination as? TasksTableViewController,
-            let index = categoriesTableView.indexPathForSelectedRow,
+            let indexes = categoryCollectionView.indexPathsForSelectedItems,
+            let index = indexes.first,
+            //let index = categoriesTableView.indexPathForSelectedRow,
             let categories = categories,
             let user = currentUser,
             let taskController = taskController,
@@ -177,7 +183,7 @@ class MainCategoriesViewController: UIViewController {
             let notificationHelper = notificationHelper
             else { return }
             
-            let category = categories[index.row]
+            let category = categories[index.item]
             
             destinationVC.currentUser = user
             destinationVC.category = category
@@ -191,9 +197,12 @@ class MainCategoriesViewController: UIViewController {
     
     @IBOutlet weak var addCategoryButton: UIButton!
     @IBOutlet weak var categoriesLabel: UILabel!
-    @IBOutlet weak var categoriesTableView: UITableView!
+    // @IBOutlet weak var categoriesTableView: UITableView!
+    @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var myToDosTableView: UITableView!
     @IBOutlet weak var myToDosLabel: UILabel!
+    
+    let collectionReuseIdentifier = "CategoryCollectionViewCell"
     
     var taskController: TaskController?
     var userController: UserController?
@@ -210,16 +219,18 @@ class MainCategoriesViewController: UIViewController {
     var myTasks: [Task]?
     var notificationHelper: NotificationHelper?
     
+    var currentCategory = 0
+    
 }
 
 extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if tableView == categoriesTableView {
-            return categories?.count ?? 0
-        }
-        
+//        if tableView == categoriesTableView {
+//            return categories?.count ?? 0
+//        }
+//
         if tableView == myToDosTableView {
             return myTasks?.count ?? 0
         }
@@ -231,18 +242,18 @@ extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSour
         
         var cell = UITableViewCell()
         
-        if tableView == categoriesTableView {
-            
-            cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-            
-            if let categories = categories {
-                cell.textLabel?.text = categories[indexPath.row].name
-                
-            }
-            
-            cell.textLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 16)
-            cell.detailTextLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
-        }
+//        if tableView == categoriesTableView {
+//
+//            cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
+//
+//            if let categories = categories {
+//                cell.textLabel?.text = categories[indexPath.row].name
+//
+//            }
+//
+//            cell.textLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 16)
+//            cell.detailTextLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
+//        }
         
         if tableView == myToDosTableView {
             
@@ -263,23 +274,76 @@ extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if tableView != categoriesTableView { return }
-        
-        if editingStyle == .delete {
-            guard let categories = categories, let categoryController = categoryController else { return }
-            
-            let category = categories[indexPath.row]
-            
-            categoryController.delete(category: category) { (error) in
-                if let error = error {
-                    print(error)
-                    return
-                }
-                
-                self.fetchCategories()
-            }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//
+//        if tableView != categoriesTableView { return }
+//
+//        if editingStyle == .delete {
+//            guard let categories = categories, let categoryController = categoryController else { return }
+//
+//            let category = categories[indexPath.row]
+//
+//            categoryController.delete(category: category) { (error) in
+//                if let error = error {
+//                    print(error)
+//                    return
+//                }
+//
+//                self.fetchCategories()
+//            }
+//        }
+//    }
+    
+}
+
+// CollectionViewExtension..?
+
+extension MainCategoriesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+     
+        if collectionView == categoryCollectionView {
+            return categories?.count ?? 0
         }
+        
+        return 0
     }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionReuseIdentifier, for: indexPath) as! CategoryCollectionViewCell
+        
+        if let categories = categories {
+            //cell.categoryImage.image = UIImage(named: "diningroom")
+            cell.categoryLabel.text = categories[indexPath.row].name
+            
+            cell.categoryImage.layer.borderColor = UIColor.orange.cgColor
+            cell.categoryImage.layer.borderWidth = 2
+            cell.categoryImage.clipsToBounds = true
+            
+            
+        }
+        
+        return cell
+    }
+    
+    
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//
+//        let selection = categories?[indexPath.item]
+//        performSegue(withIdentifier: "ShowTasks", sender: selection)
+//    }
+    
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//
+//        let layout = self.categoryCollectionView?.collectionViewLayout as! CategoryFlowLayout
+//
+//        let imageSize   = layout.itemSize.height + layout.minimumLineSpacing
+//        let offset      = scrollView.contentOffset.y
+//
+//
+//        currentCategory = Int(floor((offset - imageSize / 2) / imageSize) + 1)
+//
+//    }
+    
+    
 }

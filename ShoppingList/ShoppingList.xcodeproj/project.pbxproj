@@ -24,6 +24,7 @@
 		473D56852295B1B600C1CFF4 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473D56842295B1B600C1CFF4 /* UIViewController+Alert.swift */; };
 		473ED23B228DD4A900678E7E /* TaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473ED23A228DD4A900678E7E /* TaskController.swift */; };
 		473ED23D228DDE3E00678E7E /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473ED23C228DDE3E00678E7E /* CategoryController.swift */; };
+		47BF8B0922A5B03C00C7B8A3 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BF8B0822A5B03C00C7B8A3 /* CategoryCollectionViewCell.swift */; };
 		47E3FCA5228E780800A1CECE /* FirebaseLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E3FCA4228E780800A1CECE /* FirebaseLoginViewController.swift */; };
 		47E3FCA7228E782200A1CECE /* FirebaseLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47E3FCA6228E782200A1CECE /* FirebaseLogin.storyboard */; };
 		47F0A97022931E9500AF2EA9 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */; };
@@ -124,6 +125,7 @@
 		473D56842295B1B600C1CFF4 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		473ED23A228DD4A900678E7E /* TaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskController.swift; sourceTree = "<group>"; };
 		473ED23C228DDE3E00678E7E /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
+		47BF8B0822A5B03C00C7B8A3 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		47E3FCA4228E780800A1CECE /* FirebaseLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseLoginViewController.swift; sourceTree = "<group>"; };
 		47E3FCA6228E782200A1CECE /* FirebaseLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FirebaseLogin.storyboard; sourceTree = "<group>"; };
 		47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 		9663C6852231D43B0019FCED /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				47BF8B0822A5B03C00C7B8A3 /* CategoryCollectionViewCell.swift */,
 				771D343E228C775F00C8BA13 /* HouseholdUserTableViewCell.swift */,
 				7756A72422A5699400946EB2 /* ToDoTableViewCell.swift */,
 				7756A72622A58D8700946EB2 /* TaskTableViewCell.swift */,
@@ -711,6 +714,7 @@
 				969A840C2215C99A0003BB37 /* UIAppearance+Swift.m in Sources */,
 				11F5380D221F51EA0046BDFC /* HelperFile.swift in Sources */,
 				77C645BB22948F710030AD34 /* MessagesTableViewController.swift in Sources */,
+				47BF8B0922A5B03C00C7B8A3 /* CategoryCollectionViewCell.swift in Sources */,
 				47F0A97022931E9500AF2EA9 /* AddTaskViewController.swift in Sources */,
 				77027141229736C1002134A2 /* WhiteSegmentedControl.swift in Sources */,
 				770271352296ECE8002134A2 /* NavigationViewController.swift in Sources */,
