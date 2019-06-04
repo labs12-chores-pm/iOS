@@ -84,14 +84,8 @@ class AddTaskViewController: UIViewController {
         
 
         guard let taskController = self.taskController,
-        let household = household else {
+        let household = household, let categoryController = categoryController else {
             addTaskButton.shake()
-            return
-        }
-        
-        guard let categoryID = self.catID else {
-            addTaskButton.shake()
-            displayMsg(title: "Missing field", msg: "Please add a category.")
             return
         }
         
@@ -100,8 +94,23 @@ class AddTaskViewController: UIViewController {
             displayMsg(title: "Missing field", msg: "Please add a task description.")
             return
         }
-  
-        self.task = taskController.createTask(description: addTask, categoryId: categoryID, assineeIds: [], dueDate: Date(), isComplete: false, householdId: household.identifier, recurrence: Recurrence(rawValue: 0)!)
+        
+        if let categoryId = self.catID {
+            
+            self.task = taskController.createTask(description: addTask, categoryId: categoryId, assineeIds: [], dueDate: Date(), isComplete: false, householdId: household.identifier, recurrence: Recurrence(rawValue: 0)!)
+        } else if let categoryText = addCategoryTextField.text, !categoryText.isEmpty {
+            
+            let newCatId = UUID()
+            self.catID = newCatId
+            
+            self.category = categoryController.createCategory(householdId: household.identifier, name: categoryText, identifier: newCatId)
+            
+            self.task = taskController.createTask(description: addTask, categoryId: newCatId, assineeIds: [], dueDate: Date(), isComplete: false, householdId: household.identifier, recurrence: Recurrence(rawValue: 0)!)
+        } else {
+            addTaskButton.shake()
+            displayMsg(title: "Missing field", msg: "Please add a category.")
+            return
+        }
 
     }
 

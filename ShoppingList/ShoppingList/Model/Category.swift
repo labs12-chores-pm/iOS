@@ -25,12 +25,12 @@ struct Category: Codable, Equatable {
         case tasks, createdAt, housholdId, name, identifier
     }
     
-    init(tasks: [Task]?, householdId: UUID, name: String) {
+    init(tasks: [Task]?, householdId: UUID, name: String, identifier: UUID = UUID()) {
         self.tasks = tasks
         self.createdAt = Date()
         self.householdId = householdId
         self.name = name
-        self.identifier = UUID()
+        self.identifier = identifier
     }
     
     init(from decoder: Decoder) throws {

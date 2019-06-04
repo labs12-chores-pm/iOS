@@ -142,7 +142,7 @@
                                                 </constraints>
                                                 <state key="normal" title="➕"/>
                                                 <connections>
-                                                    <segue destination="nIq-1m-TZz" kind="show" identifier="AddCategory" id="szb-0X-gfk"/>
+                                                    <segue destination="nIq-1m-TZz" kind="show" identifier="AddCategory" id="lU6-0n-VoV"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -154,7 +154,7 @@
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="GSM-7q-6vv">
                                             <size key="itemSize" width="190" height="165"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                            <size key="footerReferenceSize" width="2" height="3"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="2" minY="0.0" maxX="2" maxY="4"/>
                                         </collectionViewFlowLayout>
                                         <cells>
@@ -204,10 +204,6 @@
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
-                                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="o1O-ul-Dez">
-                                            <rect key="frame" x="0.0" y="169" width="398" height="3"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionReusableView>
                                         <connections>
                                             <outlet property="dataSource" destination="Pts-uP-NbP" id="a4n-ux-OhI"/>
                                             <outlet property="delegate" destination="Pts-uP-NbP" id="ynG-GO-aiM"/>
@@ -311,12 +307,13 @@
             </objects>
             <point key="canvasLocation" x="2073.913043478261" y="496.875"/>
         </scene>
-        <!--Navigation View Controller-->
+        <!--Home-->
         <scene sceneID="sTf-75-2GO">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tc2-A2-Q60" customClass="NavigationViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="icons8-banana-filled-50" springLoaded="YES" id="Eon-SF-7Vh">
-                        <inset key="imageInsets" minX="5" minY="10" maxX="5" maxY="0.0"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="icons8-banana-filled-50" springLoaded="YES" id="Eon-SF-7Vh">
+                        <inset key="imageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                        <inset key="landscapeImageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                         <color key="badgeColor" red="0.86128216981887817" green="0.30987441539764404" blue="0.57130712270736694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <toolbarItems/>
