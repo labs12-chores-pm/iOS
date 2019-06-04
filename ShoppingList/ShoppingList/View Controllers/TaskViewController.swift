@@ -13,18 +13,17 @@ class TaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        assigneeSearch.delegate = self
         assigneeSearchTableView.dataSource = self
         assigneeSearchTableView.delegate = self
         recurrencePicker.delegate = self
         recurrencePicker.dataSource = self
         notesTableView.dataSource = self
         notesTableView.delegate = self
-        
+        assigneeSearchField.delegate = self
         dayPickerView.delegate = self
         dayPickerView.dataSource = self
         
-        searchResultsHeightConstraint.constant = 0
+        setAppearance()
         
         guard let userController = userController, let currentUser = currentUser, let household = household else { fatalError() }
         
@@ -43,7 +42,7 @@ class TaskViewController: UIViewController {
                 if let user = user {
                     self.assignee = user
                     DispatchQueue.main.async {
-                        self.assigneeSearch.text = user.name
+                        self.assigneeSearchField.text = user.name
                     }
                 }
             }
@@ -58,9 +57,40 @@ class TaskViewController: UIViewController {
                 print(error)
                 return
             }
+            self.householdMembers = nil
             self.householdMembers = members
         }
     }
+    
+    @IBAction func editButtonWasTapped(_ sender: UIBarButtonItem) {
+        
+        if inEditingMode {
+            guard let taskController = taskController, let task = task else {
+                displayMsg(title: "Error saving changes", msg: "Something went wrong. Please try again later.")
+                return
+            }
+            
+            var assigneeIds: [UUID] = []
+            
+            if let assignee = assignee {
+                assigneeIds.append(assignee.identifier)
+            }
+            
+            self.task = nil
+            self.task = taskController.updateTask(task: task, description: descriptionField.text, assignIds: assigneeIds, dueDate: dueDate, recurrence: recurrence)
+            
+            DispatchQueue.main.async {
+                self.searchResults = []
+                self.updateSearchViews()
+            }
+        }
+        
+        DispatchQueue.main.async {
+            self.inEditingMode = !self.inEditingMode
+            self.updateViews()
+        }
+    }
+    
     
     @IBAction func completeButtonWasTapped(_ sender: UIButton) {
         guard let taskController = taskController, let hasAdminAccess = hasAdminAccess else { return }
@@ -101,7 +131,7 @@ class TaskViewController: UIViewController {
                     ids.append(assignee.identifier)
                 }
                 
-                taskController.createTask(description: description, categoryId: categoryId, assineeIds: ids, dueDate: self.dueDate ?? Date(), notes: [], isComplete: false, householdId: householdId, recurrence: self.recurrence ?? Recurrence(rawValue: 0)!)
+                taskController.createTask(description: description, categoryId: categoryId, assineeIds: ids, dueDate: self.dueDate ?? Date(), isComplete: false, householdId: householdId, recurrence: self.recurrence ?? Recurrence(rawValue: 0)!)
             }
         } else {
             guard let task = task else {
@@ -138,23 +168,6 @@ class TaskViewController: UIViewController {
         }
     }
     
-    @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
-        
-            if let taskDescription = descriptionField.text, !taskDescription.trimmingCharacters(in: .whitespaces).isEmpty {
-                
-                print("This is the date from the Picker \(sender.date)")
-                
-                notificationHelper?.requestAuthorization { success in
-                    if success {
-                        self.notificationHelper?.scheduleTask(task: taskDescription, date: sender.date)
-                    }
-                }
-            }
-        
-        guard let taskController = taskController, let task = task else { return }
-        taskController.updateTask(task: task, dueDate: sender.date)
-    }
-    
     private func setNotes() {
         if let task = task, let notesController = notesController {
             notesController.fetchNotes(taskId: task.identifier) { (notes, error) in
@@ -169,16 +182,9 @@ class TaskViewController: UIViewController {
     
     private func updateViews() {
         guard isViewLoaded else { return }
-        
-        taskScrollView.contentInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        
-        _ = taskFormLabels.map { $0.font = AppearanceHelper.styleFont(with: .body, pointSize: 16) }
-        
-        descriptionField.font = AppearanceHelper.styleFont(with: .body, pointSize: 18)
             
         if let task = task {
             descriptionField.text = task.description
-            
             self.dueDate = task.dueDate
             
             if let datePicker = datePicker {
@@ -187,6 +193,23 @@ class TaskViewController: UIViewController {
             
             recurrencePicker.selectRow(task.recurrence.rawValue, inComponent: 0, animated: true)
             noteTextField.isEnabled = true
+            
+            
+            if inEditingMode {
+                completeButton.isEnabled = false
+                completeButton.setTitle("Cannot complete while editing...", for: .normal)
+                descriptionField.isEnabled = true
+                assigneeSearchField.isEnabled = true
+                dayPickerView.isUserInteractionEnabled = true
+                recurrencePicker.isUserInteractionEnabled = true
+            } else {
+                completeButton.isEnabled = true
+                descriptionField.isEnabled = false
+                assigneeSearchField.isEnabled = false
+                dayPickerView.isUserInteractionEnabled = false
+                recurrencePicker.isUserInteractionEnabled = false
+            }
+            
             if task.isPending && !task.isComplete {
                 completeButton.setTitle("Pending Approval", for: .normal)
             } else if task.isComplete {
@@ -194,31 +217,84 @@ class TaskViewController: UIViewController {
                 completeButton.isEnabled = false
                 descriptionField.isEnabled = false
                 recurrencePicker.isUserInteractionEnabled = false
-                assigneeSearch.isUserInteractionEnabled = false
+                assigneeSearchField.isEnabled = false
             } else {
                 completeButton.setTitle("Complete", for: .normal)
+                
+                editBarButton.isEnabled = true
+                
+                if inEditingMode {
+                    editBarButton.title = "Save"
+                } else {
+                    editBarButton.title = "Edit"
+                }
             }
         } else {
             noteTextField.isEnabled = false
             completeButton.setTitle("Create", for: .normal)
             recurrencePicker.selectRow(0, inComponent: 0, animated: true)
+            editBarButton.isEnabled = false
+            editBarButton.tintColor = .clear
         }
         
         if hasAdminAccess == false {
             descriptionField.isEnabled = false
             recurrencePicker.isUserInteractionEnabled = false
-            assigneeSearch.isUserInteractionEnabled = false
+            assigneeSearchField.isUserInteractionEnabled = false
+            editBarButton.isEnabled = false
+            editBarButton.tintColor = .clear
         }
-        
-        if searchResults == nil || searchResults!.isEmpty {
-            assigneeSearchTableView.isHidden = true
-            searchResultsHeightConstraint.constant = 0
-        } else {
-            assigneeSearchTableView.isHidden = false
-            searchResultsHeightConstraint.constant = 120
-        }
-        
+            
+        updateSearchViews()
         self.setNotes()
+    }
+    
+    private func setAppearance() {
+        guard isViewLoaded else { return }
+        
+        assigneeSearchTableView.isHidden = true
+        assigneeSearchTableView.alpha = 0
+        
+        taskScrollView.contentInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        _ = taskFormLabels.map { $0.font = AppearanceHelper.styleFont(with: .body, pointSize: 16) }
+        descriptionField.font = AppearanceHelper.styleFont(with: .body, pointSize: 16)
+        assigneeSearchField.font = AppearanceHelper.styleFont(with: .body, pointSize: 16)
+        noteTextField.font = AppearanceHelper.styleFont(with: .body, pointSize: 16)
+    }
+    
+    private func updateSearchViews() {
+        guard let searchResults = searchResults else {
+            hideSearchResultsTableView()
+            return
+        }
+        
+        if searchResults.count > 0 && inEditingMode {
+            showSearchResultsTableView()
+        } else {
+            hideSearchResultsTableView()
+        }
+        
+        self.assigneeSearchTableView.reloadData()
+    }
+    
+    private func showSearchResultsTableView() {
+        
+        viewWillLayoutSubviews()
+        
+        UIView.animate(withDuration: 0.2) {
+            self.assigneeSearchTableView.alpha = 1
+            self.assigneeSearchTableView.isHidden = false
+        }
+    }
+    
+    private func hideSearchResultsTableView() {
+        
+        viewWillLayoutSubviews()
+        
+        UIView.animate(withDuration: 0.2) {
+            self.assigneeSearchTableView.alpha = 0
+            self.assigneeSearchTableView.isHidden = true
+        }
     }
     
     private func setDateData() {
@@ -249,14 +325,15 @@ class TaskViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var searchResultsHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var assigneeSearchField: BlueField!
     @IBOutlet weak var noteTextField: UITextField!
     @IBOutlet weak var assigneeSearchTableView: UITableView!
     @IBOutlet weak var completeButton: MonkeyButton!
     @IBOutlet weak var descriptionField: UITextField!
-    @IBOutlet weak var assigneeSearch: UISearchBar!
     @IBOutlet weak var recurrencePicker: UIPickerView!
     @IBOutlet weak var notesTableView: UITableView!
+    
+    @IBOutlet weak var editBarButton: UIBarButtonItem!
     
     @IBOutlet var taskFormLabels: [UILabel]!
     
@@ -291,8 +368,9 @@ class TaskViewController: UIViewController {
     var assignee: User? {
         didSet {
             DispatchQueue.main.async {
-                self.assigneeSearch.text = self.assignee?.name
-                self.searchResults = nil
+                self.assigneeSearchField.text = self.assignee?.name
+                self.searchResults = []
+                self.updateSearchViews()
             }
         }
     }
@@ -302,6 +380,7 @@ class TaskViewController: UIViewController {
     var notesController: NotesController?
     
     var hasAdminAccess: Bool?
+    var inEditingMode: Bool = false
     
     var notificationHelper : NotificationHelper?
 
@@ -309,10 +388,8 @@ class TaskViewController: UIViewController {
     
     var searchResults: [User]? {
         didSet {
-            self.assigneeSearchTableView.reloadData()
             DispatchQueue.main.async {
-                self.updateViews()
-                self.viewDidLayoutSubviews()
+                self.updateSearchViews()
             }
         }
     }
@@ -330,16 +407,6 @@ class TaskViewController: UIViewController {
     }
     
     let recurrenceIntervals = ["Once", "Daily", "Weekly", "Monthly", "Yearly"]
-}
-
-extension TaskViewController: UISearchBarDelegate {
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard let householdMembers = householdMembers else { return }
-        let searchResults = householdMembers.filter { $0.name.lowercased().contains(searchText.lowercased()) }
-        self.searchResults = searchResults
-        updateViews()
-    }
 }
 
 extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
@@ -371,22 +438,18 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        let frame = assigneeSearchTableView.frame
-        assigneeSearchTableView.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width, height: assigneeSearchTableView.contentSize.height)
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == assigneeSearchTableView {
             defer { self.updateViews() }
-            guard let selectedMember = householdMembers?[indexPath.row], let taskController = taskController else { return }
+            guard let selectedMember = searchResults?[indexPath.row], let taskController = taskController else { return }
             
-            self.assigneeSearch.text = selectedMember.name
+            self.assigneeSearchField.text = selectedMember.name
             self.assignee = selectedMember
-            self.searchResults = nil
+            self.searchResults = []
+            self.updateSearchViews()
             
             guard let task = task else { return }
+            
             taskController.updateTask(task: task, description: task.description, assignIds: [selectedMember.identifier])
         }
     }
@@ -468,6 +531,7 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             }
             
             taskController.updateTask(task: task, description: task.description, recurrence: recurrence)
+            self.recurrence = recurrence
         }
         
         if pickerView == dayPickerView {
@@ -547,5 +611,29 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         }
         
         return pickerView.frame.width
+    }
+}
+
+extension TaskViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        searchHouseholdMembers(textField)
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        searchHouseholdMembers(textField)
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        searchHouseholdMembers(textField)
+    }
+    
+    private func searchHouseholdMembers(_ textField: UITextField) {
+        guard let householdMembers = householdMembers, let text = textField.text, !text.isEmpty else { return }
+        let searchResults = householdMembers.filter { $0.name.lowercased().contains(text.lowercased()) }
+        self.searchResults = searchResults
+        updateSearchViews()
     }
 }

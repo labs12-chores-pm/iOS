@@ -50,6 +50,8 @@ class ProfileViewController: UIViewController {
         
         guard let authResponse = authResponse, let userController = userController, let currentUser = currentUser, let keychain = keychain else { fatalError() }
         
+        var userCopy = currentUser
+        
         let activityView = getActivityView()
         activityView.startAnimating()
         
@@ -69,7 +71,7 @@ class ProfileViewController: UIViewController {
                     return
                 }
                 
-                userController.updateUser(user: currentUser, name: displayName, completion: { (error) in
+                userController.updateUser(user: userCopy, name: displayName, completion: { (error) in
                     if let error = error {
                         print(error)
                         DispatchQueue.main.async {
@@ -78,6 +80,8 @@ class ProfileViewController: UIViewController {
                         }
                         return
                     }
+                    
+                    userCopy.name = displayName
                     
                     DispatchQueue.main.async {
                         activityView.stopAnimating()
@@ -101,7 +105,12 @@ class ProfileViewController: UIViewController {
                     return
                 }
                 
-                userController.updateUser(user: currentUser, email: email)
+                userController.updateUser(user: userCopy, email: email)
+                
+                userCopy.email = email
+                
+                self.currentUser = userCopy
+                
                 keychain.set(email, forKey: Settings.keychainEmail)
                 DispatchQueue.main.async {
                     activityView.stopAnimating()

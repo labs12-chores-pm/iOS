@@ -302,6 +302,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-family-filled-50" width="50" height="50"/>
+        <image name="icons8-family-filled-50" width="25" height="25"/>
     </resources>
 </document>
