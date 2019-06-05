@@ -19,7 +19,7 @@ class HouseholdController {
         return newHousehold
     }
     
-    func updateHousehold(household: Household, name: String? = nil, memberIds: [UUID], adminIds: [UUID], categories: [Category], invite: Invite? = nil) {
+    @discardableResult func updateHousehold(household: Household, name: String? = nil, memberIds: [UUID], adminIds: [UUID], categories: [Category], invite: Invite? = nil) -> Household {
         
         var updatedHousehold = household
         
@@ -47,6 +47,7 @@ class HouseholdController {
         }
         
         put(household: updatedHousehold)
+        return updatedHousehold
     }
     
     func deleteHousehold(household: Household, completion: @escaping (Error?) -> Void) {

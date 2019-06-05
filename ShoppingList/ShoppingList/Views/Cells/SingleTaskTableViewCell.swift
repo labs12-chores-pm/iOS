@@ -1,20 +1,40 @@
 //
-//  TaskTableViewCell.swift
+//  SingleTaskTableViewCell.swift
 //  ShoppingList
 //
-//  Created by Nathanael Youngren on 6/3/19.
+//  Created by Nathanael Youngren on 6/4/19.
 //  Copyright © 2019 Lambda School Labs. All rights reserved.
 //
 
 import UIKit
 
-class TaskTableViewCell: UITableViewCell {
+class SingleTaskTableViewCell: UITableViewCell {
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        getAssigneeName()
+        setAppearance()
+        updateViews()
+    }
+
     private func getAssigneeName() {
         guard let userController = userController, let task = task,
-        let assigneeId = task.assigneeIds.first else {
-            updateViews()
-            return
+            let assigneeId = task.assigneeIds.first else {
+                return
+        }
+        
+        if let categoryController = categoryController {
+            
+            categoryController.fetchCategory(identifier: task.categoryId) { (category, error) in
+                if let error = error {
+                    print(error)
+                }
+                
+                if let category = category {
+                    self.category = category
+                    return
+                }
+            }
         }
         
         userController.fetchUser(userId: assigneeId) { (user, error) in
@@ -41,16 +61,19 @@ class TaskTableViewCell: UITableViewCell {
     private func updateViews() {
         guard let task = task else { return }
         
-        setAppearance()
-        
         descriptionLabel.text = task.description.capitalized
         dueDateLabel.text = task.dueDate.string(format: "E, MMM d")
         timeLabel.text = task.dueDate.string(format: "h:mm a")
         
-        if let assignee = assignee {
-            assigneeLabel.text = assignee.name.capitalized
+        if let category = category {
+            assigneeLabel.text = category.name.capitalized
         } else {
-            assigneeLabel.text = "Task is not assigned"
+            
+            if let assignee = assignee {
+                assigneeLabel.text = assignee.name.capitalized
+            } else {
+                assigneeLabel.text = "Task is not assigned"
+            }
         }
     }
     
@@ -71,7 +94,7 @@ class TaskTableViewCell: UITableViewCell {
         
         selectionStyle = .none
     }
-
+    
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var assigneeLabel: UILabel!
     @IBOutlet weak var dueDateLabel: UILabel!
@@ -80,10 +103,13 @@ class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var cellView: UIView!
     
     var userController: UserController?
+    var categoryController: CategoryController?
     
-    var task: Task? {
+    var category: Category? {
         didSet {
-            getAssigneeName()
+            DispatchQueue.main.async {
+                self.updateViews()
+            }
         }
     }
     
@@ -94,4 +120,6 @@ class TaskTableViewCell: UITableViewCell {
             }
         }
     }
+    
+    var task: Task?
 }

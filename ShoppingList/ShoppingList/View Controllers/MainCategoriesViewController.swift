@@ -13,12 +13,13 @@ class MainCategoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // categoriesTableView.dataSource = self
-       // categoriesTableView.delegate = self
         myToDosTableView.dataSource = self
         myToDosTableView.delegate = self
         categoryCollectionView.dataSource = self
         categoryCollectionView.delegate = self
+        
+        let nib = UINib(nibName: "SingleTaskTableViewCell", bundle: nil)
+        myToDosTableView.register(nib, forCellReuseIdentifier: "TaskCell")
         
         setAppearance()
         
@@ -220,77 +221,27 @@ class MainCategoriesViewController: UIViewController {
 extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-//        if tableView == categoriesTableView {
-//            return categories?.count ?? 0
-//        }
-//
-        if tableView == myToDosTableView {
-            return myTasks?.count ?? 0
-        }
-        
-        return 0
+        return myTasks?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+                    
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
+        guard let taskCell = cell as? SingleTaskTableViewCell,
+        let tasks = myTasks, let categories = categories else { return cell }
         
-        var cell = UITableViewCell()
+        let task = tasks[indexPath.row]
+        let categoryArray = categories.filter { $0.identifier == task.categoryId }
+        let category = categoryArray.first!
         
-//        if tableView == categoriesTableView {
-//
-//            cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-//
-//            if let categories = categories {
-//                cell.textLabel?.text = categories[indexPath.row].name
-//
-//            }
-//
-//            cell.textLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 16)
-//            cell.detailTextLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
-//        }
+        taskCell.userController = userController
+        taskCell.category = category
+        taskCell.task = task
         
-        if tableView == myToDosTableView {
-            
-            cell = tableView.dequeueReusableCell(withIdentifier: "MyToDosCell", for: indexPath)
-            guard let taskCell = cell as? ToDoTableViewCell,
-            let tasks = myTasks, let categories = categories else { return cell }
-            
-            let task = tasks[indexPath.row]
-            let categoryArray = categories.filter { $0.identifier == task.categoryId }
-            let category = categoryArray.first!
- 
-            taskCell.category = category
-            taskCell.task = task
-            
-            return taskCell
-        }
-        
-        return cell
+        return taskCell
     }
     
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//
-//        if tableView != categoriesTableView { return }
-//
-//        if editingStyle == .delete {
-//            guard let categories = categories, let categoryController = categoryController else { return }
-//
-//            let category = categories[indexPath.row]
-//
-//            categoryController.delete(category: category) { (error) in
-//                if let error = error {
-//                    print(error)
-//                    return
-//                }
-//
-//                self.fetchCategories()
-//            }
-//        }
-//    }
-    
 }
-
-// CollectionViewExtension..?
 
 extension MainCategoriesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -309,10 +260,7 @@ extension MainCategoriesViewController: UICollectionViewDelegate, UICollectionVi
             cell.categoryImage.layer.borderColor = UIColor.orange.cgColor
             cell.categoryImage.layer.borderWidth = 2
             cell.categoryImage.clipsToBounds = true
-            
-            
         }
-        
         return cell
     }
     
@@ -327,7 +275,5 @@ extension MainCategoriesViewController: UICollectionViewDelegate, UICollectionVi
         let inset: CGFloat = 10
         return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
     }
-
-    
     
 }

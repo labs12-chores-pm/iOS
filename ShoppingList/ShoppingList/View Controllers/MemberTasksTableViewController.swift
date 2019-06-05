@@ -12,8 +12,12 @@ class MemberTasksTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setAppearance()
         setTasks()
         updateViews()
+        
+        let nib = UINib(nibName: "SingleTaskTableViewCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "TaskCell")
     }
     
     private func setTasks() {
@@ -38,6 +42,13 @@ class MemberTasksTableViewController: UITableViewController {
         }
     }
     
+    private func setAppearance() {
+        nameLabel.font = AppearanceHelper.styleFont(with: .title1, pointSize: 22)
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = 75
+        self.tableView.separatorStyle = .none
+    }
+    
     private func updateViews() {
         guard isViewLoaded, let member = member else { return }
         nameLabel.text = member.name
@@ -51,19 +62,15 @@ class MemberTasksTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
-        guard let tasks = tasks else { return cell }
+        guard let tasks = tasks, let taskCell = cell as? SingleTaskTableViewCell,
+        let categoryController = categoryController, let userController = userController else { return cell }
         let task = tasks[indexPath.row]
         
-        cell.textLabel?.text = task.description
-        cell.detailTextLabel?.text = task.dueDate.string(style: .short, showTime: true)
+        taskCell.userController = userController
+        taskCell.task = task
+        taskCell.categoryController = categoryController
         
         return cell
-    }
-
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
     }
     
     @IBOutlet weak var nameLabel: UILabel!
@@ -71,6 +78,8 @@ class MemberTasksTableViewController: UITableViewController {
     var household: Household?
     var member: User?
     var taskController: TaskController?
+    var categoryController: CategoryController?
+    var userController: UserController?
     
     var tasks: [Task]? {
         didSet {

@@ -59,7 +59,6 @@ class HouseholdUserTableViewCell: UITableViewCell {
     @IBOutlet weak var roleSegmentedControl: UISegmentedControl!
     @IBOutlet weak var userNameLabel: UILabel!
     
-    var userId: UUID?
     var currentUser: User?
     var member: User?
     var householdController: HouseholdController?
