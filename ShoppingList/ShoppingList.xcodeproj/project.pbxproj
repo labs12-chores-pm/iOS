@@ -64,6 +64,7 @@
 		776BBD12228DCFCA0097A4D4 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */; };
 		7770786E22A1A20000597BCA /* String+Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7770786D22A1A20000597BCA /* String+Keys.swift */; };
 		7770787022A1BB1500597BCA /* DiscreteWhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7770786F22A1BB1500597BCA /* DiscreteWhiteButton.swift */; };
+		778E1C2E22A826D200DF5B14 /* ShiftableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778E1C2D22A826D200DF5B14 /* ShiftableViewController.swift */; };
 		779FAC8E22A1786700808092 /* MemberTasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779FAC8D22A1786700808092 /* MemberTasksTableViewController.swift */; };
 		77C645B922948EE80030AD34 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77C645B822948EE80030AD34 /* Messages.storyboard */; };
 		77C645BB22948F710030AD34 /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C645BA22948F710030AD34 /* MessagesTableViewController.swift */; };
@@ -166,6 +167,7 @@
 		776BBD11228DCFCA0097A4D4 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
 		7770786D22A1A20000597BCA /* String+Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Keys.swift"; sourceTree = "<group>"; };
 		7770786F22A1BB1500597BCA /* DiscreteWhiteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscreteWhiteButton.swift; sourceTree = "<group>"; };
+		778E1C2D22A826D200DF5B14 /* ShiftableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftableViewController.swift; sourceTree = "<group>"; };
 		779FAC8D22A1786700808092 /* MemberTasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTasksTableViewController.swift; sourceTree = "<group>"; };
 		77C645B822948EE80030AD34 /* Messages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
 		77C645BA22948F710030AD34 /* MessagesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewController.swift; sourceTree = "<group>"; };
@@ -515,6 +517,7 @@
 				770271342296ECE8002134A2 /* NavigationViewController.swift */,
 				77C9664622986B4A00549C89 /* ProfileViewController.swift */,
 				779FAC8D22A1786700808092 /* MemberTasksTableViewController.swift */,
+				778E1C2D22A826D200DF5B14 /* ShiftableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -740,6 +743,7 @@
 				473ED23B228DD4A900678E7E /* TaskController.swift in Sources */,
 				118646D4221CA8CD00D0F04B /* Household.swift in Sources */,
 				969A84032215C99A0003BB37 /* ChameleonConstants.m in Sources */,
+				778E1C2E22A826D200DF5B14 /* ShiftableViewController.swift in Sources */,
 				773DC4AE228EE7AD00EB3121 /* AddCategoryViewController.swift in Sources */,
 				96029A46223198FA00F7F7AE /* Double+Currency.swift in Sources */,
 				776BBD0E228DB93A0097A4D4 /* CreateHouseholdViewController.swift in Sources */,

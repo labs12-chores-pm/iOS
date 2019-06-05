@@ -9,7 +9,7 @@
 import UserNotifications
 import UIKit
 
-class TaskViewController: UIViewController {
+class TaskViewController: ShiftableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,9 @@ class TaskViewController: UIViewController {
         assigneeSearchField.delegate = self
         dayPickerView.delegate = self
         dayPickerView.dataSource = self
+        
+        descriptionField.delegate = self
+        noteTextField.delegate = self
         
         setAppearance()
         
