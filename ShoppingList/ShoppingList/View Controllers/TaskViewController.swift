@@ -64,6 +64,11 @@ class TaskViewController: UIViewController {
     
     @IBAction func editButtonWasTapped(_ sender: UIBarButtonItem) {
         
+        if hasAdminAccess == false {
+            displayMsg(title: "Admin Permissions Needed", msg: "Admin permissions are needed to edit tasks.")
+            return
+        }
+        
         if inEditingMode {
             guard let taskController = taskController, let task = task else {
                 displayMsg(title: "Error saving changes", msg: "Something went wrong. Please try again later.")
@@ -241,8 +246,8 @@ class TaskViewController: UIViewController {
             descriptionField.isEnabled = false
             recurrencePicker.isUserInteractionEnabled = false
             assigneeSearchField.isUserInteractionEnabled = false
-            editBarButton.isEnabled = false
             editBarButton.tintColor = .clear
+            editBarButton.title = ""
         }
             
         updateSearchViews()
