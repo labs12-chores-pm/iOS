@@ -36,8 +36,6 @@ class MainCategoriesViewController: UIViewController {
             fatalError()
         }
         updateUsersHousehold()
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -169,7 +167,6 @@ class MainCategoriesViewController: UIViewController {
             guard let destinationVC = segue.destination as? TasksTableViewController,
             let indexes = categoryCollectionView.indexPathsForSelectedItems,
             let index = indexes.first,
-            //let index = categoriesTableView.indexPathForSelectedRow,
             let categories = categories,
             let user = currentUser,
             let taskController = taskController,
@@ -241,6 +238,9 @@ extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSour
         return taskCell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "ShowToDo", sender: self)
+    }
 }
 
 extension MainCategoriesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

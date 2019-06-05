@@ -123,6 +123,10 @@ class TasksTableViewController: UITableViewController {
         return taskCell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "ShowTask", sender: self)
+    }
+    
     @IBAction func addTaskButtonWasTapped(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "AddTask", sender: self)
     }

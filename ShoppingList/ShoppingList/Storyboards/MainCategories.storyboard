@@ -158,6 +158,7 @@
                         <outlet property="myToDosLabel" destination="CSF-un-451" id="4R4-un-Rxk"/>
                         <outlet property="myToDosTableView" destination="FlG-mf-aUL" id="CLz-kx-TBd"/>
                         <segue destination="nIq-1m-TZz" kind="show" identifier="AddCategory" id="3A0-kc-rv5"/>
+                        <segue destination="GRN-gu-8Uy" kind="show" identifier="ShowToDo" id="l3a-hq-Z3c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y46-p6-1ol" userLabel="First Responder" sceneMemberID="firstResponder"/>

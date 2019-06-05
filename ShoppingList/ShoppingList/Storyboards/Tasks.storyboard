@@ -32,6 +32,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="Aqf-Ff-cXC" kind="show" identifier="AddTask" id="lvk-JG-c8Q"/>
+                        <segue destination="Aqf-Ff-cXC" kind="show" identifier="ShowTask" id="NFY-fI-VyS"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b2F-lR-gkb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -271,4 +272,7 @@
             <point key="canvasLocation" x="1391" y="37"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="NFY-fI-VyS"/>
+    </inferredMetricsTieBreakers>
 </document>
