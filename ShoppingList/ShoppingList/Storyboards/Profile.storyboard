@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4k0-Zy-vSB">
-                                <rect key="frame" x="107" y="318" width="200" height="260"/>
+                                <rect key="frame" x="107" y="206" width="200" height="260"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User name..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EPD-AY-oeY" customClass="BlueField" customModule="ShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
@@ -68,7 +68,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="4k0-Zy-vSB" firstAttribute="centerY" secondItem="N9w-qL-a8a" secondAttribute="centerY" id="ejp-IX-qY6"/>
+                            <constraint firstItem="4k0-Zy-vSB" firstAttribute="centerY" secondItem="N9w-qL-a8a" secondAttribute="centerY" multiplier="0.75" id="ejp-IX-qY6"/>
                             <constraint firstItem="4k0-Zy-vSB" firstAttribute="centerX" secondItem="N9w-qL-a8a" secondAttribute="centerX" id="qcv-Fy-Tgo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Zkn-Aj-fj8"/>
@@ -89,10 +89,7 @@
         <scene sceneID="oic-4U-sS0">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fS4-HL-iLg" customClass="NavigationViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="icons8-customer-filled-50" selectedImage="icons8-customer-filled-50" id="lDe-T5-cdD">
-                        <inset key="imageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                        <inset key="landscapeImageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Profile" image="icons8-customer-filled-50" id="lDe-T5-cdD"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Q1X-mg-vna">
@@ -110,6 +107,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-customer-filled-50" width="50" height="50"/>
+        <image name="icons8-customer-filled-50" width="25" height="25"/>
     </resources>
 </document>

@@ -14,6 +14,7 @@ class StartViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        formTypeAnimation(show: false)
         tryKeychainLogin()
     }
     
@@ -73,13 +74,9 @@ class StartViewController: UIViewController {
         }
     }
     
-    func showActivityView() {
-        
-    }
-    
     @IBAction func loginButtonWasTapped(_ sender: UIButton) {
         
-        guard let email = emailField.text, let password = passwordField.text else { return }
+        guard let email = emailField.text, let password = passwordField.text, let userName = userNameField.text, let householdName = householdNameField.text else { return }
         
         if needsNewAccount {
             
@@ -114,12 +111,11 @@ class StartViewController: UIViewController {
                     
                     let userUID = UUID()
                     
-                    let name = currentUser.displayName ?? email
                     let picture = currentUser.photoURL
                     
-                    let household = self.householdController.createHousehold(name: name, creatorId: userUID, memberIds: [userUID])
+                    let household = self.householdController.createHousehold(name: householdName, creatorId: userUID, memberIds: [userUID])
                     
-                    let user = self.userController.createUser(email: email, name: name, profilePicture: picture?.absoluteString, currentHouseholdId: household.identifier, identifier: userUID)
+                    let user = self.userController.createUser(email: email, name: userName, profilePicture: picture?.absoluteString, currentHouseholdId: household.identifier, identifier: userUID)
                     
                     self.currentUser = user
                     
@@ -135,6 +131,21 @@ class StartViewController: UIViewController {
         }
     }
     
+    private func updateViews() {
+        needsNewAccount ? formTypeAnimation(show: true) : formTypeAnimation(show: false)
+    }
+    
+    private func formTypeAnimation(show: Bool) {
+        
+        viewWillLayoutSubviews()
+        
+        UIView.animate(withDuration: 0.2) {
+            self.userNameField.isHidden = !show
+            self.userNameField.alpha = show ? 1 : 0
+            self.householdNameField.isHidden = !show
+            self.householdNameField.alpha = show ? 1 : 0
+        }
+    }
     
     @IBAction func loginSignUpControlValueChanged(_ sender: UISegmentedControl) {
         
@@ -146,6 +157,8 @@ class StartViewController: UIViewController {
         default:
             break
         }
+        
+        updateViews()
     }
     
     var needsNewAccount: Bool = false
@@ -164,6 +177,8 @@ class StartViewController: UIViewController {
     let householdController = HouseholdController()
     let keychain = KeychainSwift()
     
+    @IBOutlet weak var userNameField: UITextField!
+    @IBOutlet weak var householdNameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: MonkeyButton!

@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FC8-1j-82L">
-                                <rect key="frame" x="87.666666666666686" y="327" width="200" height="158"/>
+                                <rect key="frame" x="87.666666666666686" y="225.66666666666663" width="200" height="158"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Urs-rx-nzR">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
@@ -36,7 +36,7 @@
                                         </subviews>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="zBK-nZ-Qzu">
-                                        <rect key="frame" x="0.0" y="38" width="200" height="44"/>
+                                        <rect key="frame" x="0.0" y="38.000000000000028" width="200" height="44"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="coh-OJ-Vv0"/>
@@ -66,7 +66,7 @@
                                         </connections>
                                     </tableView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rmg-V6-NG3">
-                                        <rect key="frame" x="0.0" y="90" width="200" height="30"/>
+                                        <rect key="frame" x="0.0" y="90.000000000000028" width="200" height="30"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add Task..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ijq-gC-0bn" customClass="BlueField" customModule="ShoppingList" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
@@ -77,7 +77,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJl-8Q-5lS" customClass="MonkeyButton" customModule="ShoppingList" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="128" width="200" height="30"/>
+                                        <rect key="frame" x="0.0" y="128.00000000000003" width="200" height="30"/>
                                         <state key="normal" title="Add Task"/>
                                         <connections>
                                             <action selector="addTaskButton:" destination="ljQ-a4-7EZ" eventType="touchUpInside" id="mrn-Py-FB8"/>
@@ -92,7 +92,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="FC8-1j-82L" firstAttribute="centerY" secondItem="gd5-Bi-LK4" secondAttribute="centerY" id="Qps-oe-neW"/>
+                            <constraint firstItem="FC8-1j-82L" firstAttribute="centerY" secondItem="gd5-Bi-LK4" secondAttribute="centerY" multiplier="0.75" id="Qps-oe-neW"/>
                             <constraint firstItem="FC8-1j-82L" firstAttribute="centerX" secondItem="gd5-Bi-LK4" secondAttribute="centerX" id="sJi-ck-jX4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WPa-D7-Nnx"/>
@@ -122,11 +122,7 @@
         <scene sceneID="KW6-Sq-Jdu">
             <objects>
                 <navigationController storyboardIdentifier="AddTaskNav" automaticallyAdjustsScrollViewInsets="NO" id="cHF-33-M9j" customClass="NavigationViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Add Task" image="icons8-add-filled-50" selectedImage="icons8-add-filled-50" id="dNa-Qb-MxJ">
-                        <inset key="imageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                        <inset key="landscapeImageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                        <color key="badgeColor" red="0.86128216981887817" green="0.30987441539764404" blue="0.57130712270736694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Add Task" image="icons8-add-filled-50" id="dNa-Qb-MxJ"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pNJ-Y8-BR6">
@@ -144,6 +140,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-add-filled-50" width="50" height="50"/>
+        <image name="icons8-add-filled-50" width="25" height="25"/>
     </resources>
 </document>

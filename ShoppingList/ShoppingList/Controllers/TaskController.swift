@@ -9,35 +9,31 @@
 import Foundation
 
 class TaskController {
-    
 
-    @discardableResult func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, notes: [Note] = [] , isComplete: Bool, householdId: UUID, recurrence: Recurrence) -> Task {
+    @discardableResult func createTask(description: String, categoryId: UUID, assineeIds: [UUID], dueDate: Date, isComplete: Bool, householdId: UUID, recurrence: Recurrence) -> Task {
         
-        let task = Task(description: description, categoryId: categoryId, assigneeIds: assineeIds, dueDate: dueDate, notes: notes, recurrence: recurrence, householdId: householdId)
+        let task = Task(description: description, categoryId: categoryId, assigneeIds: assineeIds, dueDate: dueDate, recurrence: recurrence, householdId: householdId)
         put(task: task)
         
         return task
     }
     
     
-    func updateTask(task: Task , description: String? = nil, categoryId: UUID? = nil, assignIds: [UUID]? = nil, dueDate: Date? = nil, notes: [Note]? = nil, isComplete: Bool = false, recurrence: Recurrence? = nil, isPending: Bool = false) {
+    @discardableResult func updateTask(task: Task , description: String? = nil, categoryId: UUID? = nil, assignIds: [UUID] = [], dueDate: Date? = nil, isComplete: Bool = false, recurrence: Recurrence? = nil, isPending: Bool = false) -> Task {
         
         var taskCopy = task
         
         taskCopy.description = description ?? task.description
-        
-        if let assigneeIds = assignIds {
-            taskCopy.assigneeIds = task.assigneeIds + assigneeIds
-        }
+  
+        taskCopy.assigneeIds = task.assigneeIds + assignIds
         
         taskCopy.recurrence = recurrence ?? task.recurrence
         taskCopy.dueDate = dueDate ?? taskCopy.dueDate
-        taskCopy.notes = notes ?? taskCopy.notes
         taskCopy.isPending = isPending
         taskCopy.isComplete = isComplete
        
         put(task: taskCopy)
-        
+        return taskCopy
     }
     
     func resetRecurringTask(task: Task) {
@@ -61,7 +57,7 @@ class TaskController {
         taskCopy.isPending = false
         taskCopy.isComplete = false
         
-        let newTask = Task(description: taskCopy.description, categoryId: taskCopy.categoryId, assigneeIds: taskCopy.assigneeIds, dueDate: taskCopy.dueDate, notes: [], recurrence: taskCopy.recurrence, householdId: taskCopy.householdId)
+        let newTask = Task(description: taskCopy.description, categoryId: taskCopy.categoryId, assigneeIds: taskCopy.assigneeIds, dueDate: taskCopy.dueDate, recurrence: taskCopy.recurrence, householdId: taskCopy.householdId)
         
         put(task: newTask)
         updateTask(task: task, isComplete: true, isPending: false)

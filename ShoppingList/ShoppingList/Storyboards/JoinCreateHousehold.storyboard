@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="CKg-8V-95M">
-                                <rect key="frame" x="140" y="100" width="200" height="120"/>
+                                <rect key="frame" x="140" y="60" width="200" height="120"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="g58-kJ-hTH" customClass="YellowSegments" customModule="ShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="29"/>
@@ -58,7 +58,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="CKg-8V-95M" firstAttribute="centerX" secondItem="c3d-wH-aPo" secondAttribute="centerX" id="8p8-Bt-il4"/>
-                            <constraint firstItem="CKg-8V-95M" firstAttribute="centerY" secondItem="c3d-wH-aPo" secondAttribute="centerY" id="rbA-vy-pVd"/>
+                            <constraint firstItem="CKg-8V-95M" firstAttribute="centerY" secondItem="c3d-wH-aPo" secondAttribute="centerY" multiplier="0.75" id="rbA-vy-pVd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="55k-9p-QeO"/>
                     </view>

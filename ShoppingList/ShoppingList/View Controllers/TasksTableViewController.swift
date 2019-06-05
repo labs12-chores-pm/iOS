@@ -10,6 +10,13 @@ import UIKit
 
 class TasksTableViewController: UITableViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let nib = UINib(nibName: "SingleTaskTableViewCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "TaskCell")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setAppearance()
@@ -103,7 +110,7 @@ class TasksTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
-        guard let taskCell = cell as? TaskTableViewCell,
+        guard let taskCell = cell as? SingleTaskTableViewCell,
         let tasks = tasks, let completedTasks = completedTasks,
         let userController = userController
         else { return cell }
@@ -114,6 +121,10 @@ class TasksTableViewController: UITableViewController {
         taskCell.task = task
         
         return taskCell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "ShowTask", sender: self)
     }
     
     @IBAction func addTaskButtonWasTapped(_ sender: UIBarButtonItem) {

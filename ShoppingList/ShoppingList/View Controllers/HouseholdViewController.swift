@@ -16,8 +16,9 @@ class HouseholdViewController: UIViewController {
         householdPicker.delegate = self
         householdPicker.dataSource = self
         
-        householdMemberTableView.rowHeight = UITableView.automaticDimension
-        householdMemberTableView.estimatedRowHeight = 55
+        householdNameField.delegate = self
+        
+        setAppearance()
         
         if let tabBar = self.tabBarController as? TabViewViewController {
             
@@ -26,6 +27,7 @@ class HouseholdViewController: UIViewController {
             self.userController = tabBar.userController
             self.currentUser = tabBar.currentUser
             self.notesController = tabBar.notesController
+            self.categoryController = tabBar.categoryController
         } else {
             fatalError()
         }
@@ -146,6 +148,28 @@ class HouseholdViewController: UIViewController {
         }
     }
     
+    private func setAppearance() {
+        
+        householdMemberTableView.rowHeight = UITableView.automaticDimension
+        householdMemberTableView.estimatedRowHeight = 55
+        
+        householdNameField.font = AppearanceHelper.styleFont(with: .title1, pointSize: 22)
+        householdNameField.textColor = AppearanceHelper.teal
+        
+        saveButton.alpha = 0
+        saveButton.isHidden = true
+    }
+    
+    private func saveButtonAnimation(show: Bool) {
+        
+        viewWillLayoutSubviews()
+        
+        UIView.animate(withDuration: 0.2) {
+            self.saveButton.alpha = show ? 1 : 0
+            self.saveButton.isHidden = !show
+        }
+    }
+    
     private func updateViews() {
         guard let household = household, let pickerDataSource = pickerDataSource else { return }
         
@@ -156,6 +180,8 @@ class HouseholdViewController: UIViewController {
                 index = sourceIndex
             }
         }
+        
+        householdNameField.text = household.name.capitalized
         
         householdPicker.selectRow(index, inComponent: 0, animated: true)
         householdMemberTableView.reloadData()
@@ -184,6 +210,24 @@ class HouseholdViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func saveButtonWasTapped(_ sender: MonkeyButton) {
+        
+        let activityView = getActivityView()
+        view.addSubview(activityView)
+        
+        defer {
+            activityView.removeFromSuperview()
+            saveButtonAnimation(show: false)
+        }
+        
+        guard let householdController = householdController, let household = household, let householdName = householdNameField.text, !householdName.isEmpty else {
+            displayMsg(title: "Enter a name", msg: "Please enter a new houshold name.")
+            return
+        }
+        self.household = householdController.updateHousehold(household: household, name: householdName, memberIds: household.memberIds, adminIds: household.adminIds, categories: household.categories ?? [])
+    }
+    
     
     @IBAction func leaveHouseholdButtonTapped(_ sender: UIButton) {
         
@@ -284,16 +328,22 @@ class HouseholdViewController: UIViewController {
         
         if segue.identifier == "ShowMemberTasks" {
             guard let memberTasksVC = segue.destination as? MemberTasksTableViewController,
-            let members = members, let index = householdMemberTableView.indexPathForSelectedRow else { return }
+            let members = members, let categoryController = categoryController,
+            let userController = userController,
+            let index = householdMemberTableView.indexPathForSelectedRow else { return }
             
             let member = members[index.row]
             
             memberTasksVC.household = household
             memberTasksVC.member = member
             memberTasksVC.taskController = taskController
+            memberTasksVC.categoryController = categoryController
+            memberTasksVC.userController = userController
         }
     }
     
+    @IBOutlet weak var saveButton: MonkeyButton!
+    @IBOutlet weak var householdNameField: IncognitoTextField!
     @IBOutlet weak var leaveButton: UIButton!
     @IBOutlet weak var messagesBarButton: UIBarButtonItem!
     @IBOutlet weak var householdPicker: UIPickerView!
@@ -310,6 +360,7 @@ class HouseholdViewController: UIViewController {
     var householdController: HouseholdController?
     var userController: UserController?
     var notesController: NotesController?
+    var categoryController: CategoryController?
     var household: Household? {
         didSet {
             DispatchQueue.main.async {
@@ -340,7 +391,7 @@ class HouseholdViewController: UIViewController {
 extension HouseholdViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return household?.memberIds.count ?? 0
+        return members?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -348,21 +399,13 @@ extension HouseholdViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCell", for: indexPath)
         guard let userCell = cell as? HouseholdUserTableViewCell,
         let household = household, let currentUser = currentUser,
-        let userController = userController,
+        let members = members,
         let householdController = householdController else { return cell }
         
-        let userId = household.memberIds[indexPath.row]
+        let member = members[indexPath.row]
         
-        userController.fetchUser(userId: userId) { (user, error) in
-            if error != nil {
-                fatalError()
-            }
-            
-            guard let member = user else { fatalError() }
-            userCell.member = member
-        }
+        userCell.member = member
         
-        userCell.userId = userId
         userCell.currentUser = currentUser
         
         userCell.household = household
@@ -372,10 +415,10 @@ extension HouseholdViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard let householdController = householdController, let household = household,
+        guard let householdController = householdController, let household = household, let members = members,
         let index = tableView.indexPathForSelectedRow, let currentUser = currentUser else { return }
         
-        let userId = household.memberIds[index.row]
+        let userId = members[index.row].identifier
         
         guard userId != currentUser.identifier, household.adminIds.contains(currentUser.identifier) else { return }
         
@@ -419,5 +462,12 @@ extension HouseholdViewController: UIPickerViewDelegate, UIPickerViewDataSource 
         pickerLabel.font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
         
         return pickerLabel
+    }
+}
+
+extension HouseholdViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        saveButtonAnimation(show: true)
     }
 }

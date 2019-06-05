@@ -23,7 +23,6 @@ struct Task: Codable, Equatable {
     var assigneeIds: [UUID]
     var dueDate: Date
     var recurrence: Recurrence
-    var notes: [Note]
     let identifier: UUID
     var isComplete: Bool
     var isPending: Bool
@@ -38,15 +37,14 @@ struct Task: Codable, Equatable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case description, categoryId, assigneeIds, dueDate, notes, identifier, isComplete, recurrence, isPending, householdId
+        case description, categoryId, assigneeIds, dueDate, identifier, isComplete, recurrence, isPending, householdId
     }
     
-    init(description: String, categoryId: UUID, assigneeIds: [UUID]?, dueDate: Date, notes: [Note]?, recurrence: Recurrence = .once, householdId: UUID) {
+    init(description: String, categoryId: UUID, assigneeIds: [UUID]?, dueDate: Date, recurrence: Recurrence = .once, householdId: UUID) {
         self.description = description
         self.categoryId = categoryId
         self.assigneeIds = assigneeIds ?? []
         self.dueDate = dueDate
-        self.notes = notes ?? []
         self.identifier = UUID()
         self.isComplete = false
         self.recurrence = recurrence
@@ -66,7 +64,6 @@ struct Task: Codable, Equatable {
         }
         try container.encode(dueDate, forKey: .dueDate)
         try container.encode(recurrence.rawValue, forKey: .recurrence)
-        try container.encode(notes, forKey: .notes)
         try container.encode(identifier, forKey: .identifier)
         try container.encode(isComplete, forKey: .isComplete)
         try container.encode(isPending, forKey: .isPending)
@@ -94,17 +91,8 @@ struct Task: Codable, Equatable {
         }
         
         let dueDateDouble = try container.decode(Double.self, forKey: .dueDate)
-        // let dueDate = Date(timeIntervalSince1970: dueDateDouble)
-        let dueDate = Date(timeIntervalSinceReferenceDate: dueDateDouble)
-        
-        let notesGroup = try container.decodeIfPresent([String: Note].self, forKey: .notes)
 
-        if let notesGroup = notesGroup {
-            var notes: [Note] = []
-            for note in notesGroup {
-                notes += [note.value]
-            }
-        }
+        let dueDate = Date(timeIntervalSinceReferenceDate: dueDateDouble)
         
         let householdIdString = try container.decode(String.self, forKey: .householdId)
         let householdId = UUID(uuidString: householdIdString)!
@@ -123,7 +111,6 @@ struct Task: Codable, Equatable {
         self.categoryId = categoryId
         self.assigneeIds = assigneeIds
         self.dueDate = dueDate
-        self.notes = []
         self.identifier = identifier
         self.isComplete = isComplete
         self.recurrence = recurrence

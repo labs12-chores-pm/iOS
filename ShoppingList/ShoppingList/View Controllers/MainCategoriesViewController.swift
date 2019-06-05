@@ -13,12 +13,13 @@ class MainCategoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // categoriesTableView.dataSource = self
-       // categoriesTableView.delegate = self
         myToDosTableView.dataSource = self
         myToDosTableView.delegate = self
         categoryCollectionView.dataSource = self
         categoryCollectionView.delegate = self
+        
+        let nib = UINib(nibName: "SingleTaskTableViewCell", bundle: nil)
+        myToDosTableView.register(nib, forCellReuseIdentifier: "TaskCell")
         
         setAppearance()
         
@@ -35,8 +36,6 @@ class MainCategoriesViewController: UIViewController {
             fatalError()
         }
         updateUsersHousehold()
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -86,10 +85,6 @@ class MainCategoriesViewController: UIViewController {
                 }
                 self.household = nil
                 self.household = household
-                
-                DispatchQueue.main.async {
-                    self.updateViews()
-                }
             }
         } else {
             fatalError()
@@ -120,18 +115,6 @@ class MainCategoriesViewController: UIViewController {
         }
     }
     
-    private func updateViews() {
-        guard let household = household, let user = currentUser else { return }
-        
-        if household.adminIds.contains(user.identifier) {
-            addCategoryButton.isEnabled = true
-        } else {
-            addCategoryButton.isEnabled = false
-        }
-        
-        
-    }
-    
     private func setAppearance() {
         categoriesLabel.font = AppearanceHelper.boldFont(with: .headline, pointSize: 22)
         myToDosLabel.font = AppearanceHelper.boldFont(with: .headline, pointSize: 22)
@@ -143,6 +126,17 @@ class MainCategoriesViewController: UIViewController {
         myToDosTableView.backgroundColor = AppearanceHelper.themeGray
         myToDosTableView.separatorStyle = .none
     }
+    
+    @IBAction func addCategoryButtonWasTapped(_ sender: MonkeyButton) {
+        guard let household = household, let user = currentUser else { return }
+        
+        if household.adminIds.contains(user.identifier) {
+            self.performSegue(withIdentifier: "AddCategory", sender: self)
+        } else {
+            displayMsg(title: "Can't Create Category", msg: "Only users with admin permission can add a category.")
+        }
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddCategory" {
@@ -173,7 +167,6 @@ class MainCategoriesViewController: UIViewController {
             guard let destinationVC = segue.destination as? TasksTableViewController,
             let indexes = categoryCollectionView.indexPathsForSelectedItems,
             let index = indexes.first,
-            //let index = categoriesTableView.indexPathForSelectedRow,
             let categories = categories,
             let user = currentUser,
             let taskController = taskController,
@@ -197,7 +190,6 @@ class MainCategoriesViewController: UIViewController {
     
     @IBOutlet weak var addCategoryButton: UIButton!
     @IBOutlet weak var categoriesLabel: UILabel!
-    // @IBOutlet weak var categoriesTableView: UITableView!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var myToDosTableView: UITableView!
     @IBOutlet weak var myToDosLabel: UILabel!
@@ -226,86 +218,34 @@ class MainCategoriesViewController: UIViewController {
 extension MainCategoriesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-//        if tableView == categoriesTableView {
-//            return categories?.count ?? 0
-//        }
-//
-        if tableView == myToDosTableView {
-            return myTasks?.count ?? 0
-        }
-        
-        return 0
+        return myTasks?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+                    
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
+        guard let taskCell = cell as? SingleTaskTableViewCell,
+        let tasks = myTasks, let categories = categories else { return cell }
         
-        var cell = UITableViewCell()
+        let task = tasks[indexPath.row]
+        let categoryArray = categories.filter { $0.identifier == task.categoryId }
+        let category = categoryArray.first!
         
-//        if tableView == categoriesTableView {
-//
-//            cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-//
-//            if let categories = categories {
-//                cell.textLabel?.text = categories[indexPath.row].name
-//
-//            }
-//
-//            cell.textLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 16)
-//            cell.detailTextLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
-//        }
+        taskCell.userController = userController
+        taskCell.category = category
+        taskCell.task = task
         
-        if tableView == myToDosTableView {
-            
-            cell = tableView.dequeueReusableCell(withIdentifier: "MyToDosCell", for: indexPath)
-            guard let taskCell = cell as? ToDoTableViewCell,
-            let tasks = myTasks, let categories = categories else { return cell }
-            
-            let task = tasks[indexPath.row]
-            let categoryArray = categories.filter { $0.identifier == task.categoryId }
-            let category = categoryArray.first!
- 
-            taskCell.category = category
-            taskCell.task = task
-            
-            return taskCell
-        }
-        
-        return cell
+        return taskCell
     }
     
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//
-//        if tableView != categoriesTableView { return }
-//
-//        if editingStyle == .delete {
-//            guard let categories = categories, let categoryController = categoryController else { return }
-//
-//            let category = categories[indexPath.row]
-//
-//            categoryController.delete(category: category) { (error) in
-//                if let error = error {
-//                    print(error)
-//                    return
-//                }
-//
-//                self.fetchCategories()
-//            }
-//        }
-//    }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "ShowToDo", sender: self)
+    }
 }
-
-// CollectionViewExtension..?
 
 extension MainCategoriesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-     
-        if collectionView == categoryCollectionView {
-            return categories?.count ?? 0
-        }
-        
-        return 0
+        return categories?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -313,37 +253,27 @@ extension MainCategoriesViewController: UICollectionViewDelegate, UICollectionVi
         let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionReuseIdentifier, for: indexPath) as! CategoryCollectionViewCell
         
         if let categories = categories {
-            //cell.categoryImage.image = UIImage(named: "diningroom")
             cell.categoryLabel.text = categories[indexPath.row].name
+            
+            cell.categoryLabel.font = AppearanceHelper.boldFont(with: .body, pointSize: 16)
             
             cell.categoryImage.layer.borderColor = UIColor.orange.cgColor
             cell.categoryImage.layer.borderWidth = 2
             cell.categoryImage.clipsToBounds = true
-            
-            
         }
-        
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let squareDimension = collectionView.bounds.width / 2
+        let inset: CGFloat = 15
+        
+        return CGSize(width: squareDimension - inset, height: squareDimension - inset)
+    }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//
-//        let selection = categories?[indexPath.item]
-//        performSegue(withIdentifier: "ShowTasks", sender: selection)
-//    }
-    
-//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//
-//        let layout = self.categoryCollectionView?.collectionViewLayout as! CategoryFlowLayout
-//
-//        let imageSize   = layout.itemSize.height + layout.minimumLineSpacing
-//        let offset      = scrollView.contentOffset.y
-//
-//
-//        currentCategory = Int(floor((offset - imageSize / 2) / imageSize) + 1)
-//
-//    }
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let inset: CGFloat = 10
+        return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+    }
     
 }

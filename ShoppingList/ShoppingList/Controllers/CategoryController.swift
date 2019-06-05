@@ -10,10 +10,8 @@ import Foundation
 
 class CategoryController {
     
-    // CRUD
-    // Tasks vs Task ?? (Naming)
-    @discardableResult func createCategory(householdId: UUID, name: String) -> Category {
-        let category = Category(tasks: nil, householdId: householdId, name: name)
+    @discardableResult func createCategory(householdId: UUID, name: String, identifier: UUID = UUID()) -> Category {
+        let category = Category(tasks: nil, householdId: householdId, name: name, identifier: identifier)
         put(category: category)
         
         return category
@@ -58,6 +56,39 @@ class CategoryController {
                 }
                 let householdCategories = categories.filter({ $0.householdId == householdId })
                 completion(householdCategories, nil)
+            } catch {
+                completion(nil, NetworkError.decodingData)
+            }
+            return
+        }
+        
+        task.resume()
+    }
+    
+    func fetchCategory(identifier: UUID, completion: @escaping (Category?, Error?) -> Void) {
+        
+        let categoriesURL = baseURL.appendingPathComponent("categories")
+        let categoryURL = categoriesURL.appendingPathComponent(identifier.uuidString).appendingPathExtension("json")
+        
+        let request = URLRequest(url: categoryURL)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
+            
+            if let error = error {
+                print(error)
+                completion(nil, NetworkError.urlSession)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data")
+                completion(nil, NetworkError.dataMissing)
+                return
+            }
+            
+            do {
+                let category = try JSONDecoder().decode(Category.self, from: data)
+                completion(category, nil)
             } catch {
                 completion(nil, NetworkError.decodingData)
             }
