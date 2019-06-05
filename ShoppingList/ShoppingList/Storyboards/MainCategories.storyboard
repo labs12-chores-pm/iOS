@@ -189,7 +189,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cC9-eq-Kv4">
-                                <rect key="frame" x="107" y="414" width="200" height="68"/>
+                                <rect key="frame" x="107" y="302" width="200" height="68"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Category Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TVX-ua-eQJ" customClass="BlueField" customModule="ShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
@@ -219,7 +219,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="cC9-eq-Kv4" firstAttribute="centerX" secondItem="lBf-Q9-CPI" secondAttribute="centerX" id="A8Z-Sq-l0h"/>
-                            <constraint firstItem="cC9-eq-Kv4" firstAttribute="centerY" secondItem="lBf-Q9-CPI" secondAttribute="centerY" id="Onz-JQ-Hv0"/>
+                            <constraint firstItem="cC9-eq-Kv4" firstAttribute="centerY" secondItem="lBf-Q9-CPI" secondAttribute="centerY" multiplier="0.75" id="Onz-JQ-Hv0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GeM-Q9-Wdw"/>
                     </view>
