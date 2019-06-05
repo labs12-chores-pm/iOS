@@ -16,6 +16,11 @@ class StartViewController: UIViewController {
         super.viewDidLoad()
         formTypeAnimation(show: false)
         tryKeychainLogin()
+        
+        userNameField.delegate = self
+        householdNameField.delegate = self
+        emailField.delegate = self
+        passwordField.delegate = self
     }
     
     private func tryKeychainLogin() {
@@ -205,4 +210,12 @@ class StartViewController: UIViewController {
         }
     }
 
+}
+
+extension StartViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

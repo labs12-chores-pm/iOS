@@ -9,7 +9,7 @@
 import UserNotifications
 import UIKit
 
-class TaskViewController: ShiftableViewController {
+class TaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +25,12 @@ class TaskViewController: ShiftableViewController {
         
         descriptionField.delegate = self
         noteTextField.delegate = self
+        
+        viewTapGestureRecognizer.delegate = self
+        setGestureRecogizer()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         setAppearance()
         
@@ -415,6 +421,10 @@ class TaskViewController: ShiftableViewController {
     }
     
     let recurrenceIntervals = ["Once", "Daily", "Weekly", "Monthly", "Yearly"]
+    
+    var viewTapGestureRecognizer = UITapGestureRecognizer()
+    
+    var textFieldBeingEdited: UITextField?
 }
 
 extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
@@ -430,7 +440,7 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == assigneeSearchTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AssigneeSearchCell", for: indexPath)
-            guard let searchResults = searchResults else { return cell }
+            guard let searchResults = searchResults, searchResults.count > 0 else { return cell }
             let result = searchResults[indexPath.row]
             cell.textLabel?.text = result.name
             return cell
@@ -631,11 +641,22 @@ extension TaskViewController: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         searchHouseholdMembers(textField)
+        textFieldBeingEdited = nil
+        textFieldBeingEdited = textField
+        taskScrollView.contentOffset = textField.frame.origin
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         searchHouseholdMembers(textField)
+        textFieldBeingEdited = nil
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        keyboardWillHide()
+        textFieldBeingEdited = nil
+        return true
     }
     
     private func searchHouseholdMembers(_ textField: UITextField) {
@@ -643,5 +664,36 @@ extension TaskViewController: UITextFieldDelegate {
         let searchResults = householdMembers.filter { $0.name.lowercased().contains(text.lowercased()) }
         self.searchResults = searchResults
         updateSearchViews()
+    }
+    
+    // Keyboard Notification
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+
+        if let keyboardFrame: CGRect = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect, keyboardFrame.height != 0 {
+            taskScrollView.contentInset.bottom = keyboardFrame.height
+        }
+    }
+    
+    @objc func keyboardWillHide() {
+        taskScrollView.contentInset.bottom = 0
+    }
+}
+
+extension TaskViewController: UIGestureRecognizerDelegate {
+    
+    private func setGestureRecogizer() {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewWasTapped))
+        tapRecognizer.numberOfTapsRequired = 1
+        viewTapGestureRecognizer = tapRecognizer
+        view.addGestureRecognizer(viewTapGestureRecognizer)
+    }
+    
+    @objc func viewWasTapped() {
+        if let textField = textFieldBeingEdited {
+            textField.resignFirstResponder()
+            textFieldBeingEdited = nil
+            keyboardWillHide()
+        }
     }
 }
