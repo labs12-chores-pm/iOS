@@ -216,11 +216,19 @@
                                     <constraint firstItem="P4t-Cd-GeO" firstAttribute="width" secondItem="TVX-ua-eQJ" secondAttribute="width" id="KGT-ks-DKx"/>
                                 </constraints>
                             </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wYG-rB-4cb" userLabel="Image Picker">
+                                <rect key="frame" x="87" y="142" width="240" height="128"/>
+                                <color key="backgroundColor" name="Theme"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="wYG-rB-4cb" firstAttribute="top" secondItem="GeM-Q9-Wdw" secondAttribute="top" constant="54" id="5vo-WP-LsV"/>
                             <constraint firstItem="cC9-eq-Kv4" firstAttribute="centerX" secondItem="lBf-Q9-CPI" secondAttribute="centerX" id="A8Z-Sq-l0h"/>
                             <constraint firstItem="cC9-eq-Kv4" firstAttribute="centerY" secondItem="lBf-Q9-CPI" secondAttribute="centerY" multiplier="0.75" id="Onz-JQ-Hv0"/>
+                            <constraint firstItem="wYG-rB-4cb" firstAttribute="centerX" secondItem="cC9-eq-Kv4" secondAttribute="centerX" id="TFs-sc-9XX"/>
+                            <constraint firstItem="cC9-eq-Kv4" firstAttribute="top" secondItem="wYG-rB-4cb" secondAttribute="bottom" constant="32" id="agk-2Q-BmB"/>
+                            <constraint firstItem="wYG-rB-4cb" firstAttribute="leading" secondItem="GeM-Q9-Wdw" secondAttribute="leading" constant="87" id="axe-ss-aof"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GeM-Q9-Wdw"/>
                     </view>

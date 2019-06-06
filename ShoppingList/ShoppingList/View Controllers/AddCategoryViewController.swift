@@ -21,6 +21,14 @@ class AddCategoryViewController: UIViewController {
         categoryController.createCategory(householdId: user.currentHouseholdId, name: name)
         
         self.navigationController?.popViewController(animated: true)
+        
+        // Search
+        // Ask User for own photoadd
+        // Find Picrue
+        // Create the enum
+//        if categoryNameField.text?.contains("kit") {
+//            
+//        }
     }
     
     @IBOutlet weak var categoryNameField: UITextField!

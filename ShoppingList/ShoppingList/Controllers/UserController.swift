@@ -82,7 +82,7 @@ class UserController {
             }
             
             do {
-                let user = try JSONDecoder().decode(User.self, from: data)
+                let user = try JSONDecoder().decode(User?.self, from: data)
                 completion(user, nil)
             } catch {
                 completion(nil, NetworkError.decodingData)
