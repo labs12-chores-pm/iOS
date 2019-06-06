@@ -483,6 +483,14 @@ extension HouseholdViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         textFieldBeingEdited = nil
         textField.resignFirstResponder()
+        saveButtonAnimation(show: false)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textFieldBeingEdited = nil
+        textField.resignFirstResponder()
+        saveButtonAnimation(show: false)
+        return true
     }
 }
 
@@ -500,6 +508,7 @@ extension HouseholdViewController: UIGestureRecognizerDelegate {
         if let textField = textFieldBeingEdited {
             textField.resignFirstResponder()
             textFieldBeingEdited = nil
+            saveButtonAnimation(show: false)
         }
     }
 }

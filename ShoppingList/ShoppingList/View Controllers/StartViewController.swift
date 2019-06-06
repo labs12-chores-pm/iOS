@@ -121,14 +121,26 @@ class StartViewController: UIViewController {
                     
                     let picture = currentUser.photoURL
                     
-                    let household = self.householdController.createHousehold(name: householdName, creatorId: userUID, memberIds: [userUID])
+                    self.householdController.fetchHousehold(inviteCode: householdName) { (household, error) in
+                        if let error = error {
+                            print(error)
+                            return
+                        }
+                        
+                        if household != nil {
+                            self.householdController.updateHousehold(household: household!, memberIds: [userUID], adminIds: [], categories: [])
+                        }
+                        
+                        let household = household ?? self.householdController.createHousehold(name: householdName, creatorId: userUID)
+                        
+                        let user = self.userController.createUser(email: email, name: userName, profilePicture: picture?.absoluteString, currentHouseholdId: household.identifier, identifier: userUID)
+                        
+                        self.currentUser = user
+                        
+                        self.keychain.set(email, forKey: Settings.keychainEmail)
+                        self.keychain.set(password, forKey: Settings.keychainPassword)
+                    }
                     
-                    let user = self.userController.createUser(email: email, name: userName, profilePicture: picture?.absoluteString, currentHouseholdId: household.identifier, identifier: userUID)
-                    
-                    self.currentUser = user
-                    
-                    self.keychain.set(email, forKey: Settings.keychainEmail)
-                    self.keychain.set(password, forKey: Settings.keychainPassword)
                 }
                 DispatchQueue.main.async {
                     activityView.stopAnimating()

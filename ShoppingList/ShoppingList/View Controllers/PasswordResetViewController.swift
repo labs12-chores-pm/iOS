@@ -12,6 +12,11 @@ import KeychainSwift
 
 class PasswordResetViewController: UIViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setAppearance()
+    }
+    
     @IBAction func resetButtonTapped(_ sender: MonkeyButton) {
         
         guard let keychain = keychain else { fatalError() }
@@ -40,7 +45,13 @@ class PasswordResetViewController: UIViewController {
         }
     }
     
+    private func setAppearance() {
+        passwordResetLabel.font = AppearanceHelper.styleFont(with: .body, pointSize: 18)
+    }
+    
     @IBOutlet weak var emailField: BlueField!
     @IBOutlet weak var getResetEmailButton: MonkeyButton!
+    @IBOutlet weak var passwordResetLabel: UILabel!
+    
     var keychain: KeychainSwift?
 }
