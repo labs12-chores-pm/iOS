@@ -139,13 +139,15 @@ class TaskViewController: UIViewController {
         
         let assignee: [UUID] = self.assignee != nil ? [self.assignee!.identifier] : []
         
+        let userIsAssignee = currentUser.identifier == assignee.first
+        
         if let task = task {
             
             switch hasAdminAccess {
                 
             case true:
                 
-                if !task.isPending && (currentUser.identifier != assignee.first) {
+                if !task.isPending && userIsAssignee {
                     
                     displayMsg(title: "Complete?", msg: """
                     It looks like you are not assigned to
