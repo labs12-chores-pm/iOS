@@ -18,6 +18,9 @@ class HouseholdViewController: UIViewController {
         
         householdNameField.delegate = self
         
+        viewTapGestureRecognizer.delegate = self
+        setGestureRecogizer()
+        
         setAppearance()
         
         if let tabBar = self.tabBarController as? TabViewViewController {
@@ -219,6 +222,8 @@ class HouseholdViewController: UIViewController {
         defer {
             activityView.removeFromSuperview()
             saveButtonAnimation(show: false)
+            textFieldBeingEdited?.resignFirstResponder()
+            textFieldBeingEdited = nil
         }
         
         guard let householdController = householdController, let household = household, let householdName = householdNameField.text, !householdName.isEmpty else {
@@ -386,6 +391,9 @@ class HouseholdViewController: UIViewController {
             }
         }
     }
+    
+    var viewTapGestureRecognizer = UITapGestureRecognizer()
+    var textFieldBeingEdited: UITextField?
 }
 
 extension HouseholdViewController: UITableViewDelegate, UITableViewDataSource {
@@ -469,5 +477,29 @@ extension HouseholdViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         saveButtonAnimation(show: true)
+        textFieldBeingEdited = textField
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textFieldBeingEdited = nil
+        textField.resignFirstResponder()
+    }
+}
+
+extension HouseholdViewController: UIGestureRecognizerDelegate {
+    
+    private func setGestureRecogizer() {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewWasTapped))
+        tapRecognizer.numberOfTapsRequired = 1
+        tapRecognizer.cancelsTouchesInView = false
+        viewTapGestureRecognizer = tapRecognizer
+        view.addGestureRecognizer(viewTapGestureRecognizer)
+    }
+    
+    @objc func viewWasTapped() {
+        if let textField = textFieldBeingEdited {
+            textField.resignFirstResponder()
+            textFieldBeingEdited = nil
+        }
     }
 }
