@@ -126,7 +126,7 @@ class TaskViewController: UIViewController {
     
     
     @IBAction func completeButtonWasTapped(_ sender: UIButton) {
-        guard let taskController = taskController, let hasAdminAccess = hasAdminAccess else { return }
+        guard let taskController = taskController, let hasAdminAccess = hasAdminAccess, let currentUser = currentUser else { return }
         
         guard let description = descriptionField.text else {
             completeButton.shake()
@@ -137,50 +137,83 @@ class TaskViewController: UIViewController {
         let activityView = getActivityView()
         activityView.startAnimating()
         
-        if hasAdminAccess {
-            if let task = task {
+        let assignee: [UUID] = self.assignee != nil ? [self.assignee!.identifier] : []
+        
+        if let task = task {
+            
+            switch hasAdminAccess {
                 
-                var ids: [UUID] = []
-                if let assignee = assignee {
-                    ids.append(assignee.identifier)
-                }
+            case true:
                 
-                if task.recurrence == .once {
-                    taskController.updateTask(task: task, description: description, assignIds: ids, dueDate: self.dueDate, isComplete: true, isPending: false)
+                if !task.isPending && (currentUser.identifier != assignee.first) {
+                    
+                    displayMsg(title: "Complete?", msg: """
+                    It looks like you are not assigned to
+                    this task, and that it isn't pending completion. \n
+                    Are you sure that you want to mark it as complete?
+                    """, numberOfButtons: 2) { (complete) in
+                        
+                        guard let complete = complete, complete == true else {
+                            DispatchQueue.main.async {
+                                activityView.stopAnimating()
+                            }
+                            return
+                        }
+                        
+                        if task.recurrence == .once {
+                            taskController.updateTask(task: task, description: description, assignIds: assignee, dueDate: self.dueDate, isComplete: true, isPending: false)
+                        } else {
+                            taskController.resetRecurringTask(task: task)
+                        }
+                        
+                        DispatchQueue.main.async {
+                            activityView.stopAnimating()
+                        }
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    
                 } else {
-                    taskController.resetRecurringTask(task: task)
-                }
-                
-            } else {
-                guard let categoryId = category?.identifier, let householdId = household?.identifier else {
+                    
+                    if task.recurrence == .once {
+                        taskController.updateTask(task: task, description: description, assignIds: assignee, dueDate: self.dueDate, isComplete: true, isPending: false)
+                    } else {
+                        taskController.resetRecurringTask(task: task)
+                    }
+                    
                     DispatchQueue.main.async {
                         activityView.stopAnimating()
                     }
-                    return
+                    self.navigationController?.popViewController(animated: true)
                 }
                 
-                var ids: [UUID] = []
-                if let assignee = assignee {
-                    ids.append(assignee.identifier)
-                }
                 
-                taskController.createTask(description: description, categoryId: categoryId, assineeIds: ids, dueDate: self.dueDate ?? Date(), isComplete: false, householdId: householdId, recurrence: self.recurrence ?? Recurrence(rawValue: 0)!)
+            case false:
+                
+                taskController.updateTask(task: task, isPending: true)
+                completeButton.setTitle("Pending Approval", for: .normal)
+                
+                DispatchQueue.main.async {
+                    activityView.stopAnimating()
+                }
+                self.navigationController?.popViewController(animated: true)
             }
+            
         } else {
-            guard let task = task else {
+            
+            guard let categoryId = category?.identifier, let householdId = household?.identifier else {
                 DispatchQueue.main.async {
                     activityView.stopAnimating()
                 }
                 return
             }
-            taskController.updateTask(task: task, isPending: true)
-            completeButton.setTitle("Pending Approval", for: .normal)
+
+            taskController.createTask(description: description, categoryId: categoryId, assineeIds: assignee, dueDate: self.dueDate ?? Date(), isComplete: false, householdId: householdId, recurrence: self.recurrence ?? Recurrence(rawValue: 0)!)
+            
+            DispatchQueue.main.async {
+                activityView.stopAnimating()
+            }
+            self.navigationController?.popViewController(animated: true)
         }
-        
-        DispatchQueue.main.async {
-            activityView.stopAnimating()
-        }
-        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func addNoteButtonWasTapped(_ sender: UIButton) {
@@ -268,6 +301,9 @@ class TaskViewController: UIViewController {
             recurrencePicker.selectRow(0, inComponent: 0, animated: true)
             editBarButton.isEnabled = false
             editBarButton.tintColor = .clear
+            assigneeSearchField.isUserInteractionEnabled = true
+            recurrencePicker.isUserInteractionEnabled = true
+            descriptionField.isEnabled = true
         }
         
         if hasAdminAccess == false {
@@ -301,7 +337,7 @@ class TaskViewController: UIViewController {
             return
         }
         
-        if searchResults.count > 0 && inEditingMode {
+        if searchResults.count > 0 && (inEditingMode || self.task == nil) {
             showSearchResultsTableView()
         } else {
             hideSearchResultsTableView()
@@ -315,8 +351,8 @@ class TaskViewController: UIViewController {
         viewWillLayoutSubviews()
         
         UIView.animate(withDuration: 0.2) {
-            self.assigneeSearchTableView.alpha = 1
             self.assigneeSearchTableView.isHidden = false
+            self.assigneeSearchTableView.alpha = 1
         }
     }
     
@@ -325,8 +361,8 @@ class TaskViewController: UIViewController {
         viewWillLayoutSubviews()
         
         UIView.animate(withDuration: 0.2) {
-            self.assigneeSearchTableView.alpha = 0
             self.assigneeSearchTableView.isHidden = true
+            self.assigneeSearchTableView.alpha = 0
         }
     }
     
@@ -659,11 +695,14 @@ extension TaskViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        searchHouseholdMembers(textField)
         textFieldBeingEdited = nil
         textFieldBeingEdited = textField
-        taskScrollView.contentOffset = textField.frame.origin
+        searchHouseholdMembers(textField)
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        searchHouseholdMembers(textField)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
