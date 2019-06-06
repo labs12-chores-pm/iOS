@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Oie-mV-a7d">
-                                <rect key="frame" x="107" y="246" width="200" height="314"/>
+                                <rect key="frame" x="107" y="224" width="200" height="314"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gf2-zH-1gc" customClass="YellowSegments" customModule="ShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="29"/>
@@ -84,7 +84,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Oie-mV-a7d" firstAttribute="centerY" secondItem="4Ad-H7-bNl" secondAttribute="centerY" multiplier="0.9" id="5ko-Yz-KnS"/>
+                            <constraint firstItem="Oie-mV-a7d" firstAttribute="centerY" secondItem="4Ad-H7-bNl" secondAttribute="centerY" multiplier="0.85" id="5ko-Yz-KnS"/>
                             <constraint firstItem="Oie-mV-a7d" firstAttribute="centerX" secondItem="4Ad-H7-bNl" secondAttribute="centerX" id="d8d-ZN-95j"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="stY-31-Kec"/>
@@ -120,7 +120,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IqU-5J-r3b">
-                                <rect key="frame" x="107" y="400" width="200" height="96.5"/>
+                                <rect key="frame" x="107" y="288" width="200" height="96.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password Reset" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pab-aX-AWv">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="20.5"/>
@@ -150,7 +150,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="IqU-5J-r3b" firstAttribute="centerX" secondItem="LQU-TD-ItN" secondAttribute="centerX" id="x8T-YG-9b2"/>
-                            <constraint firstItem="IqU-5J-r3b" firstAttribute="centerY" secondItem="LQU-TD-ItN" secondAttribute="centerY" id="xzY-7D-yv4"/>
+                            <constraint firstItem="IqU-5J-r3b" firstAttribute="centerY" secondItem="LQU-TD-ItN" secondAttribute="centerY" multiplier="0.75" id="xzY-7D-yv4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="x4k-Ad-uMC"/>
                     </view>

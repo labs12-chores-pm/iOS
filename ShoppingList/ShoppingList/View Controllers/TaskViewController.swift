@@ -97,9 +97,8 @@ class TaskViewController: UIViewController {
                     }
                 }
             }
-            
-            self.task = nil
-            self.task = taskController.updateTask(task: task, description: descriptionField.text, assignIds: assigneeIds, dueDate: dueDate, recurrence: recurrence)
+
+            taskController.updateTask(task: task, description: descriptionField.text, assignIds: assigneeIds, dueDate: dueDate, recurrence: recurrence)
             
             DispatchQueue.main.async {
                 self.searchResults = []
@@ -147,7 +146,7 @@ class TaskViewController: UIViewController {
                 
             case true:
                 
-                if !task.isPending && userIsAssignee {
+                if !task.isPending && !userIsAssignee {
                     
                     displayMsg(title: "Complete?", msg: """
                     It looks like you are not assigned to
@@ -209,7 +208,7 @@ class TaskViewController: UIViewController {
                 return
             }
 
-            taskController.createTask(description: description, categoryId: categoryId, assineeIds: assignee, dueDate: self.dueDate ?? Date(), isComplete: false, householdId: householdId, recurrence: self.recurrence ?? Recurrence(rawValue: 0)!)
+            self.task = taskController.createTask(description: description, categoryId: categoryId, assineeIds: assignee, dueDate: self.dueDate ?? Date(), isComplete: false, householdId: householdId, recurrence: self.recurrence ?? Recurrence(rawValue: 0)!)
             
             DispatchQueue.main.async {
                 activityView.stopAnimating()
@@ -252,14 +251,21 @@ class TaskViewController: UIViewController {
         guard isViewLoaded else { return }
             
         if let task = task {
-            descriptionField.text = task.description
+            
+            if let description = descriptionField.text, description.isEmpty {
+                descriptionField.text = task.description
+            }
+            
             self.dueDate = task.dueDate
+            self.datePicker?.setDate = task.dueDate
             
             if let datePicker = datePicker {
                 dayPickerView.selectRow(datePicker.getAMPMIndex(), inComponent: 3, animated: false)
             }
             
-            recurrencePicker.selectRow(task.recurrence.rawValue, inComponent: 0, animated: true)
+            let recurrenceValue = recurrence?.rawValue ?? task.recurrence.rawValue
+            
+            recurrencePicker.selectRow(recurrenceValue, inComponent: 0, animated: false)
             noteTextField.isEnabled = true
             
             
@@ -369,7 +375,7 @@ class TaskViewController: UIViewController {
     }
     
     private func setDateData() {
-        guard let datePicker = datePicker else { return }
+        guard let datePicker = datePicker, dayPickerView != nil else { return }
         
         dates = datePicker.dates
         datesStrings = datePicker.getDateStrings()
@@ -507,8 +513,6 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
             let note = notes[indexPath.row]
             cell.textLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
             cell.textLabel?.text = note.text
-            cell.detailTextLabel?.text = note.date.string(style: .short, showTime: false)
-            cell.detailTextLabel?.font = AppearanceHelper.styleFont(with: .body, pointSize: 14)
             return cell
         }
     }
@@ -653,14 +657,12 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             
             let dateFromComponents = Calendar.current.date(from: dateComponents)
             
-            self.dueDate = dateFromComponents
-            
             guard let taskController = taskController, let task = task, let dueDate = dateFromComponents else {
                 return
             }
             
-            datePicker.setDate = dateFromComponents
-            
+            self.dueDate = dueDate
+            datePicker.setDate = dueDate
             taskController.updateTask(task: task, dueDate: dueDate)
         }
     }

@@ -21,6 +21,9 @@ class StartViewController: UIViewController {
         householdNameField.delegate = self
         emailField.delegate = self
         passwordField.delegate = self
+        
+        viewTapGestureRecognizer.delegate = self
+        setGestureRecogizer()
     }
     
     private func tryKeychainLogin() {
@@ -181,6 +184,28 @@ class StartViewController: UIViewController {
         updateViews()
     }
     
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowMain" {
+            guard let destinationVC = segue.destination as? TabViewViewController,
+                let authResponse = authResponse
+                else { return }
+            destinationVC.authResponse = authResponse
+            destinationVC.userController = userController
+            destinationVC.householdController = householdController
+            if let user = currentUser {
+                destinationVC.currentUser = user
+            }
+            destinationVC.keychain = keychain
+        }
+        
+        if segue.identifier == "ShowPasswordReset" {
+            guard let passwordResetVC = segue.destination as? PasswordResetViewController else { return }
+            passwordResetVC.keychain = keychain
+        }
+    }
+    
     var needsNewAccount: Bool = false
     
     var currentUser: User? {
@@ -203,34 +228,37 @@ class StartViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: MonkeyButton!
     
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowMain" {
-            guard let destinationVC = segue.destination as? TabViewViewController,
-            let authResponse = authResponse
-            else { return }
-            destinationVC.authResponse = authResponse
-            destinationVC.userController = userController
-            destinationVC.householdController = householdController
-            if let user = currentUser {
-                destinationVC.currentUser = user
-            }
-            destinationVC.keychain = keychain
-        }
-        
-        if segue.identifier == "ShowPasswordReset" {
-            guard let passwordResetVC = segue.destination as? PasswordResetViewController else { return }
-            passwordResetVC.keychain = keychain
-        }
-    }
-
+    var viewTapGestureRecognizer = UITapGestureRecognizer()
+    var textFieldBeingEdited: UITextField?
 }
 
 extension StartViewController: UITextFieldDelegate {
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textFieldBeingEdited = textField
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textFieldBeingEdited = nil
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension StartViewController: UIGestureRecognizerDelegate {
+    
+    private func setGestureRecogizer() {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewWasTapped))
+        tapRecognizer.numberOfTapsRequired = 1
+        tapRecognizer.cancelsTouchesInView = false
+        viewTapGestureRecognizer = tapRecognizer
+        view.addGestureRecognizer(viewTapGestureRecognizer)
+    }
+    
+    @objc func viewWasTapped() {
+        if let textField = textFieldBeingEdited {
+            textField.resignFirstResponder()
+            textFieldBeingEdited = nil
+        }
     }
 }
