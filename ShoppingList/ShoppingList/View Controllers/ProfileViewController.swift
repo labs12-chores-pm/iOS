@@ -30,6 +30,9 @@ class ProfileViewController: UIViewController {
         emailField.delegate = self
         passwordField.delegate = self
         
+        viewTapGestureRecognizer.delegate = self
+        setGestureRecogizer()
+        
         updateViews()
     }
     
@@ -142,6 +145,7 @@ class ProfileViewController: UIViewController {
         self.dismiss(animated: true) {
             self.currentUser = nil
             try? Auth.auth().signOut()
+            self.keychain?.clear()
         }
     }
     
@@ -176,9 +180,17 @@ class ProfileViewController: UIViewController {
     var currentUser: User?
     var userController: UserController?
     var keychain: KeychainSwift?
+    
+    var viewTapGestureRecognizer = UITapGestureRecognizer()
+    var textFieldBeingEdited: UITextField?
 }
 
 extension ProfileViewController: UITextFieldDelegate {
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textFieldBeingEdited = textField
+        return true
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -187,5 +199,24 @@ extension ProfileViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         showSaveButton()
+        textFieldBeingEdited = nil
+    }
+}
+
+extension ProfileViewController: UIGestureRecognizerDelegate {
+    
+    private func setGestureRecogizer() {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewWasTapped))
+        tapRecognizer.numberOfTapsRequired = 1
+        tapRecognizer.cancelsTouchesInView = false
+        viewTapGestureRecognizer = tapRecognizer
+        view.addGestureRecognizer(viewTapGestureRecognizer)
+    }
+    
+    @objc func viewWasTapped() {
+        if let textField = textFieldBeingEdited {
+            textField.resignFirstResponder()
+            textFieldBeingEdited = nil
+        }
     }
 }

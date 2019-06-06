@@ -45,6 +45,9 @@ class AddTaskViewController: UIViewController {
         
         categoryTableView.isHidden = true
         categoryTableView.alpha = 0
+        
+        viewTapGestureRecognizer.delegate = self
+        setGestureRecogizer()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -81,12 +84,14 @@ class AddTaskViewController: UIViewController {
     }
     
     @IBAction func addTaskButton(_ sender: Any) {
-        
+        addTask()
+    }
 
+    private func addTask() {
         guard let taskController = self.taskController,
-        let household = household, let categoryController = categoryController else {
-            addTaskButton.shake()
-            return
+            let household = household, let categoryController = categoryController else {
+                addTaskButton.shake()
+                return
         }
         
         guard let addTask = self.addTaskTextField.text, !addTask.trimmingCharacters(in: .whitespaces).isEmpty else {
@@ -111,9 +116,7 @@ class AddTaskViewController: UIViewController {
             displayMsg(title: "Missing field", msg: "Please add a category.")
             return
         }
-
     }
-
     
     
     private func updateViews() {
@@ -210,6 +213,8 @@ class AddTaskViewController: UIViewController {
         }
     }
     
+    var viewTapGestureRecognizer = UITapGestureRecognizer()
+    var textFieldBeingEdited: UITextField?
 }
 
 extension AddTaskViewController: UITableViewDataSource, UITableViewDelegate {
@@ -241,9 +246,26 @@ extension AddTaskViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension AddTaskViewController: UITextFieldDelegate {
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textFieldBeingEdited = textField
+        return true
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        textFieldBeingEdited = nil
+        
+        if textField == addTaskTextField {
+            if let taskText = addTaskTextField.text, !taskText.isEmpty {
+                addTask()
+            }
+        }
+        
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textFieldBeingEdited = nil
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -260,6 +282,24 @@ extension AddTaskViewController: UITextFieldDelegate {
         self.filteredResults = filteredResults
         updateViews()
         return true
+    }
+}
+
+extension AddTaskViewController: UIGestureRecognizerDelegate {
+    
+    private func setGestureRecogizer() {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewWasTapped))
+        tapRecognizer.numberOfTapsRequired = 1
+        tapRecognizer.cancelsTouchesInView = false
+        viewTapGestureRecognizer = tapRecognizer
+        view.addGestureRecognizer(viewTapGestureRecognizer)
+    }
+    
+    @objc func viewWasTapped() {
+        if let textField = textFieldBeingEdited {
+            textField.resignFirstResponder()
+            textFieldBeingEdited = nil
+        }
     }
 }
 
