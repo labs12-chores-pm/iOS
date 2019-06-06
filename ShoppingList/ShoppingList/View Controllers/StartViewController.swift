@@ -39,6 +39,7 @@ class StartViewController: UIViewController {
                     activityView.stopAnimating()
                     self.loginButton.shake()
                     self.displayMsg(title: "Error signing in...", msg: error.localizedDescription)
+                    self.keychain.clear()
                 }
                 return
             }
@@ -61,6 +62,8 @@ class StartViewController: UIViewController {
                     }
                     
                     if let user = user {
+                        
+                        self.keychain.clear()
                         self.currentUser = user
                         
                         if self.keychain.get(Settings.keychainEmail) == nil {

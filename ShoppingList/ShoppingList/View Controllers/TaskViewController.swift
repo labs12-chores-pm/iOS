@@ -25,10 +25,10 @@ class TaskViewController: UIViewController {
         
         descriptionField.delegate = self
         noteTextField.delegate = self
-        
+
         viewTapGestureRecognizer.delegate = self
         setGestureRecogizer()
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
@@ -88,6 +88,14 @@ class TaskViewController: UIViewController {
             
             if let assignee = assignee {
                 assigneeIds.append(assignee.identifier)
+            } else {
+                
+                if let assigneeSearch = assigneeSearchField.text {
+                    
+                    if let user = checkForMatchingMembersWithString(assigneeSearch) {
+                        assigneeIds.append(user.identifier)
+                    }
+                }
             }
             
             self.task = nil
@@ -103,6 +111,17 @@ class TaskViewController: UIViewController {
             self.inEditingMode = !self.inEditingMode
             self.updateViews()
         }
+    }
+    
+    private func checkForMatchingMembersWithString(_ string: String) -> User? {
+        guard let householdMembers = householdMembers else { return nil }
+        
+        let trimmedString = string.trimmingCharacters(in: .whitespacesAndNewlines)
+        let lowercaseString = trimmedString.lowercased()
+        
+        let usersMatchingString = householdMembers.filter { $0.name.lowercased() == lowercaseString }
+        
+        return usersMatchingString.first
     }
     
     
@@ -669,14 +688,20 @@ extension TaskViewController: UITextFieldDelegate {
     // Keyboard Notification
     
     @objc func keyboardWillShow(_ notification: Notification) {
-
-        if let keyboardFrame: CGRect = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect, keyboardFrame.height != 0 {
-            taskScrollView.contentInset.bottom = keyboardFrame.height
+        
+        if textFieldBeingEdited == noteTextField {
+            if let keyboardFrame: CGRect = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect, keyboardFrame.height != 0 {
+                taskScrollView.contentInset.bottom = keyboardFrame.height
+                taskScrollView.scrollIndicatorInsets = taskScrollView.contentInset
+            }
         }
     }
     
     @objc func keyboardWillHide() {
-        taskScrollView.contentInset.bottom = 0
+        if textFieldBeingEdited == noteTextField {
+            taskScrollView.contentInset.bottom = 0
+            taskScrollView.scrollIndicatorInsets = taskScrollView.contentInset
+        }
     }
 }
 
@@ -685,10 +710,11 @@ extension TaskViewController: UIGestureRecognizerDelegate {
     private func setGestureRecogizer() {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewWasTapped))
         tapRecognizer.numberOfTapsRequired = 1
+        tapRecognizer.cancelsTouchesInView = false
         viewTapGestureRecognizer = tapRecognizer
         view.addGestureRecognizer(viewTapGestureRecognizer)
     }
-    
+
     @objc func viewWasTapped() {
         if let textField = textFieldBeingEdited {
             textField.resignFirstResponder()

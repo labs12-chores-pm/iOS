@@ -142,6 +142,7 @@ class ProfileViewController: UIViewController {
         self.dismiss(animated: true) {
             self.currentUser = nil
             try? Auth.auth().signOut()
+            self.keychain?.clear()
         }
     }
     
