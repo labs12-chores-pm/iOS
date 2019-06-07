@@ -13,13 +13,13 @@ class HouseholdUserTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         updateViews()
+        setAppearance()
     }
     
     private func updateViews() {
         guard let member = member, let household = household, let currentUser = currentUser else { return }
         
         userNameLabel.text = member.name
-        userNameLabel.font = AppearanceHelper.styleFont(with: .body, pointSize: 16)
         
         let adminIds = household.adminIds
         
@@ -34,6 +34,11 @@ class HouseholdUserTableViewCell: UITableViewCell {
         } else {
             roleSegmentedControl.selectedSegmentIndex = 1
         }
+    }
+    
+    private func setAppearance() {
+        selectionStyle = .none
+        userNameLabel.font = AppearanceHelper.styleFont(with: .body, pointSize: 16)
     }
     
     @IBAction func roleSegmentedControlValueChanged(_ sender: UISegmentedControl) {

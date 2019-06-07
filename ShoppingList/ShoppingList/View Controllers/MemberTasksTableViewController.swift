@@ -38,7 +38,10 @@ class MemberTasksTableViewController: UITableViewController {
                 self.displayMsg(title: "No tasks", msg: "\(member.name) doesn't have any tasks assigned to them currently.")
                 return
             }
-            self.tasks = memberTasks.filter({ $0.householdId == household.identifier })
+            let tasksInHousehold = memberTasks.filter({ $0.householdId == household.identifier })
+            
+            self.tasks = tasksInHousehold.filter({ $0.isComplete == false })
+            self.completedTasks = tasksInHousehold.filter({ $0.isComplete == true })
         }
     }
     
@@ -47,6 +50,7 @@ class MemberTasksTableViewController: UITableViewController {
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 75
         self.tableView.separatorStyle = .none
+        self.view.backgroundColor = AppearanceHelper.themeGray
     }
     
     private func updateViews() {
@@ -55,22 +59,54 @@ class MemberTasksTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasks?.count ?? 0
+        
+        if section == 0 {
+            return tasks?.count ?? 0
+        } else {
+            return completedTasks?.count ?? 0
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
-        guard let tasks = tasks, let taskCell = cell as? SingleTaskTableViewCell,
+        guard let tasks = tasks, let completedTasks = completedTasks, let taskCell = cell as? SingleTaskTableViewCell,
         let categoryController = categoryController, let userController = userController else { return cell }
-        let task = tasks[indexPath.row]
+        
+        let task = indexPath.section == 0 ? tasks[indexPath.row] : completedTasks[indexPath.row]
         
         taskCell.userController = userController
         taskCell.task = task
         taskCell.categoryController = categoryController
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let label = UILabel()
+        
+        if section == 0 {
+             label.text = "Current Tasks"
+        } else if section == 1 {
+            label.text = "Completed Tasks"
+        }
+        
+        let view = UIView()
+        view.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.topAnchor.constraint(equalTo: view.topAnchor, constant: 10).isActive = true
+        
+        label.font = AppearanceHelper.boldFont(with: .title1, pointSize: 14)
+        label.textColor = .black
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        
+        return view
     }
     
     @IBOutlet weak var nameLabel: UILabel!
@@ -82,6 +118,14 @@ class MemberTasksTableViewController: UITableViewController {
     var userController: UserController?
     
     var tasks: [Task]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    var completedTasks: [Task]? {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()

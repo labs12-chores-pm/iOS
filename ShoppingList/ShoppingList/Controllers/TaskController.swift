@@ -25,7 +25,7 @@ class TaskController {
         
         taskCopy.description = description ?? task.description
   
-        taskCopy.assigneeIds = task.assigneeIds + assignIds
+        taskCopy.assigneeIds = assignIds
         
         taskCopy.recurrence = recurrence ?? task.recurrence
         taskCopy.dueDate = dueDate ?? taskCopy.dueDate

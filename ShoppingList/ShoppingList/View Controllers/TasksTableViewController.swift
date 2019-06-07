@@ -145,10 +145,35 @@ class TasksTableViewController: UITableViewController {
         self.tableView.separatorStyle = .none
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            guard let tasks = tasks, let taskController = taskController else { return }
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        if indexPath.section == 0 {
+            guard let tasks = tasks, let taskController = taskController else { return nil }
+            
             let task = tasks[indexPath.row]
+            
+            let action = UIContextualAction(style: .normal, title: "Complete") { (action, view, handler) in
+                taskController.updateTask(task: task, isComplete: true)
+                self.tasks?.remove(at: indexPath.row)
+                tableView.reloadData()
+            }
+            
+            action.backgroundColor = AppearanceHelper.teal
+            
+            return UISwipeActionsConfiguration(actions: [action])
+        } else {
+            return nil
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        guard let tasks = tasks, let completedTasks = completedTasks, let taskController = taskController else { return }
+        
+        let task = indexPath.section == 0 ? tasks[indexPath.row] : completedTasks[indexPath.row]
+        
+        if editingStyle == .delete {
+            
             taskController.delete(task: task) { (error) in
                 if let error = error {
                     print(error)

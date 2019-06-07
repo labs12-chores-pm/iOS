@@ -16,6 +16,7 @@ class AddTaskViewController: UIViewController {
         categoryTableView.delegate = self
         categoryTableView.dataSource = self
         addCategoryTextField.delegate = self
+        addTaskTextField.delegate = self
         
         categoryTableView.rowHeight = UITableView.automaticDimension
         
@@ -252,14 +253,14 @@ extension AddTaskViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        textFieldBeingEdited = nil
-        
         if textField == addTaskTextField {
             if let taskText = addTaskTextField.text, !taskText.isEmpty {
                 addTask()
             }
         }
+        
+        textField.resignFirstResponder()
+        textFieldBeingEdited = nil
         
         return true
     }

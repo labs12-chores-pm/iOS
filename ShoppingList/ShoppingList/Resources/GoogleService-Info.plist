@@ -3,39 +3,34 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>682615121437-jjifq2csh6h6p4gdfrjb45475li3aqv0.apps.googleusercontent.com</string>
+	<string>433401859345-c1ao77820s2gah2i2ed6kk508lgso5ij.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.682615121437-jjifq2csh6h6p4gdfrjb45475li3aqv0</string>
+	<string>com.googleusercontent.apps.433401859345-c1ao77820s2gah2i2ed6kk508lgso5ij</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCUr5tt0weJ5KL-kJA2UDaglPSpLPOA1g8</string>
+	<string>AIzaSyBPT8-7b_Trrps2bq1I86oYATLdKYb5Pbs</string>
 	<key>GCM_SENDER_ID</key>
-	<string>682615121437</string>
+	<string>433401859345</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.ChoreMonkey.ChoreMonkey</string>
+	<string>com.choremonkeyios.choremonkeyios</string>
 	<key>PROJECT_ID</key>
-	<string>chore-monkey-app</string>
+	<string>choremonkeyios</string>
 	<key>STORAGE_BUCKET</key>
-	<string>chore-monkey-app.appspot.com</string>
+	<string>choremonkeyios.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:682615121437:ios:e573abd03270f120</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Nunito-Regular.ttf</string>
-		<string>Nunito-Bold.ttf</string>
-	</array>
+	<string>1:433401859345:ios:64eb35c950be213d</string>
 	<key>DATABASE_URL</key>
-	<string>https://chore-monkey-app.firebaseio.com</string>
+	<string>https://choremonkeyios.firebaseio.com</string>
 </dict>
 </plist>
