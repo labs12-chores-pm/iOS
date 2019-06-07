@@ -359,12 +359,20 @@ class TaskViewController: UIViewController {
     }
     
     private func setDateData() {
-        guard let datePicker = datePicker, dayPickerView != nil else { return }
+        guard dayPickerView != nil else { return }
         
-        dates = datePicker.dates
-        datesStrings = datePicker.getDateStrings()
-        hoursStrings = datePicker.getHourStrings()
-        minutesStrings = datePicker.getMinutesStrings()
+        if let datePicker = datePicker {
+            dates = datePicker.dates
+            datesStrings = datePicker.getDateStrings()
+            hoursStrings = datePicker.getHourStrings()
+            minutesStrings = datePicker.getMinutesStrings()
+        } else {
+            datePicker = DatePicker(setDate: Date())
+            dates = datePicker?.dates
+            datesStrings = datePicker?.getDateStrings()
+            hoursStrings = datePicker?.getHourStrings()
+            minutesStrings = datePicker?.getMinutesStrings()
+        }
         
         DispatchQueue.main.async {
             self.updateViews()
@@ -682,7 +690,9 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 extension TaskViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        searchHouseholdMembers(textField)
+        if textField == assigneeSearchField {
+            searchHouseholdMembers(textField)
+        }
         taskWasChanged = true
         return true
     }
