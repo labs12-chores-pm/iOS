@@ -651,12 +651,18 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             
             let dateFromComponents = Calendar.current.date(from: dateComponents)
             
-            guard let taskController = taskController, let task = task, let dueDate = dateFromComponents else {
+            guard let dueDate = dateFromComponents else {
                 return
             }
             
             self.dueDate = dueDate
             datePicker.setDate = dueDate
+            
+            
+            guard let taskController = taskController, let task = task else {
+                return
+            }
+            
             taskController.updateTask(task: task, dueDate: dueDate)
         }
         
