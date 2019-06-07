@@ -10,6 +10,13 @@ import UIKit
 
 class CreateHouseholdViewController: UIViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        createNameInviteCodeField.delegate = self
+        viewTapGestureRecognizer.delegate = self
+        setGestureRecogizer()
+    }
+    
     private func updateViews() {
         if isJoinForm {
             createJoinButton.setTitle("Join", for: .normal)
@@ -79,4 +86,38 @@ class CreateHouseholdViewController: UIViewController {
     var userController: UserController?
     var currentUser: User?
     var isJoinForm: Bool = true
+    
+    var viewTapGestureRecognizer = UITapGestureRecognizer()
+    var textFieldBeingEdited: UITextField?
+}
+
+extension CreateHouseholdViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textFieldBeingEdited = textField
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textFieldBeingEdited = nil
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension CreateHouseholdViewController: UIGestureRecognizerDelegate {
+    
+    private func setGestureRecogizer() {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewWasTapped))
+        tapRecognizer.numberOfTapsRequired = 1
+        tapRecognizer.cancelsTouchesInView = false
+        viewTapGestureRecognizer = tapRecognizer
+        view.addGestureRecognizer(viewTapGestureRecognizer)
+    }
+    
+    @objc func viewWasTapped() {
+        if let textField = textFieldBeingEdited {
+            textField.resignFirstResponder()
+            textFieldBeingEdited = nil
+        }
+    }
 }

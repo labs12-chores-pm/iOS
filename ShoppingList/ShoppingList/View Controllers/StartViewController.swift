@@ -16,6 +16,14 @@ class StartViewController: UIViewController {
         super.viewDidLoad()
         formTypeAnimation(show: false)
         tryKeychainLogin()
+        
+        userNameField.delegate = self
+        householdNameField.delegate = self
+        emailField.delegate = self
+        passwordField.delegate = self
+        
+        viewTapGestureRecognizer.delegate = self
+        setGestureRecogizer()
     }
     
     private func tryKeychainLogin() {
@@ -34,6 +42,7 @@ class StartViewController: UIViewController {
                     activityView.stopAnimating()
                     self.loginButton.shake()
                     self.displayMsg(title: "Error signing in...", msg: error.localizedDescription)
+                    self.keychain.clear()
                 }
                 return
             }
@@ -56,6 +65,8 @@ class StartViewController: UIViewController {
                     }
                     
                     if let user = user {
+                        
+                        self.keychain.clear()
                         self.currentUser = user
                         
                         if self.keychain.get(Settings.keychainEmail) == nil {
@@ -113,14 +124,26 @@ class StartViewController: UIViewController {
                     
                     let picture = currentUser.photoURL
                     
-                    let household = self.householdController.createHousehold(name: householdName, creatorId: userUID, memberIds: [userUID])
+                    self.householdController.fetchHousehold(inviteCode: householdName) { (household, error) in
+                        if let error = error {
+                            print(error)
+                            return
+                        }
+                        
+                        if household != nil {
+                            self.householdController.updateHousehold(household: household!, memberIds: [userUID], adminIds: [], categories: [])
+                        }
+                        
+                        let household = household ?? self.householdController.createHousehold(name: householdName, creatorId: userUID)
+                        
+                        let user = self.userController.createUser(email: email, name: userName, profilePicture: picture?.absoluteString, currentHouseholdId: household.identifier, identifier: userUID)
+                        
+                        self.currentUser = user
+                        
+                        self.keychain.set(email, forKey: Settings.keychainEmail)
+                        self.keychain.set(password, forKey: Settings.keychainPassword)
+                    }
                     
-                    let user = self.userController.createUser(email: email, name: userName, profilePicture: picture?.absoluteString, currentHouseholdId: household.identifier, identifier: userUID)
-                    
-                    self.currentUser = user
-                    
-                    self.keychain.set(email, forKey: Settings.keychainEmail)
-                    self.keychain.set(password, forKey: Settings.keychainPassword)
                 }
                 DispatchQueue.main.async {
                     activityView.stopAnimating()
@@ -161,6 +184,28 @@ class StartViewController: UIViewController {
         updateViews()
     }
     
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowMain" {
+            guard let destinationVC = segue.destination as? TabViewViewController,
+                let authResponse = authResponse
+                else { return }
+            destinationVC.authResponse = authResponse
+            destinationVC.userController = userController
+            destinationVC.householdController = householdController
+            if let user = currentUser {
+                destinationVC.currentUser = user
+            }
+            destinationVC.keychain = keychain
+        }
+        
+        if segue.identifier == "ShowPasswordReset" {
+            guard let passwordResetVC = segue.destination as? PasswordResetViewController else { return }
+            passwordResetVC.keychain = keychain
+        }
+    }
+    
     var needsNewAccount: Bool = false
     
     var currentUser: User? {
@@ -183,26 +228,37 @@ class StartViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: MonkeyButton!
     
-    // MARK: - Navigation
+    var viewTapGestureRecognizer = UITapGestureRecognizer()
+    var textFieldBeingEdited: UITextField?
+}
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowMain" {
-            guard let destinationVC = segue.destination as? TabViewViewController,
-            let authResponse = authResponse
-            else { return }
-            destinationVC.authResponse = authResponse
-            destinationVC.userController = userController
-            destinationVC.householdController = householdController
-            if let user = currentUser {
-                destinationVC.currentUser = user
-            }
-            destinationVC.keychain = keychain
-        }
-        
-        if segue.identifier == "ShowPasswordReset" {
-            guard let passwordResetVC = segue.destination as? PasswordResetViewController else { return }
-            passwordResetVC.keychain = keychain
+extension StartViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textFieldBeingEdited = textField
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textFieldBeingEdited = nil
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension StartViewController: UIGestureRecognizerDelegate {
+    
+    private func setGestureRecogizer() {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewWasTapped))
+        tapRecognizer.numberOfTapsRequired = 1
+        tapRecognizer.cancelsTouchesInView = false
+        viewTapGestureRecognizer = tapRecognizer
+        view.addGestureRecognizer(viewTapGestureRecognizer)
+    }
+    
+    @objc func viewWasTapped() {
+        if let textField = textFieldBeingEdited {
+            textField.resignFirstResponder()
+            textFieldBeingEdited = nil
         }
     }
-
 }

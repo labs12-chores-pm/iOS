@@ -14,12 +14,7 @@ class TabViewViewController: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         setAppearance()
-        
-//        Auth.auth().addIDTokenDidChangeListener { (auth, user) in
-//
-//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

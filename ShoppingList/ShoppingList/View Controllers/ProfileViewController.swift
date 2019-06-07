@@ -30,6 +30,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         emailField.delegate = self
         passwordField.delegate = self
         
+        viewTapGestureRecognizer.delegate = self
+        setGestureRecogizer()
+        
         updateViews()
         
         profileImage.layer.cornerRadius = profileImage.frame.height / 2
@@ -38,11 +41,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     private func updateViews() {
-        guard isViewLoaded, let authResponse = authResponse else { fatalError() }
+        guard isViewLoaded, let authResponse = authResponse, let currentUser = currentUser else { fatalError() }
         
         let authUser = authResponse.user
         
-        userNameField.text = authUser.displayName
+        userNameField.text = currentUser.name
         emailField.text = authUser.email
         
         saveChangesButton.alpha = 0
@@ -148,6 +151,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.dismiss(animated: true) {
             self.currentUser = nil
             try? Auth.auth().signOut()
+            self.keychain?.clear()
         }
     }
     
@@ -232,9 +236,17 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var currentUser: User?
     var userController: UserController?
     var keychain: KeychainSwift?
+    
+    var viewTapGestureRecognizer = UITapGestureRecognizer()
+    var textFieldBeingEdited: UITextField?
 }
 
 extension ProfileViewController: UITextFieldDelegate {
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textFieldBeingEdited = textField
+        return true
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -243,6 +255,25 @@ extension ProfileViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         showSaveButton()
+        textFieldBeingEdited = nil
+    }
+}
+
+extension ProfileViewController: UIGestureRecognizerDelegate {
+    
+    private func setGestureRecogizer() {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewWasTapped))
+        tapRecognizer.numberOfTapsRequired = 1
+        tapRecognizer.cancelsTouchesInView = false
+        viewTapGestureRecognizer = tapRecognizer
+        view.addGestureRecognizer(viewTapGestureRecognizer)
+    }
+    
+    @objc func viewWasTapped() {
+        if let textField = textFieldBeingEdited {
+            textField.resignFirstResponder()
+            textFieldBeingEdited = nil
+        }
     }
 }
 

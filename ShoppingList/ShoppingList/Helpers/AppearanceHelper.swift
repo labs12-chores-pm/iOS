@@ -19,7 +19,7 @@ class AppearanceHelper {
     static let yellow = #colorLiteral(red: 0.9928019643, green: 0.7650975585, blue: 0.1207756624, alpha: 1)
     static let lightOrange = #colorLiteral(red: 0.9405652881, green: 0.663567245, blue: 0.1158531085, alpha: 1)
     static let midOrange = #colorLiteral(red: 0.9414839149, green: 0.5269313455, blue: 0.1456429958, alpha: 1)
-    static let darkOrange = #colorLiteral(red: 0.943921864, green: 0.4410427809, blue: 0.1553348303, alpha: 1)
+    static let darkOrange = #colorLiteral(red: 0.9450980392, green: 0.4392156863, blue: 0.1568627451, alpha: 1)
     static let themeGray = #colorLiteral(red: 0.9489166141, green: 0.9490789771, blue: 0.9489063621, alpha: 1)
     
     static func setNavigationStyle() {
