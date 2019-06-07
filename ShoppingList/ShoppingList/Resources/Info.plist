@@ -38,9 +38,9 @@
 	<key>NSAppTransportSecurity</key>
 	<dict/>
 	<key>NSCameraUsageDescription</key>
-	<string>We need to access your camera for scanning QR code</string>
+	<string>&quot;We need to access your camera to update pictures in ChoreMonkey&quot;</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>"We need access to your photos to update your profile picture" </string>
+	<string>&quot;We need access to your photos to update your profile picture&quot; </string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Nunito-Bold.ttf</string>

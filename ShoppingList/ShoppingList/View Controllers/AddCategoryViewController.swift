@@ -15,6 +15,7 @@ class AddCategoryViewController: UIViewController {
         categoryNameField.delegate = self
         viewTapGestureRecognizer.delegate = self
         setGestureRecogizer()
+
     }
     
     @IBAction func createCategoryButtonWasTapped(_ sender: UIButton) {
@@ -29,6 +30,7 @@ class AddCategoryViewController: UIViewController {
         
         self.navigationController?.popViewController(animated: true)
     }
+    
     
     @IBOutlet weak var categoryNameField: UITextField!
     @IBOutlet weak var createCategoryButton: MonkeyButton!

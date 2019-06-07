@@ -17,6 +17,7 @@
 		473D56852295B1B600C1CFF4 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473D56842295B1B600C1CFF4 /* UIViewController+Alert.swift */; };
 		473ED23B228DD4A900678E7E /* TaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473ED23A228DD4A900678E7E /* TaskController.swift */; };
 		473ED23D228DDE3E00678E7E /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473ED23C228DDE3E00678E7E /* CategoryController.swift */; };
+		47A6036F22A97BAC00F0DD79 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47A6036E22A97BAC00F0DD79 /* GoogleService-Info.plist */; };
 		47BF8B0922A5B03C00C7B8A3 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BF8B0822A5B03C00C7B8A3 /* CategoryCollectionViewCell.swift */; };
 		47E3FCA7228E782200A1CECE /* FirebaseLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47E3FCA6228E782200A1CECE /* FirebaseLogin.storyboard */; };
 		47F0A97022931E9500AF2EA9 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */; };
@@ -100,6 +101,7 @@
 		473D56842295B1B600C1CFF4 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		473ED23A228DD4A900678E7E /* TaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskController.swift; sourceTree = "<group>"; };
 		473ED23C228DDE3E00678E7E /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
+		47A6036E22A97BAC00F0DD79 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		47BF8B0822A5B03C00C7B8A3 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		47E3FCA6228E782200A1CECE /* FirebaseLogin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FirebaseLogin.storyboard; sourceTree = "<group>"; };
 		47F0A96F22931E9500AF2EA9 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
@@ -606,7 +608,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ShoppingList/Pods-ShoppingList-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ShoppingList/Pods-ShoppingList-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
@@ -623,7 +625,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ShoppingList/Pods-ShoppingList-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShoppingList/Pods-ShoppingList-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -844,7 +846,7 @@
 				CODE_SIGN_ENTITLEMENTS = ShoppingList/ShoppingList.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VXUQXR6S56;
+				DEVELOPMENT_TEAM = 7JG93VFG2G;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/ShoppingList/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -871,7 +873,7 @@
 				CODE_SIGN_ENTITLEMENTS = ShoppingList/ShoppingList.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VXUQXR6S56;
+				DEVELOPMENT_TEAM = 7JG93VFG2G;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/ShoppingList/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -45,6 +45,8 @@ class InvitationViewController: UIViewController {
         
         let ac = UIActivityViewController(activityItems: code, applicationActivities: nil)
         present(ac, animated: true, completion: nil)
+        
+        
     }
     
     @IBOutlet weak var codeLabel: UILabel!
