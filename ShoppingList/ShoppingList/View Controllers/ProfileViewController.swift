@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 import KeychainSwift
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +31,10 @@ class ProfileViewController: UIViewController {
         passwordField.delegate = self
         
         updateViews()
+        
+        profileImage.layer.cornerRadius = profileImage.frame.height / 2
+        profileImage.clipsToBounds = true
+        
     }
     
     private func updateViews() {
@@ -44,6 +48,8 @@ class ProfileViewController: UIViewController {
         saveChangesButton.alpha = 0
         saveChangesButton.isEnabled = false
         saveChangesButton.isHidden = true
+        
+       
     }
     
     @IBAction func saveChangesButtonTapped(_ sender: MonkeyButton) {
@@ -172,6 +178,56 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var passwordField: BlueField!
     @IBOutlet weak var saveChangesButton: MonkeyButton!
     
+    @IBOutlet weak var profileImage: UIImageView!
+    
+    @IBOutlet weak var addImageButton: MonkeyButton!
+    @IBAction func addImageButtonTapped(_ sender: Any) {
+        // Camera or Photo
+        // Action Sheets
+        // Make sure camera is available
+
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        
+        let actionSheet = UIAlertController(title: "PhotoSource", message: "Please Choose Your Photo Source", preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action:UIAlertAction) in
+           
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            imagePickerController.sourceType = .camera
+            self.present(imagePickerController, animated: true, completion: nil)
+           
+            } else {
+                print("Camera is Not available")
+            }
+            
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "PhotoLibrary", style: .default, handler: { (action:UIAlertAction) in
+            imagePickerController.sourceType = .photoLibrary
+            self.present(imagePickerController, animated: true, completion: nil)
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
+        
+        self.present(actionSheet, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        
+        profileImage.image = image
+        
+        picker.dismiss(animated: true, completion: nil)
+    
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
     var authResponse: AuthDataResult?
     var currentUser: User?
     var userController: UserController?
@@ -189,3 +245,4 @@ extension ProfileViewController: UITextFieldDelegate {
         showSaveButton()
     }
 }
+

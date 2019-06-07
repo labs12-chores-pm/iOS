@@ -10,6 +10,13 @@ import UIKit
 
 class AddCategoryViewController: UIViewController {
     
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+      
+        
+    }
+    
     @IBAction func createCategoryButtonWasTapped(_ sender: UIButton) {
         guard let categoryController = categoryController, let user = currentUser else { fatalError() }
         guard let name = categoryNameField.text else {
@@ -21,7 +28,8 @@ class AddCategoryViewController: UIViewController {
         categoryController.createCategory(householdId: user.currentHouseholdId, name: name)
         
         self.navigationController?.popViewController(animated: true)
-        
+      
+        //TODo:
         // Search
         // Ask User for own photoadd
         // Find Picrue
