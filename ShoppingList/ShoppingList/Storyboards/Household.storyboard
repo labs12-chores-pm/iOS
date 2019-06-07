@@ -239,7 +239,6 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="krd-1B-FaD" firstAttribute="centerY" secondItem="e3L-Hz-v0y" secondAttribute="centerY" id="nUE-u3-FvY"/>
                                 <constraint firstItem="krd-1B-FaD" firstAttribute="centerX" secondItem="e3L-Hz-v0y" secondAttribute="centerX" id="xOW-HU-DMC"/>

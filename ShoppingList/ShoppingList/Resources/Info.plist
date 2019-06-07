@@ -32,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -40,7 +40,11 @@
 	<key>NSCameraUsageDescription</key>
 	<string>&quot;We need to access your camera to update pictures in ChoreMonkey&quot;</string>
 	<key>NSPhotoLibraryUsageDescription</key>
+<<<<<<< HEAD
 	<string>&quot;We need access to your photos to update your profile picture&quot; </string>
+=======
+	<string>"We need access to your photos to update your profile picture" </string>
+>>>>>>> master
 	<key>UIAppFonts</key>
 	<array>
 		<string>Nunito-Bold.ttf</string>

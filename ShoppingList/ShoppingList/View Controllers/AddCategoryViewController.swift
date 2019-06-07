@@ -10,11 +10,19 @@ import UIKit
 
 class AddCategoryViewController: UIViewController {
     
+<<<<<<< HEAD
 
     override func viewDidLoad() {
         super.viewDidLoad()
       
         
+=======
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        categoryNameField.delegate = self
+        viewTapGestureRecognizer.delegate = self
+        setGestureRecogizer()
+>>>>>>> master
     }
     
     @IBAction func createCategoryButtonWasTapped(_ sender: UIButton) {
@@ -44,4 +52,38 @@ class AddCategoryViewController: UIViewController {
     
     var categoryController: CategoryController?
     var currentUser: User?
+    
+    var viewTapGestureRecognizer = UITapGestureRecognizer()
+    var textFieldBeingEdited: UITextField?
+}
+
+extension AddCategoryViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textFieldBeingEdited = textField
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textFieldBeingEdited = nil
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension AddCategoryViewController: UIGestureRecognizerDelegate {
+    
+    private func setGestureRecogizer() {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewWasTapped))
+        tapRecognizer.numberOfTapsRequired = 1
+        tapRecognizer.cancelsTouchesInView = false
+        viewTapGestureRecognizer = tapRecognizer
+        view.addGestureRecognizer(viewTapGestureRecognizer)
+    }
+    
+    @objc func viewWasTapped() {
+        if let textField = textFieldBeingEdited {
+            textField.resignFirstResponder()
+            textFieldBeingEdited = nil
+        }
+    }
 }

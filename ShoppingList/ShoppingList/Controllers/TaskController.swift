@@ -25,7 +25,7 @@ class TaskController {
         
         taskCopy.description = description ?? task.description
   
-        taskCopy.assigneeIds = task.assigneeIds + assignIds
+        taskCopy.assigneeIds = assignIds
         
         taskCopy.recurrence = recurrence ?? task.recurrence
         taskCopy.dueDate = dueDate ?? taskCopy.dueDate
@@ -61,9 +61,6 @@ class TaskController {
         
         put(task: newTask)
         updateTask(task: task, isComplete: true, isPending: false)
-        
-        // task.description, taskCopy.dueDate
-        // Call notification set function
     }
     
     func fetchTasks(userId: UUID, completion: @escaping ([Task]?, Error?) -> Void) {

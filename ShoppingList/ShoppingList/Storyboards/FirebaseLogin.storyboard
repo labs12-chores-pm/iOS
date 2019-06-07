@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Oie-mV-a7d">
-                                <rect key="frame" x="107" y="246" width="200" height="314"/>
+                                <rect key="frame" x="107" y="224" width="200" height="314"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gf2-zH-1gc" customClass="YellowSegments" customModule="ShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="29"/>
@@ -32,13 +31,13 @@
                                             <action selector="loginSignUpControlValueChanged:" destination="yU6-kc-1IM" eventType="valueChanged" id="f4c-Qk-Gff"/>
                                         </connections>
                                     </segmentedControl>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oVj-uM-umz">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oVj-uM-umz" customClass="BlueField" customModule="ShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="36" width="200" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Household name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="II0-dS-MHn">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Household name or code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="II0-dS-MHn" customClass="BlueField" customModule="ShoppingList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="74" width="200" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -85,7 +84,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Oie-mV-a7d" firstAttribute="centerY" secondItem="4Ad-H7-bNl" secondAttribute="centerY" multiplier="0.9" id="5ko-Yz-KnS"/>
+                            <constraint firstItem="Oie-mV-a7d" firstAttribute="centerY" secondItem="4Ad-H7-bNl" secondAttribute="centerY" multiplier="0.85" id="5ko-Yz-KnS"/>
                             <constraint firstItem="Oie-mV-a7d" firstAttribute="centerX" secondItem="4Ad-H7-bNl" secondAttribute="centerX" id="d8d-ZN-95j"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="stY-31-Kec"/>
@@ -121,7 +120,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IqU-5J-r3b">
-                                <rect key="frame" x="107" y="400" width="200" height="96.5"/>
+                                <rect key="frame" x="107" y="288" width="200" height="96.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password Reset" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pab-aX-AWv">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="20.5"/>
@@ -148,16 +147,17 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" name="Theme"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="IqU-5J-r3b" firstAttribute="centerX" secondItem="LQU-TD-ItN" secondAttribute="centerX" id="x8T-YG-9b2"/>
-                            <constraint firstItem="IqU-5J-r3b" firstAttribute="centerY" secondItem="LQU-TD-ItN" secondAttribute="centerY" id="xzY-7D-yv4"/>
+                            <constraint firstItem="IqU-5J-r3b" firstAttribute="centerY" secondItem="LQU-TD-ItN" secondAttribute="centerY" multiplier="0.75" id="xzY-7D-yv4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="x4k-Ad-uMC"/>
                     </view>
                     <connections>
                         <outlet property="emailField" destination="GbL-1b-8bc" id="toH-Ea-NC7"/>
                         <outlet property="getResetEmailButton" destination="spV-f6-H67" id="yyd-jG-RQj"/>
+                        <outlet property="passwordResetLabel" destination="pab-aX-AWv" id="hrE-BG-Iyb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hh4-O5-7rJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -183,9 +183,4 @@
             <point key="canvasLocation" x="-217.39130434782609" y="92.410714285714278"/>
         </scene>
     </scenes>
-    <resources>
-        <namedColor name="Theme">
-            <color red="0.41600000858306885" green="0.80000001192092896" blue="0.77600002288818359" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
-    </resources>
 </document>
