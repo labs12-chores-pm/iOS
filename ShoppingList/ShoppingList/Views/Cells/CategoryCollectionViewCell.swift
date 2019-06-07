@@ -48,7 +48,11 @@ class CategoryCollectionViewCell: UICollectionViewCell {
             "patio"
         ]
         
-        let imageName = listOfImages.filter { $0.contains(name.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)) }.first
+        let trimmedString = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        let noSpaceString = trimmedString.replacingOccurrences(of: " ", with: "")
+        let lowercaseString = noSpaceString.lowercased()
+        
+        let imageName = listOfImages.filter { $0.lowercased().contains(lowercaseString) }.first
         
         if let imageName = imageName {
             return UIImage(named: imageName)!
