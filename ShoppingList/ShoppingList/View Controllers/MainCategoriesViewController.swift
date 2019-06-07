@@ -250,18 +250,15 @@ extension MainCategoriesViewController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionReuseIdentifier, for: indexPath) as! CategoryCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionReuseIdentifier, for: indexPath)
         
-        if let categories = categories {
-            cell.categoryLabel.text = categories[indexPath.row].name
+        guard let categoryCell = cell as? CategoryCollectionViewCell, let categories = categories else { return cell }
             
-            cell.categoryLabel.font = AppearanceHelper.boldFont(with: .body, pointSize: 16)
-            
-            cell.categoryImage.layer.borderColor = UIColor.orange.cgColor
-            cell.categoryImage.layer.borderWidth = 2
-            cell.categoryImage.clipsToBounds = true
-        }
-        return cell
+        let category = categories[indexPath.row]
+        
+        categoryCell.category = category
+        
+        return categoryCell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
