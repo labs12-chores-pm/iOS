@@ -262,7 +262,7 @@ extension MainCategoriesViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let squareDimension = collectionView.bounds.width / 2
+        let squareDimension = collectionView.bounds.width / 3
         let inset: CGFloat = 15
         
         return CGSize(width: squareDimension - inset, height: squareDimension - inset)

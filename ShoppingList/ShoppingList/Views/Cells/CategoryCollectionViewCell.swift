@@ -22,7 +22,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
             backgroundColor = .black
         } else {
             categoryImage.alpha = 0
-            backgroundColor = AppearanceHelper.themeGray
+            backgroundColor = AppearanceHelper.darkOrange
         }
         
         layer.borderWidth = 0
