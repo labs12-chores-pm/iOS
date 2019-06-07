@@ -37,11 +37,11 @@ class ProfileViewController: UIViewController {
     }
     
     private func updateViews() {
-        guard isViewLoaded, let authResponse = authResponse else { fatalError() }
+        guard isViewLoaded, let authResponse = authResponse, let currentUser = currentUser else { fatalError() }
         
         let authUser = authResponse.user
         
-        userNameField.text = authUser.displayName
+        userNameField.text = currentUser.name
         emailField.text = authUser.email
         
         saveChangesButton.alpha = 0

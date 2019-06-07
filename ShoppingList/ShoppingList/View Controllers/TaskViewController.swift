@@ -71,45 +71,45 @@ class TaskViewController: UIViewController {
         }
     }
     
-    @IBAction func editButtonWasTapped(_ sender: UIBarButtonItem) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setDateData()
+    }
+    
+    private func editTask() {
         
         if hasAdminAccess == false {
             displayMsg(title: "Admin Permissions Needed", msg: "Admin permissions are needed to edit tasks.")
             return
         }
         
-        if inEditingMode {
-            guard let taskController = taskController, let task = task else {
-                displayMsg(title: "Error saving changes", msg: "Something went wrong. Please try again later.")
-                return
-            }
+        
+        guard let taskController = taskController, let task = task else {
+            displayMsg(title: "Error saving changes", msg: "Something went wrong. Please try again later.")
+            return
+        }
+        
+        var assigneeIds: [UUID] = []
+        
+        if let assignee = assignee {
+            assigneeIds.append(assignee.identifier)
+        } else {
             
-            var assigneeIds: [UUID] = []
-            
-            if let assignee = assignee {
-                assigneeIds.append(assignee.identifier)
-            } else {
+            if let assigneeSearch = assigneeSearchField.text {
                 
-                if let assigneeSearch = assigneeSearchField.text {
-                    
-                    if let user = checkForMatchingMembersWithString(assigneeSearch) {
-                        assigneeIds.append(user.identifier)
-                    }
+                if let user = checkForMatchingMembersWithString(assigneeSearch) {
+                    assigneeIds.append(user.identifier)
                 }
-            }
-
-            taskController.updateTask(task: task, description: descriptionField.text, assignIds: assigneeIds, dueDate: dueDate, recurrence: recurrence)
-            
-            DispatchQueue.main.async {
-                self.searchResults = []
-                self.updateSearchViews()
             }
         }
         
+        taskController.updateTask(task: task, description: descriptionField.text, assignIds: assigneeIds, dueDate: dueDate, recurrence: recurrence)
+        
         DispatchQueue.main.async {
-            self.inEditingMode = !self.inEditingMode
-            self.updateViews()
+            self.updateButtonViews()
         }
+        
+        taskWasChanged = false
     }
     
     private func checkForMatchingMembersWithString(_ string: String) -> User? {
@@ -125,6 +125,11 @@ class TaskViewController: UIViewController {
     
     
     @IBAction func completeButtonWasTapped(_ sender: UIButton) {
+        if taskWasChanged && task != nil {
+            editTask()
+            return
+        }
+        
         guard let taskController = taskController, let hasAdminAccess = hasAdminAccess, let currentUser = currentUser else { return }
         
         guard let description = descriptionField.text else {
@@ -139,6 +144,7 @@ class TaskViewController: UIViewController {
         let assignee: [UUID] = self.assignee != nil ? [self.assignee!.identifier] : []
         
         let userIsAssignee = currentUser.identifier == assignee.first
+        
         
         if let task = task {
             
@@ -252,78 +258,54 @@ class TaskViewController: UIViewController {
             
         if let task = task {
             
-            if let description = descriptionField.text, description.isEmpty {
-                descriptionField.text = task.description
+            descriptionField.text = task.description
+            
+            let recurrenceValue = recurrence == nil ? task.recurrence.rawValue : recurrence?.rawValue
+            recurrencePicker.selectRow(recurrenceValue!, inComponent: 0, animated: false)
+            
+            
+            if let amPM = datePicker?.getAMPMIndex() {
+                dayPickerView.selectRow(amPM, inComponent: 3, animated: false)
             }
-            
-            self.dueDate = task.dueDate
-            self.datePicker?.setDate = task.dueDate
-            
-            if let datePicker = datePicker {
-                dayPickerView.selectRow(datePicker.getAMPMIndex(), inComponent: 3, animated: false)
-            }
-            
-            let recurrenceValue = recurrence?.rawValue ?? task.recurrence.rawValue
-            
-            recurrencePicker.selectRow(recurrenceValue, inComponent: 0, animated: false)
-            noteTextField.isEnabled = true
-            
-            
-            if inEditingMode {
-                completeButton.isEnabled = false
-                completeButton.setTitle("Cannot complete while editing...", for: .normal)
-                descriptionField.isEnabled = true
-                assigneeSearchField.isEnabled = true
-                dayPickerView.isUserInteractionEnabled = true
-                recurrencePicker.isUserInteractionEnabled = true
-            } else {
-                completeButton.isEnabled = true
-                descriptionField.isEnabled = false
-                assigneeSearchField.isEnabled = false
-                dayPickerView.isUserInteractionEnabled = false
-                recurrencePicker.isUserInteractionEnabled = false
-            }
-            
-            if task.isPending && !task.isComplete {
-                completeButton.setTitle("Pending Approval", for: .normal)
-            } else if task.isComplete {
-                completeButton.setTitle("Task Complete!", for: .normal)
-                completeButton.isEnabled = false
-                descriptionField.isEnabled = false
-                recurrencePicker.isUserInteractionEnabled = false
-                assigneeSearchField.isEnabled = false
-            } else {
-                completeButton.setTitle("Complete", for: .normal)
-                
-                editBarButton.isEnabled = true
-                
-                if inEditingMode {
-                    editBarButton.title = "Save"
-                } else {
-                    editBarButton.title = "Edit"
-                }
-            }
-        } else {
-            noteTextField.isEnabled = false
-            completeButton.setTitle("Create", for: .normal)
-            recurrencePicker.selectRow(0, inComponent: 0, animated: true)
-            editBarButton.isEnabled = false
-            editBarButton.tintColor = .clear
-            assigneeSearchField.isUserInteractionEnabled = true
-            recurrencePicker.isUserInteractionEnabled = true
-            descriptionField.isEnabled = true
         }
+        
+        updateButtonViews()
         
         if hasAdminAccess == false {
             descriptionField.isEnabled = false
             recurrencePicker.isUserInteractionEnabled = false
             assigneeSearchField.isUserInteractionEnabled = false
-            editBarButton.tintColor = .clear
-            editBarButton.title = ""
         }
-            
-        updateSearchViews()
+        
         self.setNotes()
+    }
+    
+    private func updateButtonViews() {
+        guard let task = task else {
+            completeButton.setTitle("Create", for: .normal)
+            completeButton.backgroundColor = AppearanceHelper.teal
+            return
+        }
+        
+        if task.isPending && !task.isComplete {
+            completeButton.setTitle("Pending Approval", for: .normal)
+            completeButton.backgroundColor = AppearanceHelper.lightOrange
+        } else if task.isComplete {
+            completeButton.setTitle("Task Complete!", for: .normal)
+            completeButton.isEnabled = false
+            descriptionField.isEnabled = false
+            recurrencePicker.isUserInteractionEnabled = false
+            assigneeSearchField.isEnabled = false
+            completeButton.backgroundColor = AppearanceHelper.themeGray
+        } else {
+            if taskWasChanged {
+                completeButton.setTitle("Save Changes", for: .normal)
+                completeButton.backgroundColor = AppearanceHelper.teal
+            } else {
+                completeButton.setTitle("Mark Task Completed", for: .normal)
+                completeButton.backgroundColor = AppearanceHelper.yellow
+            }
+        }
     }
     
     private func setAppearance() {
@@ -345,7 +327,7 @@ class TaskViewController: UIViewController {
             return
         }
         
-        if searchResults.count > 0 && (inEditingMode || self.task == nil) {
+        if searchResults.count > 0 {
             showSearchResultsTableView()
         } else {
             hideSearchResultsTableView()
@@ -356,20 +338,22 @@ class TaskViewController: UIViewController {
     
     private func showSearchResultsTableView() {
         
+        self.assigneeSearchTableView.isHidden = false
+        
         viewWillLayoutSubviews()
         
         UIView.animate(withDuration: 0.2) {
-            self.assigneeSearchTableView.isHidden = false
             self.assigneeSearchTableView.alpha = 1
         }
     }
     
     private func hideSearchResultsTableView() {
         
+        self.assigneeSearchTableView.isHidden = true
+        
         viewWillLayoutSubviews()
         
         UIView.animate(withDuration: 0.2) {
-            self.assigneeSearchTableView.isHidden = true
             self.assigneeSearchTableView.alpha = 0
         }
     }
@@ -409,8 +393,6 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var descriptionField: UITextField!
     @IBOutlet weak var recurrencePicker: UIPickerView!
     @IBOutlet weak var notesTableView: UITableView!
-    
-    @IBOutlet weak var editBarButton: UIBarButtonItem!
     
     @IBOutlet var taskFormLabels: [UILabel]!
     
@@ -488,6 +470,8 @@ class TaskViewController: UIViewController {
     var viewTapGestureRecognizer = UITapGestureRecognizer()
     
     var textFieldBeingEdited: UITextField?
+    
+    var taskWasChanged: Bool = false
 }
 
 extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
@@ -519,7 +503,6 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == assigneeSearchTableView {
-            defer { self.updateViews() }
             guard let selectedMember = searchResults?[indexPath.row], let taskController = taskController else { return }
             
             self.assigneeSearchField.text = selectedMember.name
@@ -600,6 +583,9 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        taskWasChanged = true
+        
         if pickerView == recurrencePicker {
             
             let recurrence = Recurrence(rawValue: row)
@@ -665,6 +651,8 @@ extension TaskViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             datePicker.setDate = dueDate
             taskController.updateTask(task: task, dueDate: dueDate)
         }
+        
+        updateButtonViews()
     }
     
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
@@ -695,22 +683,18 @@ extension TaskViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         searchHouseholdMembers(textField)
+        taskWasChanged = true
         return true
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         textFieldBeingEdited = nil
         textFieldBeingEdited = textField
-        searchHouseholdMembers(textField)
         return true
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        searchHouseholdMembers(textField)
-    }
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        searchHouseholdMembers(textField)
+        updateButtonViews()
         textFieldBeingEdited = nil
     }
     
